@@ -3,710 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Master - Test Your Knowledge</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-color: #60A5FA; /* Soft blue */
-            --success-color: #34D399; /* Mint green */
-            --danger-color: #F87171; /* Soft red */
-            --light-bg: #F9FAFB; /* Off-white */
-            --card-bg: #FFFFFF;
-            --text-color: #1F2937; /* Dark gray */
-            --navbar-height: 50px; /* Desktop navbar height */
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(180deg, #F9FAFB 0%, #E6F0FA 100%);
-            min-height: 100vh;
-            max-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
-        }
-
-        .main-container {
-            max-width: 800px;
-            width: 100%;
-            height: calc(100vh - var(--navbar-height));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            margin-top: var(--navbar-height);
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #E5E7EB;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            height: auto;
-            max-height: calc(90vh - var(--navbar-height));
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-header {
-            background: #E6F0FA;
-            color: var(--text-color);
-            border-radius: 12px 12px 0 0;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .card-header h1, .card-header h2, .card-header h3 {
-            margin: 0;
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .card-header p {
-            margin: 4px 0 0;
-            font-size: 0.85rem;
-        }
-
-        .card-body {
-            padding: 12px;
-            flex-grow: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .subject-btn {
-            background: #FFFFFF;
-            border: 1px solid #E5E7EB;
-            border-radius: 8px;
-            padding: 12px;
-            margin: 8px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        .subject-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary-color);
-        }
-
-        .subject-btn i {
-            font-size: 1.8rem;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .quiz-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #E6F0FA;
-            padding: 8px 12px;
-            border-bottom: 1px solid #E5E7EB;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            z-index: 1000;
-            height: var(--navbar-height);
-        }
-
-        .quiz-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 12px;
-            height: calc(100vh - var(--navbar-height));
-            width: 100%;
-        }
-
-        .question-card {
-            background: #FFFFFF;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .question-card h4 {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-
-        .options-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .option-btn {
-            background: #FFFFFF;
-            border: 1px solid #E5E7EB;
-            border-radius: 8px;
-            padding: 8px;
-            margin: 0;
-            transition: all 0.3s ease;
-            font-size: 0.85rem;
-            color: var(--text-color);
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .options-container.boolean {
-            flex-direction: row;
-            justify-content: space-between;
-        }
-
-        .options-container.boolean .option-btn {
-            flex: 1;
-            margin: 0 4px;
-        }
-
-        .options-container.multiple {
-            flex-direction: column;
-        }
-
-        .options-container.multiple .option-btn {
-            width: 100%;
-            margin: 4px 0;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            border-color: var(--primary-color);
-            background: #EFF6FF;
-        }
-
-        .option-btn.correct {
-            background: #D1FAE5;
-            border-color: var(--success-color);
-        }
-
-        .option-btn.wrong {
-            background: #FEE2E2;
-            border-color: var(--danger-color);
-        }
-
-        .option-btn:disabled {
-            cursor: not-allowed;
-        }
-
-        .counter-badge {
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-block;
-            margin: 0 6px;
-        }
-
-        .progress {
-            height: 5px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: #3B82F6;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-secondary {
-            background: #D1D5DB;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            color: var(--text-color);
-        }
-
-        .feedback-message {
-            background: #E5E7EB;
-            color: var(--text-color);
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .feedback-message.bg-success {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-
-        .feedback-message.bg-danger {
-            background: #FEE2E2;
-            color: #991B1B;
-        }
-
-        .explanation-text {
-            background: #F3F4F6;
-            color: var(--text-color);
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 8px;
-            font-size: 0.8rem;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .score-display {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 12px 0;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Smartphone View */
-        @media (max-width: 768px) {
-            :root {
-                --navbar-height: 40px; /* Smaller navbar for mobile */
-            }
-
-            body {
-                padding: 0;
-            }
-
-            .main-container {
-                padding: 8px;
-                width: 100vw;
-                height: calc(100vh - var(--navbar-height));
-                margin-top: var(--navbar-height);
-            }
-
-            .card {
-                max-height: 100vh;
-                border-radius: 0;
-                border: none;
-            }
-
-            .card-header {
-                padding: 8px;
-            }
-
-            .card-header h1, .card-header h2, .card-header h3 {
-                font-size: 1.1rem;
-            }
-
-            .card-header p {
-                font-size: 0.75rem;
-            }
-
-            .card-body {
-                padding: 8px;
-            }
-
-            .subject-btn {
-                margin: 4px;
-                padding: 8px;
-                font-size: 0.75rem;
-            }
-
-            .subject-btn i {
-                font-size: 1.3rem;
-                margin-bottom: 4px;
-            }
-
-            .quiz-navbar {
-                padding: 6px 8px;
-                height: var(--navbar-height);
-            }
-
-            .quiz-content {
-                padding: 8px;
-                height: calc(100vh - var(--navbar-height));
-            }
-
-            .question-card {
-                padding: 8px;
-                margin-bottom: 6px;
-                max-width: 100%;
-            }
-
-            .question-card h4 {
-                font-size: 0.9rem;
-                margin-bottom: 8px;
-            }
-
-            .options-container {
-                gap: 6px;
-            }
-
-            .option-btn {
-                padding: 6px;
-                font-size: 0.75rem;
-            }
-
-            .options-container.boolean .option-btn {
-                margin: 0 3px;
-            }
-
-            .options-container.multiple .option-btn {
-                margin: 3px 0;
-            }
-
-            .counter-badge {
-                padding: 4px 8px;
-                font-size: 0.6rem;
-                margin: 0 4px;
-            }
-
-            .progress {
-                height: 4px;
-                margin-bottom: 6px;
-            }
-
-            .btn-primary, .btn-secondary {
-                padding: 6px 16px;
-                font-size: 0.75rem;
-            }
-
-            .score-display {
-                font-size: 1.8rem;
-                margin: 8px 0;
-            }
-
-            .feedback-message, .explanation-text {
-                padding: 8px;
-                font-size: 0.75rem;
-                margin-top: 6px;
-            }
-
-            .row.mb-5 {
-                margin-bottom: 1rem !important;
-            }
-
-            .row.mb-5 > div {
-                padding: 4px;
-            }
-
-            .row.mb-5 h5 {
-                font-size: 0.75rem;
-            }
-
-            .row.mb-5 h2 {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+    <title>quizzapp</title>
+    <link rel="stylesheet" href="assets/style.css"/>
+    <script src="assets/app.js" defer></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container main-container">
+    <!-- Main Content -->
+    <div class="main-content">
         
         <!-- Home Screen -->
-        <div id="homeScreen" class="card">
-            <div class="card-header text-center">
-                <h1 class="mb-0">Quiz Master</h1>
-                <p class="mb-0 mt-2">Test Your Knowledge</p>
+        <div id="homeScreen">
+            <div class="page-header">
+                <h1 class="page-title">quizzapp</h1>
+                <p class="page-description">Test your knowledge across different subjects. Choose a topic below to get started.</p>
             </div>
-            <div class="card-body p-5">
-                <h4 class="text-center mb-5">Select a Subject</h4>
-                <div class="row" id="subjectContainer"></div>
-            </div>
+            
+            <div class="block-title">Available Subjects</div>
+            <div class="subjects-grid" id="subjectContainer"></div>
         </div>
 
         <!-- Question Count Selection -->
-        <div id="questionCountScreen" class="card hidden">
-            <div class="card-header text-center">
-                <h2 class="mb-0" id="selectedSubjectTitle"></h2>
+        <div id="questionCountScreen" class="hidden">
+            <div class="page-header">
+                <h1 class="page-title" id="selectedSubjectTitle"></h1>
+                <p class="page-description">Select how many questions you'd like to answer.</p>
             </div>
-            <div class="card-body p-5 text-center">
-                <h4 class="mb-5">How many questions would you like to answer?</h4>
-                <div class="d-flex flex-wrap justify-content-center gap-3">
-                    <button class="btn btn-primary btn-lg" onclick="startQuiz(10)">10 Questions</button>
-                    <button class="btn btn-primary btn-lg" onclick="startQuiz(20)">20 Questions</button>
-                    <button class="btn btn-primary btn-lg" onclick="startQuiz('all')">All Questions</button>
+            
+            <div class="options-block">
+                <div class="block-title">Quiz Length</div>
+                <div class="option-cards">
+                    <div class="option-card" onclick="startQuiz(10)">
+                        <div class="option-card-value">10</div>
+                        <div class="option-card-label">Questions</div>
+                    </div>
+                    <div class="option-card" onclick="startQuiz(20)">
+                        <div class="option-card-value">20</div>
+                        <div class="option-card-label">Questions</div>
+                    </div>
+                    <div class="option-card" onclick="startQuiz('all')">
+                        <div class="option-card-value">All</div>
+                        <div class="option-card-label">Questions</div>
+                    </div>
                 </div>
-                <button class="btn btn-secondary mt-4" onclick="goHome()">Back</button>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <button class="btn btn-ghost" onclick="goHome()">← Back to subjects</button>
             </div>
         </div>
 
         <!-- Quiz Screen -->
         <div id="quizScreen" class="hidden">
-            <div class="quiz-navbar">
-                <button class="btn btn-outline-light btn-sm" onclick="goHome()">Home</button>
-                <h3 class="mb-0" id="quizSubjectTitle"></h3>
-                <div>
-                    <span class="counter-badge bg-success text-white">Correct: <span id="correctCount">0</span></span>
-                    <span class="counter-badge bg-danger text-white">Wrong: <span id="wrongCount">0</span></span>
+            <div class="quiz-header">
+                <div class="quiz-meta">
+                    <button class="btn btn-ghost" onclick="goHome()">← Exit Quiz</button>
+                    <h2 style="font-size: 1.25rem; font-weight: 600; margin: 0;" id="quizSubjectTitle"></h2>
                 </div>
-            </div>
-            <div class="quiz-content">
-                <div class="mb-3">
-                    <small class="text-muted">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span></small>
-                    <div class="progress">
-                        <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <span class="quiz-counter">
+                        <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
+                    </span>
+                    <div class="quiz-stats">
+                        <div class="stat-badge correct">✓ <span id="correctCount">0</span></div>
+                        <div class="stat-badge wrong">✗ <span id="wrongCount">0</span></div>
                     </div>
                 </div>
-                <div class="question-card">
-                    <h4 id="questionText"></h4>
-                    <div id="optionsContainer" class="options-container"></div>
-                    <div id="feedbackMessage" class="feedback-message hidden"></div>
-                    <div id="explanationText" class="explanation-text hidden"></div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+
+            <div class="quiz-content-mobile">
+                <div class="question-block">
+                    <div class="question-number">Question <span id="questionNumberText">1</span></div>
+                    <div class="question-text" id="questionText"></div>
+                    <div class="answer-options" id="optionsContainer"></div>
+                    
+                    <div id="feedbackCallout" class="hidden"></div>
+                    <div id="explanationCallout" class="hidden"></div>
                 </div>
-                <div class="text-center mt-3">
-                    <button id="nextBtn" class="btn btn-primary btn-lg hidden" onclick="nextQuestion()">Next Question</button>
-                </div>
+            </div>
+
+            <div class="quiz-navigation">
+                <button id="prevBtn" class="nav-btn" onclick="previousQuestion()">
+                    ← Previous
+                </button>
+                <button id="nextBtn" class="nav-btn" onclick="nextQuestion()">
+                    Next →
+                </button>
             </div>
         </div>
 
         <!-- Results Screen -->
-        <div id="resultsScreen" class="card hidden">
-            <div class="card-header text-center">
-                <h2 class="mb-0">Quiz Complete</h2>
+        <div id="resultsScreen" class="hidden">
+            <div class="page-header">
+                <h1 class="page-title">Quiz Complete!</h1>
+                <p class="page-description">Here's how you performed on this quiz.</p>
             </div>
-            <div class="card-body p-5 text-center">
-                <div class="score-display" id="scorePercentage"></div>
-                <h4 class="mb-4">Your Results</h4>
-                <div class="row mb-5">
-                    <div class="col-md-4 mb-3">
-                        <div class="p-4 bg-light rounded">
-                            <h5>Total Questions</h5>
-                            <h2 id="totalQuestionsResult">0</h2>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="p-4 bg-success text-white rounded">
-                            <h5>Correct</h5>
-                            <h2 id="correctResult">0</h2>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="p-4 bg-danger text-white rounded">
-                            <h5>Wrong</h5>
-                            <h2 id="wrongResult">0</h2>
-                        </div>
-                    </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-label">Score</div>
+                    <div class="result-value" id="scorePercentage">0%</div>
                 </div>
-                <div class="d-flex gap-3 justify-content-center flex-wrap">
-                    <button class="btn btn-primary btn-lg" onclick="restartQuiz()">Try Again</button>
-                    <button class="btn btn-secondary btn-lg" onclick="goHome()">Home</button>
+                <div class="result-card success">
+                    <div class="result-label">Correct</div>
+                    <div class="result-value" id="correctResult">0</div>
                 </div>
+                <div class="result-card error">
+                    <div class="result-label">Wrong</div>
+                    <div class="result-value" id="wrongResult">0</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Total</div>
+                    <div class="result-value" id="totalQuestionsResult">0</div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 32px;">
+                <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+                <button class="btn btn-ghost" onclick="goHome()">← Back to Home</button>
             </div>
         </div>
 
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        const quizApp = {
-            subjects: [
-                { id: 'math', name: 'Mathematics', icon: 'M' },
-                { id: 'history', name: 'History', icon: 'H' },
-                { id: 'science', name: 'Science', icon: 'S' },
-                { id: 'geography', name: 'Geography', icon: 'G' }
-            ],
-            currentSubject: null,
-            questions: [],
-            currentQuestionIndex: 0,
-            selectedAnswer: null,
-            correctAnswers: 0,
-            wrongAnswers: 0,
-            totalQuestions: 0
-        };
-
-        function init() {
-            loadSubjects();
-        }
-
-        function loadSubjects() {
-            const container = document.getElementById('subjectContainer');
-            container.innerHTML = '';
-            
-            quizApp.subjects.forEach(subject => {
-                const col = document.createElement('div');
-                col.className = 'col-md-6 col-lg-3';
-                col.innerHTML = `
-                    <div class="subject-btn text-center" onclick="selectSubject('${subject.id}')">
-                        <div style="font-size: 3rem;">${subject.icon}</div>
-                        <h5 class="mt-2 mb-0">${subject.name}</h5>
-                    </div>
-                `;
-                container.appendChild(col);
-            });
-        }
-
-        async function selectSubject(subjectId) {
-            quizApp.currentSubject = quizApp.subjects.find(s => s.id === subjectId);
-            document.getElementById('selectedSubjectTitle').textContent = quizApp.currentSubject.name;
-            try {
-                const response = await fetch(`${subjectId}.json`);
-                if (!response.ok) throw new Error('Failed to load questions');
-                quizApp.questions = await response.json();
-                showScreen('questionCountScreen');
-            } catch (error) {
-                console.error('Error loading questions:', error);
-                alert('Failed to load questions for this subject. Please try again.');
-            }
-        }
-
-        function startQuiz(questionCount) {
-            const allQuestions = shuffleArray([...quizApp.questions]);
-            quizApp.totalQuestions = questionCount === 'all' ? allQuestions.length : Math.min(questionCount, allQuestions.length);
-            quizApp.questions = allQuestions.slice(0, quizApp.totalQuestions);
-            quizApp.currentQuestionIndex = 0;
-            quizApp.correctAnswers = 0;
-            quizApp.wrongAnswers = 0;
-            quizApp.selectedAnswer = null;
-
-            document.getElementById('quizSubjectTitle').textContent = quizApp.currentSubject.name;
-            document.getElementById('totalQuestions').textContent = quizApp.totalQuestions;
-            document.getElementById('correctCount').textContent = '0';
-            document.getElementById('wrongCount').textContent = '0';
-
-            showScreen('quizScreen');
-            loadQuestion();
-        }
-
-        function loadQuestion() {
-            const question = quizApp.questions[quizApp.currentQuestionIndex];
-            quizApp.selectedAnswer = null;
-
-            document.getElementById('currentQuestion').textContent = quizApp.currentQuestionIndex + 1;
-            const progress = ((quizApp.currentQuestionIndex + 1) / quizApp.totalQuestions) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-
-            document.getElementById('questionText').textContent = question.question;
-
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
-            optionsContainer.className = 'options-container ' + question.type;
-
-            const options = question.type === 'multiple' ? shuffleArray([...question.options]) : question.options;
-            options.forEach((option, index) => {
-                const button = document.createElement('button');
-                button.className = 'option-btn';
-                button.textContent = option;
-                button.onclick = () => selectOption(index, button, question);
-                optionsContainer.appendChild(button);
-            });
-
-            document.getElementById('nextBtn').classList.add('hidden');
-            document.getElementById('feedbackMessage').classList.add('hidden');
-            document.getElementById('explanationText').classList.add('hidden');
-        }
-
-        function selectOption(index, button, question) {
-            if (quizApp.selectedAnswer !== null) return;
-
-            quizApp.selectedAnswer = index;
-            const selectedOption = question.options[index];
-            const isCorrect = selectedOption === question.answer;
-
-            if (isCorrect) {
-                quizApp.correctAnswers++;
-                document.getElementById('correctCount').textContent = quizApp.correctAnswers;
-            } else {
-                quizApp.wrongAnswers++;
-                document.getElementById('wrongCount').textContent = quizApp.wrongAnswers;
-            }
-
-            const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach((btn, idx) => {
-                btn.disabled = true;
-                if (question.options[idx] === question.answer) {
-                    btn.classList.add('correct');
-                } else if (idx === quizApp.selectedAnswer && !isCorrect) {
-                    btn.classList.add('wrong');
-                }
-            });
-
-            const feedback = document.getElementById('feedbackMessage');
-            feedback.textContent = isCorrect ? 'Correct!' : 'Wrong!';
-            feedback.className = 'feedback-message ' + (isCorrect ? 'bg-success text-white' : 'bg-danger text-white');
-            feedback.classList.remove('hidden');
-
-            if (question.explanation) {
-                const explanation = document.getElementById('explanationText');
-                explanation.textContent = question.explanation;
-                explanation.classList.remove('hidden');
-            }
-
-            document.getElementById('nextBtn').classList.remove('hidden');
-        }
-
-        function nextQuestion() {
-            quizApp.currentQuestionIndex++;
-
-            if (quizApp.currentQuestionIndex < quizApp.totalQuestions) {
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function showResults() {
-            const percentage = Math.round((quizApp.correctAnswers / quizApp.totalQuestions) * 100);
-            
-            document.getElementById('scorePercentage').textContent = percentage + '%';
-            document.getElementById('totalQuestionsResult').textContent = quizApp.totalQuestions;
-            document.getElementById('correctResult').textContent = quizApp.correctAnswers;
-            document.getElementById('wrongResult').textContent = quizApp.wrongAnswers;
-
-            showScreen('resultsScreen');
-        }
-
-        function restartQuiz() {
-            startQuiz(quizApp.totalQuestions);
-        }
-
-        function goHome() {
-            showScreen('homeScreen');
-        }
-
-        function showScreen(screenId) {
-            document.querySelectorAll('.card, #quizScreen').forEach(el => el.classList.add('hidden'));
-            document.getElementById(screenId).classList.remove('hidden');
-        }
-
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-
-        window.onload = init;
-    </script>
 </body>
 </html>

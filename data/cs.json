@@ -1,0 +1,72 @@
+[
+    {
+        "type": "multiple",
+        "question": "What does CPU stand for?",
+        "options": ["Central Processing Unit", "Computer Processing Unit", "Central Program Utility", "Computer Primary Unit"],
+        "answer": "Central Processing Unit",
+        "explanation": "CPU stands for Central Processing Unit, which is the primary component that executes instructions in a computer."
+    },
+    {
+        "type": "multiple",
+        "question": "Which programming language was developed by Guido van Rossum?",
+        "options": ["Java", "Python", "C++", "JavaScript"],
+        "answer": "Python",
+        "explanation": "Guido van Rossum created Python in the late 1980s and it was first released in 1991."
+    },
+    {
+        "type": "boolean",
+        "question": "HTML is a programming language.",
+        "options": ["True", "False"],
+        "answer": "False",
+        "explanation": "HTML is a markup language used for creating web pages, not a programming language as it lacks programming constructs like variables and logic."
+    },
+    {
+        "type": "multiple",
+        "question": "What data structure uses LIFO (Last-In, First-Out) principle?",
+        "options": ["Queue", "Stack", "Array", "Linked List"],
+        "answer": "Stack",
+        "explanation": "A stack follows the LIFO principle where the last element added is the first one to be removed."
+    },
+    {
+        "type": "multiple",
+        "question": "Which of these is NOT a valid programming paradigm?",
+        "options": ["Object-Oriented", "Functional", "Procedural", "Hypothetical"],
+        "answer": "Hypothetical",
+        "explanation": "Hypothetical is not a recognized programming paradigm, while Object-Oriented, Functional, and Procedural are common paradigms."
+    },
+    {
+        "type": "multiple",
+        "question": "What does API stand for?",
+        "options": ["Application Programming Interface", "Advanced Programming Interface", "Application Protocol Interface", "Automated Programming Interface"],
+        "answer": "Application Programming Interface",
+        "explanation": "API stands for Application Programming Interface, which defines how different software components should interact."
+    },
+    {
+        "type": "boolean",
+        "question": "The first computer bug was an actual insect found in a computer.",
+        "options": ["True", "False"],
+        "answer": "True",
+        "explanation": "The term 'bug' was popularized when Grace Hopper found a moth stuck in a relay of the Harvard Mark II computer in 1947."
+    },
+    {
+        "type": "multiple",
+        "question": "Which company developed the Java programming language?",
+        "options": ["Microsoft", "Apple", "Sun Microsystems", "IBM"],
+        "answer": "Sun Microsystems",
+        "explanation": "Java was developed by James Gosling at Sun Microsystems in 1995. Sun was later acquired by Oracle."
+    },
+    {
+        "type": "multiple",
+        "question": "What is the time complexity of binary search?",
+        "options": ["O(1)", "O(n)", "O(log n)", "O(n²)"],
+        "answer": "O(log n)",
+        "explanation": "Binary search has a time complexity of O(log n) as it halves the search space with each iteration."
+    },
+    {
+        "type": "multiple",
+        "question": "Which protocol is used for secure communication over a computer network?",
+        "options": ["HTTP", "FTP", "HTTPS", "SMTP"],
+        "answer": "HTTPS",
+        "explanation": "HTTPS (Hypertext Transfer Protocol Secure) provides encrypted communication and secure identification of servers."
+    }
+]

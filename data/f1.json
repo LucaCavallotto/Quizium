@@ -1,0 +1,72 @@
+[
+    {
+        "type": "multiple",
+        "question": "Which driver has won the most Formula 1 World Championships?",
+        "options": ["Ayrton Senna", "Michael Schumacher", "Lewis Hamilton", "Alain Prost"],
+        "answer": "Lewis Hamilton",
+        "explanation": "Lewis Hamilton holds the record with 7 World Championships (tied with Michael Schumacher)."
+    },
+    {
+        "type": "multiple",
+        "question": "Which team has won the most Constructors' Championships?",
+        "options": ["Ferrari", "Mercedes", "McLaren", "Williams"],
+        "answer": "Ferrari",
+        "explanation": "Ferrari has won 16 Constructors' Championships, the most of any team in F1 history."
+    },
+    {
+        "type": "boolean",
+        "question": "The Monaco Grand Prix is the shortest circuit on the F1 calendar.",
+        "options": ["True", "False"],
+        "answer": "False",
+        "explanation": "While Monaco is one of the shortest in distance (3.337 km), it's not the shortest. Circuits like Zandvoort are shorter."
+    },
+    {
+        "type": "multiple",
+        "question": "What does DRS stand for in Formula 1?",
+        "options": ["Drag Reduction System", "Downforce Regulation System", "Driver Response System", "Dynamic Racing Setup"],
+        "answer": "Drag Reduction System",
+        "explanation": "DRS allows drivers to adjust their rear wing to reduce drag and increase straight-line speed for overtaking."
+    },
+    {
+        "type": "multiple",
+        "question": "Which circuit is known as 'The Temple of Speed'?",
+        "options": ["Silverstone", "Monza", "Spa-Francorchamps", "Suzuka"],
+        "answer": "Monza",
+        "explanation": "Monza in Italy is called 'The Temple of Speed' due to its high-speed nature and long straights."
+    },
+    {
+        "type": "multiple",
+        "question": "What year did Formula 1 officially begin?",
+        "options": ["1947", "1950", "1955", "1960"],
+        "answer": "1950",
+        "explanation": "The Formula One World Championship officially began in 1950, with the first race at Silverstone."
+    },
+    {
+        "type": "boolean",
+        "question": "Red Bull Racing was originally the Jaguar F1 team.",
+        "options": ["True", "False"],
+        "answer": "True",
+        "explanation": "Red Bull purchased the Jaguar Racing team in 2004 and rebranded it as Red Bull Racing for the 2005 season."
+    },
+    {
+        "type": "multiple",
+        "question": "Which driver holds the record for most Grand Prix wins?",
+        "options": ["Fernando Alonso", "Lewis Hamilton", "Sebastian Vettel", "Alain Prost"],
+        "answer": "Lewis Hamilton",
+        "explanation": "Lewis Hamilton holds the record with over 100 Grand Prix victories."
+    },
+    {
+        "type": "multiple",
+        "question": "What is the minimum weight of a Formula 1 car (including driver) as of 2023?",
+        "options": ["728 kg", "752 kg", "798 kg", "815 kg"],
+        "answer": "798 kg",
+        "explanation": "The minimum weight for 2023 F1 cars is 798 kg, including the driver and all fluids."
+    },
+    {
+        "type": "multiple",
+        "question": "Which country hosts the most F1 Grands Prix in a single season?",
+        "options": ["United States", "Italy", "Germany", "United Kingdom"],
+        "answer": "United States",
+        "explanation": "The United States hosts 3 races in 2023: Miami, Austin, and Las Vegas."
+    }
+]
