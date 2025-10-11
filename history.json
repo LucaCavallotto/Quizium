@@ -1,0 +1,207 @@
+[
+    {
+        "type": "multiple",
+        "question": "In which year did World War II end?",
+        "options": ["1943", "1944", "1945", "1946"],
+        "answer": "1945",
+        "explanation": "World War II ended in 1945 with the surrender of Germany in May and Japan in August."
+    },
+    {
+        "type": "multiple",
+        "question": "Who was the first President of the United States?",
+        "options": ["Thomas Jefferson", "George Washington", "John Adams", "Benjamin Franklin"],
+        "answer": "George Washington",
+        "explanation": "George Washington served as the first U.S. President from 1789 to 1797."
+    },
+    {
+        "type": "boolean",
+        "question": "The Roman Empire fell in 476 AD.",
+        "options": ["True", "False"],
+        "answer": "True",
+        "explanation": "The Western Roman Empire is considered to have fallen in 476 AD when Romulus Augustulus was deposed."
+    },
+    {
+        "type": "multiple",
+        "question": "In which year did the French Revolution begin?",
+        "options": ["1776", "1789", "1799", "1804"],
+        "answer": "1789",
+        "explanation": "The French Revolution began in 1789 with events like the Storming of the Bastille."
+    },
+    {
+        "type": "multiple",
+        "question": "Who discovered America in 1492?",
+        "options": ["Marco Polo", "Christopher Columbus", "Ferdinand Magellan", "Amerigo Vespucci"],
+        "answer": "Christopher Columbus",
+        "explanation": "Christopher Columbus reached the Americas in 1492, initiating European exploration."
+    },
+    {
+        "type": "multiple",
+        "question": "Which ancient wonder was located in Egypt?",
+        "options": ["Hanging Gardens", "Colossus of Rhodes", "Great Pyramid", "Lighthouse of Alexandria"],
+        "answer": "Great Pyramid",
+        "explanation": "The Great Pyramid of Giza, built around 2600 BC, is the only surviving ancient wonder."
+    },
+    {
+        "type": "boolean",
+        "question": "The Great Wall of China was built in one continuous construction period.",
+        "options": ["True", "False"],
+        "answer": "False",
+        "explanation": "The Great Wall was built over centuries by multiple dynasties, not in a single period."
+    },
+    {
+        "type": "multiple",
+        "question": "Who was the first Emperor of Rome?",
+        "options": ["Julius Caesar", "Augustus", "Nero", "Constantine"],
+        "answer": "Augustus",
+        "explanation": "Augustus, originally named Octavian, became the first Roman Emperor in 27 BC."
+    },
+    {
+        "type": "multiple",
+        "question": "In which year did the Berlin Wall fall?",
+        "options": ["1987", "1988", "1989", "1990"],
+        "answer": "1989",
+        "explanation": "The Berlin Wall fell in November 1989, symbolizing the end of the Cold War division in Europe."
+    },
+    {
+        "type": "multiple",
+        "question": "Which civilization built Machu Picchu?",
+        "options": ["Aztec", "Maya", "Inca", "Olmec"],
+        "answer": "Inca",
+        "explanation": "Machu Picchu was constructed by the Inca civilization in the 15th century."
+    },
+    {
+        "type": "boolean",
+        "question": "Napoleon Bonaparte was born in France.",
+        "options": ["True", "False"],
+        "answer": "False",
+        "explanation": "Napoleon was born in Corsica, which had recently become part of France in 1769."
+    },
+    {
+        "type": "multiple",
+        "question": "What year did the Titanic sink?",
+        "options": ["1910", "1912", "1914", "1916"],
+        "answer": "1912"
+    },
+    {
+        "type": "multiple",
+        "question": "Who wrote the Declaration of Independence?",
+        "options": ["George Washington", "Benjamin Franklin", "Thomas Jefferson", "John Adams"],
+        "answer": "Thomas Jefferson",
+        "explanation": "Thomas Jefferson was the primary author of the Declaration of Independence in 1776."
+    },
+    {
+        "type": "multiple",
+        "question": "In which century did the Renaissance begin?",
+        "options": ["12th", "13th", "14th", "15th"],
+        "answer": "14th",
+        "explanation": "The Renaissance began in the 14th century in Italy, marked by a revival of art and learning."
+    },
+    {
+        "type": "boolean",
+        "question": "Cleopatra was Greek, not Egyptian.",
+        "options": ["True", "False"],
+        "answer": "True",
+        "explanation": "Cleopatra VII was of Macedonian Greek descent, from the Ptolemaic dynasty."
+    },
+    {
+        "type": "multiple",
+        "question": "What was the first artificial satellite launched into space?",
+        "options": ["Apollo 1", "Voyager", "Sputnik", "Explorer"],
+        "answer": "Sputnik",
+        "explanation": "Sputnik 1, launched by the Soviet Union in 1957, was the first artificial satellite."
+    },
+    {
+        "type": "multiple",
+        "question": "Who painted the Mona Lisa?",
+        "options": ["Michelangelo", "Raphael", "Leonardo da Vinci", "Donatello"],
+        "answer": "Leonardo da Vinci"
+    },
+    {
+        "type": "multiple",
+        "question": "Which empire was ruled by Genghis Khan?",
+        "options": ["Ottoman", "Roman", "Mongol", "Persian"],
+        "answer": "Mongol",
+        "explanation": "Genghis Khan founded and ruled the Mongol Empire in the 13th century."
+    },
+    {
+        "type": "boolean",
+        "question": "The Cold War involved direct military conflict between the US and USSR.",
+        "options": ["True", "False"],
+        "answer": "False",
+        "explanation": "The Cold War was characterized by political tension, not direct military conflict."
+    },
+    {
+        "type": "multiple",
+        "question": "In which year did India gain independence?",
+        "options": ["1945", "1946", "1947", "1948"],
+        "answer": "1947",
+        "explanation": "India gained independence from British rule on August 15, 1947."
+    },
+    {
+        "type": "multiple",
+        "question": "Who was known as the 'Iron Lady'?",
+        "options": ["Queen Victoria", "Margaret Thatcher", "Golda Meir", "Indira Gandhi"],
+        "answer": "Margaret Thatcher"
+    },
+    {
+        "type": "multiple",
+        "question": "What ancient city was destroyed by a volcanic eruption in 79 AD?",
+        "options": ["Athens", "Pompeii", "Rome", "Carthage"],
+        "answer": "Pompeii",
+        "explanation": "Pompeii was destroyed by the eruption of Mount Vesuvius in 79 AD."
+    },
+    {
+        "type": "boolean",
+        "question": "The Hundred Years' War lasted exactly 100 years.",
+        "options": ["True", "False"],
+        "answer": "False",
+        "explanation": "The Hundred Years' War lasted 116 years, from 1337 to 1453."
+    },
+    {
+        "type": "multiple",
+        "question": "Who was the last Pharaoh of Egypt?",
+        "options": ["Tutankhamun", "Cleopatra", "Ramses II", "Nefertiti"],
+        "answer": "Cleopatra"
+    },
+    {
+        "type": "multiple",
+        "question": "In which year did the American Civil War begin?",
+        "options": ["1859", "1860", "1861", "1862"],
+        "answer": "1861",
+        "explanation": "The American Civil War began in 1861 with the attack on Fort Sumter."
+    },
+    {
+        "type": "multiple",
+        "question": "Which country gifted the Statue of Liberty to the United States?",
+        "options": ["England", "Spain", "France", "Italy"],
+        "answer": "France",
+        "explanation": "France gifted the Statue of Liberty to the U.S. in 1886 as a symbol of friendship."
+    },
+    {
+        "type": "boolean",
+        "question": "Shakespeare lived during the Victorian era.",
+        "options": ["True", "False"],
+        "answer": "False",
+        "explanation": "Shakespeare lived during the Elizabethan era, in the late 16th and early 17th centuries."
+    },
+    {
+        "type": "multiple",
+        "question": "What was the capital of the Byzantine Empire?",
+        "options": ["Rome", "Athens", "Constantinople", "Alexandria"],
+        "answer": "Constantinople"
+    },
+    {
+        "type": "multiple",
+        "question": "Who was the first person to walk on the Moon?",
+        "options": ["Buzz Aldrin", "Neil Armstrong", "Yuri Gagarin", "John Glenn"],
+        "answer": "Neil Armstrong",
+        "explanation": "Neil Armstrong walked on the Moon in 1969 during the Apollo 11 mission."
+    },
+    {
+        "type": "multiple",
+        "question": "In which year did the Soviet Union collapse?",
+        "options": ["1989", "1990", "1991", "1992"],
+        "answer": "1991",
+        "explanation": "The Soviet Union officially dissolved in December 1991."
+    }
+]
