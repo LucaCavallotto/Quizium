@@ -1,57 +1,115 @@
 const quizApp = {
     subjects: [
-        { id: 'f1', name: 'Formula 1', description: '10 questions' },
-        { id: 'cs', name: 'Computer Science', description: '10 questions' },
+        { id: 'f1', name: '🇮🇹 Formula 1' },
+        { id: 'cs', name: '🇬🇧 Computer Science' },
     ],
     currentSubject: null,
     questions: [],
-    allAnswers: [], // Store all user answers
+    allAnswers: [],
     currentQuestionIndex: 0,
     selectedAnswer: null,
     correctAnswers: 0,
     wrongAnswers: 0,
     totalQuestions: 0,
-    quizCompleted: false
+    quizCompleted: false,
+    subjectQuestionsCount: {}
 };
 
-function init() {
-    loadSubjects();
+async function init() {
+    await loadSubjectsWithQuestionCount();
 }
 
-function loadSubjects() {
+async function loadSubjectsWithQuestionCount() {
     const container = document.getElementById('subjectContainer');
     container.innerHTML = '';
-    
-    quizApp.subjects.forEach(subject => {
-        const card = document.createElement('div');
-        card.className = 'subject-card';
-        card.onclick = () => selectSubject(subject.id);
-        card.innerHTML = `
-            <h3 class="subject-name">${subject.name}</h3>
-            <div class="subject-meta">${subject.description}</div>
-        `;
-        container.appendChild(card);
-    });
+   
+    for (const subject of quizApp.subjects) {
+        try {
+            const response = await fetch(`data/${subject.id}.json`);
+            if (response.ok) {
+                const questions = await response.json();
+                quizApp.subjectQuestionsCount[subject.id] = questions.length;
+                
+                const card = document.createElement('div');
+                card.className = 'subject-card';
+                card.onclick = () => selectSubject(subject.id);
+                card.innerHTML = `
+                    <h3 class="subject-name">${subject.name}</h3>
+                    <div class="subject-meta">${questions.length} questions</div>
+                `;
+                container.appendChild(card);
+            } else {
+                const card = document.createElement('div');
+                card.className = 'subject-card';
+                card.onclick = () => selectSubject(subject.id);
+                card.innerHTML = `
+                    <h3 class="subject-name">${subject.name}</h3>
+                    <div class="subject-meta">Loading...</div>
+                `;
+                container.appendChild(card);
+            }
+        } catch (error) {
+            console.error(`Error loading questions for ${subject.id}:`, error);
+            const card = document.createElement('div');
+            card.className = 'subject-card';
+            card.onclick = () => selectSubject(subject.id);
+            card.innerHTML = `
+                <h3 class="subject-name">${subject.name}</h3>
+                <div class="subject-meta">Error loading</div>
+            `;
+            container.appendChild(card);
+        }
+    }
 }
 
 async function selectSubject(subjectId) {
     quizApp.currentSubject = quizApp.subjects.find(s => s.id === subjectId);
     document.getElementById('selectedSubjectTitle').textContent = quizApp.currentSubject.name;
-    
+   
     try {
         const response = await fetch(`data/${subjectId}.json`);
         if (!response.ok) throw new Error('Failed to load questions');
         quizApp.questions = await response.json();
         showScreen('questionCountScreen');
+        populateQuestionOptions();
     } catch (error) {
         console.error('Error loading questions:', error);
         alert('Failed to load questions for this subject. Please try again.');
     }
 }
 
+function populateQuestionOptions() {
+    const optionCardsContainer = document.querySelector('#questionCountScreen .option-cards');
+    optionCardsContainer.innerHTML = '';
+    
+    const totalAvailable = quizApp.questions.length;
+    const percentages = [25, 50, 75, 100];
+    const uniqueQuestionCounts = new Set();
+    
+    percentages.forEach(percentage => {
+        const numQuestions = Math.max(1, Math.round((percentage / 100) * totalAvailable));
+        if (!uniqueQuestionCounts.has(numQuestions)) {
+            uniqueQuestionCounts.add(numQuestions);
+            const optionCard = createOptionCard(numQuestions, percentage);
+            optionCardsContainer.appendChild(optionCard);
+        }
+    });
+}
+
+function createOptionCard(numQuestions, percentage) {
+    const optionCard = document.createElement('div');
+    optionCard.className = 'option-card';
+    optionCard.onclick = () => startQuiz(numQuestions);
+    optionCard.innerHTML = `
+        <div class="option-card-value">${numQuestions}</div>
+        <div class="option-card-label">Questions</div>
+    `;
+    return optionCard;
+}
+
 function startQuiz(questionCount) {
     const allQuestions = shuffleArray([...quizApp.questions]);
-    quizApp.totalQuestions = questionCount === 'all' ? allQuestions.length : Math.min(questionCount, allQuestions.length);
+    quizApp.totalQuestions = Math.min(questionCount, allQuestions.length);
     quizApp.questions = allQuestions.slice(0, quizApp.totalQuestions);
     quizApp.currentQuestionIndex = 0;
     quizApp.correctAnswers = 0;
@@ -59,12 +117,10 @@ function startQuiz(questionCount) {
     quizApp.selectedAnswer = null;
     quizApp.allAnswers = new Array(quizApp.totalQuestions).fill(null);
     quizApp.quizCompleted = false;
-
     document.getElementById('totalQuestions').textContent = quizApp.totalQuestions;
     document.getElementById('correctCount').textContent = '0';
     document.getElementById('wrongCount').textContent = '0';
     document.getElementById('quizSubjectTitle').textContent = quizApp.currentSubject.name;
-
     showScreen('quizScreen');
     loadQuestion();
 }
@@ -72,22 +128,17 @@ function startQuiz(questionCount) {
 function loadQuestion() {
     const question = quizApp.questions[quizApp.currentQuestionIndex];
     const savedAnswer = quizApp.allAnswers[quizApp.currentQuestionIndex];
-
     document.getElementById('currentQuestion').textContent = quizApp.currentQuestionIndex + 1;
     document.getElementById('questionNumberText').textContent = quizApp.currentQuestionIndex + 1;
-    
+   
     const progress = ((quizApp.currentQuestionIndex + 1) / quizApp.totalQuestions) * 100;
     document.getElementById('progressBar').style.width = progress + '%';
-
     document.getElementById('questionText').textContent = question.question;
-
     const optionsContainer = document.getElementById('optionsContainer');
     optionsContainer.innerHTML = '';
-
-    const options = question.type === 'multiple' ? 
-        (question.shuffledOptions || (question.shuffledOptions = shuffleArray([...question.options]))) : 
+    const options = question.type === 'multiple' ?
+        (question.shuffledOptions || (question.shuffledOptions = shuffleArray([...question.options]))) :
         question.options;
-
     options.forEach((option, index) => {
         const button = document.createElement('button');
         button.className = 'answer-option';
@@ -98,39 +149,34 @@ function loadQuestion() {
         button.onclick = () => selectOption(index, button, question, options);
         optionsContainer.appendChild(button);
     });
-
     // Update navigation buttons
     document.getElementById('prevBtn').disabled = quizApp.currentQuestionIndex === 0;
     document.getElementById('nextBtn').disabled = !savedAnswer && !quizApp.quizCompleted;
-
+    
     // If we already answered this question, show the answer
     if (savedAnswer !== null) {
         showAnswer(savedAnswer, question, options);
     } else {
-        document.getElementById('feedbackCallout').classList.add('hidden');
         document.getElementById('explanationCallout').classList.add('hidden');
     }
-
-    // Update next button text
+    
+    // Update next button text: cambia in "Termina Quiz" se è l'ultima domanda E è già stata risposta
     if (quizApp.currentQuestionIndex === quizApp.totalQuestions - 1 && savedAnswer !== null) {
-        document.getElementById('nextBtn').textContent = 'View Results →';
+        document.getElementById('nextBtn').textContent = 'Termina Quiz';
     } else {
-        document.getElementById('nextBtn').textContent = 'Next Question →';
+        document.getElementById('nextBtn').textContent = 'Next →';
     }
 }
 
 function selectOption(index, button, question, displayedOptions) {
     const savedAnswer = quizApp.allAnswers[quizApp.currentQuestionIndex];
     if (savedAnswer !== null) return; // Already answered
-
     quizApp.allAnswers[quizApp.currentQuestionIndex] = {
         selectedIndex: index,
         selectedOption: displayedOptions[index],
         isCorrect: displayedOptions[index] === question.answer
     };
-
     const isCorrect = displayedOptions[index] === question.answer;
-
     if (isCorrect) {
         quizApp.correctAnswers++;
         document.getElementById('correctCount').textContent = quizApp.correctAnswers;
@@ -138,7 +184,6 @@ function selectOption(index, button, question, displayedOptions) {
         quizApp.wrongAnswers++;
         document.getElementById('wrongCount').textContent = quizApp.wrongAnswers;
     }
-
     showAnswer(quizApp.allAnswers[quizApp.currentQuestionIndex], question, displayedOptions);
     document.getElementById('nextBtn').disabled = false;
 }
@@ -148,7 +193,7 @@ function showAnswer(answerData, question, displayedOptions) {
     buttons.forEach((btn, idx) => {
         btn.disabled = true;
         const indicator = btn.querySelector('.option-indicator');
-        
+       
         if (displayedOptions[idx] === question.answer) {
             btn.classList.add('correct');
             indicator.textContent = '✓';
@@ -157,14 +202,6 @@ function showAnswer(answerData, question, displayedOptions) {
             indicator.textContent = '✗';
         }
     });
-
-    const feedback = document.getElementById('feedbackCallout');
-    feedback.className = 'callout ' + (answerData.isCorrect ? 'success' : 'error');
-    feedback.innerHTML = `
-        <div>${answerData.isCorrect ? '<strong>Correct!</strong> Well done.' : '<strong>Incorrect.</strong> The correct answer is highlighted above.'}</div>
-    `;
-    feedback.classList.remove('hidden');
-
     if (question.explanation) {
         const explanation = document.getElementById('explanationCallout');
         explanation.className = 'callout info';
@@ -198,12 +235,11 @@ function nextQuestion() {
 
 function showResults() {
     const percentage = Math.round((quizApp.correctAnswers / quizApp.totalQuestions) * 100);
-    
+   
     document.getElementById('scorePercentage').textContent = percentage + '%';
     document.getElementById('totalQuestionsResult').textContent = quizApp.totalQuestions;
     document.getElementById('correctResult').textContent = quizApp.correctAnswers;
     document.getElementById('wrongResult').textContent = quizApp.wrongAnswers;
-
     showScreen('resultsScreen');
 }
 
@@ -213,15 +249,15 @@ function restartQuiz() {
     quizApp.correctAnswers = 0;
     quizApp.wrongAnswers = 0;
     quizApp.quizCompleted = false;
-    
+   
     // Re-shuffle questions
     quizApp.questions.forEach(q => {
         if (q.shuffledOptions) delete q.shuffledOptions;
     });
-    
+   
     document.getElementById('correctCount').textContent = '0';
     document.getElementById('wrongCount').textContent = '0';
-    
+   
     showScreen('quizScreen');
     loadQuestion();
 }

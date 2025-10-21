@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quizzapp</title>
+    <title>Quizium</title>
     <link rel="stylesheet" href="assets/style.css"/>
     <script src="assets/app.js" defer></script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
@@ -12,25 +12,21 @@
 <body>
     <!-- Main Content -->
     <div class="main-content">
-        
         <!-- Home Screen -->
         <div id="homeScreen">
             <div class="page-header">
-                <h1 class="page-title">quizzapp</h1>
+                <h1 class="page-title">Quizium</h1>
                 <p class="page-description">Test your knowledge across different subjects. Choose a topic below to get started.</p>
             </div>
-            
             <div class="block-title">Available Subjects</div>
             <div class="subjects-grid" id="subjectContainer"></div>
         </div>
-
         <!-- Question Count Selection -->
         <div id="questionCountScreen" class="hidden">
             <div class="page-header">
                 <h1 class="page-title" id="selectedSubjectTitle"></h1>
                 <p class="page-description">Select how many questions you'd like to answer.</p>
             </div>
-            
             <div class="options-block">
                 <div class="block-title">Quiz Length</div>
                 <div class="option-cards">
@@ -48,12 +44,10 @@
                     </div>
                 </div>
             </div>
-
             <div style="margin-top: 32px;">
                 <button class="btn btn-ghost" onclick="goHome()">← Back to subjects</button>
             </div>
         </div>
-
         <!-- Quiz Screen -->
         <div id="quizScreen" class="hidden">
             <div class="quiz-header">
@@ -71,39 +65,28 @@
                     </div>
                 </div>
             </div>
-
             <div class="progress-bar-container">
                 <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
             </div>
-
             <div class="quiz-content-mobile">
                 <div class="question-block">
                     <div class="question-number">Question <span id="questionNumberText">1</span></div>
                     <div class="question-text" id="questionText"></div>
                     <div class="answer-options" id="optionsContainer"></div>
-                    
-                    <div id="feedbackCallout" class="hidden"></div>
-                    <div id="explanationCallout" class="hidden"></div>
+                    <div id="explanationCallout" class="callout info hidden"></div>
+                </div>
+                <div class="quiz-navigation">
+                    <button id="prevBtn" class="nav-btn" onclick="previousQuestion()">← Previous</button>
+                    <button id="nextBtn" class="nav-btn" onclick="nextQuestion()">Next →</button>
                 </div>
             </div>
-
-            <div class="quiz-navigation">
-                <button id="prevBtn" class="nav-btn" onclick="previousQuestion()">
-                    ← Previous
-                </button>
-                <button id="nextBtn" class="nav-btn" onclick="nextQuestion()">
-                    Next →
-                </button>
-            </div>
         </div>
-
         <!-- Results Screen -->
         <div id="resultsScreen" class="hidden">
             <div class="page-header">
                 <h1 class="page-title">Quiz Complete!</h1>
                 <p class="page-description">Here's how you performed on this quiz.</p>
             </div>
-
             <div class="results-grid">
                 <div class="result-card">
                     <div class="result-label">Score</div>
@@ -122,13 +105,11 @@
                     <div class="result-value" id="totalQuestionsResult">0</div>
                 </div>
             </div>
-
             <div style="display: flex; gap: 12px; margin-top: 32px;">
                 <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
                 <button class="btn btn-ghost" onclick="goHome()">← Back to Home</button>
             </div>
         </div>
-
     </div>
 </body>
-</html>
+</html> 
