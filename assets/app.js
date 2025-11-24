@@ -2,6 +2,7 @@ const quizApp = {
     subjects: [
         { id: 'f1', name: '🇮🇹 Formula 1' },
         { id: 'cs', name: '🇬🇧 Computer Science' },
+        { id: 'cnts', name: '🇬🇧/🇮🇹 Computer Network Technologies and Services' }
     ],
     currentSubject: null,
     questions: [],
