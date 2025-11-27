@@ -2,114 +2,154 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Quizium</title>
     <link rel="stylesheet" href="assets/style.css"/>
     <script src="assets/app.js" defer></script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Main Content -->
+    
+    <div class="bg-gradient"></div>
+
     <div class="main-content">
-        <!-- Home Screen -->
-        <div id="homeScreen">
-            <div class="page-header">
-                <h1 class="page-title">Quizium</h1>
-                <p class="page-description">Test your knowledge across different subjects. Choose a topic below to get started.</p>
+        
+        <div id="homeScreen" class="screen-container">
+            <header class="home-header">
+                <div class="logo-circle">🎯</div>
+                <h1 class="app-name">Quizium</h1>
+                <p class="app-tagline">Ready to challenge yourself?</p>
+            </header>
+            
+            <div class="content-wrapper">
+                <div class="section-header">
+                    <span class="section-title">Explore Topics</span>
+                    <span class="section-line"></span>
+                </div>
+                <div class="subjects-grid" id="subjectContainer"></div>
             </div>
-            <div class="block-title">Available Subjects</div>
-            <div class="subjects-grid" id="subjectContainer"></div>
         </div>
-        <!-- Question Count Selection -->
-        <div id="questionCountScreen" class="hidden">
-            <div class="page-header">
-                <h1 class="page-title" id="selectedSubjectTitle"></h1>
-                <p class="page-description">Select how many questions you'd like to answer.</p>
+
+        <div id="questionCountScreen" class="screen-container hidden">
+            <div class="nav-header">
+                <button class="btn btn-icon-back" onclick="goHome()" aria-label="Go Back">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+                </button>
             </div>
+
+            <header class="page-header">
+                <h1 class="page-title" id="selectedSubjectTitle">Subject</h1>
+                <p class="page-description">Customize your session.</p>
+            </header>
+            
             <div class="options-block">
-                <div class="block-title">Quiz Length</div>
-                <div class="option-cards">
-                    <div class="option-card" onclick="startQuiz(10)">
-                        <div class="option-card-value">10</div>
-                        <div class="option-card-label">Questions</div>
+                <div class="slider-wrapper">
+                    <div class="count-display-group">
+                        <div class="slider-value-display">
+                            <span id="sliderValue">10</span>
+                        </div>
+                        <div class="label-questions">Questions</div>
+                        <div class="time-estimate-pill" id="timeEstimate">⏱️ ~3 min</div>
                     </div>
-                    <div class="option-card" onclick="startQuiz(20)">
-                        <div class="option-card-value">20</div>
-                        <div class="option-card-label">Questions</div>
+
+                    <div class="preset-buttons">
+                        <button class="preset-btn" onclick="setSliderValue(10)">Short</button>
+                        <button class="preset-btn" onclick="setSliderValue(50)">Normal</button>
+                        <button class="preset-btn" onclick="setSliderValue('max')">Max</button>
                     </div>
-                    <div class="option-card" onclick="startQuiz('all')">
-                        <div class="option-card-value">All</div>
-                        <div class="option-card-label">Questions</div>
+
+                    <div class="range-container">
+                        <input type="range" min="1" max="50" value="10" class="slider" id="questionSlider">
+                        <div class="slider-labels">
+                            <span>1</span>
+                            <span id="maxQuestionsLabel">All</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div style="margin-top: 32px;">
-                <button class="btn btn-ghost" onclick="goHome()">← Back to subjects</button>
+
+                <button class="btn btn-primary full-width" onclick="startQuizFromSlider()" style="margin-top: 24px;">Start Quiz</button>
             </div>
         </div>
-        <!-- Quiz Screen -->
-        <div id="quizScreen" class="hidden">
+
+        <div id="quizScreen" class="screen-container hidden">
             <div class="quiz-header">
-                <div class="quiz-meta">
-                    <button class="btn btn-ghost" onclick="goHome()">← Exit Quiz</button>
-                    <h2 style="font-size: 1.25rem; font-weight: 600; margin: 0;" id="quizSubjectTitle"></h2>
-                </div>
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <span class="quiz-counter">
-                        <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
-                    </span>
+                <div class="quiz-header-top">
+                    <div class="quiz-header-left">
+                        <button class="btn btn-close" onclick="goHome()" aria-label="Exit Quiz">✕</button>
+                        <span class="quiz-subject-badge" id="quizSubjectTitle">Subject</span>
+                    </div>
+
                     <div class="quiz-stats">
-                        <div class="stat-badge correct">✓ <span id="correctCount">0</span></div>
-                        <div class="stat-badge wrong">✗ <span id="wrongCount">0</span></div>
+                        <div class="stat-pill correct"><span class="icon">✓</span> <span id="correctCount">0</span></div>
+                        <div class="stat-pill wrong"><span class="icon">✗</span> <span id="wrongCount">0</span></div>
                     </div>
                 </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                </div>
             </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
-            </div>
-            <div class="quiz-content-mobile">
-                <div class="question-block">
-                    <div class="question-number">Question <span id="questionNumberText">1</span></div>
-                    <div class="question-text" id="questionText"></div>
+
+            <div class="quiz-scroll-area">
+                <div class="question-card">
+                    <div class="question-meta">
+                        <span class="q-number">Question <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></span>
+                    </div>
+                    
+                    <h2 class="question-text" id="questionText">Loading...</h2>
+                    
                     <div class="answer-options" id="optionsContainer"></div>
-                    <div id="explanationCallout" class="callout info hidden"></div>
+                    <div id="explanationCallout" class="callout hidden"></div>
+                </div>
+            </div>
+
+            <footer class="quiz-footer">
+                <div class="navigator-container">
+                    <div class="navigator-scroll" id="questionNavigator"></div>
                 </div>
                 <div class="quiz-navigation">
-                    <button id="prevBtn" class="nav-btn" onclick="previousQuestion()">← Previous</button>
-                    <button id="nextBtn" class="nav-btn" onclick="nextQuestion()">Next →</button>
+                    <button id="prevBtn" class="nav-btn btn-secondary" onclick="previousQuestion()">Previous</button>
+                    <button id="nextBtn" class="nav-btn btn-primary" onclick="nextQuestion()">Next</button>
+                </div>
+            </footer>
+        </div>
+
+        <div id="resultsScreen" class="screen-container hidden">
+            <div class="results-content">
+                <div class="score-hero">
+                    <div class="score-ring-container">
+                        <svg class="score-ring" width="160" height="160" viewBox="0 0 160 160">
+                            <circle class="ring-bg" cx="80" cy="80" r="70"></circle>
+                            <circle class="ring-progress" id="scoreRing" cx="80" cy="80" r="70" stroke-linecap="round" transform="rotate(-90 80 80)"></circle>
+                        </svg>
+                        <div class="score-text-center">
+                            <span class="score-big" id="scorePercentage">0%</span>
+                            <span class="score-label">Score</span>
+                        </div>
+                    </div>
+                    <h2 class="result-title" id="resultTitle">Great Job!</h2>
+                    <p class="result-subtitle" id="resultMessage">You have mastered this subject.</p>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-box correct">
+                        <span class="stat-val" id="correctResult">0</span><span class="stat-lbl">Correct</span>
+                    </div>
+                    <div class="stat-box wrong">
+                        <span class="stat-val" id="wrongResult">0</span><span class="stat-lbl">Wrong</span>
+                    </div>
+                    <div class="stat-box total">
+                        <span class="stat-val" id="totalQuestionsResult">0</span><span class="stat-lbl">Total</span>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn btn-primary full-width" onclick="restartQuiz()">Try Again</button>
+                    <button class="btn btn-ghost full-width" onclick="goHome()">Back to Home</button>
                 </div>
             </div>
         </div>
-        <!-- Results Screen -->
-        <div id="resultsScreen" class="hidden">
-            <div class="page-header">
-                <h1 class="page-title">Quiz Complete!</h1>
-                <p class="page-description">Here's how you performed on this quiz.</p>
-            </div>
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-label">Score</div>
-                    <div class="result-value" id="scorePercentage">0%</div>
-                </div>
-                <div class="result-card success">
-                    <div class="result-label">Correct</div>
-                    <div class="result-value" id="correctResult">0</div>
-                </div>
-                <div class="result-card error">
-                    <div class="result-label">Wrong</div>
-                    <div class="result-value" id="wrongResult">0</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-label">Total</div>
-                    <div class="result-value" id="totalQuestionsResult">0</div>
-                </div>
-            </div>
-            <div style="display: flex; gap: 12px; margin-top: 32px;">
-                <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
-                <button class="btn btn-ghost" onclick="goHome()">← Back to Home</button>
-            </div>
-        </div>
+
     </div>
 </body>
-</html> 
+</html>
