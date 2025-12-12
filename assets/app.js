@@ -1,17 +1,8 @@
-/* =========================================
-   1. CONFIGURATION & STATE
-   ========================================= */
-const subjectConfig = {
-    'f1': { icon: '🏎️', color: '#e10600', bg: '#fff1f0' },
-    'cs': { icon: '💻', color: '#3b82f6', bg: '#eff6ff' },
-    'cnts': { icon: '🌐', color: '#10b981', bg: '#d1fae5' }
-};
-
 const quizApp = {
     subjects: [
-        { id: 'f1', name: 'Formula 1' },
-        { id: 'cs', name: 'Computer Science' },
-        { id: 'cnts', name: 'Network Technologies' }
+        { id: 'f1', name: 'Formula 1', icon: '🏎️', color: '#e10600', bg: '#fff1f0' },
+        { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff' },
+        { id: 'cnts', name: 'Network Technologies', icon: '🌐', color: '#10b981', bg: '#d1fae5' }
     ],
     currentSubject: null,
     questions: [],
@@ -43,15 +34,19 @@ async function loadSubjectsWithQuestionCount() {
                 const questions = await response.json();
                 quizApp.subjectQuestionsCount[subject.id] = questions.length;
 
-                const config = subjectConfig[subject.id] || { icon: '📝', color: '#6b7280', bg: '#f3f4f6' };
+                // Default styles if missing
+                const icon = subject.icon || '📝';
+                const color = subject.color || '#6b7280';
+                const bg = subject.bg || '#f3f4f6';
+
                 const card = document.createElement('div');
                 card.className = 'subject-card';
-                card.style.setProperty('--card-color', config.color);
-                card.style.setProperty('--card-bg-light', config.bg);
+                card.style.setProperty('--card-color', color);
+                card.style.setProperty('--card-bg-light', bg);
                 card.onclick = () => selectSubject(subject.id);
 
                 card.innerHTML = `
-                    <div class="card-icon">${config.icon}</div>
+                    <div class="card-icon">${icon}</div>
                     <div class="card-content">
                         <h3 class="card-title">${subject.name}</h3>
                         <div class="card-stats"><span>${questions.length} Questions</span></div>
