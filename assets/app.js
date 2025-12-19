@@ -1,8 +1,8 @@
 const quizApp = {
     subjects: [
-        { id: 'f1', name: 'Formula 1', icon: '🏎️', color: '#e10600', bg: '#fff1f0' },
-        { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff' },
-        { id: 'cnts', name: 'Network Technologies', icon: '🌐', color: '#10b981', bg: '#d1fae5' }
+        { id: 'f1', name: 'Formula 1', icon: '🏎️', color: '#e10600', bg: '#fff1f0', booleanLabels: ['Vero', 'Falso'] },
+        { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff', booleanLabels: ['True', 'False'] },
+        { id: 'cnts', name: 'Network Technologies', icon: '🌐', color: '#10b981', bg: '#d1fae5', booleanLabels: ['True', 'False'] }
     ],
     currentSubject: null,
     questions: [],
@@ -156,6 +156,7 @@ function loadQuestion() {
     const savedAnswer = quizApp.allAnswers[quizApp.currentQuestionIndex];
 
     document.getElementById('currentQuestion').textContent = quizApp.currentQuestionIndex + 1;
+    document.getElementById('questionIdDisplay').innerHTML = `ID <span class="id-val">${question.id}</span>`;
     document.getElementById('totalQuestions').textContent = quizApp.totalQuestions;
 
     const progress = ((quizApp.currentQuestionIndex + 1) / quizApp.totalQuestions) * 100;
@@ -165,14 +166,32 @@ function loadQuestion() {
     const optionsContainer = document.getElementById('optionsContainer');
     optionsContainer.innerHTML = '';
 
-    const options = question.type === 'multiple' ?
-        (question.shuffledOptions || (question.shuffledOptions = shuffleArray([...question.options]))) : question.options;
+    let options = [];
+    if (question.type === 'multiple') {
+        options = question.shuffledOptions || (question.shuffledOptions = shuffleArray([...question.options]));
+    } else if (question.type === 'boolean') {
+        const labels = quizApp.currentSubject.booleanLabels || ['True', 'False'];
+        options = [
+            { text: labels[0], value: true },
+            { text: labels[1], value: false }
+        ];
+    }
 
     options.forEach((option, index) => {
         const button = document.createElement('button');
         button.className = 'answer-option';
-        button.innerHTML = `<span>${option}</span>`;
-        button.onclick = () => selectOption(index, button, question, options);
+
+        let displayText, value;
+        if (question.type === 'multiple') {
+            displayText = option;
+            value = question.options.indexOf(option); // Get original index
+        } else {
+            displayText = option.text;
+            value = option.value;
+        }
+
+        button.innerHTML = `<span>${displayText}</span>`;
+        button.onclick = () => selectOption(value, button, question, options);
         optionsContainer.appendChild(button);
     });
 
@@ -187,12 +206,13 @@ function loadQuestion() {
     updateNavigator();
 }
 
-function selectOption(index, button, question, displayedOptions) {
+function selectOption(selectedValue, button, question, displayedOptions) {
     const savedAnswer = quizApp.allAnswers[quizApp.currentQuestionIndex];
     if (savedAnswer !== null) return;
 
-    const isCorrect = displayedOptions[index] === question.answer;
-    quizApp.allAnswers[quizApp.currentQuestionIndex] = { selectedIndex: index, selectedOption: displayedOptions[index], isCorrect: isCorrect };
+    const isCorrect = selectedValue === question.answer;
+
+    quizApp.allAnswers[quizApp.currentQuestionIndex] = { selectedValue: selectedValue, isCorrect: isCorrect };
 
     if (isCorrect) {
         quizApp.correctAnswers++;
@@ -211,8 +231,16 @@ function showAnswer(answerData, question, displayedOptions) {
     const buttons = document.querySelectorAll('.answer-option');
     buttons.forEach((btn, idx) => {
         btn.disabled = true;
-        if (displayedOptions[idx] === question.answer) btn.classList.add('correct');
-        else if (idx === answerData.selectedIndex && !answerData.isCorrect) btn.classList.add('wrong');
+
+        let buttonValue;
+        if (question.type === 'multiple') {
+            buttonValue = question.options.indexOf(displayedOptions[idx]);
+        } else {
+            buttonValue = displayedOptions[idx].value;
+        }
+
+        if (buttonValue === question.answer) btn.classList.add('correct');
+        else if (buttonValue === answerData.selectedValue && !answerData.isCorrect) btn.classList.add('wrong');
     });
 
     if (question.explanation) {

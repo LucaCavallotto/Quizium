@@ -24,25 +24,29 @@ The file must contain an array of question objects. Each object should have the 
 ```json
 [
   {
+    "id": 1,
     "type": "multiple",
     "question": "Your question text here?",
-    "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
-    "answer": "Option 1",
+    "options": ["Option A", "Option B", "Option C", "Option D"],
+    "answer": 2,
     "explanation": "Brief explanation of why this answer is correct."
   },
   {
+    "id": 2,
     "type": "boolean",
     "question": "True or False question statement?",
-    "options": ["True", "False"],
-    "answer": "False",
+    "answer": false,
     "explanation": "Explanation here."
   }
 ]
 ```
 
-*   **type**: `"multiple"` for 4 options, or `"boolean"` for True/False.
-*   **options**: Array of strings.
-*   **answer**: The exact string matching one of the options.
+*   **id**: Unique integer identifier for the question.
+*   **type**: `"multiple"` for multiple choice, or `"boolean"` for True/False.
+*   **options**: Array of strings (Required only for `"multiple"` type).
+*   **answer**: 
+    *   For `multiple`: Integer index (0-based) of the correct option.
+    *   For `boolean`: Boolean value (`true` or `false`).
 
 ### 2. Register the Subject in the App
 
@@ -57,7 +61,8 @@ subjects: [
         name: 'World History', 
         icon: '📜', 
         color: '#d97706', 
-        bg: '#fffbeb' 
+        bg: '#fffbeb',
+        booleanLabels: ['True', 'False']
     }
 ],
 ```
@@ -67,5 +72,6 @@ subjects: [
 *   **icon**: Emoji or text icon.
 *   **color**: Main accent color.
 *   **bg**: Light background color.
+*   **booleanLabels**: Array of 2 strings for True/False buttons (e.g., `['Vero', 'Falso']` or `['True', 'False']`).
 
 Once this is done, refresh the page to see your new subject!

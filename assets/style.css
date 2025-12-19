@@ -1297,3 +1297,16 @@ input[type=range]::-moz-range-track {
         height: 20px;
     }
 }
+
+.q-id {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.q-id .id-val {
+    color: var(--primary);
+    font-weight: 800;
+}

@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Quizium</title>
-    <link rel="stylesheet" href="assets/style.css"/>
+    <link rel="stylesheet" href="assets/style.css" />
     <script src="assets/app.js" defer></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
+
     <div class="bg-gradient"></div>
 
     <div class="main-content">
-        
+
         <div id="homeScreen" class="screen-container">
             <header class="home-header">
                 <div class="logo-circle">🎯</div>
                 <h1 class="app-name">Quizium</h1>
                 <p class="app-tagline">Ready to challenge yourself?</p>
             </header>
-            
+
             <div class="content-wrapper">
                 <div class="section-header">
                     <span class="section-title">Explore Topics</span>
@@ -34,7 +37,11 @@
         <div id="questionCountScreen" class="screen-container hidden">
             <div class="nav-header">
                 <button class="btn btn-icon-back" onclick="goHome()" aria-label="Go Back">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"></path>
+                        <path d="M12 19l-7-7 7-7"></path>
+                    </svg>
                 </button>
             </div>
 
@@ -42,7 +49,7 @@
                 <h1 class="page-title" id="selectedSubjectTitle">Subject</h1>
                 <p class="page-description">Customize your session.</p>
             </header>
-            
+
             <div class="options-block">
                 <div class="slider-wrapper">
                     <div class="count-display-group">
@@ -68,7 +75,8 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary full-width" onclick="startQuizFromSlider()" style="margin-top: 24px;">Start Quiz</button>
+                <button class="btn btn-primary full-width" onclick="startQuizFromSlider()"
+                    style="margin-top: 24px;">Start Quiz</button>
             </div>
         </div>
 
@@ -81,7 +89,8 @@
                     </div>
 
                     <div class="quiz-stats">
-                        <div class="stat-pill correct"><span class="icon">✓</span> <span id="correctCount">0</span></div>
+                        <div class="stat-pill correct"><span class="icon">✓</span> <span id="correctCount">0</span>
+                        </div>
                         <div class="stat-pill wrong"><span class="icon">✗</span> <span id="wrongCount">0</span></div>
                     </div>
                 </div>
@@ -93,11 +102,13 @@
             <div class="quiz-scroll-area">
                 <div class="question-card">
                     <div class="question-meta">
-                        <span class="q-number">Question <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></span>
+                        <span class="q-number">Question <span id="currentQuestion">1</span>/<span
+                                id="totalQuestions">10</span></span>
+                        <span class="q-id" id="questionIdDisplay"></span>
                     </div>
-                    
+
                     <h2 class="question-text" id="questionText">Loading...</h2>
-                    
+
                     <div class="answer-options" id="optionsContainer"></div>
                     <div id="explanationCallout" class="callout hidden"></div>
                 </div>
@@ -120,7 +131,8 @@
                     <div class="score-ring-container">
                         <svg class="score-ring" width="160" height="160" viewBox="0 0 160 160">
                             <circle class="ring-bg" cx="80" cy="80" r="70"></circle>
-                            <circle class="ring-progress" id="scoreRing" cx="80" cy="80" r="70" stroke-linecap="round" transform="rotate(-90 80 80)"></circle>
+                            <circle class="ring-progress" id="scoreRing" cx="80" cy="80" r="70" stroke-linecap="round"
+                                transform="rotate(-90 80 80)"></circle>
                         </svg>
                         <div class="score-text-center">
                             <span class="score-big" id="scorePercentage">0%</span>
@@ -152,4 +164,5 @@
 
     </div>
 </body>
+
 </html>
