@@ -39,10 +39,10 @@
     /* Slate 200 */
 
     /* Dimensions */
-    --header-height: 56px;
-    --radius-l: 24px;
-    --radius-m: 16px;
-    --radius-s: 12px;
+    --header-height: 52px;
+    --radius-l: 20px;
+    --radius-m: 12px;
+    --radius-s: 8px;
 
     /* Shadows - Soft & Layered */
     --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
@@ -90,6 +90,8 @@ body {
     background-color: var(--bg-body);
     color: var(--text-main);
     line-height: 1.5;
+    font-size: 0.95rem;
+    /* Slightly reduced base font size */
     -webkit-font-smoothing: antialiased;
 }
 
@@ -146,9 +148,9 @@ body {
 }
 
 .page-title {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.75rem, 4.5vw, 2.5rem);
     font-weight: 800;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, var(--text-main), var(--text-secondary));
     -webkit-background-clip: text;
@@ -158,14 +160,14 @@ body {
 
 .page-description {
     color: var(--text-secondary);
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     max-width: 600px;
     line-height: 1.6;
 }
 
 .btn,
 .nav-btn {
-    padding: 16px 28px;
+    padding: 14px 24px;
     border-radius: var(--radius-m);
     border: none;
     font-weight: 600;
@@ -278,27 +280,27 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-bottom: 48px;
-    padding-top: 32px;
+    margin-bottom: 40px;
+    padding-top: 24px;
 }
 
 .logo-circle {
-    font-size: 4rem;
-    width: 96px;
-    height: 96px;
+    font-size: 3.5rem;
+    width: 80px;
+    height: 80px;
     background: var(--bg-card);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: var(--shadow-float);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     border: 1px solid var(--border);
     animation: pop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .app-name {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 800;
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     -webkit-background-clip: text;
@@ -347,7 +349,7 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-l);
-    padding: 24px;
+    padding: 20px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-card);
@@ -355,9 +357,9 @@ body {
     overflow: hidden;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     height: 100%;
-    min-height: 110px;
+    min-height: 100px;
 }
 
 .subject-card:hover {
@@ -378,9 +380,9 @@ body {
 }
 
 .card-icon {
-    font-size: 2.5rem;
-    width: 64px;
-    height: 64px;
+    font-size: 2rem;
+    width: 56px;
+    height: 56px;
     border-radius: var(--radius-m);
     background: var(--card-bg-light, var(--primary-light));
     display: flex;
@@ -390,9 +392,9 @@ body {
     transition: transform 0.3s;
 }
 
-.subject-card:hover .card-icon {
-    /* transform: scale(1.1) rotate(5deg); */
-}
+/* .subject-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+} */
 
 .card-content {
     flex: 1;
@@ -400,7 +402,7 @@ body {
 }
 
 .card-title {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 700;
     margin-bottom: 6px;
     color: var(--text-main);
@@ -461,8 +463,8 @@ body {
     max-width: 480px;
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    padding: 40px 32px;
+    gap: 24px;
+    padding: 32px 24px;
 }
 
 .count-display-group {
@@ -473,7 +475,7 @@ body {
 }
 
 .slider-value-display {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 800;
     color: var(--text-main);
     line-height: 1;
@@ -624,11 +626,11 @@ input[type=range]::-moz-range-track {
 }
 
 .options-block .btn {
-    margin-top: 32px;
+    margin-top: 24px;
     width: 100%;
     max-width: 480px;
-    font-size: 1.1rem;
-    padding: 18px;
+    font-size: 1.05rem;
+    padding: 16px;
 }
 
 /* =========================================
@@ -765,7 +767,7 @@ input[type=range]::-moz-range-track {
 .question-card {
     background: var(--bg-card);
     border-radius: var(--radius-l);
-    padding: 24px;
+    padding: 20px;
     box-shadow: var(--shadow-float);
     border: 1px solid var(--border);
     /* animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
@@ -775,7 +777,7 @@ input[type=range]::-moz-range-track {
 }
 
 .question-meta {
-    margin-bottom: 24px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -795,8 +797,8 @@ input[type=range]::-moz-range-track {
 }
 
 .question-text {
-    font-size: 1.25rem;
-    margin-bottom: 32px;
+    font-size: 1.15rem;
+    margin-bottom: 20px;
     font-weight: 700;
     line-height: 1.4;
     color: var(--text-main);
@@ -813,9 +815,9 @@ input[type=range]::-moz-range-track {
     background: var(--bg-card);
     border: 2px solid var(--border);
     border-radius: var(--radius-m);
-    padding: 16px 20px;
+    padding: 14px 20px;
     text-align: left;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: var(--text-main);
     cursor: pointer;
@@ -829,11 +831,11 @@ input[type=range]::-moz-range-track {
 .answer-option::before {
     content: '';
     position: absolute;
-    left: 24px;
+    left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border: 2px solid var(--border);
     border-radius: 50%;
     transition: all 0.2s;
@@ -892,12 +894,12 @@ input[type=range]::-moz-range-track {
 }
 
 .callout {
-    margin-top: 32px;
-    padding: 24px;
+    margin-top: 24px;
+    padding: 20px;
     background: var(--primary-light);
     border-left: 4px solid var(--primary);
     border-radius: var(--radius-s);
-    font-size: 1.05rem;
+    font-size: 1rem;
     animation: fadeIn 0.4s;
     line-height: 1.6;
     color: var(--text-main);
@@ -1038,8 +1040,8 @@ input[type=range]::-moz-range-track {
 
 .score-ring-container {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto 32px auto;
 }
 
@@ -1078,7 +1080,7 @@ input[type=range]::-moz-range-track {
 }
 
 .score-big {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 800;
     line-height: 1;
     color: var(--text-main);
@@ -1095,7 +1097,7 @@ input[type=range]::-moz-range-track {
 }
 
 .result-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     margin-bottom: 12px;
     color: var(--text-main);
@@ -1127,7 +1129,7 @@ input[type=range]::-moz-range-track {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-m);
-    padding: 20px;
+    padding: 16px;
     flex: 1;
     min-width: 100px;
     max-width: 140px;
@@ -1144,7 +1146,7 @@ input[type=range]::-moz-range-track {
 } */
 
 .stat-val {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 4px;
@@ -1271,15 +1273,15 @@ input[type=range]::-moz-range-track {
 
 @media (max-width: 600px) {
     .page-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
 
     .question-card {
-        padding: 24px 20px;
+        padding: 20px 16px;
     }
 
     .question-text {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
     }
 
     .nav-btn {
@@ -1292,10 +1294,12 @@ input[type=range]::-moz-range-track {
     }
 
     .answer-option {
-        padding: 16px 16px 16px 56px;
+        padding: 14px 14px 14px 48px;
     }
 
     .answer-option::before {
-        left: 16px;
+        left: 14px;
+        width: 20px;
+        height: 20px;
     }
 }
