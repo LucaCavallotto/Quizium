@@ -35,7 +35,7 @@ The file must contain an array of question objects. Each object should have the 
     "id": 2,
     "type": "boolean",
     "question": "True or False question statement?",
-    "answer": false,
+    "answer": 0,
     "explanation": "Explanation here."
   }
 ]
@@ -46,7 +46,7 @@ The file must contain an array of question objects. Each object should have the 
 *   **options**: Array of strings (Required only for `"multiple"` type).
 *   **answer**: 
     *   For `multiple`: Integer index (0-based) of the correct option.
-    *   For `boolean`: Boolean value (`true` or `false`).
+    *   For `boolean`: Integer `0` (False) or `1` (True).
 
 ### 2. Register the Subject in the App
 
@@ -72,6 +72,6 @@ subjects: [
 *   **icon**: Emoji or text icon.
 *   **color**: Main accent color.
 *   **bg**: Light background color.
-*   **booleanLabels**: Array of 2 strings for True/False buttons (e.g., `['Vero', 'Falso']` or `['True', 'False']`).
+*   **lang**: Language code for boolean labels (e.g., `'IT'` for Vero/Falso, `'EN'` for True/False).
 
 Once this is done, refresh the page to see your new subject!

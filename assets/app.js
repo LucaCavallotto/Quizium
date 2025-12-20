@@ -42,9 +42,9 @@ class QuizApp {
     constructor() {
         this.state = {
             subjects: [
-                { id: 'f1', name: 'Formula 1', icon: '🏎️', color: '#e10600', bg: '#fff1f0', booleanLabels: ['Vero', 'Falso'] },
-                { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff', booleanLabels: ['True', 'False'] },
-                { id: 'cnts', name: 'Network Tech', icon: '🌐', color: '#10b981', bg: '#d1fae5', booleanLabels: ['True', 'False'] }
+                { id: 'f1', name: 'Formula 1', icon: '🏎️', color: '#e10600', bg: '#fff1f0', lang: 'IT' },
+                { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff', lang: 'EN' },
+                { id: 'cnts', name: 'Network Tech', icon: '🌐', color: '#10b981', bg: '#d1fae5', lang: 'EN' }
             ],
             currentSubject: null,
             questions: [],
@@ -286,10 +286,12 @@ class QuizApp {
             }
             options = question._shuffledOptions;
         } else if (question.type === 'boolean') {
-            const labels = this.state.currentSubject.booleanLabels || ['True', 'False'];
+            const isItalian = (this.state.currentSubject.lang === 'IT');
+            const labels = isItalian ? ['Vero', 'Falso'] : ['True', 'False'];
+
             options = [
-                { text: labels[0], value: true },
-                { text: labels[1], value: false }
+                { text: labels[0], value: 1 },
+                { text: labels[1], value: 0 }
             ];
         }
 

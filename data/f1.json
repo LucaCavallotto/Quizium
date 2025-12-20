@@ -29,7 +29,7 @@
     "id": 3,
     "type": "boolean",
     "question": "Il Gran Premio di Monaco è il circuito più corto del calendario F1.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Sebbene Monaco sia uno dei più corti in distanza (3,337 km), non è il più corto. Circuiti come Zandvoort sono più corti."
   },
   {
@@ -75,7 +75,7 @@
     "id": 7,
     "type": "boolean",
     "question": "La Red Bull Racing era originariamente il team Jaguar F1.",
-    "answer": true,
+    "answer": 1,
     "explanation": "La Red Bull acquistò il team Jaguar Racing nel 2004 e lo rinominò Red Bull Racing per la stagione 2005."
   },
   {
@@ -134,7 +134,7 @@
     "id": 12,
     "type": "boolean",
     "question": "La pole position in F1 garantisce sempre la vittoria in gara.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Sebbene la pole position sia vantaggiosa, non garantisce la vittoria a causa di vari fattori come strategia, affidabilità o incidenti."
   },
   {
@@ -167,7 +167,7 @@
     "id": 15,
     "type": "boolean",
     "question": "La stagione F1 2020 è stata accorciata a causa della pandemia di COVID-19.",
-    "answer": true,
+    "answer": 1,
     "explanation": "La stagione F1 2020 ha avuto meno gare ed è iniziata più tardi del solito a causa del COVID-19."
   },
   {
@@ -213,7 +213,7 @@
     "id": 19,
     "type": "boolean",
     "question": "Il fornitore di pneumatici Bridgestone fornisce ancora pneumatici alla Formula 1 nel 2023.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Bridgestone ha terminato il suo coinvolgimento in F1 dopo la stagione 2010."
   },
   {
@@ -259,7 +259,7 @@
     "id": 23,
     "type": "boolean",
     "question": "In Formula 1, la 'safety car' esce sempre per ogni incidente.",
-    "answer": false,
+    "answer": 0,
     "explanation": "La safety car viene impiegata a discrezione della direzione gara; non ogni incidente porta al suo impiego."
   },
   {
@@ -305,7 +305,7 @@
     "id": 27,
     "type": "boolean",
     "question": "Il numero massimo di pit stop consentiti in una gara di F1 è tre.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Non c'è un limite esplicito al numero di pit stop in F1; la strategia e le gomme decidono quanti stop avvengono."
   },
   {
@@ -351,7 +351,7 @@
     "id": 31,
     "type": "boolean",
     "question": "L'ultima volta che un motore aspirato ha vinto il Campionato del Mondo F1 è stato prima del 2014.",
-    "answer": true,
+    "answer": 1,
     "explanation": "Da quando l'era turbo-ibrida è iniziata nel 2014, tutte le auto vincitrici del campionato sono state turbo-ibride."
   },
   {
@@ -384,7 +384,7 @@
     "id": 34,
     "type": "boolean",
     "question": "Il sistema di riduzione della resistenza (DRS) è stato utilizzato per la prima volta in F1 nel 2011.",
-    "answer": true,
+    "answer": 1,
     "explanation": "Il DRS è stato introdotto nella stagione F1 2011."
   },
   {
@@ -417,7 +417,7 @@
     "id": 37,
     "type": "boolean",
     "question": "Il Gran Premio degli Stati Uniti del 2005 a Indianapolis vide gareggiare solo sei auto a causa di problemi di sicurezza dei pneumatici.",
-    "answer": true,
+    "answer": 1,
     "explanation": "Nel GP degli Stati Uniti del 2005 solo le sei auto che utilizzavano pneumatici Bridgestone gareggiarono dopo che Michelin avvertì di problemi di sicurezza."
   },
   {
@@ -450,7 +450,7 @@
     "id": 40,
     "type": "boolean",
     "question": "In F1, un pilota deve sempre finire la gara per segnare punti.",
-    "answer": false,
+    "answer": 0,
     "explanation": "In alcuni casi (ad esempio, se viene completato il 90% della distanza di gara) un pilota che si ritira può comunque essere classificato e segnare punti."
   },
   {
@@ -483,7 +483,7 @@
     "id": 43,
     "type": "boolean",
     "question": "Un pilota può utilizzare solo tre mescole di pneumatici in un weekend di gara asciutta (due per la domenica e una per le qualifiche del sabato).",
-    "answer": true,
+    "answer": 1,
     "explanation": "Nelle recenti regole F1, vengono nominate tre distinte mescole da asciutto e i piloti devono usarne due diverse durante la gara."
   },
   {
@@ -516,7 +516,7 @@
     "id": 46,
     "type": "boolean",
     "question": "L'unico pilota a vincere il Campionato del Mondo, la 500 Miglia di Indianapolis e la 24 Ore di Le Mans è Graham Hill.",
-    "answer": true,
+    "answer": 1,
     "explanation": "Graham Hill è l'unico ad aver completato la cosiddetta 'tripla corona' del motorsport."
   },
   {
@@ -549,7 +549,7 @@
     "id": 49,
     "type": "boolean",
     "question": "Il sistema di punti F1 (25-18-15-12...) è stato introdotto nel 2010.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Il sistema di punti che assegna 25 punti per una vittoria è stato introdotto nel 2010."
   },
   {
@@ -582,7 +582,7 @@
     "id": 52,
     "type": "boolean",
     "question": "Il concetto 'flag-to-pole' (qualifiche al sabato) è stato standard dal 1980 senza modifiche.",
-    "answer": false,
+    "answer": 0,
     "explanation": "I formati delle qualifiche sono cambiati molte volte dal 1980."
   },
   {
@@ -615,7 +615,7 @@
     "id": 55,
     "type": "boolean",
     "question": "Il rifornimento di carburante delle auto durante le gare di F1 è stato vietato a partire dal 2010.",
-    "answer": true,
+    "answer": 1,
     "explanation": "Il rifornimento durante le gare è stato vietato dalla stagione 2010 in poi."
   },
   {
@@ -648,7 +648,7 @@
     "id": 58,
     "type": "boolean",
     "question": "In Formula 1, il casco del pilota deve includere il suo nome sul retro secondo i regolamenti attuali.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Non esiste un regolamento che richieda il nome del pilota sul retro del casco, sebbene molti scelgano di farlo."
   },
   {
@@ -681,7 +681,7 @@
     "id": 61,
     "type": "boolean",
     "question": "I limitatori di coppia (governors) sono utilizzati sulle auto F1 per ridurre la velocità massima per sicurezza.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Non ci sono 'limitatori di coppia' separati per la velocità massima; la velocità è gestita tramite regolamenti aerodinamici/motore."
   },
   {
@@ -714,7 +714,7 @@
     "id": 64,
     "type": "boolean",
     "question": "In F1, i piloti possono cambiare motore una volta per gara senza penalità.",
-    "answer": false,
+    "answer": 0,
     "explanation": "I cambi di motore al di fuori dell'allocazione consentita comportano penalità in griglia."
   },
   {
@@ -747,7 +747,7 @@
     "id": 67,
     "type": "boolean",
     "question": "Il formato 'sprint' in F1 consente gare di lunghezza completa al sabato con punti pieni.",
-    "answer": false,
+    "answer": 0,
     "explanation": "La sprint è una gara più breve con punti ridotti, non un Gran Premio completo."
   },
   {
@@ -780,7 +780,7 @@
     "id": 70,
     "type": "boolean",
     "question": "Ai piloti è richiesto di utilizzare almeno un set di pneumatici intermedi o da bagnato in una gara asciutta.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Non c'è alcun requisito di utilizzare intermedie o da bagnato in una gara asciutta."
   },
   {
@@ -813,7 +813,7 @@
     "id": 73,
     "type": "boolean",
     "question": "Il team Williams ha vinto un Campionato Costruttori dal 1997.",
-    "answer": false,
+    "answer": 0,
     "explanation": "La Williams ha vinto l'ultima volta il Campionato Costruttori nel 1997."
   },
   {
@@ -846,7 +846,7 @@
     "id": 76,
     "type": "boolean",
     "question": "L'ala posteriore dell'auto F1 è l'unica superficie aerodinamica che può essere regolata durante la gara dal pilota.",
-    "answer": false,
+    "answer": 0,
     "explanation": "I piloti possono regolare molteplici sistemi aerodinamici e meccanici (ad es. DRS, bilanciamento dei freni) durante la gara."
   },
   {
@@ -879,7 +879,7 @@
     "id": 79,
     "type": "boolean",
     "question": "La FIA ha introdotto il dispositivo di protezione dell'abitacolo 'halo' in F1 a partire dal 2018.",
-    "answer": true,
+    "answer": 1,
     "explanation": "L'halo è stato reso obbligatorio dalla stagione 2018 in poi."
   },
   {
@@ -912,7 +912,7 @@
     "id": 82,
     "type": "boolean",
     "question": "La prima team principal donna in F1 è apparsa negli anni 2020.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Ci sono state donne in ruoli dirigenziali senior nei team prima degli anni 2020 (sebbene nessuna ancora come team principal a pieno titolo)."
   },
   {
@@ -945,7 +945,7 @@
     "id": 85,
     "type": "boolean",
     "question": "I caschi dei piloti devono superare un crash test (drop test) approvato dalla FIA prima di ogni weekend di gara.",
-    "answer": true,
+    "answer": 1,
     "explanation": "I caschi devono soddisfare gli standard FIA, inclusi i crash test (drop test)."
   },
   {
@@ -978,7 +978,7 @@
     "id": 88,
     "type": "boolean",
     "question": "Le partenze delle gare in F1 sono sempre partenze da fermo (piloti fermi sulla griglia).",
-    "answer": false,
+    "answer": 0,
     "explanation": "La F1 ha utilizzato partenze lanciate (rolling start) in rare circostanze (ad es. partenze accorciate dietro safety car)."
   },
   {
@@ -1011,7 +1011,7 @@
     "id": 91,
     "type": "boolean",
     "question": "La velocità massima mai registrata in una gara di F1 supera i 400 km/h.",
-    "answer": true,
+    "answer": 1,
     "explanation": "La velocità ufficiale più alta in gara in F1 è appena sotto i 400 km/h."
   },
   {
@@ -1044,7 +1044,7 @@
     "id": 94,
     "type": "boolean",
     "question": "Le penalità in griglia per il superamento dell'allocazione dei motori significano che il pilota è squalificato dalla gara.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Di solito comportano una retrocessione in griglia, non la squalifica."
   },
   {
@@ -1077,7 +1077,7 @@
     "id": 97,
     "type": "boolean",
     "question": "In F1, il 'budget cap' (tetto di spesa) è stato introdotto a partire dalla stagione 2021.",
-    "answer": true,
+    "answer": 1,
     "explanation": "Il budget cap è stato introdotto per il 2021 per migliorare la competitività."
   },
   {
@@ -1110,7 +1110,7 @@
     "id": 100,
     "type": "boolean",
     "question": "La prima volta che le auto F1 hanno utilizzato motori ibridi è stato nel 2014.",
-    "answer": true,
+    "answer": 1,
     "explanation": "L'era turbo-ibrida è iniziata nel 2014 con la power unit V6 turbo-ibrida."
   },
   {
@@ -1143,7 +1143,7 @@
     "id": 103,
     "type": "boolean",
     "question": "Un weekend di Gran Premio consiste sempre in tre sessioni di prove libere, una qualifica e una gara.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Dal 2021 alcuni weekend utilizzano formati sprint; a volte si tengono solo due sessioni di prove libere."
   },
   {
@@ -1176,7 +1176,7 @@
     "id": 106,
     "type": "boolean",
     "question": "La FIA ha permesso auto 'halo-clear' (senza halo) in alcune gare per motivi storici.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Tutte le attuali auto F1 devono avere l'halo o un equivalente approvato; nessuna eccezione per gare storiche."
   },
   {
@@ -1209,7 +1209,7 @@
     "id": 109,
     "type": "boolean",
     "question": "Il numero di gara 1 è sempre riservato al Campione del Mondo in carica in F1.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Dal 2014 i piloti scelgono i numeri; il campione può scegliere di usare l'1 ma non è obbligato."
   },
   {
@@ -1242,7 +1242,7 @@
     "id": 112,
     "type": "boolean",
     "question": "Le auto di Formula 1 devono completare almeno il 90% della distanza di gara per essere classificate.",
-    "answer": true,
+    "answer": 1,
     "explanation": "I piloti devono completare il 90% della distanza del vincitore per essere classificati."
   },
   {
@@ -1275,7 +1275,7 @@
     "id": 115,
     "type": "boolean",
     "question": "Un pilota può guadagnare un punto per il giro più veloce anche se finisce 11° o peggio.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Per guadagnare il punto del giro più veloce, il pilota deve finire tra i primi dieci."
   },
   {

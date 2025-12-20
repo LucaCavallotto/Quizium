@@ -29,7 +29,7 @@
     "id": 3,
     "type": "boolean",
     "question": "HTML is a programming language.",
-    "answer": false,
+    "answer": 0,
     "explanation": "HTML is a markup language used for creating web pages, not a programming language as it lacks programming constructs like variables and logic."
   },
   {
@@ -75,7 +75,7 @@
     "id": 7,
     "type": "boolean",
     "question": "The first computer bug was an actual insect found in a computer.",
-    "answer": true,
+    "answer": 1,
     "explanation": "The term 'bug' was popularized when Grace Hopper found a moth stuck in a relay of the Harvard Mark II computer in 1947."
   },
   {
@@ -121,7 +121,7 @@
     "id": 11,
     "type": "boolean",
     "question": "RAM (Random Access Memory) is non-volatile memory.",
-    "answer": false,
+    "answer": 0,
     "explanation": "RAM is volatile; it loses data when power is lost. ROM (Read-Only Memory) is non-volatile."
   },
   {
@@ -167,7 +167,7 @@
     "id": 15,
     "type": "boolean",
     "question": "'localhost' always refers to the IP address 192.168.1.1.",
-    "answer": false,
+    "answer": 0,
     "explanation": "'localhost' refers to the loopback address, which is almost always 127.0.0.1 (or ::1 in IPv6)."
   },
   {
@@ -200,7 +200,7 @@
     "id": 18,
     "type": "boolean",
     "question": "A compiler translates the entire source code at once before execution.",
-    "answer": true,
+    "answer": 1,
     "explanation": "A compiler translates the entire program into machine code, whereas an interpreter translates and executes the code line by line."
   },
   {
@@ -233,7 +233,7 @@
     "id": 21,
     "type": "boolean",
     "question": "Linux is proprietary software.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Linux is an open-source operating system, meaning its source code is freely available and modifiable."
   },
   {
@@ -266,7 +266,7 @@
     "id": 24,
     "type": "boolean",
     "question": "TCP (Transmission Control Protocol) is 'connectionless'.",
-    "answer": false,
+    "answer": 0,
     "explanation": "TCP is 'connection-oriented', guaranteeing ordered and reliable packet delivery. UDP is 'connectionless'."
   },
   {
@@ -312,7 +312,7 @@
     "id": 28,
     "type": "boolean",
     "question": "The C language is an interpreted language.",
-    "answer": false,
+    "answer": 0,
     "explanation": "C is a compiled language. C source code is translated into machine code by a compiler before execution."
   },
   {
@@ -345,7 +345,7 @@
     "id": 31,
     "type": "boolean",
     "question": "The term 'Malware' is short for 'Malicious Software'.",
-    "answer": true,
+    "answer": 1,
     "explanation": "Malware is a general term derived from the contraction of 'malicious software'."
   },
   {
@@ -378,7 +378,7 @@
     "id": 34,
     "type": "boolean",
     "question": "HTTP is the secure protocol for the web.",
-    "answer": false,
+    "answer": 0,
     "explanation": "HTTP (Hypertext Transfer Protocol) is not secure. HTTPS (HTTP Secure) is the secure version that uses encryption (SSL/TLS)."
   },
   {
@@ -411,7 +411,7 @@
     "id": 37,
     "type": "boolean",
     "question": "Object-Oriented Programming (OOP) is based on the concept of 'functions'.",
-    "answer": false,
+    "answer": 0,
     "explanation": "OOP is based on the concept of 'objects', which combine data (attributes) and behaviors (methods). Procedural programming is based on functions."
   },
   {
@@ -444,7 +444,7 @@
     "id": 40,
     "type": "boolean",
     "question": "An 'Array' has a fixed size in most low-level languages (like C).",
-    "answer": true,
+    "answer": 1,
     "explanation": "In languages like C, the size of a static array must be defined at compile time and cannot change."
   },
   {
@@ -477,7 +477,7 @@
     "id": 43,
     "type": "boolean",
     "question": "'Boolean' is a data type that can only have two values: True or False.",
-    "answer": true,
+    "answer": 1,
     "explanation": "A boolean data type is a logical data type that represents the truth values 'true' and 'false'."
   },
   {
@@ -523,7 +523,7 @@
     "id": 47,
     "type": "boolean",
     "question": "The 'Garbage Collector' in languages like Java and C# automatically manages memory allocation.",
-    "answer": false,
+    "answer": 0,
     "explanation": "The Garbage Collector automatically manages memory *deallocation* (freeing memory no longer in use), not allocation."
   },
   {
@@ -556,7 +556,7 @@
     "id": 50,
     "type": "boolean",
     "question": "A MAC address is globally unique for every network interface.",
-    "answer": true,
+    "answer": 1,
     "explanation": "The MAC (Media Access Control) address is a unique identifier assigned by the manufacturer to a network interface."
   },
   {
@@ -589,7 +589,7 @@
     "id": 53,
     "type": "boolean",
     "question": "'Cloud Computing' refers to storing data exclusively on local hard drives.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Cloud Computing refers to the delivery of services (like storage, databases, servers) over the Internet (the 'cloud')."
   },
   {
@@ -622,7 +622,7 @@
     "id": 56,
     "type": "boolean",
     "question": "JavaScript and Java are the same programming language.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Despite similar names, they are completely different languages. JavaScript is mainly used for web scripting, Java is a general-purpose OOP language."
   },
   {
@@ -655,7 +655,7 @@
     "id": 59,
     "type": "boolean",
     "question": "An 'algorithm' is an error in a program's code.",
-    "answer": false,
+    "answer": 0,
     "explanation": "An algorithm is a finite series of instructions or step-by-step procedures to solve a problem or complete a task. An error is a 'bug'."
   },
   {
@@ -688,7 +688,7 @@
     "id": 62,
     "type": "boolean",
     "question": "Inheritance is one of the fundamental pillars of Object-Oriented Programming (OOP).",
-    "answer": true,
+    "answer": 1,
     "explanation": "Inheritance, encapsulation, and polymorphism are the key concepts of OOP."
   },
   {
@@ -721,7 +721,7 @@
     "id": 65,
     "type": "boolean",
     "question": "In C++, 'cout' is used to receive input from the user.",
-    "answer": false,
+    "answer": 0,
     "explanation": "'cout' (character output) is used to print output to the console. 'cin' (character input) is used to receive input."
   },
   {
@@ -754,7 +754,7 @@
     "id": 68,
     "type": "boolean",
     "question": "The 'Kernel' is the part of the operating system that interacts directly with the user.",
-    "answer": false,
+    "answer": 0,
     "explanation": "The Kernel manages the hardware. The 'Shell' (or the graphical user interface, GUI) is the part that interacts with the user."
   },
   {
@@ -787,7 +787,7 @@
     "id": 71,
     "type": "boolean",
     "question": "The FTP (File Transfer Protocol) protocol is inherently secure and encrypted.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Standard FTP transmits data, including usernames and passwords, in plain text. SFTP (SSH File Transfer Protocol) is the secure version."
   },
   {
@@ -820,7 +820,7 @@
     "id": 74,
     "type": "boolean",
     "question": "A 'bug' and a 'glitch' are exactly the same thing.",
-    "answer": false,
+    "answer": 0,
     "explanation": "A 'bug' is an error in the source code. A 'glitch' is often a temporary or unexpected flaw in the system's behavior, which can be caused by a bug or other factors."
   },
   {
@@ -853,7 +853,7 @@
     "id": 77,
     "type": "boolean",
     "question": "'Polymorphism' in OOP allows an object to take on many forms.",
-    "answer": true,
+    "answer": 1,
     "explanation": "Polymorphism allows methods with the same name to behave differently in different classes, enabling flexibility (e.g., a child class can override a parent class method)."
   },
   {
@@ -899,7 +899,7 @@
     "id": 81,
     "type": "boolean",
     "question": "'void' in C/C++/Java is a data type that represents an integer value.",
-    "answer": false,
+    "answer": 0,
     "explanation": "'void' is a keyword used to indicate the absence of a data type, commonly used for functions that return no value."
   },
   {
@@ -932,7 +932,7 @@
     "id": 84,
     "type": "boolean",
     "question": "The address 0.0.0.0 in a server context means 'listen on all available network interfaces'.",
-    "answer": true,
+    "answer": 1,
     "explanation": "When a server is configured to listen on 0.0.0.0, it will accept connections on any (IPv4) IP address assigned to the machine."
   },
   {
@@ -965,7 +965,7 @@
     "id": 87,
     "type": "boolean",
     "question": "'Agile' is a programming language.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Agile is a software development methodology (an approach to project management) that focuses on iterative development and collaboration."
   },
   {
@@ -985,7 +985,7 @@
     "id": 89,
     "type": "boolean",
     "question": "'Refactoring' involves adding new features to a program.",
-    "answer": false,
+    "answer": 0,
     "explanation": "Refactoring is the process of restructuring existing code to improve its readability, maintainability, or performance, without changing its external behavior."
   },
   {
