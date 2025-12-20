@@ -460,17 +460,40 @@ body {
     width: 100%;
 }
 
+.setup-grid {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    max-width: 900px;
+    /* Increased to fit both side-by-side */
+    justify-content: center;
+    align-items: stretch;
+}
+
+@media (max-width: 768px) {
+    .setup-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 .slider-wrapper {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 24px;
     box-shadow: var(--shadow-float);
     width: 100%;
+    flex: 1;
+    /* Equal width */
     max-width: 500px;
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    padding: 40px 32px;
+    gap: 24px;
+    /* Added spacing between elements */
+    padding: 48px 32px;
+    /* Increased side padding slightly too for balance */
+    justify-content: space-between;
+    /* Align content if height differs */
 }
 
 .count-display-group {
@@ -674,6 +697,26 @@ input[type=range]::-moz-range-track {
     align-items: center;
     justify-content: space-between;
     padding: 0 24px;
+}
+
+@media (max-width: 600px) {
+    .quiz-header-top {
+        padding: 0 12px;
+        /* Move elements to edges */
+    }
+
+    .quiz-header-left {
+        margin-right: 8px;
+        /* Reduce spacer */
+        gap: 12px;
+    }
+
+    .quiz-subject-badge {
+        font-size: 0.95rem;
+        /* Smaller title */
+        max-width: 120px;
+        /* Prevent title from eating too much space */
+    }
 }
 
 .quiz-header-left {
@@ -1330,4 +1373,114 @@ input[type=range]::-moz-range-track {
 .q-id .id-val {
     color: var(--primary);
     font-weight: 800;
+}
+
+/* Time Mode Styles */
+.range-container.hidden {
+    display: none;
+}
+
+#timerInputContainer .slider-labels span {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+#timerInputContainer #timerValueDisplay {
+    color: var(--text-main);
+}
+
+/* Quiz Timer Display */
+.quiz-timer-display {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    background: var(--primary-light);
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+    /* Ensure it doesn't overlap on small screens */
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .quiz-timer-display {
+        /* Un-absolute for mobile to group with right-side items */
+        position: static;
+        transform: none;
+        left: auto;
+
+        font-size: 0.9rem;
+        padding: 6px 12px;
+        margin-right: 8px;
+        /* Space between time and stats */
+
+        /* Match stat pills aesthetics if needed, or keep distinct */
+        background: var(--bg-body);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-stats {
+        gap: 8px;
+        /* Tighter gap on mobile */
+    }
+
+    .stat-pill {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+
+    .stat-pill .icon {
+        margin-right: 4px;
+    }
+}
+
+/* Vertical Options for Time Mode */
+.vertical-options {
+    flex-direction: column !important;
+    align-items: stretch;
+}
+
+.vertical-options .preset-btn {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.slider-dimmed {
+    opacity: 0.5;
+    filter: grayscale(1);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    pointer-events: auto;
+    /* Allow interaction to auto-switch */
+}
+
+.slider-dimmed:hover {
+    opacity: 0.8;
+    /* Slight feedback on hover */
+}
+
+/* Result Time Badge */
+.time-result-badge {
+    margin-top: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: var(--radius-m);
+    font-weight: 700;
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.time-result-badge span {
+    color: var(--text-main);
+    font-variant-numeric: tabular-nums;
 }

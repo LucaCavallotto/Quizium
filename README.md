@@ -10,6 +10,17 @@ The application loads subject data dynamically from JSON files located in the `d
 3.  **Quiz Mode**: Questions are presented one by one. The app tracks correct and wrong answers. Immediate feedback is provided with explanations.
 4.  **Results**: At the end of the quiz, a score is calculated and displayed along with a performance summary.
 
+## ⏱️ Time Modes
+
+Select your preferred pacing style before starting the quiz:
+
+-   **None**: Take your time! No time tracking or limits.
+-   **Stopwatch**: Tracks your elapsed time. Good for measuring how fast you can complete the quiz.
+-   **Timer**: Sets a countdown limit (e.g., 10 minutes).
+    -   *Auto-Select*: Interacting with the timer slider automatically enables Timer mode.
+    -   *Timeout*: The quiz automatically ends if the time runs out.
+    -   *Results*: Shows the actual time taken if you finish early (e.g., if you set 10m but finish in 2m, results show 2m).
+
 ## How to Add a New Subject
 
 To add a new subject to Quizium, you need to follow these steps:
@@ -50,10 +61,10 @@ The file must contain an array of question objects. Each object should have the 
 
 ### 2. Register the Subject in the App
 
-Open `assets/app.js` and find the `quizApp.subjects` array. Add a single line for your new subject containing its ID, name, icon, and colors.
+Open `assets/app.js` and find the `subjects` array inside the `QuizApp` constructor state. Add a single line for your new subject:
 
 ```javascript
-/* ... inside quizApp object ... */
+/* Inside QuizApp constructor -> this.state */
 subjects: [
     // ... existing subjects
     { 
@@ -62,7 +73,7 @@ subjects: [
         icon: '📜', 
         color: '#d97706', 
         bg: '#fffbeb',
-        booleanLabels: ['True', 'False']
+        lang: 'EN' 
     }
 ],
 ```
@@ -70,8 +81,8 @@ subjects: [
 *   **id**: Must match your JSON filename (without `.json`).
 *   **name**: The display name of the subject.
 *   **icon**: Emoji or text icon.
-*   **color**: Main accent color.
+*   **color**: Main accent color (CSS hex or var).
 *   **bg**: Light background color.
-*   **lang**: Language code for boolean labels (e.g., `'IT'` for Vero/Falso, `'EN'` for True/False).
+*   **lang**: Language code (`'EN'` or `'IT'`) for formatting boolean question labels (e.g., True/False vs Vero/Falso).
 
 Once this is done, refresh the page to see your new subject!

@@ -48,26 +48,52 @@
 
             <div class="options-block">
                 <p class="page-description" style="margin-bottom: 24px;">Customize your session.</p>
-                <div class="slider-wrapper">
-                    <div class="count-display-group">
-                        <div class="slider-value-display">
-                            <span id="sliderValue">10</span>
+
+                <div class="setup-grid">
+                    <!-- Question Count Section -->
+                    <div class="slider-wrapper">
+                        <div class="label-questions">Number of Questions</div>
+                        <div class="count-display-group">
+                            <div class="slider-value-display">
+                                <span id="sliderValue">10</span>
+                            </div>
+                            <div class="time-estimate-pill" id="timeEstimate">⏱️ ~3 min</div>
                         </div>
-                        <div class="label-questions">Questions</div>
-                        <div class="time-estimate-pill" id="timeEstimate">⏱️ ~3 min</div>
+
+                        <div class="preset-buttons">
+                            <button class="preset-btn" onclick="setSliderValue(10)">Short</button>
+                            <button class="preset-btn" onclick="setSliderValue(50)">Normal</button>
+                            <button class="preset-btn" onclick="setSliderValue('max')">Max</button>
+                        </div>
+
+                        <div class="range-container">
+                            <input type="range" min="1" max="50" value="10" class="slider" id="questionSlider">
+                            <div class="slider-labels">
+                                <span>1</span>
+                                <span id="maxQuestionsLabel">All</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="preset-buttons">
-                        <button class="preset-btn" onclick="setSliderValue(10)">Short</button>
-                        <button class="preset-btn" onclick="setSliderValue(50)">Normal</button>
-                        <button class="preset-btn" onclick="setSliderValue('max')">Max</button>
-                    </div>
+                    <!-- Time Mode Section -->
+                    <div class="slider-wrapper">
+                        <div class="label-questions" style="margin-bottom: 16px;">Time Mode</div>
+                        <div class="preset-buttons vertical-options">
+                            <button class="preset-btn active" id="btnTimeNone"
+                                onclick="selectTimeMode('none')">None</button>
+                            <button class="preset-btn" id="btnTimeStopwatch"
+                                onclick="selectTimeMode('stopwatch')">Stopwatch</button>
+                            <button class="preset-btn" id="btnTimeTimer"
+                                onclick="selectTimeMode('timer')">Timer</button>
+                        </div>
 
-                    <div class="range-container">
-                        <input type="range" min="1" max="50" value="10" class="slider" id="questionSlider">
-                        <div class="slider-labels">
-                            <span>1</span>
-                            <span id="maxQuestionsLabel">All</span>
+                        <div id="timerInputContainer" class="range-container slider-dimmed" style="margin-top: 20px;">
+                            <input type="range" min="1" max="60" value="10" class="slider" id="timerSlider">
+                            <div class="slider-labels">
+                                <span>1m</span>
+                                <span id="timerValueDisplay">10m</span>
+                                <span>60m</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,6 +110,8 @@
                         <button class="btn btn-close" onclick="goHome()" aria-label="Exit Quiz">✕</button>
                         <span class="quiz-subject-badge" id="quizSubjectTitle">Subject</span>
                     </div>
+
+                    <div class="quiz-timer-display" id="timeDisplay"></div>
 
                     <div class="quiz-stats">
                         <div class="stat-pill correct"><span class="icon">✓</span> <span id="correctCount">0</span>
@@ -138,6 +166,9 @@
                     </div>
                     <h2 class="result-title" id="resultTitle">Great Job!</h2>
                     <p class="result-subtitle" id="resultMessage">You have mastered this subject.</p>
+                    <div class="time-result-badge hidden" id="timeResultBadge">
+                        ⏱️ <span id="timeResult">00:00</span>
+                    </div>
                 </div>
 
                 <div class="stats-row">

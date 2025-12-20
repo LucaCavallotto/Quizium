@@ -31,7 +31,17 @@ const CONFIG = {
         EXPLANATION: 'explanationCallout',
         NAVIGATOR: 'questionNavigator',
         NEXT_BTN: 'nextBtn',
-        PREV_BTN: 'prevBtn'
+        PREV_BTN: 'prevBtn',
+        // Time Selectors
+        BTN_TIME_NONE: 'btnTimeNone',
+        BTN_TIME_STOPWATCH: 'btnTimeStopwatch',
+        BTN_TIME_TIMER: 'btnTimeTimer',
+        TIMER_INPUT_CONTAINER: 'timerInputContainer',
+        TIMER_SLIDER: 'timerSlider',
+        TIMER_VALUE_DISPLAY: 'timerValueDisplay',
+        TIME_DISPLAY: 'timeDisplay',
+        TIME_RESULT_BADGE: 'timeResultBadge',
+        TIME_RESULT: 'timeResult'
     }
 };
 
@@ -44,7 +54,7 @@ class QuizApp {
             subjects: [
                 { id: 'f1', name: 'Formula 1', icon: '🏎️', color: '#e10600', bg: '#fff1f0', lang: 'IT' },
                 { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff', lang: 'EN' },
-                { id: 'cnts', name: 'Network Tech', icon: '🌐', color: '#10b981', bg: '#d1fae5', lang: 'EN' }
+                { id: 'cnts', name: 'CNTS', icon: '🌐', color: '#10b981', bg: '#d1fae5', lang: 'EN' }
             ],
             currentSubject: null,
             questions: [],
@@ -54,7 +64,13 @@ class QuizApp {
             wrongAnswers: 0,
             totalQuestions: 0,
             quizCompleted: false,
-            subjectQuestionsCount: {}
+            subjectQuestionsCount: {},
+            // Time State
+            timeMode: 'none', // 'none', 'stopwatch', 'timer'
+            timerDuration: 10, // minutes
+            elapsedTime: 0, // seconds
+            remainingTime: 0, // seconds
+            timerInterval: null
         };
 
         this.init();
@@ -66,6 +82,7 @@ class QuizApp {
     async init() {
         await this.loadSubjects();
         this.bindGlobalEvents();
+        this.setupTimerInput();
     }
 
     /**
@@ -78,7 +95,8 @@ class QuizApp {
         window.previousQuestion = () => this.navigateQuestion(-1);
         window.nextQuestion = () => this.navigateQuestion(1);
         window.restartQuiz = () => this.restartQuiz();
-        window.selectSubject = (id) => this.selectSubject(id); // Helper for HTML onclick
+        window.selectSubject = (id) => this.selectSubject(id);
+        window.selectTimeMode = (mode) => this.selectTimeMode(mode);
     }
 
     /**
@@ -89,6 +107,11 @@ class QuizApp {
             document.getElementById(id).classList.add('hidden');
         });
         document.getElementById(screenId).classList.remove('hidden');
+
+        // Stop timer if leaving quiz screen (except to results)
+        if (screenId !== CONFIG.SCREENS.QUIZ && screenId !== CONFIG.SCREENS.RESULTS) {
+            this.stopTimer();
+        }
     }
 
     /**
@@ -123,8 +146,6 @@ class QuizApp {
         card.style.setProperty('--card-color', color);
         card.style.setProperty('--card-bg-light', bg);
 
-        // Note: Using window alias for selectSubject to match existing HTML patterns, 
-        // or we could add event listener directly here.
         card.onclick = () => this.selectSubject(subject.id);
 
         card.innerHTML = `
@@ -159,7 +180,7 @@ class QuizApp {
     }
 
     /* ===========================
-       Slider Logic
+       Slider & Time Logic
        =========================== */
     setupSlider() {
         const total = this.state.questions.length;
@@ -190,11 +211,20 @@ class QuizApp {
 
         // Update Buttons
         const btns = document.querySelectorAll(CONFIG.SELECTORS.PRESET_BTNS);
-        btns.forEach(btn => btn.classList.remove('active'));
+        // Note: This targets all preset-btns including time ones if not careful. 
+        // Better to scope to question count buttons only.
+        // Assuming the first 3 are question count. safely we can use ID based logic or check parent.
+        // For now, let's just protect against errors if selector matches more.
 
-        if (val === 10 && btns[0]) btns[0].classList.add('active');
-        else if (val === 50 && btns[1]) btns[1].classList.add('active');
-        else if (val === total && val !== 10 && val !== 50 && btns[2]) btns[2].classList.add('active');
+        // Actually, let's fix the selector in CONFIG or here. 
+        // The original logic relied on index 0, 1, 2. But we added time buttons dealing with PRESET_BTNS class too.
+        // We should distinct them.
+        const countBtns = document.querySelector('.slider-wrapper .preset-buttons').querySelectorAll('.preset-btn');
+        countBtns.forEach(btn => btn.classList.remove('active'));
+
+        if (val === 10 && countBtns[0]) countBtns[0].classList.add('active');
+        else if (val === 50 && countBtns[1]) countBtns[1].classList.add('active');
+        else if (val === total && val !== 10 && val !== 50 && countBtns[2]) countBtns[2].classList.add('active');
     }
 
     setSliderValue(preset) {
@@ -203,6 +233,38 @@ class QuizApp {
         const slider = document.getElementById(CONFIG.SELECTORS.SLIDER);
         slider.value = val;
         this.updateSliderUI(val);
+    }
+
+    /* Time Mode Selection */
+    selectTimeMode(mode) {
+        this.state.timeMode = mode;
+
+        // Update UI
+        document.getElementById(CONFIG.SELECTORS.BTN_TIME_NONE).classList.toggle('active', mode === 'none');
+        document.getElementById(CONFIG.SELECTORS.BTN_TIME_STOPWATCH).classList.toggle('active', mode === 'stopwatch');
+        document.getElementById(CONFIG.SELECTORS.BTN_TIME_TIMER).classList.toggle('active', mode === 'timer');
+
+        const timerInput = document.getElementById(CONFIG.SELECTORS.TIMER_INPUT_CONTAINER);
+        if (mode === 'timer') {
+            timerInput.classList.remove('slider-dimmed');
+        } else {
+            timerInput.classList.add('slider-dimmed');
+        }
+    }
+
+    setupTimerInput() {
+        const slider = document.getElementById(CONFIG.SELECTORS.TIMER_SLIDER);
+        const display = document.getElementById(CONFIG.SELECTORS.TIMER_VALUE_DISPLAY);
+
+        slider.oninput = (e) => {
+            // Auto switch to Timer mode if trying to change value in other modes
+            if (this.state.timeMode !== 'timer') {
+                this.selectTimeMode('timer');
+            }
+
+            this.state.timerDuration = parseInt(e.target.value);
+            display.textContent = `${this.state.timerDuration}m`;
+        };
     }
 
     startQuizFromSlider() {
@@ -229,9 +291,62 @@ class QuizApp {
         document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = '0';
         document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = '0';
 
+        // Start Timer
+        this.startTimerLogic();
+
         this.renderNavigator();
         this.loadQuestion();
         this.showScreen(CONFIG.SCREENS.QUIZ);
+    }
+
+    startTimerLogic() {
+        this.stopTimer(); // specific clear
+
+        const display = document.getElementById(CONFIG.SELECTORS.TIME_DISPLAY);
+        display.classList.remove('hidden');
+
+        if (this.state.timeMode === 'none') {
+            display.classList.add('hidden');
+            return;
+        }
+
+        if (this.state.timeMode === 'stopwatch') {
+            this.state.elapsedTime = 0;
+            display.textContent = "00:00";
+            this.state.timerInterval = setInterval(() => {
+                this.state.elapsedTime++;
+                display.textContent = this.formatTime(this.state.elapsedTime);
+            }, 1000);
+        } else if (this.state.timeMode === 'timer') {
+            this.state.remainingTime = this.state.timerDuration * 60;
+            display.textContent = this.formatTime(this.state.remainingTime);
+            this.state.timerInterval = setInterval(() => {
+                this.state.remainingTime--;
+                display.textContent = this.formatTime(this.state.remainingTime);
+                if (this.state.remainingTime <= 0) {
+                    this.finishQuiz(true); // time out
+                }
+            }, 1000);
+        }
+    }
+
+    stopTimer() {
+        if (this.state.timerInterval) {
+            clearInterval(this.state.timerInterval);
+            this.state.timerInterval = null;
+        }
+    }
+
+    formatTime(seconds) {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    finishQuiz(isTimeOut = false) {
+        this.state.quizCompleted = true;
+        this.stopTimer();
+        this.showResults(isTimeOut);
     }
 
     loadQuestion() {
@@ -277,10 +392,6 @@ class QuizApp {
         this.currentOptions = []; // Store for reference
 
         if (question.type === 'multiple') {
-            // Shuffle only if not already shuffled for this session/question instance
-            // Ideally we should store shuffled options in state to persist order on revisit but simplified here:
-            // Actually, wait, if we go back/forward, reshuffling will break "selected index".
-            // We need to persist the shuffled order if it's not determined.
             if (!question._shuffledOptions) {
                 question._shuffledOptions = this.shuffleArray([...question.options]);
             }
@@ -372,8 +483,7 @@ class QuizApp {
         } else if (direction > 0 && newIndex === this.state.totalQuestions) {
             // Finish
             if (this.state.allAnswers.every(a => a !== null)) {
-                this.state.quizCompleted = true;
-                this.showResults();
+                this.finishQuiz();
             }
         }
     }
@@ -420,7 +530,9 @@ class QuizApp {
         }
     }
 
-    showResults() {
+    showResults(isTimeOut = false) {
+        this.stopTimer(); // Ensure timer stops
+
         const percent = Math.round((this.state.correctAnswers / this.state.totalQuestions) * 100);
 
         document.getElementById('scorePercentage').textContent = `${percent}%`;
@@ -433,7 +545,11 @@ class QuizApp {
         const ring = document.getElementById('scoreRing');
         let color = 'var(--primary)';
 
-        if (percent === 100) {
+        if (isTimeOut) {
+            title.textContent = "Time's Up!";
+            msg.textContent = "You ran out of time.";
+            color = 'var(--error)';
+        } else if (percent === 100) {
             title.textContent = "Perfect Score!";
             msg.textContent = "Incredible! You didn't miss a single question.";
             color = 'var(--success)';
@@ -457,6 +573,26 @@ class QuizApp {
         ring.style.strokeDashoffset = circumference;
         ring.style.stroke = color;
 
+        // Time Result
+        const timeBadge = document.getElementById(CONFIG.SELECTORS.TIME_RESULT_BADGE);
+        if (this.state.timeMode !== 'none') {
+            timeBadge.classList.remove('hidden');
+            let displayedTime = "00:00";
+            if (this.state.timeMode === 'stopwatch') {
+                displayedTime = this.formatTime(this.state.elapsedTime);
+            } else {
+                // Timer: Show actual time taken
+                const totalSeconds = this.state.timerDuration * 60;
+                // If remainingTime < 0 (timed out), taken is full duration
+                const left = Math.max(0, this.state.remainingTime);
+                const taken = totalSeconds - left;
+                displayedTime = this.formatTime(taken);
+            }
+            document.getElementById(CONFIG.SELECTORS.TIME_RESULT).textContent = displayedTime;
+        } else {
+            timeBadge.classList.add('hidden');
+        }
+
         // Animate
         setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
         this.showScreen(CONFIG.SCREENS.RESULTS);
@@ -470,21 +606,9 @@ class QuizApp {
         this.state.wrongAnswers = 0;
         this.state.quizCompleted = false;
 
-        // Remove shuffled state so questions get re-shuffled freshly on next start? 
-        // Or re-shuffle logic happens in startQuiz anyway.
-        // We do need to clear the _shuffledOptions from existing questions if we want fresh options order.
         this.state.questions.forEach(q => { delete q._shuffledOptions; });
 
-        this.startQuiz(this.state.totalQuestions); // Restart with same count? Or strict restart requires re-selection.
-        // Usually restart just restarts the current session.
-        // HTML restart calls restartQuiz() which in old code did exactly this.
-        // But wait, the standard usually just shows quiz screen again.
-
-        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = '0';
-        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = '0';
-
-        this.showScreen(CONFIG.SCREENS.QUIZ);
-        this.loadQuestion();
+        this.startQuiz(this.state.totalQuestions);
     }
 
     shuffleArray(array) {
