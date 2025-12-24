@@ -96,6 +96,21 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Correction Mode Section -->
+                    <div class="slider-wrapper">
+                        <div class="label-questions" style="margin-bottom: 16px;">Correction</div>
+                        <div class="preset-buttons vertical-options">
+                            <button class="preset-btn active" id="btnCorrectionInstant"
+                                onclick="selectCorrectionMode('instant')">Instant</button>
+                            <button class="preset-btn" id="btnCorrectionFinal"
+                                onclick="selectCorrectionMode('final')">Final</button>
+                        </div>
+                        <div
+                            style="margin-top: 16px; font-size: 0.85rem; color: var(--text-tertiary); text-align: center; line-height: 1.4;">
+                            <span id="correctionModeDesc">Instant feedback after each answer.</span>
+                        </div>
+                    </div>
                 </div>
 
                 <button class="btn btn-primary full-width" onclick="startQuizFromSlider()"
@@ -107,7 +122,11 @@
             <div class="quiz-header">
                 <div class="quiz-header-top">
                     <div class="quiz-header-left">
-                        <button class="btn btn-close" onclick="goHome()" aria-label="Exit Quiz">✕</button>
+                        <button class="btn btn-close" id="btnQuizClose" onclick="goHome()"
+                            aria-label="Exit Quiz">✕</button>
+                        <button class="btn btn-close hidden" id="btnReviewBack" onclick="exitReview()"
+                            aria-label="Back to Results"
+                            style="font-size: 1rem; width: auto; padding: 0 8px; border-radius: 20px;">← Back</button>
                         <span class="quiz-subject-badge" id="quizSubjectTitle">Subject</span>
                     </div>
 
@@ -185,6 +204,8 @@
 
                 <div class="results-actions">
                     <button class="btn btn-primary full-width" onclick="restartQuiz()">Try Again</button>
+                    <button class="btn btn-secondary full-width" id="btnReviewAnswers" onclick="startReview()"
+                        style="margin-top: 12px; display: none;">Review Answers</button>
                     <button class="btn btn-ghost full-width" onclick="goHome()">Back to Home</button>
                 </div>
             </div>

@@ -10,7 +10,7 @@ The application loads subject data dynamically from JSON files located in the `d
 3.  **Quiz Mode**: Questions are presented one by one. The app tracks correct and wrong answers. Immediate feedback is provided with explanations.
 4.  **Results**: At the end of the quiz, a score is calculated and displayed along with a performance summary.
 
-## ⏱️ Time Modes
+## Time Modes
 
 Select your preferred pacing style before starting the quiz:
 
@@ -21,7 +21,30 @@ Select your preferred pacing style before starting the quiz:
     -   *Timeout*: The quiz automatically ends if the time runs out.
     -   *Results*: Shows the actual time taken if you finish early (e.g., if you set 10m but finish in 2m, results show 2m).
 
-## How to Add a New Subject
+## Correction Modes
+
+Choose when to receive feedback on your answers (located in the Setup screen):
+
+-   **Instant Correction** (Default):
+    -   Get immediate feedback after selecting an answer.
+    -   Correct answers turn Green, wrong answers turn Red.
+    -   Once selected, the answer is locked and cannot be changed.
+    -   Explanations are shown immediately.
+-   **Final Correction**:
+    -   No feedback is shown during the quiz.
+    -   You can change your selected answer by clicking another option.
+    -   Selected answers are marked with a neutral blue outline.
+    -   Scores and incorrect answers are revealed only at the end.
+
+## Review Features
+
+After completing a quiz, you can review your performance:
+
+-   **Results Screen**: Displays your score percentage, total time, and a breakdown of correct/incorrect answers.
+-   **Review Answers**: Click the "Review Answers" button on the results screen to navigate through the questions again.
+    -   See exactly what you answered vs. the correct answer.
+    -   Read detailed explanations for each question.
+
 
 To add a new subject to Quizium, you need to follow these steps:
 

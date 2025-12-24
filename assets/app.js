@@ -41,7 +41,14 @@ const CONFIG = {
         TIMER_VALUE_DISPLAY: 'timerValueDisplay',
         TIME_DISPLAY: 'timeDisplay',
         TIME_RESULT_BADGE: 'timeResultBadge',
-        TIME_RESULT: 'timeResult'
+        TIME_RESULT: 'timeResult',
+        // Correction Mode Selectors
+        BTN_CORRECTION_INSTANT: 'btnCorrectionInstant',
+        BTN_CORRECTION_FINAL: 'btnCorrectionFinal',
+        CORRECTION_DESC: 'correctionModeDesc',
+        BTN_REVIEW: 'btnReviewAnswers',
+        BTN_CLOSE: 'btnQuizClose',
+        BTN_REVIEW_BACK: 'btnReviewBack'
     }
 };
 
@@ -70,7 +77,11 @@ class QuizApp {
             timerDuration: 10, // minutes
             elapsedTime: 0, // seconds
             remainingTime: 0, // seconds
-            timerInterval: null
+
+            timerInterval: null,
+            // Correction Mode State
+            correctionMode: 'instant', // 'instant' or 'final'
+            isReviewing: false
         };
 
         this.init();
@@ -97,6 +108,9 @@ class QuizApp {
         window.restartQuiz = () => this.restartQuiz();
         window.selectSubject = (id) => this.selectSubject(id);
         window.selectTimeMode = (mode) => this.selectTimeMode(mode);
+        window.selectCorrectionMode = (mode) => this.selectCorrectionMode(mode);
+        window.startReview = () => this.startReview();
+        window.exitReview = () => this.exitReview();
     }
 
     /**
@@ -265,6 +279,23 @@ class QuizApp {
             this.state.timerDuration = parseInt(e.target.value);
             display.textContent = `${this.state.timerDuration}m`;
         };
+        display.textContent = `${this.state.timerDuration}m`;
+    }
+
+    /* Correction Mode Selection */
+    selectCorrectionMode(mode) {
+        this.state.correctionMode = mode;
+
+        // Update UI
+        document.getElementById(CONFIG.SELECTORS.BTN_CORRECTION_INSTANT).classList.toggle('active', mode === 'instant');
+        document.getElementById(CONFIG.SELECTORS.BTN_CORRECTION_FINAL).classList.toggle('active', mode === 'final');
+
+        const desc = document.getElementById(CONFIG.SELECTORS.CORRECTION_DESC);
+        if (mode === 'instant') {
+            desc.textContent = "Instant feedback after each answer.";
+        } else {
+            desc.textContent = "Review answers only after the quiz.";
+        }
     }
 
     startQuizFromSlider() {
@@ -286,8 +317,11 @@ class QuizApp {
         this.state.wrongAnswers = 0;
         this.state.allAnswers = new Array(this.state.totalQuestions).fill(null);
         this.state.quizCompleted = false;
+        this.state.isReviewing = false;
 
         // Reset UI
+        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.style.display = (this.state.correctionMode === 'final') ? 'none' : 'flex';
+        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.style.display = (this.state.correctionMode === 'final') ? 'none' : 'flex';
         document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = '0';
         document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = '0';
 
@@ -371,17 +405,36 @@ class QuizApp {
         document.getElementById(CONFIG.SELECTORS.PREV_BTN).disabled = (this.state.currentQuestionIndex === 0);
 
         const nextBtn = document.getElementById(CONFIG.SELECTORS.NEXT_BTN);
-        nextBtn.textContent = (this.state.currentQuestionIndex === this.state.totalQuestions - 1) ? 'Finish Quiz' : 'Next';
-        nextBtn.disabled = !savedAnswer && !this.state.quizCompleted;
+        nextBtn.textContent = (this.state.currentQuestionIndex === this.state.totalQuestions - 1) ? (this.state.isReviewing ? 'Finish Review' : 'Finish Quiz') : 'Next';
+
+        // In Final Mode, next is enabled if answered. In Review, always enabled.
+        if (this.state.isReviewing) {
+            nextBtn.disabled = false;
+        } else {
+            nextBtn.disabled = !savedAnswer && !this.state.quizCompleted;
+        }
 
         // Restore State or Hide Explanation
-        if (savedAnswer !== null) {
-            this.showAnswerState(savedAnswer, question);
+        if (this.state.isReviewing) {
+            // In review mode, show full state (Correct/Wrong + Explanation)
+            if (savedAnswer) {
+                this.showAnswerState(savedAnswer, question, true); // Force feedback
+            } else {
+                // Unanswered question in review (shouldn't happen ideally but handle it)
+                this.showAnswerState({ selectedValue: null, isCorrect: false }, question, true);
+            }
+        } else if (savedAnswer !== null) {
+            // Restore locked state
+            this.showAnswerState(savedAnswer, question, false); // respect correction mode inside
         } else {
             document.getElementById(CONFIG.SELECTORS.EXPLANATION).classList.add('hidden');
         }
 
         this.updateNavigator();
+
+        // Header Buttons
+        document.getElementById(CONFIG.SELECTORS.BTN_CLOSE).classList.toggle('hidden', this.state.isReviewing);
+        document.getElementById(CONFIG.SELECTORS.BTN_REVIEW_BACK).classList.toggle('hidden', !this.state.isReviewing);
     }
 
     renderOptions(question) {
@@ -422,55 +475,84 @@ class QuizApp {
     }
 
     handleOptionSelect(selectedValue, question) {
-        if (this.state.allAnswers[this.state.currentQuestionIndex] !== null) return;
+        // If reviewing or completed in instant mode, ignore
+        if (this.state.isReviewing || (this.state.correctionMode === 'instant' && this.state.allAnswers[this.state.currentQuestionIndex] !== null)) return;
 
         const isCorrect = (selectedValue === question.answer);
+
+        // Update Score (Only if Instant Mode - in Final, calculate at end)
+        if (this.state.correctionMode === 'instant') {
+            // If already answered, don't update score (prevent double counting if bug)
+            if (!this.state.allAnswers[this.state.currentQuestionIndex]) {
+                if (isCorrect) {
+                    this.state.correctAnswers++;
+                    document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = this.state.correctAnswers;
+                } else {
+                    this.state.wrongAnswers++;
+                    document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = this.state.wrongAnswers;
+                }
+            }
+        }
 
         // Save Answer
         this.state.allAnswers[this.state.currentQuestionIndex] = { selectedValue, isCorrect };
 
-        // Update Score
-        if (isCorrect) {
-            this.state.correctAnswers++;
-            document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = this.state.correctAnswers;
-        } else {
-            this.state.wrongAnswers++;
-            document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = this.state.wrongAnswers;
-        }
-
-        this.showAnswerState({ selectedValue, isCorrect }, question);
+        this.showAnswerState({ selectedValue, isCorrect }, question, false);
         document.getElementById(CONFIG.SELECTORS.NEXT_BTN).disabled = false;
         this.updateNavigator();
     }
 
-    showAnswerState(answerData, question) {
+    showAnswerState(answerData, question, forceShowFeedback = false) {
         const buttons = document.querySelectorAll('.answer-option');
+        const showFeedback = forceShowFeedback || this.state.correctionMode === 'instant' || this.state.quizCompleted;
 
         buttons.forEach((btn, idx) => {
-            btn.disabled = true;
+            // Disable if showing feedback OR if Instant mode (locked)
+            // In Final mode during quiz, do NOT disable (allow change)
+            if (showFeedback || this.state.correctionMode === 'instant') {
+                btn.disabled = true;
+            } else {
+                btn.disabled = false;
+                // Restore active state visual (remove old classes first)
+                btn.className = 'answer-option';
+            }
 
-            // Resolve value based on type
+            // Resolve value
             let btnValue;
             if (question.type === 'multiple') {
-                // Map displayed option back to original value/index
                 const displayedOpt = this.currentOptions[idx];
                 btnValue = question.options.indexOf(displayedOpt);
             } else {
                 btnValue = this.currentOptions[idx].value;
             }
 
-            if (btnValue === question.answer) {
-                btn.classList.add('correct');
-            } else if (btnValue === answerData.selectedValue && !answerData.isCorrect) {
-                btn.classList.add('wrong');
+            // Clean classes
+            btn.classList.remove('correct', 'wrong', 'selected');
+
+            if (showFeedback) {
+                if (btnValue === question.answer) {
+                    btn.classList.add('correct');
+                } else if (btnValue === answerData.selectedValue && !answerData.isCorrect) {
+                    btn.classList.add('wrong');
+                } else if (btnValue === answerData.selectedValue && answerData.isCorrect) {
+                    // Correct selected
+                    btn.classList.add('correct');
+                }
+            } else {
+                // Final Mode (During Quiz) - just show selected
+                if (btnValue === answerData.selectedValue) {
+                    btn.classList.add('selected');
+                }
             }
         });
 
-        if (question.explanation) {
+        if (showFeedback && question.explanation) {
             const exp = document.getElementById(CONFIG.SELECTORS.EXPLANATION);
             exp.className = 'callout';
             exp.innerHTML = `<strong>Explanation:</strong> ${question.explanation}`;
             exp.classList.remove('hidden');
+        } else {
+            document.getElementById(CONFIG.SELECTORS.EXPLANATION).classList.add('hidden');
         }
     }
 
@@ -482,7 +564,9 @@ class QuizApp {
             this.loadQuestion();
         } else if (direction > 0 && newIndex === this.state.totalQuestions) {
             // Finish
-            if (this.state.allAnswers.every(a => a !== null)) {
+            if (this.state.isReviewing) {
+                this.exitReview();
+            } else if (this.state.allAnswers.every(a => a !== null)) {
                 this.finishQuiz();
             }
         }
@@ -519,8 +603,20 @@ class QuizApp {
             if (i === this.state.currentQuestionIndex) dot.classList.add('current');
 
             const ans = this.state.allAnswers[i];
+
+            // In Final Mode (during quiz), show answered state but not correct/wrong colors?
+            // User requested: "do not show any correctness feedback during the quiz"
+            // So dot should just look 'completed'.
             if (ans) {
-                dot.classList.add(ans.isCorrect ? 'answered-correct' : 'answered-wrong');
+                if (this.state.correctionMode === 'final' && !this.state.quizCompleted && !this.state.isReviewing) {
+                    // Just show a neutral 'answered' state
+                    dot.classList.add('answered-neutral'); // Need to add this class or reuse one
+                    dot.style.borderColor = 'var(--text-secondary)';
+                    dot.style.background = 'var(--text-secondary)';
+                    dot.style.color = 'white';
+                } else {
+                    dot.classList.add(ans.isCorrect ? 'answered-correct' : 'answered-wrong');
+                }
             }
         }
 
@@ -533,12 +629,23 @@ class QuizApp {
     showResults(isTimeOut = false) {
         this.stopTimer(); // Ensure timer stops
 
+
+
+        // Calculate score for Final Mode
+        if (this.state.correctionMode === 'final') {
+            this.state.correctAnswers = this.state.allAnswers.filter(a => a && a.isCorrect).length;
+            this.state.wrongAnswers = this.state.allAnswers.filter(a => a && !a.isCorrect).length;
+        }
+
         const percent = Math.round((this.state.correctAnswers / this.state.totalQuestions) * 100);
 
         document.getElementById('scorePercentage').textContent = `${percent}%`;
         document.getElementById('totalQuestionsResult').textContent = this.state.totalQuestions;
         document.getElementById('correctResult').textContent = this.state.correctAnswers;
         document.getElementById('wrongResult').textContent = this.state.wrongAnswers;
+
+        // Show/Hide Review Button
+        document.getElementById(CONFIG.SELECTORS.BTN_REVIEW).style.display = 'flex';
 
         const title = document.getElementById('resultTitle');
         const msg = document.getElementById('resultMessage');
@@ -617,6 +724,26 @@ class QuizApp {
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
+    }
+
+    startReview() {
+        this.state.isReviewing = true;
+        this.state.currentQuestionIndex = 0;
+
+        // Show correct/wrong counts in header for review
+        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.style.display = 'flex';
+        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.style.display = 'flex';
+        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = this.state.correctAnswers;
+        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = this.state.wrongAnswers;
+
+        this.renderNavigator();
+        this.loadQuestion();
+        this.showScreen(CONFIG.SCREENS.QUIZ);
+    }
+
+    exitReview() {
+        this.state.isReviewing = false;
+        this.showScreen(CONFIG.SCREENS.RESULTS);
     }
 }
 

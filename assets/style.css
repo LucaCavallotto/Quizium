@@ -896,6 +896,18 @@ input[type=range]::-moz-range-track {
     border-color: var(--primary);
 }
 
+.answer-option.selected {
+    border-color: var(--text-secondary);
+    background: var(--bg-body);
+    color: var(--text-main);
+}
+
+.answer-option.selected::before {
+    background: var(--text-secondary);
+    border-color: var(--text-secondary);
+    box-shadow: inset 0 0 0 3px var(--bg-card);
+}
+
 .answer-option.correct {
     border-color: var(--success);
     background: var(--success-bg);
@@ -1394,11 +1406,11 @@ input[type=range]::-moz-range-track {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.2rem;
-    font-weight: 800;
+    font-size: 0.9rem;
+    font-weight: 700;
     color: var(--primary-dark);
     background: var(--primary-light);
-    padding: 6px 16px;
+    padding: 6px 14px;
     border-radius: 20px;
     letter-spacing: 0.05em;
     font-variant-numeric: tabular-nums;
@@ -1418,11 +1430,11 @@ input[type=range]::-moz-range-track {
         margin-right: 8px;
         /* Space between time and stats */
 
-        /* Match stat pills aesthetics if needed, or keep distinct */
-        background: var(--bg-body);
-        border: 1px solid var(--border);
-        color: var(--text-secondary);
-        box-shadow: var(--shadow-sm);
+        /* Explicitly force purple theme */
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        border: none;
+        box-shadow: none;
     }
 
     .quiz-stats {
@@ -1483,4 +1495,132 @@ input[type=range]::-moz-range-track {
 .time-result-badge span {
     color: var(--text-main);
     font-variant-numeric: tabular-nums;
+}
+
+/* =========================================
+   9. DESKTOP OPTIMIZATIONS
+   ========================================= */
+@media (min-width: 768px) {
+
+    /* Setup Screen: Wider and Cleaner */
+    .setup-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: 1100px;
+        /* Increased max-width for better spacing */
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .slider-wrapper {
+        width: 100%;
+        max-width: none;
+        padding: 32px 24px;
+        margin: 0;
+        /* Reset Flex items props just in case */
+        flex: unset;
+    }
+
+    /* Results Screen: Side-by-Side to prevent Scroll */
+    .results-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        /* Center vertically */
+        gap: 60px;
+        /* Space between Columns */
+        max-width: 1000px;
+        margin: 0 auto;
+        padding-top: 0;
+        height: 100%;
+        /* Use full height available */
+        min-height: 600px;
+    }
+
+    /* Left Column: Score Hero */
+    .score-hero {
+        margin-bottom: 0;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .score-ring-container {
+        width: 220px;
+        /* Slightly larger ring on desktop */
+        height: 220px;
+        margin-bottom: 24px;
+    }
+
+    .score-big {
+        font-size: 3.5rem;
+    }
+
+    /* Right Column: Stats & Actions */
+    .results-right-col {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        flex: 0 0 340px;
+        /* Fixed width for consistency */
+    }
+
+    /* We need to wrap stats and actions in a container dynamically or just style them as siblings if we can select them */
+    /* Since we can't easily change HTML structure just for desktop without JS or complex CSS Grid, 
+       we'll use CSS Grid on the parent .results-content to position them. 
+       
+       Current HTML structure:
+        .results-content
+            .score-hero
+            .stats-row
+            .results-actions
+    */
+
+    .results-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "hero stats"
+            "hero actions";
+        align-content: center;
+        text-align: left;
+        /* Reset alignment */
+    }
+
+    .score-hero {
+        grid-area: hero;
+        align-self: center;
+        justify-self: center;
+        border-right: 1px solid var(--border);
+        padding-right: 60px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stats-row {
+        grid-area: stats;
+        justify-content: flex-start;
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .results-actions {
+        grid-area: actions;
+        width: 100%;
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        align-self: flex-start;
+    }
+
+    /* Align text in hero to center, others to left or standard */
+    .score-hero {
+        text-align: center;
+    }
 }
