@@ -45,7 +45,7 @@ After completing a quiz, you can review your performance:
     -   See exactly what you answered vs. the correct answer.
     -   Read detailed explanations for each question.
 
-### How to add a new subject
+## How to add a new subject
 
 To add a new subject to Quizium, you need to follow these steps:
 

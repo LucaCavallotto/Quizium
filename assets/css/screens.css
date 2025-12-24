@@ -18,6 +18,12 @@
 }
 
 /* --- Home Screen --- */
+#homeScreen {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 .home-header {
     display: flex;
     flex-direction: column;
@@ -564,7 +570,7 @@
    MOBILE & RESPONSIVE OVERRIDES
    ========================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
     .setup-grid {
         flex-direction: column;
         align-items: center;
@@ -686,24 +692,6 @@
    ========================================= */
 @media (min-width: 768px) {
 
-    /* Setup Screen: Wider and Cleaner */
-    .setup-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        max-width: 1100px;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .slider-wrapper {
-        width: 100%;
-        max-width: none;
-        padding: 32px 24px;
-        margin: 0;
-        flex: unset;
-    }
-
     /* Results Screen: Side-by-Side to prevent Scroll */
     .results-content {
         flex-direction: row;
@@ -805,5 +793,122 @@
 
     .score-text-center {
         align-items: center;
+    }
+}
+
+
+@media (min-width: 1024px) {
+
+    /* Setup Screen: Wider and Cleaner */
+    .setup-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .slider-wrapper {
+        width: 100%;
+        max-width: none;
+        padding: 32px 24px;
+        margin: 0;
+        flex: unset;
+    }
+
+    /* Results Screen: 2-Column Content + Bottom Actions */
+    .results-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "hero stats"
+            "actions actions";
+        align-items: center;
+        align-content: center;
+        width: 100%;
+        max-width: 1000px;
+        gap: 32px;
+        padding: 0 40px;
+    }
+
+    /* Column 1: Hero (Summary) */
+    .score-hero {
+        grid-area: hero;
+        border-right: none;
+        padding-right: 0;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Revert Hero alignment to center for this layout as it sits better next to stats */
+    .score-hero .score-ring-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .result-title {
+        text-align: center;
+        justify-content: center;
+        align-self: center;
+    }
+
+    .result-subtitle {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Column 2: Stats (Details) */
+    .stats-row {
+        grid-area: stats;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        max-width: none;
+        padding: 0;
+        padding-left: 0;
+    }
+
+    .stat-box {
+        padding: 20px 16px;
+        min-height: 110px;
+        justify-content: center;
+    }
+
+    .stat-val {
+        font-size: 2.25rem;
+    }
+
+    /* Bottom Row: Actions */
+    .results-actions {
+        grid-area: actions;
+        border-left: none;
+        border-top: none;
+        padding-left: 0;
+        padding-top: 24px;
+        justify-self: center;
+        width: 100%;
+        max-width: 500px;
+        gap: 12px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Button Specific Placement */
+    .results-actions .btn-primary {
+        grid-column: 1;
+    }
+
+    .results-actions #btnReviewAnswers {
+        grid-column: 2;
+        margin-top: 0 !important;
+        /* Override inline margin */
+    }
+
+    .results-actions .btn-ghost {
+        grid-column: 1 / -1;
     }
 }
