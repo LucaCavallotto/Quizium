@@ -1,0 +1,19 @@
+/* =========================================
+   STATES
+   ========================================= */
+.hidden {
+    display: none !important;
+}
+
+.slider-dimmed {
+    opacity: 0.5;
+    filter: grayscale(1);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    pointer-events: auto;
+    /* Allow interaction to auto-switch */
+}
+
+.slider-dimmed:hover {
+    opacity: 0.8;
+    /* Slight feedback on hover */
+}

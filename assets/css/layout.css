@@ -1,0 +1,35 @@
+/* =========================================
+   LAYOUT
+   ========================================= */
+.main-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.screen-container {
+    width: 100%;
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Scroll Area (Centered) */
+
+.quiz-scroll-area {
+    padding-top: calc(var(--header-height) + 32px);
+    padding-bottom: 180px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
