@@ -133,7 +133,6 @@
 }
 
 #timerInputContainer .slider-labels span {
-    color: var(--primary);
     font-weight: 700;
 }
 
@@ -671,6 +670,14 @@
     .stats-row {
         margin-bottom: 24px;
         gap: 12px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-box {
+        min-width: 0;
+        width: 100%;
+        max-width: none;
     }
 }
 

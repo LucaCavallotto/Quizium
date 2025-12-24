@@ -88,10 +88,14 @@
                         </div>
 
                         <div id="timerInputContainer" class="range-container slider-dimmed" style="margin-top: 20px;">
+                            <div class="count-display-group" style="padding-bottom: 12px;">
+                                <div class="slider-value-display">
+                                    <span id="timerValueDisplay">10m</span>
+                                </div>
+                            </div>
                             <input type="range" min="1" max="60" value="10" class="slider" id="timerSlider">
                             <div class="slider-labels">
                                 <span>1m</span>
-                                <span id="timerValueDisplay">10m</span>
                                 <span>60m</span>
                             </div>
                         </div>
@@ -197,6 +201,9 @@
                     <div class="stat-box wrong">
                         <span class="stat-val" id="wrongResult">0</span><span class="stat-lbl">Wrong</span>
                     </div>
+                    <div class="stat-box skipped">
+                        <span class="stat-val" id="skippedResult">0</span><span class="stat-lbl">Skipped</span>
+                    </div>
                     <div class="stat-box total">
                         <span class="stat-val" id="totalQuestionsResult">0</span><span class="stat-lbl">Total</span>
                     </div>
@@ -207,6 +214,18 @@
                     <button class="btn btn-secondary full-width" id="btnReviewAnswers" onclick="startReview()"
                         style="margin-top: 12px; display: none;">Review Answers</button>
                     <button class="btn btn-ghost full-width" onclick="goHome()">Back to Home</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="confirmationModal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <h3 class="modal-title">Finish Quiz?</h3>
+                <p class="modal-text">Are you sure you want to finish the quiz? You can't change your answers after
+                    submitting.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="hideFinishConfirmation()">Cancel</button>
+                    <button class="btn btn-primary" onclick="confirmFinish()">Confirm</button>
                 </div>
             </div>
         </div>

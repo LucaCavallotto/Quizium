@@ -111,6 +111,9 @@ class QuizApp {
         window.selectCorrectionMode = (mode) => this.selectCorrectionMode(mode);
         window.startReview = () => this.startReview();
         window.exitReview = () => this.exitReview();
+        window.showFinishConfirmation = () => this.showFinishConfirmation();
+        window.hideFinishConfirmation = () => this.hideFinishConfirmation();
+        window.confirmFinish = () => this.confirmFinish();
     }
 
     /**
@@ -405,14 +408,23 @@ class QuizApp {
         document.getElementById(CONFIG.SELECTORS.PREV_BTN).disabled = (this.state.currentQuestionIndex === 0);
 
         const nextBtn = document.getElementById(CONFIG.SELECTORS.NEXT_BTN);
-        nextBtn.textContent = (this.state.currentQuestionIndex === this.state.totalQuestions - 1) ? (this.state.isReviewing ? 'Finish Review' : 'Finish Quiz') : 'Next';
+        if (this.state.currentQuestionIndex === this.state.totalQuestions - 1) {
+            nextBtn.textContent = this.state.isReviewing ? 'Finish Review' : 'Finish Quiz';
+            nextBtn.onclick = () => {
+                if (this.state.isReviewing) this.exitReview();
+                else this.showFinishConfirmation();
+            };
+        } else {
+            nextBtn.textContent = 'Next';
+            nextBtn.onclick = () => this.navigateQuestion(1);
+        }
 
         // In Final Mode, next is enabled if answered. In Review, always enabled.
-        if (this.state.isReviewing) {
-            nextBtn.disabled = false;
-        } else {
-            nextBtn.disabled = !savedAnswer && !this.state.quizCompleted;
-        }
+        // In Final Mode, next is enabled if answered. In Review, always enabled.
+        // User Request: Always enable Next button to allow skipping.
+        // User Request: Always enable Next button to allow skipping.
+        // Fix: If in review mode, always enable. If quiz completed (and not reviewing), disable.
+        nextBtn.disabled = this.state.quizCompleted && !this.state.isReviewing;
 
         // Restore State or Hide Explanation
         if (this.state.isReviewing) {
@@ -566,10 +578,28 @@ class QuizApp {
             // Finish
             if (this.state.isReviewing) {
                 this.exitReview();
-            } else if (this.state.allAnswers.every(a => a !== null)) {
-                this.finishQuiz();
+            } else {
+                // Allow finishing even if not all answered
+                this.showFinishConfirmation();
             }
         }
+    }
+
+    showFinishConfirmation() {
+        if (this.state.isReviewing) {
+            this.exitReview();
+            return;
+        }
+        document.getElementById('confirmationModal').classList.remove('hidden');
+    }
+
+    hideFinishConfirmation() {
+        document.getElementById('confirmationModal').classList.add('hidden');
+    }
+
+    confirmFinish() {
+        this.hideFinishConfirmation();
+        this.finishQuiz();
     }
 
     jumpToQuestion(index) {
@@ -617,6 +647,12 @@ class QuizApp {
                 } else {
                     dot.classList.add(ans.isCorrect ? 'answered-correct' : 'answered-wrong');
                 }
+            } else if (!this.state.quizCompleted && this.state.currentQuestionIndex !== i) {
+                // Not answered and not current -> ensure no class (or skipped style if we want)
+                // If it's the current one, it gets 'current' class above.
+            } else if (this.state.quizCompleted) {
+                // Quiz over, if null it's skipped
+                dot.classList.add('answered-skipped');
             }
         }
 
@@ -632,10 +668,9 @@ class QuizApp {
 
 
         // Calculate score for Final Mode
-        if (this.state.correctionMode === 'final') {
-            this.state.correctAnswers = this.state.allAnswers.filter(a => a && a.isCorrect).length;
-            this.state.wrongAnswers = this.state.allAnswers.filter(a => a && !a.isCorrect).length;
-        }
+        this.state.correctAnswers = this.state.allAnswers.filter(a => a && a.isCorrect).length;
+        this.state.wrongAnswers = this.state.allAnswers.filter(a => a && !a.isCorrect).length; // Actual wrong answers
+        this.state.skippedAnswers = this.state.allAnswers.filter(a => a === null).length;
 
         const percent = Math.round((this.state.correctAnswers / this.state.totalQuestions) * 100);
 
@@ -643,6 +678,10 @@ class QuizApp {
         document.getElementById('totalQuestionsResult').textContent = this.state.totalQuestions;
         document.getElementById('correctResult').textContent = this.state.correctAnswers;
         document.getElementById('wrongResult').textContent = this.state.wrongAnswers;
+
+        // Update Skipped Count if element exists (will be added to HTML)
+        const skippedEl = document.getElementById('skippedResult');
+        if (skippedEl) skippedEl.textContent = this.state.skippedAnswers;
 
         // Show/Hide Review Button
         document.getElementById(CONFIG.SELECTORS.BTN_REVIEW).style.display = 'flex';
