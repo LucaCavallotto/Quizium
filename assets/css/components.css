@@ -584,6 +584,7 @@ input[type=range]::-moz-range-track {
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
 }
 
 .nav-dot:hover {
@@ -708,4 +709,54 @@ input[type=range]::-moz-range-track {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+/* --- Flag Button --- */
+.btn-flag {
+    background: transparent;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-flag:hover {
+    background: var(--bg-body);
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.btn-flag.active {
+    color: #f59e0b;
+    /* Amber/Orange color */
+}
+
+.btn-flag.active svg {
+    fill: #f59e0b;
+    stroke: #f59e0b;
+}
+
+.btn-flag svg {
+    width: 20px;
+    height: 20px;
+    transition: all 0.2s;
+}
+
+/* --- Flagged Navigator Dot --- */
+.nav-dot.flagged::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    background: #f59e0b;
+    border: 2px solid var(--bg-card);
+    border-radius: 50%;
+    z-index: 3;
 }

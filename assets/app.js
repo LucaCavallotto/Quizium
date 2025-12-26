@@ -81,7 +81,8 @@ class QuizApp {
             timerInterval: null,
             // Correction Mode State
             correctionMode: 'instant', // 'instant' or 'final'
-            isReviewing: false
+            isReviewing: false,
+            flaggedQuestions: new Set()
         };
 
         this.init();
@@ -114,6 +115,7 @@ class QuizApp {
         window.showFinishConfirmation = () => this.showFinishConfirmation();
         window.hideFinishConfirmation = () => this.hideFinishConfirmation();
         window.confirmFinish = () => this.confirmFinish();
+        window.toggleFlag = () => this.toggleFlag();
     }
 
     /**
@@ -442,6 +444,22 @@ class QuizApp {
             document.getElementById(CONFIG.SELECTORS.EXPLANATION).classList.add('hidden');
         }
 
+        // Handle Flag Button Visibility and State
+        const flagBtn = document.getElementById('btnFlagQuestion');
+        if (this.state.correctionMode === 'final' && !this.state.quizCompleted && !this.state.isReviewing) {
+            flagBtn.classList.remove('hidden');
+            const isFlagged = this.state.flaggedQuestions.has(this.state.currentQuestionIndex);
+            if (isFlagged) {
+                flagBtn.classList.add('active');
+                flagBtn.querySelector('svg').setAttribute('fill', '#f59e0b');
+            } else {
+                flagBtn.classList.remove('active');
+                flagBtn.querySelector('svg').setAttribute('fill', 'none');
+            }
+        } else {
+            flagBtn.classList.add('hidden');
+        }
+
         this.updateNavigator();
 
         // Header Buttons
@@ -494,11 +512,11 @@ class QuizApp {
         // Check if we are in Final Correction mode and if the same answer is being clicked
         if (this.state.correctionMode === 'final') {
             const currentAnswer = this.state.allAnswers[this.state.currentQuestionIndex];
-            
+
             // If clicking the already selected answer, deselect it
             if (currentAnswer && currentAnswer.selectedValue === selectedValue) {
                 this.state.allAnswers[this.state.currentQuestionIndex] = null;
-                
+
                 // Update UI to clear selection
                 this.showAnswerState({ selectedValue: null, isCorrect: false }, question, false);
                 this.updateNavigator();
@@ -623,6 +641,20 @@ class QuizApp {
         this.loadQuestion();
     }
 
+    toggleFlag() {
+        if (this.state.correctionMode !== 'final' || this.state.quizCompleted) return;
+
+        const idx = this.state.currentQuestionIndex;
+        if (this.state.flaggedQuestions.has(idx)) {
+            this.state.flaggedQuestions.delete(idx);
+        } else {
+            this.state.flaggedQuestions.add(idx);
+        }
+
+        this.loadQuestion(); // Re-render to update icon
+        this.updateNavigator();
+    }
+
     /* ===========================
        Navigator & Results
        =========================== */
@@ -676,6 +708,12 @@ class QuizApp {
         if (currentDot) {
             currentDot.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
+
+        // Apply flagged status to dots
+        this.state.flaggedQuestions.forEach(idx => {
+            const dot = document.getElementById(`nav-dot-${idx}`);
+            if (dot) dot.classList.add('flagged');
+        });
     }
 
     showResults(isTimeOut = false) {
