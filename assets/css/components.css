@@ -605,6 +605,12 @@ input[type=range]::-moz-range-track {
     border-color: var(--success);
 }
 
+.nav-dot.answered-neutral {
+    background: var(--text-secondary);
+    color: white;
+    border-color: var(--text-secondary);
+}
+
 .nav-dot.answered-wrong {
     background: var(--error-bg);
     color: var(--error-text);
@@ -759,4 +765,12 @@ input[type=range]::-moz-range-track {
     border: 2px solid var(--bg-card);
     border-radius: 50%;
     z-index: 3;
+}
+
+@media (prefers-color-scheme: dark) {
+    .nav-dot.answered-neutral {
+        background: var(--border);
+        border-color: var(--border);
+        color: var(--text-main);
+    }
 }

@@ -678,6 +678,7 @@ class QuizApp {
             if (!dot) continue;
 
             dot.className = 'nav-dot'; // Reset
+            dot.removeAttribute('style'); // Clear inline styles
             if (i === this.state.currentQuestionIndex) dot.classList.add('current');
 
             const ans = this.state.allAnswers[i];
@@ -688,10 +689,7 @@ class QuizApp {
             if (ans) {
                 if (this.state.correctionMode === 'final' && !this.state.quizCompleted && !this.state.isReviewing) {
                     // Just show a neutral 'answered' state
-                    dot.classList.add('answered-neutral'); // Need to add this class or reuse one
-                    dot.style.borderColor = 'var(--text-secondary)';
-                    dot.style.background = 'var(--text-secondary)';
-                    dot.style.color = 'white';
+                    dot.classList.add('answered-neutral');
                 } else {
                     dot.classList.add(ans.isCorrect ? 'answered-correct' : 'answered-wrong');
                 }
