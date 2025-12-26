@@ -490,6 +490,22 @@ class QuizApp {
         // If reviewing or completed in instant mode, ignore
         if (this.state.isReviewing || (this.state.correctionMode === 'instant' && this.state.allAnswers[this.state.currentQuestionIndex] !== null)) return;
 
+
+        // Check if we are in Final Correction mode and if the same answer is being clicked
+        if (this.state.correctionMode === 'final') {
+            const currentAnswer = this.state.allAnswers[this.state.currentQuestionIndex];
+            
+            // If clicking the already selected answer, deselect it
+            if (currentAnswer && currentAnswer.selectedValue === selectedValue) {
+                this.state.allAnswers[this.state.currentQuestionIndex] = null;
+                
+                // Update UI to clear selection
+                this.showAnswerState({ selectedValue: null, isCorrect: false }, question, false);
+                this.updateNavigator();
+                return;
+            }
+        }
+
         const isCorrect = (selectedValue === question.answer);
 
         // Update Score (Only if Instant Mode - in Final, calculate at end)
