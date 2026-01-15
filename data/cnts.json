@@ -2206,19 +2206,6 @@
     "explanation": "The IPv6 base header has a fixed 40-byte length with only essential fields, using extension headers for optional features."
   },
   {
-    "id": 172,
-    "type": "multiple",
-    "question": "nella soluzione di livello 3 di vpn basate su MPLS e BGP i pachetti che transitano sulla dorsale MPLS hanno due etichette",
-    "options": [
-      "i router interni (p) non modificano(swap) mai l'etichetta più esterna",
-      "l'etichetta più esterna è usata dai router interni(p) per inoltrare verso un router PE",
-      "l'etichetta più interna è usata dai router interni(p) per inoltrare verso un router PE",
-      "entrambe le etichette sono usate dai router interni (P) per inoltrare pachetti verso router PE"
-    ],
-    "answer": 1,
-    "explanation": "In MPLS VPNs, the outer label (transport label) is used by P routers to forward packets toward the egress PE router."
-  },
-  {
     "id": 173,
     "type": "multiple",
     "question": "A differenza della versione 4 dell'IP, la versione 6:",
@@ -3437,8 +3424,8 @@
       "L'etichetta più esterna è usata dai router interni (P) per inoltrare pacchetti verso un router PE.",
       "L'etichetta più interna è usata dai router interni (P) per inoltrare pacchetti verso un router PE."
     ],
-    "answer": 1,
-    "explanation": "In MPLS VPNs, P routers only process and swap the outer transport label, leaving the inner VPN label unchanged."
+    "answer": 2,
+    "explanation": "In MPLS VPNs, the outer label (transport label) is used by P routers to forward packets toward the egress PE router."
   },
   {
     "id": 268,
@@ -3504,5 +3491,291 @@
     ],
     "answer": 1,
     "explanation": "The primary advantage of IPv6 is its enormous address space (128 bits vs 32 bits in IPv4), which eliminates address exhaustion concerns."
+  },
+  {
+    "id": 273,
+    "type": "multiple",
+    "question": "Two hosts A and B belong to the same physical network and have IP addresses 80.60.6.55/21 and 80.60.2.114/22, respectively.",
+    "options": [
+      "A directly communicates with B but B needs a router to reach A",
+      "B directly communicates with A but A needs a router to reach B",
+      "They both can only communicate by means of a router",
+      "A directly communicates with B and viceversa"
+    ],
+    "answer": 0,
+    "explanation": ""
+  },
+  {
+    "id": 274,
+    "type": "multiple",
+    "question": "What is the smallest aggregation (i.e., the longest prefix) that can contain the ranges of IP addresses 10.20.30.64/30 and 10.20.30.32/28?",
+    "options": [
+      "10.20.30.0/25",
+      "10.20.30.64/25",
+      "10.20.30.0/26",
+      "10.20.30.64/26"
+    ],
+    "answer": 0,
+    "explanation": ""
+  },
+  {
+    "id": 275,
+    "type": "multiple",
+    "question": "A packet with IP address 90.80.70.193 will have a longest match in which of the following lines belonging to a routing table?",
+    "options": [
+      "90.80.70.0/25",
+      "90.80.70.0/24",
+      "90.80.70.128/26",
+      "90.80.70.64/26"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "id": 276,
+    "type": "multiple",
+    "question": "Identify the only valid IP Network among the following:",
+    "options": [
+      "10.20.30.0/22",
+      "30.32.34.36/29",
+      "50.60.70.80/31",
+      "70.60.50.40/29"
+    ],
+    "answer": 3,
+    "explanation": ""
+  },
+  {
+    "id": 277,
+    "type": "multiple",
+    "question": "The Solicited Node Multicast Address in IPv6 plays a role in",
+    "options": [
+      "The configuration of a host prefix",
+      "The streaming of multimedia content",
+      "The advertisement of an IPv6 router",
+      "The resolution of an IPv6 address"
+    ],
+    "answer": 3,
+    "explanation": ""
+  },
+  {
+    "id": 278,
+    "type": "multiple",
+    "question": "The use to the \"Next Header\" field in the IPv6 header allows the elimination of the IPV4",
+    "options": [
+      "\"Protocol\" field",
+      "\"Fragment Offset\" field",
+      "\"Next Fragment\" field",
+      "\"Total Length\" field"
+    ],
+    "answer": 0,
+    "explanation": ""
+  },
+  {
+    "id": 279,
+    "type": "multiple",
+    "question": "A border router (i.e., a router giving access to the Internet) receiving a packet with source address: fd00: 1: : 3",
+    "options": [
+      "Forwards it after mapping it to a global address",
+      "Maps it to an IPv4 address",
+      "Forwards it every time",
+      "Discards it"
+    ],
+    "answer": 3,
+    "explanation": ""
+  },
+  {
+    "id": 280,
+    "type": "multiple",
+    "question": "The purpose of EUI-48 to EUI-64 mapping in IPv6 is to",
+    "options": [
+      "Discover the MAC address of the router in indirect delivery",
+      "Define an interface identifier",
+      "Define a prefix",
+      "Discover the MAC address of the destination in direct delivery"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "id": 281,
+    "type": "multiple",
+    "question": "Tunneling IPv6 traffic through an IPv4 network involves",
+    "options": [
+      "Replacing an IPv6 header with an IPv4 one",
+      "Adding an IPv4 header before an IPv6 one",
+      "Adding an IPv6 header before an IPv4 one",
+      "Replacing an IPv4 header with an IPv6 one"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "id": 282,
+    "type": "multiple",
+    "question": "The main motivation to have the NAT deployed at the CPE in the A+P transition solution is",
+    "options": [
+      "To avoid encapsulation of IPv4 datagrams inside IPv6 if the destination is on an IPv4 network",
+      "To avoid encapsulation of IPv6 datagrams inside IPv4 if the destination is on an IPv6 network",
+      "To reduce costs",
+      "To let customers configure their own port mappings"
+    ],
+    "answer": 3,
+    "explanation": ""
+  },
+  {
+    "id": 283,
+    "type": "multiple",
+    "question": "Which of the following actions enables the Roaming functionality in cellular networks?",
+    "options": [
+      "Transmission of paging message within the LA of the user",
+      "Transfer of an active connection from one cell to another",
+      "Update of the position of a user terminal",
+      "Transfer of an active connection from one operator to another"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "id": 284,
+    "type": "multiple",
+    "question": "In GSM networks, the VLR (Visitor Location Register) is used to record",
+    "options": [
+      "The association of user terminals subscribed to another operator",
+      "Information on user terminals in a specific area",
+      "The location of user terminals that are currently under the coverage of another operator",
+      "The opening of a connection with another operator"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "id": 285,
+    "type": "multiple",
+    "question": "A single Physical Channel in GSM is defined as",
+    "options": [
+      "A time frame on a specific frequency",
+      "A time slot on a specific frequency",
+      "A set of frequencies that can be used in the same time interval",
+      "A set of frequencies that can be used without time constraints"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "id": 286,
+    "type": "multiple",
+    "question": "In case of handover in LTE, which of the established bearer may change?",
+    "options": [
+      "None",
+      "The S5 bearer",
+      "The S8 bearer",
+      "The S1 bearer"
+    ],
+    "answer": 3,
+    "explanation": ""
+  },
+  {
+    "id": 287,
+    "type": "multiple",
+    "question": "Which of the following functions is not carried out in the LTE EPC?",
+    "options": [
+      "Radio resource management",
+      "Lawful intercept",
+      "Channel quality monitoring",
+      "Packet routing"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "id": 288,
+    "type": "multiple",
+    "question": "In an RTS/CTS exchange in 802.11 a collision between the frames of a hidden station and that of an Access point may happen when",
+    "options": [
+      "It can never happen",
+      "Two CTS are sent at the same time",
+      "Two RTS are sent at the same time",
+      "An RTS and a CTS are sent at the same time"
+    ],
+    "answer": 3,
+    "explanation": ""
+  },
+  {
+    "id": 289,
+    "type": "multiple",
+    "question": "A node implementing a Distance Vector algorithm increases the cost to reach a destination when:",
+    "options": [
+      "It receives a DV from a new neighbour advertising a higher cost",
+      "The neighbour with the highest cost starts advertising the destination",
+      "It receives a DV with cost increase from the neighbour used to reach the destination",
+      "The destination moves away by one or more hops"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "id": 290,
+    "type": "multiple",
+    "question": "In Distance Vector routing, a routing table is derived from the distance table by",
+    "options": [
+      "Selecting the shortest path per destination",
+      "Selecting the shortest path per neighbour",
+      "Filtering out the destinations not reached by one of the neighbours",
+      "Merging the distance table with the incoming Distance Vector"
+    ],
+    "answer": 0,
+    "explanation": ""
+  },
+  {
+    "id": 291,
+    "type": "multiple",
+    "question": "In a Link State algorithm, the connectivity (i.e., the number of links) of another node is know when",
+    "options": [
+      "Two or more nodes agree on the number go hops to reach it",
+      "A neighbour advertises it",
+      "The node completes the execution of Dijkstra algorithm",
+      "A link state advertisement is received from that node through flooded multicast"
+    ],
+    "answer": 3,
+    "explanation": ""
+  },
+  {
+    "id": 292,
+    "type": "multiple",
+    "question": "An eBGP connection operates between",
+    "options": [
+      "A gateway router and any other router in the AS",
+      "A gateway router and a router using iBGP",
+      "Two gateway routers of different ASes",
+      "Any two routers of the same AS"
+    ],
+    "answer": 2,
+    "explanation": ""
+  },
+  {
+    "id": 293,
+    "type": "multiple",
+    "question": "Conventionally, BGP identifies as NEXT-HOP:",
+    "options": [
+      "The IP address of the router interface closest to the gateway router",
+      "The IP address of the first router interface in the first AS of the AS-PATH",
+      "The IP address of the router interface that has AS-PATH as prefix",
+      "The IP address of the router interface of the gateway router in the same AS"
+    ],
+    "answer": 1,
+    "explanation": ""
+  },
+  {
+    "id": 294,
+    "type": "multiple",
+    "question": "A network Z with a public BGP peering will not carry:",
+    "options": [
+      "Traffic directed to a non-existent host in Z",
+      "Traffic that is originated in Z but has a destination outside it",
+      "Traffic that has a destination in Z but was originated outside it",
+      "Traffic that does not have source or destination in Z"
+    ],
+    "answer": 3,
+    "explanation": ""
   }
 ]
