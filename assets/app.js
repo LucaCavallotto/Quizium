@@ -82,7 +82,8 @@ class QuizApp {
             // Correction Mode State
             correctionMode: 'instant', // 'instant' or 'final'
             isReviewing: false,
-            flaggedQuestions: new Set()
+            flaggedQuestions: new Set(),
+            shuffleQuestions: true // Default to true
         };
 
         this.init();
@@ -116,6 +117,7 @@ class QuizApp {
         window.hideFinishConfirmation = () => this.hideFinishConfirmation();
         window.confirmFinish = () => this.confirmFinish();
         window.toggleFlag = () => this.toggleFlag();
+        window.toggleShuffle = (checked) => this.toggleShuffle(checked);
     }
 
     /**
@@ -312,7 +314,8 @@ class QuizApp {
        Quiz Logic
        =========================== */
     startQuiz(count) {
-        const shuffled = this.shuffleArray([...this.state.questions]);
+        const questionsToUse = [...this.state.questions];
+        const shuffled = this.state.shuffleQuestions ? this.shuffleArray(questionsToUse) : questionsToUse;
         this.state.totalQuestions = Math.min(count, shuffled.length);
         this.state.questions = shuffled.slice(0, this.state.totalQuestions);
 
@@ -835,6 +838,10 @@ class QuizApp {
     exitReview() {
         this.state.isReviewing = false;
         this.showScreen(CONFIG.SCREENS.RESULTS);
+    }
+
+    toggleShuffle(checked) {
+        this.state.shuffleQuestions = checked;
     }
 }
 
