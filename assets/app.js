@@ -391,6 +391,12 @@ class QuizApp {
         this.showResults(isTimeOut);
     }
 
+    updateProgressBar() {
+        const answeredCount = this.state.allAnswers.filter(a => a !== null).length;
+        const progress = (answeredCount / this.state.totalQuestions) * 100;
+        document.getElementById(CONFIG.SELECTORS.PROGRESS_BAR).style.width = `${progress}%`;
+    }
+
     loadQuestion() {
         const question = this.state.questions[this.state.currentQuestionIndex];
         const savedAnswer = this.state.allAnswers[this.state.currentQuestionIndex];
@@ -400,9 +406,8 @@ class QuizApp {
         document.getElementById(CONFIG.SELECTORS.TOTAL_QUESTIONS).textContent = this.state.totalQuestions;
         document.getElementById(CONFIG.SELECTORS.QUESTION_ID).innerHTML = `ID <span class="id-val">${question.id}</span>`;
 
-        // Progress Bar
-        const progress = ((this.state.currentQuestionIndex + 1) / this.state.totalQuestions) * 100;
-        document.getElementById(CONFIG.SELECTORS.PROGRESS_BAR).style.width = `${progress}%`;
+        // Progress Bar (Update based on answered count)
+        this.updateProgressBar();
 
         document.getElementById(CONFIG.SELECTORS.QUESTION_TEXT).textContent = question.question;
 
@@ -523,6 +528,7 @@ class QuizApp {
                 // Update UI to clear selection
                 this.showAnswerState({ selectedValue: null, isCorrect: false }, question, false);
                 this.updateNavigator();
+                this.updateProgressBar();
                 return;
             }
         }
@@ -549,6 +555,7 @@ class QuizApp {
         this.showAnswerState({ selectedValue, isCorrect }, question, false);
         document.getElementById(CONFIG.SELECTORS.NEXT_BTN).disabled = false;
         this.updateNavigator();
+        this.updateProgressBar();
     }
 
     showAnswerState(answerData, question, forceShowFeedback = false) {
