@@ -97,6 +97,22 @@ class QuizApp {
         this.bindGlobalEvents();
         this.setupTimerInput();
         this.setupKeyboardSupport();
+        this.setupNavigationProtection();
+    }
+
+    setupNavigationProtection() {
+        window.addEventListener('beforeunload', (e) => {
+            const quizScreen = document.getElementById(CONFIG.SCREENS.QUIZ);
+            const isQuizActive = !quizScreen.classList.contains('hidden');
+
+            // Only protect if Quiz is visible AND not completed AND not reviewing
+            if (isQuizActive && !this.state.quizCompleted && !this.state.isReviewing) {
+                // Standard way to trigger browser confirmation
+                e.preventDefault();
+                e.returnValue = ''; // Required for Chrome/Edge
+                return '';
+            }
+        });
     }
 
     setupKeyboardSupport() {

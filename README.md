@@ -50,6 +50,12 @@ Improve your workflow with these keyboard shortcuts (Desktop):
 
 *Note: Number keys are disabled if the corresponding option is not available or if navigation modifiers (Ctrl/Alt) are held. Navigation/Selection keys are blocked when the confirmation modal is open.*
 
+## Navigation Protection
+
+To prevent accidental data loss, the application includes a protection mechanism:
+-   **Active Quiz**: If you try to reload the page, close the tab, or navigate away while a quiz is in progress, the browser will display a confirmation dialog.
+-   **Safe States**: Navigation is free (no warning) when on the Home screen, Setup screens, Results screen, or while Reviewing answers.
+
 ## Review Features
 
 After completing a quiz, you can review your performance:
