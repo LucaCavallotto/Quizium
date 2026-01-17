@@ -451,19 +451,6 @@
     "explanation": "FDMA systems use frequency reuse patterns where the same frequencies are reused in distant cells to increase capacity while minimizing interference."
   },
   {
-    "id": 36,
-    "type": "multiple",
-    "question": "With reference to the network in the following figure that provides VPN services over MPLS, router A binds a label to a FEC that identifies packets",
-    "options": [
-      "Going to hosts in subnet 10.2.3.0/24",
-      "Coming from 10.5.4.2",
-      "Going to 10.5.3.2",
-      "Going to 10.5.2.2"
-    ],
-    "answer": 0,
-    "explanation": "In MPLS, Forwarding Equivalence Classes (FECs) typically group packets based on their destination network prefixes."
-  },
-  {
     "id": 37,
     "type": "multiple",
     "question": "In MPLS label binding consists in",
@@ -856,7 +843,7 @@
   {
     "id": 67,
     "type": "multiple",
-    "question": "The OSPF (Open Shortest Path First) routing protocol :",
+    "question": "The OSPF (Open Shortest Path First) routing protocol:",
     "options": [
       "Is suitable to large size networks because routers do not need to exchange any message periodically",
       "Is obsolete and was recently replaced by the Integrated IS-IS (Intermediate System to Intermediate System) protocol",
@@ -869,7 +856,7 @@
   {
     "id": 68,
     "type": "multiple",
-    "question": "In a provider provisioned access VPN (Virtual Private Network) solution, a remote host that activates a VPN session with its corporate network has :",
+    "question": "In a provider provisioned access VPN (Virtual Private Network) solution, a remote host that activates a VPN session with its corporate network has:",
     "options": [
       "A single address used to communicate with any other host (both on the corporate network and outside)",
       "A single address used to communicate only with corporate hosts",
@@ -2438,12 +2425,12 @@
   {
     "id": 191,
     "type": "multiple",
-    "question": "due stazioni A e B hanno rispettivamente 130.192.1.1/25 e 130.192.1.100/24",
+    "question": "Due stazioni A e B hanno rispettivamente 130.192.1.1/25 e 130.192.1.100/24",
     "options": [
-      "comunica direttamente con B e viceversa",
-      "comunica direttamente con A ma non viceversa",
-      "comunica direttamente con B solo attraverso un router",
-      "comunica direttamente con b ma non viceversa"
+      "A comunica direttamente con B e viceversa",
+      "B comunica direttamente con A ma non viceversa",
+      "A comunica direttamente con B solo attraverso un router",
+      "A comunica direttamente con B ma non viceversa"
     ],
     "answer": 0,
     "explanation": "Host A (130.192.1.1/25) is in network 130.192.1.0/25, and host B (130.192.1.100/24) is in network 130.192.1.0/24. Since 130.192.1.0/25 is a subset of 130.192.1.0/24, both hosts can communicate directly."
@@ -3250,10 +3237,10 @@
     "type": "multiple",
     "question": "Un Host A ha indirizzo 192.168.1.1/24 e un Host B 192.168.1.129/25.",
     "options": [
-      "A) Entrambi possono comunicare direttamente l'uno con l'altro.",
-      "B) A può comunicare direttamente con B ma not viceversa.",
-      "C) A ha bisogno di un router per comunicare con B",
-      "D) Non possono comunicare."
+      "Entrambi possono comunicare direttamente l'uno con l'altro.",
+      "A può comunicare direttamente con B ma not viceversa.",
+      "A ha bisogno di un router per comunicare con B",
+      "Non possono comunicare."
     ],
     "answer": 1,
     "explanation": "Host A (192.168.1.1/24) can reach B (in 192.168.1.128/25) since A's network includes B's, but B cannot reach A directly as A is outside B's network range."
