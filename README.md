@@ -36,6 +36,20 @@ Choose when to receive feedback on your answers (located in the Setup screen):
     -   Selected answers are marked with a neutral blue outline.
     -   Scores and incorrect answers are revealed only at the end.
 
+## Keyboard Shortcuts
+
+Improve your workflow with these keyboard shortcuts (Desktop):
+
+| Key | Action |
+| :--- | :--- |
+| **Right Arrow** | Go to the Next Question |
+| **Left Arrow** | Go to the Previous Question |
+| **Numbers 1-9** | Select Answer Option (1 for 1st, 2 for 2nd, etc.) |
+| **Enter** | Confirm/Finish Quiz (when Modal is open) |
+| **Backspace** | Cancel/Close Modal (when Modal is open) |
+
+*Note: Number keys are disabled if the corresponding option is not available or if navigation modifiers (Ctrl/Alt) are held. Navigation/Selection keys are blocked when the confirmation modal is open.*
+
 ## Review Features
 
 After completing a quiz, you can review your performance:
@@ -44,6 +58,14 @@ After completing a quiz, you can review your performance:
 -   **Review Answers**: Click the "Review Answers" button on the results screen to navigate through the questions again.
     -   See exactly what you answered vs. the correct answer.
     -   Read detailed explanations for each question.
+
+## Accessibility
+
+The application is built with accessibility in mind:
+-   **Semantic HTML**: Uses proper semantic tags for structure.
+-   **ARIA Labels**: Interactive elements include labels for screen readers.
+-   **Keyboard Navigation**: Full support for navigating and interacting via keyboard.
+-   **Visual Feedback**: Distinct colors and icons (now minimal and centered) for correct/wrong states.
 
 ## How to add a new subject
 

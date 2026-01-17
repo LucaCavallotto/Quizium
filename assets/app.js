@@ -96,6 +96,50 @@ class QuizApp {
         await this.loadSubjects();
         this.bindGlobalEvents();
         this.setupTimerInput();
+        this.setupKeyboardSupport();
+    }
+
+    setupKeyboardSupport() {
+        document.addEventListener('keydown', (e) => {
+            // Only active in Quiz Screen or Review Mode
+            const quizScreen = document.getElementById(CONFIG.SCREENS.QUIZ);
+            if (quizScreen.classList.contains('hidden')) return;
+
+            // Handle Confirmation Modal
+            const confirmationModal = document.getElementById('confirmationModal');
+            if (confirmationModal && !confirmationModal.classList.contains('hidden')) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.confirmFinish();
+                } else if (e.key === 'Backspace') {
+                    e.preventDefault();
+                    this.hideFinishConfirmation();
+                }
+                return; // Block other inputs
+            }
+
+            // Navigation
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                const nextBtn = document.getElementById(CONFIG.SELECTORS.NEXT_BTN);
+                if (nextBtn && !nextBtn.disabled) nextBtn.click();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const prevBtn = document.getElementById(CONFIG.SELECTORS.PREV_BTN);
+                if (prevBtn && !prevBtn.disabled) prevBtn.click();
+            }
+
+            // Number Keys (1-9)
+            // Do not handle if modifier keys (Ctrl/Alt/Meta) are pressed to avoid conflict
+            else if (!e.ctrlKey && !e.altKey && !e.metaKey && e.key >= '1' && e.key <= '9') {
+                const index = parseInt(e.key) - 1;
+                const options = document.querySelectorAll('.answer-option');
+                if (options[index] && !options[index].disabled) {
+                    // Simulate click to leverage existing logic
+                    options[index].click();
+                }
+            }
+        });
     }
 
     /**
