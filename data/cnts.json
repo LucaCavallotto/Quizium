@@ -356,8 +356,8 @@
       "A directly communicates with B but not vice versa",
       "A directly communicates with B and vice versa"
     ],
-    "answer": 1,
-    "explanation": "Host A (130.192.1.1/25) is in network 130.192.1.0/25, while host B (130.192.1.100/24) is in network 130.192.1.0/24. They are on different logical subnets."
+    "answer": 3,
+    "explanation": "Although the two hosts have different subnet masks, communication occurs successfully in both directions because both IP addresses fall within the intersection area of ​​the two subnets."
   },
   {
     "id": 29,
@@ -494,8 +494,8 @@
     "type": "multiple",
     "question": "The Count to Infinity",
     "options": [
-      "is a Link State-based algorithm to prevent the generation of loops",
-      "is a transient period in the Distance Vector algorithm",
+      "Is a Link State-based algorithm to prevent the generation of loops",
+      "Is a transient period in the Distance Vector algorithm",
       "None of the other answers is correct",
       "Helps to understand if a node no longer reachable."
     ],
@@ -772,8 +772,8 @@
       "A directly communicates with B and viceversa",
       "B directly communicates with A but not vice versa"
     ],
-    "answer": 2,
-    "explanation": "Host A (130.192.0.1/26) is in network 130.192.0.0/26, and host B (130.192.1.1/23) is in network 130.192.0.0/23. Since 130.192.0.0/26 is a subset of 130.192.0.0/23, both hosts are on the same logical network from B's perspective."
+    "answer": 3,
+    "explanation": "Host B has a larger subnet mask (/23) that encompasses the IP address of Host A. Conversely, Host A has a much smaller mask (/26) that does not include B's IP, leading A to believe B is on a different network that requires a router to be reached."
   },
   {
     "id": 62,
@@ -1080,7 +1080,7 @@
     "options": [
       "L'header è di dimensione fissa e non possono essere aggiunte opzioni",
       "L'header è di dimensione variabile",
-      "Dimensione dell'header fissa ma con eventuale aggiunta di Header aggiuntivi(?)"
+      "Dimensione dell'header fissa ma con eventuale aggiunta di Header aggiuntivi"
     ],
     "answer": 2,
     "explanation": "IPv6 has a fixed 40-byte base header, with optional extension headers for additional features, making the overall header structure extensible."
@@ -1114,10 +1114,10 @@
     "type": "multiple",
     "question": "Indicate the false claim among the below statements about the Link State algorithm",
     "options": [
-      "A: The Link State algorithm converges faster than the Distance Vector algorithm",
-      "B: The RIP (Routing Information Protocol) protocol is based on the Link State algorithm",
-      "C: The Link State algorithm seldom generates loops",
-      "D: The Link State algorithm exchanges less information than the Distance Vector algorithm."
+      "The Link State algorithm converges faster than the Distance Vector algorithm",
+      "The RIP (Routing Information Protocol) protocol is based on the Link State algorithm",
+      "The Link State algorithm seldom generates loops",
+      "The Link State algorithm exchanges less information than the Distance Vector algorithm."
     ],
     "answer": 1,
     "explanation": "RIP is a distance vector protocol, not a link state protocol. OSPF and IS-IS are examples of link state protocols."
@@ -1151,7 +1151,7 @@
   {
     "id": 91,
     "type": "multiple",
-    "question": "Data una rete composta da diversi reti fisiche interconnesse da opportuni router e un range di indirizzi IP da utilizzare in tale rete, è possibile realizzare un piano di indirizzamento in grado di ottimizzare il routing su un certo router di quella rete:",
+    "question": "Data una rete composta da diverse reti fisiche interconnesse da opportuni router e un range di indirizzi IP da utilizzare in tale rete, è possibile realizzare un piano di indirizzamento in grado di ottimizzare il routing su un certo router di quella rete:",
     "options": [
       "Assegnando alle varie reti fisiche presenti degli indirizzi scelti randomicamente all'interno del range di indirizzi definito per la rete",
       "Assegnando alle varie reti fisiche presenti degli indirizzi scelti all'interno del range di indirizzi definito per la rete, procedendo con l'assegnazione in ordine decrescente di dimensione della rete",
@@ -1781,7 +1781,7 @@
   {
     "id": 140,
     "type": "multiple",
-    "question": "implementazione Multicast in IPv4",
+    "question": "Implementazione Multicast in IPv4",
     "options": [
       "Disponibile senza necessità di protocolli aggiuntivi",
       "Disponibile ma con protocolli aggiuntivi",
@@ -1945,19 +1945,6 @@
     ],
     "answer": 1,
     "explanation": "NAT64 devices translate between IPv6 and IPv4 by replacing packet headers, allowing IPv6-only hosts to communicate with IPv4-only hosts."
-  },
-  {
-    "id": 153,
-    "type": "multiple",
-    "question": "il count to infinity",
-    "options": [
-      "permette di capire se un nodo non è più raggiungibile",
-      "è una variante dell'algoritmo link state ch evita la creazione di loop",
-      "è uno stato transitorio dell'algoritmo distance vector",
-      "nessuna delle precedenti"
-    ],
-    "answer": 3,
-    "explanation": "Count to infinity is a problem in distance vector routing, not a feature or state. It occurs when routers slowly increment metrics to unreachable destinations."
   },
   {
     "id": 154,
@@ -2403,7 +2390,7 @@
     "options": [
       "Può causare di fenomeni di 'Counting to Infinity' solo in reti che presentano maglie",
       "Causa sempre fenomeni di 'Counting to Infinity' in reti non magliate",
-      "è caratterizzato da una minore possibilità di fenomeni di 'Counting to Infinity' in reti che non presentano maglie qualora si faccia uso della tecnica 'Split Horizon'",
+      "È caratterizzato da una minore possibilità di fenomeni di 'Counting to Infinity' in reti che non presentano maglie qualora si faccia uso della tecnica 'Split Horizon'",
       "Il fenomeno di 'Counting to Infinity' è proprio delle reti Link State."
     ],
     "answer": 2,
@@ -2516,7 +2503,7 @@
   {
     "id": 198,
     "type": "multiple",
-    "question": "Il protocollo RIP ` e imbustato:",
+    "question": "Il protocollo RIP è imbustato:",
     "options": [
       "Direttamente in IP, per limitare la dimensione dei pacchetti di routing",
       "Direttamente in IP, per consentire la trasmissione in broadcast dei pacchetti",
@@ -2642,7 +2629,7 @@
   {
     "id": 208,
     "type": "multiple",
-    "question": "Un Neutral Access Point ` e una particolare rete in cui:",
+    "question": "Un Neutral Access Point è una particolare rete in cui:",
     "options": [
       "Più Autonomous System collegano, a livello 2, un certo numero di router in modo scambiarsi le informazioni di routing",
       "Più Autonomous System collegano, a livello 3, un certo numero di router in modo scambiarsi le informazioni di routing",
@@ -2749,9 +2736,9 @@
     "question": "Un Network Provider considerato 'Tier-1':",
     "options": [
       "Dispone di una sola interconnessione verso un altro Autonomous System di tipo Tier-1",
-      "è un Autonomous System collegato ad altri AS Tier-1 solamente con connessioni di tipo 'Peering', ossia non a pagamento",
-      "è un Autonomous System collegato ad altri AS Tier-1 prevalentemente con connessioni di tipo 'Peering', ossia non a pagamento",
-      "è un Autonomous System collegato ad altri AS Tier-1 prevalentemente con connessioni di tipo 'transit', ossia a pagamento"
+      "È un Autonomous System collegato ad altri AS Tier-1 solamente con connessioni di tipo 'Peering', ossia non a pagamento",
+      "È un Autonomous System collegato ad altri AS Tier-1 prevalentemente con connessioni di tipo 'Peering', ossia non a pagamento",
+      "È un Autonomous System collegato ad altri AS Tier-1 prevalentemente con connessioni di tipo 'transit', ossia a pagamento"
     ],
     "answer": 2,
     "explanation": "Tier-1 ISPs peer with other Tier-1 providers without paying for transit, as they can reach all Internet destinations through their peering relationships."
@@ -2993,10 +2980,10 @@
     "type": "multiple",
     "question": "Il Multipath routing:",
     "options": [
-      "è supportato dalle maggiori implementazioni di RIP",
+      "È supportato dalle maggiori implementazioni di RIP",
       "Permette ai router di utilizzare percorsi multipli durante i transitori sulla rete, così da velocizzare la diffusione delle informazioni di routing e diminuire la durata del transitorio",
-      "Pu' o essere causa di loop se si ammette che i percorsi utilizzati possano avere costi differenti",
-      "E consigliato solamente se il traffico dati `e composto prevalentemente da pacchetti TCP"
+      "Può essere causa di loop se si ammette che i percorsi utilizzati possano avere costi differenti",
+      "È consigliato solamente se il traffico dati è composto prevalentemente da pacchetti TCP"
     ],
     "answer": 2,
     "explanation": "Multipath routing can cause routing loops if packets take asymmetric paths with different costs, potentially creating inconsistent forwarding states."
@@ -3004,7 +2991,7 @@
   {
     "id": 236,
     "type": "multiple",
-    "question": "la più piccola aggregazione che può contenere le due reti IP 130.192.0.0/25 e 130.192.1.0/25",
+    "question": "La più piccola aggregazione che può contenere le due reti IP 130.192.0.0/25 e 130.192.1.0/25",
     "options": [
       "130.192.1.0/23",
       "130.192.0.0/24",
@@ -3045,10 +3032,10 @@
     "type": "multiple",
     "question": "La redistribuzione:",
     "options": [
-      "è quel processo che va abilitato sul router per far sì che riesca a smistare i pacchetti verso l'opportuna destinazione",
-      "è utilizzata per lo scambio di informazioni tra un router interno (interior gateway) ed un router esterno (exterior gateway) che usa il protocollo BGP",
+      "È quel processo che va abilitato sul router per far sì che riesca a smistare i pacchetti verso l'opportuna destinazione",
+      "È utilizzata per lo scambio di informazioni tra un router interno (interior gateway) ed un router esterno (exterior gateway) che usa il protocollo BGP",
       "Viene utilizzata soprattutto dai domini di routing periferici, che si collegano ad un solo Internet service provider per l'accesso ad Internet",
-      "è utilizzata per permettere il passaggio delle informazioni di routing da un dominio di routing A ad un dominio di routing B"
+      "È utilizzata per permettere il passaggio delle informazioni di routing da un dominio di routing A ad un dominio di routing B"
     ],
     "answer": 3,
     "explanation": "Route redistribution involves exchanging routing information between different routing domains or protocols."
@@ -3069,7 +3056,7 @@
   {
     "id": 241,
     "type": "multiple",
-    "question": "Un Neutral Access Point `e una particolare rete in cui:",
+    "question": "Un Neutral Access Point è una particolare rete in cui:",
     "options": [
       "Tutti gli apparati sono collegati mediante l'utilizzo di un router centrale ad alte prestazioni, dotato di interfacce di rete multiple",
       "I vari AS si scambiano il traffico in modalità 'peering', ossia non a pagamento",
@@ -3095,7 +3082,7 @@
   {
     "id": 243,
     "type": "multiple",
-    "question": "1. Due stazioni A e B appartengono alla stessa rete fisica e hanno rispettivamente indirizzi IP 130.192.1.1/25 e 130.192.1.129/24",
+    "question": "Due stazioni A e B appartengono alla stessa rete fisica e hanno rispettivamente indirizzi IP 130.192.1.1/25 e 130.192.1.129/24",
     "options": [
       "A comunica direttamente con B e viceversa",
       "A comunica direttamente con B ma not viceversa",
@@ -3304,7 +3291,7 @@
     "options": [
       "Non è possibile sapere con precisione l'indirizzo stesso, dal momento che l'indirizzo IPv6 viene ogni volta rigenerato con un numero casuale per quanto riguarda la parte riservata all'Interface ID.",
       "Un indirizzo FE80::/32",
-      "Per quanto riguarda l'indirizzo link-local, assumera' lo stesso indirizzo IPv6 che possedeva prima del reboot.",
+      "Per quanto riguarda l'indirizzo link-local, assumerà lo stesso indirizzo IPv6 che possedeva prima del reboot.",
       "L'indirizzo dipende interamente dalla configurazione che acquisirà dal suo default router."
     ],
     "answer": 2,
@@ -3555,7 +3542,7 @@
       "\"Total Length\" field"
     ],
     "answer": 0,
-    "explanation": ""
+    "explanation": "In IPv4, the Protocol field is used to tell the receiver which protocol is encapsulated in the payload of the IP packet (e.g., TCP, UDP, or ICMP). In IPv6, this functionality was replaced and expanded by the Next Header field, which is more versatile than the old Protocol field because it can point to either an upper-layer protocol (TCP/UDP) or an intermediate IPv6 Extension Header."
   },
   {
     "id": 279,
