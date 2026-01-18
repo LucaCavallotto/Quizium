@@ -363,9 +363,11 @@
     content: '✓';
     color: white;
     font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-weight: 700;
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 20px;
+    display: block;
+    text-align: center;
     border: none;
 }
 
@@ -380,12 +382,14 @@
 .answer-option.wrong::before {
     background: var(--error);
     border-color: var(--error);
-    content: '✕';
+    content: '✗';
     color: white;
     font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-weight: 700;
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 20px;
+    display: block;
+    text-align: center;
     border: none;
 }
 

@@ -434,6 +434,8 @@ input[type=range]::-moz-range-track {
 
 .stat-pill .icon {
     margin-right: 6px;
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1;
 }
 
 .stat-box {
