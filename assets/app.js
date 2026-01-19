@@ -266,24 +266,59 @@ class QuizApp {
     setupSlider() {
         const total = this.state.questions.length;
         const slider = document.getElementById(CONFIG.SELECTORS.SLIDER);
-        const display = document.getElementById(CONFIG.SELECTORS.SLIDER_VALUE);
+        const input = document.getElementById(CONFIG.SELECTORS.SLIDER_VALUE); // Now an input
         const maxLabel = document.getElementById(CONFIG.SELECTORS.MAX_QUESTIONS_LABEL);
 
         slider.max = total;
+        input.max = total;
+
         const defaultVal = Math.min(10, total);
         slider.value = defaultVal;
-        display.textContent = defaultVal;
+        input.value = defaultVal;
         maxLabel.textContent = total;
 
         this.updateSliderUI(defaultVal);
+
+        // Slider interaction
         slider.oninput = (e) => this.updateSliderUI(e.target.value);
+
+        // Manual Input interaction
+        input.oninput = (e) => {
+            // Allow empty while typing, otherwise sync logic
+            if (e.target.value !== '') {
+                // Sync slider visual only, validate on blur
+                slider.value = e.target.value;
+                this.updateSliderUI(e.target.value, false); // Don't update input value recursively
+            }
+        };
+
+        input.onblur = () => {
+            let val = parseInt(input.value);
+            if (isNaN(val) || val < 1) val = 1;
+            if (val > total) val = total;
+
+            this.setSliderValue(val);
+        };
+
+        input.onkeydown = (e) => {
+            if (e.key === 'Enter') {
+                input.blur();
+            }
+        };
+
+        // Mobile focus fix
+        input.addEventListener('touchend', (e) => {
+            input.focus();
+        });
     }
 
-    updateSliderUI(value) {
+    updateSliderUI(value, updateInput = true) {
         const val = parseInt(value);
         const total = this.state.questions.length;
 
-        document.getElementById(CONFIG.SELECTORS.SLIDER_VALUE).textContent = val;
+        if (updateInput) {
+            document.getElementById(CONFIG.SELECTORS.SLIDER_VALUE).value = val;
+        }
 
         // Time Estimate (~90s per question)
         const minutes = Math.ceil((val * 90) / 60);
@@ -297,9 +332,7 @@ class QuizApp {
         // Assuming the first 3 are question count. safely we can use ID based logic or check parent.
         // For now, let's just protect against errors if selector matches more.
 
-        // Actually, let's fix the selector in CONFIG or here. 
-        // The original logic relied on index 0, 1, 2. But we added time buttons dealing with PRESET_BTNS class too.
-        // We should distinct them.
+        // ID based selection for safety
         const countBtns = document.querySelector('.slider-wrapper .preset-buttons').querySelectorAll('.preset-btn');
         countBtns.forEach(btn => btn.classList.remove('active'));
 
@@ -311,8 +344,10 @@ class QuizApp {
     setSliderValue(preset) {
         const total = this.state.questions.length;
         const val = (preset === 'max') ? total : Math.min(preset, total);
+
         const slider = document.getElementById(CONFIG.SELECTORS.SLIDER);
         slider.value = val;
+
         this.updateSliderUI(val);
     }
 
@@ -335,18 +370,45 @@ class QuizApp {
 
     setupTimerInput() {
         const slider = document.getElementById(CONFIG.SELECTORS.TIMER_SLIDER);
-        const display = document.getElementById(CONFIG.SELECTORS.TIMER_VALUE_DISPLAY);
+        const input = document.getElementById(CONFIG.SELECTORS.TIMER_VALUE_DISPLAY); // Now input
 
-        slider.oninput = (e) => {
+        const updateTimerUI = (val, updateInput = true) => {
             // Auto switch to Timer mode if trying to change value in other modes
             if (this.state.timeMode !== 'timer') {
                 this.selectTimeMode('timer');
             }
-
-            this.state.timerDuration = parseInt(e.target.value);
-            display.textContent = `${this.state.timerDuration}m`;
+            if (updateInput) input.value = val;
+            this.state.timerDuration = parseInt(val);
         };
-        display.textContent = `${this.state.timerDuration}m`;
+
+        slider.oninput = (e) => {
+            updateTimerUI(e.target.value);
+        };
+
+        input.oninput = (e) => {
+            if (e.target.value !== '') {
+                slider.value = e.target.value;
+                updateTimerUI(e.target.value, false);
+            }
+        };
+
+        input.onblur = () => {
+            let val = parseInt(input.value);
+            if (isNaN(val) || val < 1) val = 1;
+            if (val > 60) val = 60;
+
+            input.value = val;
+            slider.value = val;
+            updateTimerUI(val, false);
+        };
+
+        input.onkeydown = (e) => {
+            if (e.key === 'Enter') {
+                input.blur();
+            }
+        };
+
+        input.value = this.state.timerDuration;
     }
 
     /* Correction Mode Selection */

@@ -243,29 +243,72 @@
     max-width: 500px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 24px 24px;
+    gap: 12px;
+    padding: 20px;
     justify-content: space-between;
 }
 
 .slider-value-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-value-input {
     font-size: 5rem;
     font-weight: 800;
     color: var(--text-main);
     line-height: 1;
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.06em;
+    background: var(--bg-body);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    width: auto;
+    min-width: 3ch;
+    text-align: center;
+    padding: 0 12px;
+    margin: 0;
+    font-family: inherit;
+    /* Gradient text fallback if possible, usually tough on inputs */
+    color: var(--primary);
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: none;
-    filter: none;
-    padding: 0 20px;
+    caret-color: var(--primary);
+    transition: all 0.2s;
 }
 
-#timerInputContainer .slider-value-display {
-    font-size: 2rem;
+.slider-value-input:focus,
+.slider-value-input:hover {
+    outline: none;
+    -webkit-text-fill-color: var(--primary);
+    /* Show solid color on focus to see caret better */
+    background: var(--bg-body);
+    /* Reset gradient background to solid for box */
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+/* Hide spin buttons */
+.slider-value-input::-webkit-outer-spin-button,
+.slider-value-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.slider-value-input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+#timerValueDisplay {
+    font-size: 3rem;
+    width: 3ch;
+    /* Reduced width for smaller font/number */
+    min-width: 0;
 }
 
 .label-questions {

@@ -55,7 +55,7 @@
                         <div class="label-questions">Number of Questions</div>
                         <div class="count-display-group">
                             <div class="slider-value-display">
-                                <span id="sliderValue">10</span>
+                                <input type="number" id="sliderValue" class="slider-value-input" value="10" min="1">
                             </div>
                             <div class="time-estimate-pill" id="timeEstimate">⏱️ ~3 min</div>
                         </div>
@@ -98,9 +98,8 @@
 
                         <div id="timerInputContainer" class="range-container slider-dimmed" style="margin-top: 20px;">
                             <div class="count-display-group" style="padding-bottom: 12px;">
-                                <div class="slider-value-display">
-                                    <span id="timerValueDisplay">10m</span>
-                                </div>
+                                <input type="number" id="timerValueDisplay" class="slider-value-input" value="10"
+                                    min="1" max="60">
                             </div>
                             <input type="range" min="1" max="60" value="10" class="slider" id="timerSlider">
                             <div class="slider-labels">
