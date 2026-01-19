@@ -451,7 +451,7 @@
     "explanation": "FDMA systems use frequency reuse patterns where the same frequencies are reused in distant cells to increase capacity while minimizing interference."
   },
   {
-    "id": 37,
+    "id": 36,
     "type": "multiple",
     "question": "In MPLS label binding consists in",
     "options": [
@@ -464,7 +464,7 @@
     "explanation": "Label binding is the process of associating a label with a specific FEC, which defines how packets should be forwarded."
   },
   {
-    "id": 38,
+    "id": 37,
     "type": "multiple",
     "question": "In the context of VPNs (Virtual Private Networks) traffic encryption is",
     "options": [
@@ -477,7 +477,7 @@
     "explanation": "While encryption is a common and important feature in VPNs, not all VPN technologies include encryption (e.g., some MPLS VPNs rely on the provider's security)."
   },
   {
-    "id": 39,
+    "id": 38,
     "type": "multiple",
     "question": "The smallest aggregation that can contain the IP networks 130.192.0.0/25 and 130.192.1.0/25 is:",
     "options": [
@@ -490,7 +490,7 @@
     "explanation": "The networks 130.192.0.0/25 and 130.192.1.0/25 can be aggregated into 130.192.0.0/23, which covers addresses from 130.192.0.0 to 130.192.1.255."
   },
   {
-    "id": 40,
+    "id": 39,
     "type": "multiple",
     "question": "The Count to Infinity",
     "options": [
@@ -503,7 +503,7 @@
     "explanation": "Count to infinity is a problem in distance vector routing protocols where routers slowly increment their metric to a destination that has become unreachable."
   },
   {
-    "id": 41,
+    "id": 40,
     "type": "multiple",
     "question": "The Solicited Node Multicast Address is",
     "options": [
@@ -516,7 +516,7 @@
     "explanation": "The solicited-node multicast address is used as the destination address in IPv6 Neighbor Solicitation messages for address resolution."
   },
   {
-    "id": 42,
+    "id": 41,
     "type": "multiple",
     "question": "Indicate the true claim among the below statements about a VPN (Virtual Private Network)",
     "options": [
@@ -529,7 +529,7 @@
     "explanation": "All the other statements contain inaccuracies about VPN technologies and their deployment."
   },
   {
-    "id": 43,
+    "id": 42,
     "type": "multiple",
     "question": "In a GSM cellular network, a 'Regular Burst' is used",
     "options": [
@@ -542,7 +542,7 @@
     "explanation": "In GSM, regular bursts are used primarily for voice traffic but can also carry control information when needed."
   },
   {
-    "id": 44,
+    "id": 43,
     "type": "multiple",
     "question": "Multicast groups in IPv4",
     "options": [
@@ -555,7 +555,7 @@
     "explanation": "IPv4 multicast uses addresses in the range 224.0.0.0 to 239.255.255.255, which are reserved specifically for multicast and cannot be assigned to individual hosts."
   },
   {
-    "id": 45,
+    "id": 44,
     "type": "multiple",
     "question": "Label distribution in MPLS (Multi-Protocol Label Switching)",
     "options": [
@@ -568,7 +568,7 @@
     "explanation": "RSVP-TE (Resource Reservation Protocol - Traffic Engineering) is commonly used for label distribution in MPLS networks, especially for traffic engineering purposes."
   },
   {
-    "id": 46,
+    "id": 45,
     "type": "multiple",
     "question": "OSPF-TE and ISIS-TE include enhancements to tradition routing protocols OSPF and ISIS that have been standardized in the context of MPLS in order to",
     "options": [
@@ -581,7 +581,7 @@
     "explanation": "OSPF-TE and ISIS-TE extensions distribute additional link attributes (like available bandwidth) to support constraint-based routing for traffic engineering."
   },
   {
-    "id": 47,
+    "id": 46,
     "type": "multiple",
     "question": "The IPv6 address 2001:4600::0201:06FF:FEAS:3A4C is",
     "options": [
@@ -594,7 +594,7 @@
     "explanation": "2001:4600::/32 is part of the global unicast address space allocated for public IPv6 Internet use."
   },
   {
-    "id": 48,
+    "id": 47,
     "type": "multiple",
     "question": "Multicast communications in an IPv4 network",
     "options": [
@@ -607,7 +607,7 @@
     "explanation": "While basic LAN multicast might work without additional protocols, proper multicast routing across networks requires protocols like PIM (Protocol Independent Multicast)."
   },
   {
-    "id": 49,
+    "id": 48,
     "type": "multiple",
     "question": "The distance Vector routing algorithm",
     "options": [
@@ -620,7 +620,7 @@
     "explanation": "Distance vector protocols like RIP are still used in specific scenarios, particularly in small networks or as part of redistribution strategies."
   },
   {
-    "id": 50,
+    "id": 49,
     "type": "multiple",
     "question": "The basic ideal of MPLS (Multi-Protocol Label Switching) consists in",
     "options": [
@@ -633,7 +633,7 @@
     "explanation": "MPLS uses labels to make forwarding decisions, allowing for more efficient packet processing and enabling traffic engineering and VPN services."
   },
   {
-    "id": 51,
+    "id": 50,
     "type": "multiple",
     "question": "An optical switch is a device capable of switching",
     "options": [
@@ -646,7 +646,7 @@
     "explanation": "An optical switch routes an entire optical channel (wavelength) from an input fiber to an output fiber without converting it to electrical signals."
   },
   {
-    "id": 52,
+    "id": 51,
     "type": "multiple",
     "question": "In MPLS label binding consists in:",
     "options": [
@@ -659,7 +659,7 @@
     "explanation": "Label binding is the fundamental process of associating a specific label with a Forwarding Equivalence Class that defines how packets should be forwarded."
   },
   {
-    "id": 53,
+    "id": 52,
     "type": "multiple",
     "question": "The GRE (Generic Routing Encapsulation) protocol is utilized for:",
     "options": [
@@ -672,7 +672,7 @@
     "explanation": "GRE is a tunneling protocol that encapsulates various network layer protocols inside IP tunnels and identifies the protocol type of the payload."
   },
   {
-    "id": 54,
+    "id": 53,
     "type": "multiple",
     "question": "In the context of routing, redistribution consists in:",
     "options": [
@@ -685,7 +685,7 @@
     "explanation": "Route redistribution involves exchanging routing information between different routing protocols, which may result in loss of metric information and potential routing loops."
   },
   {
-    "id": 55,
+    "id": 54,
     "type": "multiple",
     "question": "In topology-based control-driven label binding:",
     "options": [
@@ -698,7 +698,7 @@
     "explanation": "In topology-based label binding, LSPs are automatically established based on routing information from IGP protocols like OSPF or IS-IS."
   },
   {
-    "id": 56,
+    "id": 55,
     "type": "multiple",
     "question": "DWDM (Dense Wavelength Division Multiplexing) is a technology allowing to:",
     "options": [
@@ -711,7 +711,7 @@
     "explanation": "DWDM combines multiple optical signals on different wavelengths onto a single fiber, significantly increasing the capacity of optical networks."
   },
   {
-    "id": 57,
+    "id": 56,
     "type": "multiple",
     "question": "An IPv6 host can autoconfigure its own address by using:",
     "options": [
@@ -724,7 +724,7 @@
     "explanation": "IPv6 stateless address autoconfiguration (SLAAC) uses the MAC address to create the interface identifier and obtains the network prefix from Router Advertisement messages."
   },
   {
-    "id": 58,
+    "id": 57,
     "type": "multiple",
     "question": "Modern Ethernet networks are:",
     "options": [
@@ -737,7 +737,7 @@
     "explanation": "Modern Ethernet networks predominantly use switches for interconnection and VLANs for logical segmentation, providing better performance and flexibility than hubs."
   },
   {
-    "id": 59,
+    "id": 58,
     "type": "multiple",
     "question": "A 48-port Ethernet switch is used for interconnecting 47 hosts belonging to three different VLANs: 10 hosts belong to VLAN 2, 20 hosts belong to VLAN 1. All the 47 ports of the switch connected to the hosts are configured in Access mode.",
     "options": [
@@ -750,7 +750,7 @@
     "explanation": "The remaining port can be configured as a trunk port and connected to a router or layer-3 switch to enable inter-VLAN routing between the three VLANs."
   },
   {
-    "id": 60,
+    "id": 59,
     "type": "multiple",
     "question": "The DS-Lite technique for the IPv4-IPv6 transition is based on the fact that",
     "options": [
@@ -763,7 +763,7 @@
     "explanation": "DS-Lite moves the NAT function from the customer premises to the service provider's AFTR device, allowing IPv4 communication over an IPv6 infrastructure."
   },
   {
-    "id": 61,
+    "id": 60,
     "type": "multiple",
     "question": "Two hosts A and B belong to the same physical network and have IP addresses 130.192.0.1/26 and 130.192.1.1/23, respectively",
     "options": [
@@ -776,7 +776,7 @@
     "explanation": "Host B has a larger subnet mask (/23) that encompasses the IP address of Host A. Conversely, Host A has a much smaller mask (/26) that does not include B's IP, leading A to believe B is on a different network that requires a router to be reached."
   },
   {
-    "id": 62,
+    "id": 61,
     "type": "multiple",
     "question": "Quando un host IPv6 ha necessità di imparare l'indirizzo MAC associato ad un indirizzo …..",
     "options": [
@@ -789,7 +789,7 @@
     "explanation": "IPv6 uses Neighbor Solicitation ICMPv6 messages sent to the solicited-node multicast address for address resolution, replacing ARP used in IPv4."
   },
   {
-    "id": 63,
+    "id": 62,
     "type": "multiple",
     "question": "Se un host IPv4 vuole comunicare con un host IPv6",
     "options": [
@@ -802,7 +802,7 @@
     "explanation": "Communication between IPv4 and IPv6 hosts requires translation mechanisms like NAT64 or protocol translation gateways that convert between the two protocol versions."
   },
   {
-    "id": 64,
+    "id": 63,
     "type": "multiple",
     "question": "L'address range IP 130.192.4.0/23 rappresenta la più piccola aggregazione possibile ….",
     "options": [
@@ -815,7 +815,7 @@
     "explanation": "130.192.4.0/23 is the smallest aggregation that contains both 130.192.4.0/25 and 130.192.4.128/25, as it covers the entire 130.192.4.0-130.192.5.255 range."
   },
   {
-    "id": 65,
+    "id": 64,
     "type": "multiple",
     "question": "Relativamente a un Autonomous System, quali di queste affermazioni è falsa.",
     "options": [
@@ -828,7 +828,7 @@
     "explanation": "An Autonomous System is not just a single subnet but a collection of networks under common administrative control, typically using dynamic routing protocols internally."
   },
   {
-    "id": 66,
+    "id": 65,
     "type": "multiple",
     "question": "Date due stazioni A e B appartenenti alla stessa rete fisica, indicare la configurazione che permette ad A di comunicare direttamente con B, ma a B di comunicare con A solo attraverso un router…..",
     "options": [
@@ -841,7 +841,7 @@
     "explanation": "With A in 130.192.1.0/25 and B in 130.192.1.0/26, A can reach B directly (since B's network is within A's), but B cannot reach A directly (since A's address is outside B's network range)."
   },
   {
-    "id": 67,
+    "id": 66,
     "type": "multiple",
     "question": "The OSPF (Open Shortest Path First) routing protocol:",
     "options": [
@@ -854,7 +854,7 @@
     "explanation": "OSPF uses areas to create a hierarchical structure that reduces routing overhead and improves scalability in large networks."
   },
   {
-    "id": 68,
+    "id": 67,
     "type": "multiple",
     "question": "In a provider provisioned access VPN (Virtual Private Network) solution, a remote host that activates a VPN session with its corporate network has:",
     "options": [
@@ -867,7 +867,7 @@
     "explanation": "In provider-provisioned VPNs, remote hosts typically have separate addresses for corporate network access (through the VPN) and for general Internet access."
   },
   {
-    "id": 69,
+    "id": 68,
     "type": "multiple",
     "question": "The DS-Lite technique for the IPv4-IPv6 transition is based on the fact that",
     "options": [
@@ -880,7 +880,7 @@
     "explanation": "DS-Lite centralizes the NAT function at the service provider's AFTR, allowing IPv4 communication over an IPv6 access network."
   },
   {
-    "id": 70,
+    "id": 69,
     "type": "multiple",
     "question": "Net meccanismo del secchiello a gettoni si riesce a controllare:",
     "options": [
@@ -893,7 +893,7 @@
     "explanation": "The token bucket algorithm controls both the maximum burst size (bucket capacity) and the average data rate (token generation rate)."
   },
   {
-    "id": 71,
+    "id": 70,
     "type": "multiple",
     "question": "A differenza della versione 4 dell'IP, la versione 6:",
     "options": [
@@ -906,7 +906,7 @@
     "explanation": "IPv6 eliminates broadcast addresses entirely, using multicast for all one-to-many communications instead."
   },
   {
-    "id": 72,
+    "id": 71,
     "type": "multiple",
     "question": "Un protocollo usato in MPLS per la distribuzione delle label è:",
     "options": [
@@ -919,7 +919,7 @@
     "explanation": "BGP is commonly used for label distribution in MPLS networks, particularly for inter-domain scenarios and MPLS VPNs."
   },
   {
-    "id": 73,
+    "id": 72,
     "type": "multiple",
     "question": "IPsec:",
     "options": [
@@ -931,7 +931,7 @@
     "explanation": "IPsec has compatibility issues with NAT because NAT modifies IP headers and ports, which can break IPsec integrity checks and encryption."
   },
   {
-    "id": 74,
+    "id": 73,
     "type": "multiple",
     "question": "Quale tra le seguenti definizioni è una novità dello standard UMTS?",
     "options": [
@@ -944,7 +944,7 @@
     "explanation": "Macrodiversity, where a mobile terminal can communicate with multiple base stations simultaneously, was a key innovation in UMTS/3G networks."
   },
   {
-    "id": 75,
+    "id": 74,
     "type": "multiple",
     "question": "Aumentando il numero di VLAN:",
     "options": [
@@ -957,7 +957,7 @@
     "explanation": "Each VLAN creates a separate broadcast domain, so increasing the number of VLANs increases the number of broadcast domains in the network."
   },
   {
-    "id": 76,
+    "id": 75,
     "type": "multiple",
     "question": "Handover è il meccanismo che permette di:",
     "options": [
@@ -970,7 +970,7 @@
     "explanation": "Handover is the process of transferring an ongoing call or data session from one cell to another without interruption."
   },
   {
-    "id": 77,
+    "id": 76,
     "type": "multiple",
     "question": "Il protocollo PPTP viene utilizzato di solito per:",
     "options": [
@@ -983,7 +983,7 @@
     "explanation": "PPTP (Point-to-Point Tunneling Protocol) is primarily used for remote access VPNs, allowing users to securely connect to corporate networks over the Internet."
   },
   {
-    "id": 78,
+    "id": 77,
     "type": "multiple",
     "question": "le comunicazioni multicast in una rete ipv4",
     "options": [
@@ -996,7 +996,7 @@
     "explanation": "While basic LAN multicast might work with IGMP, proper multicast routing across networks requires additional protocols like PIM (Protocol Independent Multicast)."
   },
   {
-    "id": 79,
+    "id": 78,
     "type": "multiple",
     "question": "Si consideri una semplice topologia di rete in cui sono presenti quattro router (A, B, C, D). I primi 3 sono collegati tra di loro ad anello (A-B-C-A), mentre il quarto ` e collegato a C attraverso un link punto-punto (C-D). Se gli host utilizzano un algoritmo di routing di tipo flooding e il router A invia un pacchetto a D, quante copie del medesimo pacchetto saranno recapitate al router D?",
     "options": [
@@ -1009,7 +1009,7 @@
     "explanation": "With flooding, multiple copies of the packet will be forwarded through different paths, and the exact number depends on the TTL value and network topology."
   },
   {
-    "id": 80,
+    "id": 79,
     "type": "multiple",
     "question": "L'importanza di MPLS (multi-protocol label switching) nelle reti odierne e future deriva dalla possibilità di",
     "options": [
@@ -1022,7 +1022,7 @@
     "explanation": "MPLS enables sophisticated traffic engineering capabilities, allowing network operators to control the paths that traffic takes through their networks."
   },
   {
-    "id": 81,
+    "id": 80,
     "type": "multiple",
     "question": "La tecnica 'Path Vector' impiegata dal BGP:",
     "options": [
@@ -1035,7 +1035,7 @@
     "explanation": "BGP's path vector algorithm stores the complete AS path to each destination, which helps prevent routing loops and enables policy-based routing."
   },
   {
-    "id": 82,
+    "id": 81,
     "type": "multiple",
     "question": "il fatto che una VPN offra accesso ad internet centralizzato implica che",
     "options": [
@@ -1048,7 +1048,7 @@
     "explanation": "With centralized Internet access, all Internet-bound traffic is routed through the corporate network, which may result in suboptimal paths compared to direct local Internet access."
   },
   {
-    "id": 83,
+    "id": 82,
     "type": "multiple",
     "question": "I concetti di Forwarding e Routing:",
     "options": [
@@ -1061,7 +1061,7 @@
     "explanation": "Routing is the process of determining the best path to a destination, while forwarding is the process of sending packets to the appropriate output interface based on the routing decisions."
   },
   {
-    "id": 84,
+    "id": 83,
     "type": "multiple",
     "question": "Per l'instaurazione di un LSP è indispensabile che",
     "options": [
@@ -1074,7 +1074,7 @@
     "explanation": "MPLS routers must perform label mapping operations to establish and maintain Label Switched Paths through the network."
   },
   {
-    "id": 85,
+    "id": 84,
     "type": "multiple",
     "question": "Header IPv6",
     "options": [
@@ -1086,7 +1086,7 @@
     "explanation": "IPv6 has a fixed 40-byte base header, with optional extension headers for additional features, making the overall header structure extensible."
   },
   {
-    "id": 86,
+    "id": 85,
     "type": "multiple",
     "question": "Qual è un vantaggio di utilizzare un algoritmo di routing di tipo Link State rispetto ad uno di tipo Distance Vector?",
     "options": [
@@ -1099,7 +1099,7 @@
     "explanation": "Link state protocols allow each router to independently compute optimal paths using Dijkstra's algorithm on the complete network topology database."
   },
   {
-    "id": 87,
+    "id": 86,
     "type": "multiple",
     "question": "Un host appartenente ad una certa VLAN",
     "options": [
@@ -1110,7 +1110,7 @@
     "explanation": "Communication between different VLANs requires routing functionality, typically provided by a router or layer-3 switch."
   },
   {
-    "id": 88,
+    "id": 87,
     "type": "multiple",
     "question": "Indicate the false claim among the below statements about the Link State algorithm",
     "options": [
@@ -1123,7 +1123,7 @@
     "explanation": "RIP is a distance vector protocol, not a link state protocol. OSPF and IS-IS are examples of link state protocols."
   },
   {
-    "id": 89,
+    "id": 88,
     "type": "multiple",
     "question": "Quale tra questi elementi rappresenta un notevole svantaggio nella tecnica del routing centralizzato?",
     "options": [
@@ -1136,7 +1136,7 @@
     "explanation": "Centralized routing creates a single point of failure and potential bottleneck at the central node, limiting scalability and reliability."
   },
   {
-    "id": 90,
+    "id": 89,
     "type": "multiple",
     "question": "Un indirizzo link-local:",
     "options": [
@@ -1149,7 +1149,7 @@
     "explanation": "Link-local addresses (fe80::/10) are automatically configured and used for communication between nodes on the same link, even without global addresses."
   },
   {
-    "id": 91,
+    "id": 90,
     "type": "multiple",
     "question": "Data una rete composta da diverse reti fisiche interconnesse da opportuni router e un range di indirizzi IP da utilizzare in tale rete, è possibile realizzare un piano di indirizzamento in grado di ottimizzare il routing su un certo router di quella rete:",
     "options": [
@@ -1161,7 +1161,7 @@
     "explanation": "Hierarchical addressing with distinct address ranges for different areas enables route summarization and optimizes routing table sizes."
   },
   {
-    "id": 92,
+    "id": 91,
     "type": "multiple",
     "question": "Le procedure di Neighbor Discovery in IPv6",
     "options": [
@@ -1174,7 +1174,7 @@
     "explanation": "IPv6 Neighbor Discovery uses ICMPv6 messages sent to multicast addresses for functions like address resolution and duplicate address detection."
   },
   {
-    "id": 93,
+    "id": 92,
     "type": "multiple",
     "question": "L'High speed packet access (HSPA):",
     "options": [
@@ -1187,7 +1187,7 @@
     "explanation": "HSPA uses shared channels more efficiently than dedicated channels, improving resource utilization and overall system capacity."
   },
   {
-    "id": 94,
+    "id": 93,
     "type": "multiple",
     "question": "RIP, caratteristica:",
     "options": [
@@ -1199,7 +1199,7 @@
     "explanation": "RIP exchanges routing information only with directly connected neighbor routers, using a distance vector algorithm."
   },
   {
-    "id": 95,
+    "id": 94,
     "type": "multiple",
     "question": "Qual è l'uso dei meccanismi di policing?",
     "options": [
@@ -1212,7 +1212,7 @@
     "explanation": "Traffic policing monitors traffic flows and enforces compliance with service level agreements by dropping or remarking non-conforming packets."
   },
   {
-    "id": 96,
+    "id": 95,
     "type": "multiple",
     "question": "DiffServ si differenzia da IntServ perché:",
     "options": [
@@ -1225,7 +1225,7 @@
     "explanation": "IntServ provides per-flow QoS guarantees with explicit resource reservation, while DiffServ provides class-based QoS with relative assurances but no strict guarantees."
   },
   {
-    "id": 97,
+    "id": 96,
     "type": "multiple",
     "question": "Il protocollo RIP è caratterizzato da",
     "options": [
@@ -1238,7 +1238,7 @@
     "explanation": "RIP is prone to routing loops and slow convergence, especially in larger networks or during topology changes."
   },
   {
-    "id": 98,
+    "id": 97,
     "type": "multiple",
     "question": "Il protocollo GRE ha lo scopo di:",
     "options": [
@@ -1251,7 +1251,7 @@
     "explanation": "GRE (Generic Routing Encapsulation) is a tunneling protocol that encapsulates various network layer protocols inside IP tunnels."
   },
   {
-    "id": 99,
+    "id": 98,
     "type": "multiple",
     "question": "Gli indirizzi IPv6 Aggregatable Global Unicast sono:",
     "options": [
@@ -1264,7 +1264,7 @@
     "explanation": "Aggregatable Global Unicast addresses in IPv6 are globally routable and unique, serving the same purpose as public IPv4 addresses."
   },
   {
-    "id": 100,
+    "id": 99,
     "type": "multiple",
     "question": "Utilizzando l'algoritmo del secchiello a gettoni (o secchio bucato) di capacità B token e velocità di riempimento r token/s si riesce a controllare:",
     "options": [
@@ -1277,7 +1277,7 @@
     "explanation": "The token bucket algorithm controls the average rate (r tokens/sec) and maximum burst size (B tokens), allowing bursts up to B tokens while maintaining the long-term average rate r."
   },
   {
-    "id": 101,
+    "id": 100,
     "type": "multiple",
     "question": "Un 'Internal Router' OSPF in un'area mantiene nell'archivio di LSA:",
     "options": [
@@ -1290,7 +1290,7 @@
     "explanation": "An internal OSPF router maintains detailed topology information for its own area and summary information (type 3 LSAs) for other areas."
   },
   {
-    "id": 102,
+    "id": 101,
     "type": "multiple",
     "question": "In un pacchetto che viaggia su un tunnel GRE quante intestazioni possono essere presenti?",
     "options": [
@@ -1303,7 +1303,7 @@
     "explanation": "GRE tunnels encapsulate the original packet with an additional IP header, resulting in two IP headers without restrictions on address types."
   },
   {
-    "id": 103,
+    "id": 102,
     "type": "multiple",
     "question": "Cosa sono i bursts?",
     "options": [
@@ -1316,7 +1316,7 @@
     "explanation": "In circuit-switched networks like GSM, bursts refer to the time slots allocated for data transmission in TDMA systems."
   },
   {
-    "id": 104,
+    "id": 103,
     "type": "multiple",
     "question": "L'architettura MPLS (multi-protocol label switching) è caratterizzata da:",
     "options": [
@@ -1329,7 +1329,7 @@
     "explanation": "MPLS uses label-based forwarding instead of traditional IP longest prefix match, enabling faster packet processing and traffic engineering."
   },
   {
-    "id": 105,
+    "id": 104,
     "type": "multiple",
     "question": "La metrica (costo) in un algoritmo di instradamento esprime",
     "options": [
@@ -1341,7 +1341,7 @@
     "explanation": "Routing metrics represent the cost or weight associated with network links, used by routing algorithms to determine the best path to destinations."
   },
   {
-    "id": 106,
+    "id": 105,
     "type": "multiple",
     "question": "Le reti 192.168.1.0/24 e 192.168.2.0/24 sono aggregabili in:",
     "options": [
@@ -1354,7 +1354,7 @@
     "explanation": "192.168.1.0/24 and 192.168.2.0/24 are not contiguous in a way that allows aggregation with a smaller prefix than /23. The default route 0.0.0.0/0 is the only valid aggregation that covers both."
   },
   {
-    "id": 107,
+    "id": 106,
     "type": "multiple",
     "question": "Le soluzioni di VPN (virtual private network) di livello 3 basate su MPLS sono caratterizzate da",
     "options": [
@@ -1366,7 +1366,7 @@
     "explanation": "MPLS Layer 3 VPNs provide excellent automation and integration between service provider networks and customer networks through BGP and other protocols."
   },
   {
-    "id": 108,
+    "id": 107,
     "type": "multiple",
     "question": "Il Solicited Node Multicast Address è:",
     "options": [
@@ -1379,7 +1379,7 @@
     "explanation": "The solicited-node multicast address is used as the destination address in IPv6 Neighbor Solicitation messages for efficient address resolution."
   },
   {
-    "id": 109,
+    "id": 108,
     "type": "multiple",
     "question": "Le soluzioni di VPN (virtual private network) basate su SSL (secure socket layer) consentono:",
     "options": [
@@ -1392,7 +1392,7 @@
     "explanation": "SSL VPNs provide secure remote access to specific corporate applications through web browsers, without requiring full network-level VPN access."
   },
   {
-    "id": 110,
+    "id": 109,
     "type": "multiple",
     "question": "La tecnica 'Path Vector' permette di:",
     "options": [
@@ -1405,7 +1405,7 @@
     "explanation": "Path vector protocols like BGP solve the count-to-infinity problem by storing the complete AS path, making routing loops easily detectable."
   },
   {
-    "id": 111,
+    "id": 110,
     "type": "multiple",
     "question": "Una BSC (Base Station Controller):",
     "options": [
@@ -1418,7 +1418,7 @@
     "explanation": "A Base Station Controller manages multiple Base Transceiver Stations (BTSs) in a GSM network, handling radio resource management and handovers."
   },
   {
-    "id": 112,
+    "id": 111,
     "type": "multiple",
     "question": "Gli LSP (label switched path) nell'architettura MPLS:",
     "options": [
@@ -1431,7 +1431,7 @@
     "explanation": "LSPs are established to forward packets belonging to specific Forwarding Equivalence Classes through the MPLS network."
   },
   {
-    "id": 113,
+    "id": 112,
     "type": "multiple",
     "question": "Un algoritmo di routing di tipo selective flooding:",
     "options": [
@@ -1444,7 +1444,7 @@
     "explanation": "Selective flooding reduces unnecessary packet duplication by forwarding packets only to links that lead toward the destination, unlike simple flooding."
   },
   {
-    "id": 114,
+    "id": 113,
     "type": "multiple",
     "question": "Un Area Border Router (OSPF)",
     "options": [
@@ -1457,7 +1457,7 @@
     "explanation": "An Area Border Router in OSPF maintains detailed topology information for the backbone area and summary information for other areas."
   },
   {
-    "id": 115,
+    "id": 114,
     "type": "multiple",
     "question": "In OSPF, un pacchetto di 'Database Description':",
     "options": [
@@ -1470,7 +1470,7 @@
     "explanation": "Database Description packets are used during the OSPF exchange process to synchronize link-state databases between adjacent routers."
   },
   {
-    "id": 116,
+    "id": 115,
     "type": "multiple",
     "question": "Il meccanismo dello 'Split Horizon' permette di:",
     "options": [
@@ -1483,7 +1483,7 @@
     "explanation": "Split horizon prevents routers from advertising routes back to the interface from which they were learned, reducing but not eliminating routing loops."
   },
   {
-    "id": 117,
+    "id": 116,
     "type": "multiple",
     "question": "Nell'algoritmo del secchiello a gettoni:",
     "options": [
@@ -1496,7 +1496,7 @@
     "explanation": "In the token bucket algorithm, the bucket capacity determines the maximum burst size that can be sent at once."
   },
   {
-    "id": 118,
+    "id": 117,
     "type": "multiple",
     "question": "Due host collegati ad uno switch Ethernet:",
     "options": [
@@ -1509,7 +1509,7 @@
     "explanation": "Hosts on different VLANs can communicate if the switch is configured for inter-VLAN routing (layer-3 switching) or connected to an external router."
   },
   {
-    "id": 119,
+    "id": 118,
     "type": "multiple",
     "question": "Il protocollo RSVP (Resource reServation Protocol) è in grado di:",
     "options": [
@@ -1522,7 +1522,7 @@
     "explanation": "RSVP is a signaling protocol that allows applications to communicate their QoS requirements to network routers along the path."
   },
   {
-    "id": 120,
+    "id": 119,
     "type": "multiple",
     "question": "Due host collegati ad una rete Switched Ethernet attraverso porte configurate in modalità VLAN",
     "options": [
@@ -1535,7 +1535,7 @@
     "explanation": "Inter-VLAN communication is possible through layer-3 devices regardless of port configuration, as long as proper routing is configured between VLANs."
   },
   {
-    "id": 121,
+    "id": 120,
     "type": "multiple",
     "question": "In OSPF, un pacchetto di 'Link State Update':",
     "options": [
@@ -1548,7 +1548,7 @@
     "explanation": "Link State Update packets carry complete LSA information and are used during database exchange and for flooding topology changes."
   },
   {
-    "id": 122,
+    "id": 121,
     "type": "multiple",
     "question": "vantaggio fibra ottica:",
     "options": [
@@ -1559,7 +1559,7 @@
     "explanation": "Optical fiber provides significantly higher bandwidth and transmission speeds compared to copper cables, with lower signal attenuation."
   },
   {
-    "id": 123,
+    "id": 122,
     "type": "multiple",
     "question": "In un pacchetto che viaggia su una rete MPLS, è possibile avere più label contemporaneamente?",
     "options": [
@@ -1572,7 +1572,7 @@
     "explanation": "MPLS supports label stacking with multiple labels (typically up to 8-16 in practice, though the standard allows more), but 20 is a reasonable upper limit."
   },
   {
-    "id": 124,
+    "id": 123,
     "type": "multiple",
     "question": "Una differenza del protocollo di routing OSPF rispetto all'IGRP è che:",
     "options": [
@@ -1585,7 +1585,7 @@
     "explanation": "OSPF uses a hierarchical area structure to improve scalability, while IGRP (and its successor EIGRP) uses a flat topology."
   },
   {
-    "id": 125,
+    "id": 124,
     "type": "multiple",
     "question": "Due stazioni A e B appartengono alla stessa rete fisica e hanno rispettivamente indirizzi IP 130.192.1.1/25 e 130.192.1.129/24.",
     "options": [
@@ -1598,7 +1598,7 @@
     "explanation": "Host A (130.192.1.1/25) is in network 130.192.1.0/25, while host B (130.192.1.129/24) is in network 130.192.1.0/24. They are on different logical subnets requiring a router."
   },
   {
-    "id": 126,
+    "id": 125,
     "type": "multiple",
     "question": "L'importanza di MPLS (multi-protocol label switching) nelle reti odierne e future deriva dalla possibilità di",
     "options": [
@@ -1611,7 +1611,7 @@
     "explanation": "MPLS provides a unified control plane that can work across various forwarding technologies, enabling consistent management and traffic engineering."
   },
   {
-    "id": 127,
+    "id": 126,
     "type": "multiple",
     "question": "Le soluzioni di VPN (virtual private network) basate su SSL (secure socket layer) consentono:",
     "options": [
@@ -1624,7 +1624,7 @@
     "explanation": "SSL VPNs provide application-level remote access security, allowing employees to securely access specific corporate applications from outside the corporate network."
   },
   {
-    "id": 128,
+    "id": 127,
     "type": "multiple",
     "question": "L'International Mobile Equipment Identity (IMEI) è:",
     "options": [
@@ -1637,7 +1637,7 @@
     "explanation": "The IMEI is a unique identifier for mobile devices, assigned by the manufacturer and permanently associated with the hardware."
   },
   {
-    "id": 129,
+    "id": 128,
     "type": "multiple",
     "question": "Nel protocollo OSPF i router connessi ad una stessa LAN vengono rappresentati nel grafo che descrive la rete come:",
     "options": [
@@ -1650,7 +1650,7 @@
     "explanation": "In OSPF, routers on a broadcast network are represented in a star topology with the Designated Router at the center."
   },
   {
-    "id": 130,
+    "id": 129,
     "type": "multiple",
     "question": "Lo schema di indirizzamento IPv6:",
     "options": [
@@ -1663,7 +1663,7 @@
     "explanation": "IPv6 addressing typically uses the first 64 bits as the network prefix and the remaining 64 bits as the interface identifier."
   },
   {
-    "id": 131,
+    "id": 130,
     "type": "multiple",
     "question": "Nella fase finale di un algoritmo di routing di tipo Link State, ogni router:",
     "options": [
@@ -1676,7 +1676,7 @@
     "explanation": "In link state routing, each router independently runs the SPF (Dijkstra's) algorithm on its complete topology database to compute shortest paths."
   },
   {
-    "id": 132,
+    "id": 131,
     "type": "multiple",
     "question": "Si consideri una semplice topologia di rete in cui sono presenti quattro router (A, B, C, D), collegati tra di loro ad anello (A-B-C-D-A). Se gli host utilizzano un algoritmo di routing di tipo flooding e il router A invia un pacchetto a D, quante copie del medesimo pacchetto saranno recapitate al router D?",
     "options": [
@@ -1689,7 +1689,7 @@
     "explanation": "In a ring topology with flooding, packets will travel in both directions around the ring, resulting in 2 copies reaching the destination router D."
   },
   {
-    "id": 133,
+    "id": 132,
     "type": "multiple",
     "question": "DWDM è una tecnologia che permette di",
     "options": [
@@ -1702,7 +1702,7 @@
     "explanation": "Dense Wavelength Division Multiplexing combines multiple optical signals on different wavelengths onto a single fiber for high-capacity transmission."
   },
   {
-    "id": 134,
+    "id": 133,
     "type": "multiple",
     "question": "indirizzi global unicast aggregatable",
     "options": [
@@ -1714,7 +1714,7 @@
     "explanation": "Aggregatable Global Unicast addresses in IPv6 are allocated hierarchically to enable efficient route aggregation and reduce global routing table size."
   },
   {
-    "id": 135,
+    "id": 134,
     "type": "multiple",
     "question": "Quale di queste tecniche non è una soluzione per la transizione IPV4-IPV6?",
     "options": [
@@ -1727,7 +1727,7 @@
     "explanation": "6mix4 is not a standard IPv4-IPv6 transition mechanism. Valid techniques include 6to4, Teredo, and 6over4."
   },
   {
-    "id": 136,
+    "id": 135,
     "type": "multiple",
     "question": "Nel protocollo OSPF, gli LSA di tipo Network Link presenti nel Link State Database di un router contengono:",
     "options": [
@@ -1740,7 +1740,7 @@
     "explanation": "Network LSA (Type 2) describe transit networks within an OSPF area, typically broadcast networks with multiple attached routers."
   },
   {
-    "id": 137,
+    "id": 136,
     "type": "multiple",
     "question": "Il protocollo RIP è caratterizzato da",
     "options": [
@@ -1753,7 +1753,7 @@
     "explanation": "RIP is prone to routing loops and slow convergence, making it less stable than more modern routing protocols."
   },
   {
-    "id": 138,
+    "id": 137,
     "type": "multiple",
     "question": "Nel protocollo di routing BGP:",
     "options": [
@@ -1766,7 +1766,7 @@
     "explanation": "BGP is a policy-based routing protocol where administrative policies often override technical metrics in path selection decisions."
   },
   {
-    "id": 139,
+    "id": 138,
     "type": "multiple",
     "question": "L'indirizzo IPv6 FE80::0201:06FF:FEA5:3A4C è:",
     "options": [
@@ -1779,7 +1779,7 @@
     "explanation": "FE80::/10 is the link-local prefix, and the address shown uses EUI-64 format derived from MAC address 00:01:06:A5:3A:4C for local link communication only."
   },
   {
-    "id": 140,
+    "id": 139,
     "type": "multiple",
     "question": "Implementazione Multicast in IPv4",
     "options": [
@@ -1791,7 +1791,7 @@
     "explanation": "IPv4 multicast requires additional protocols like IGMP for group management and PIM for multicast routing across networks."
   },
   {
-    "id": 141,
+    "id": 140,
     "type": "multiple",
     "question": "In OSPF, un pacchetto di 'Database Description':",
     "options": [
@@ -1804,7 +1804,7 @@
     "explanation": "Database Description packets are used during the OSPF exchange process to identify missing LSAs that need to be requested."
   },
   {
-    "id": 142,
+    "id": 141,
     "type": "multiple",
     "question": "Il pacchetto ICMPv6 Router Advertisement",
     "options": [
@@ -1817,7 +1817,7 @@
     "explanation": "Router Advertisement messages enable IPv6 stateless address autoconfiguration (SLAAC), allowing hosts to configure themselves without DHCP."
   },
   {
-    "id": 143,
+    "id": 142,
     "type": "multiple",
     "question": "Le operazioni che un router MPLS può effettuare sui label sono le seguenti:",
     "options": [
@@ -1830,7 +1830,7 @@
     "explanation": "MPLS routers perform three basic operations on the top (outermost) label: PUSH (add), POP (remove), and SWAP (replace)."
   },
   {
-    "id": 144,
+    "id": 143,
     "type": "multiple",
     "question": "Cosa contraddistingue una VPN realizzata secondo uno schema overlay?",
     "options": [
@@ -1843,7 +1843,7 @@
     "explanation": "In overlay VPNs, the service provider is typically unaware of the VPN traffic, as it appears as regular IP traffic between customer sites."
   },
   {
-    "id": 145,
+    "id": 144,
     "type": "multiple",
     "question": "Lo standard IPsec viene utilizzato nelle VPN (virtual private network) per",
     "options": [
@@ -1856,7 +1856,7 @@
     "explanation": "IPsec provides secure tunneling over public IP networks, allowing private network traffic to be transported securely regardless of the addressing schemes used."
   },
   {
-    "id": 146,
+    "id": 145,
     "type": "multiple",
     "question": "Nella connessione UMTS",
     "options": [
@@ -1869,7 +1869,7 @@
     "explanation": "UMTS uses W-CDMA technology where multiple users share the same frequency band but are separated by unique spreading codes, eliminating the need for frequency reuse patterns."
   },
   {
-    "id": 147,
+    "id": 146,
     "type": "multiple",
     "question": "L'inoltro di pacchetti Ipv6 su una LAN:",
     "options": [
@@ -1882,7 +1882,7 @@
     "explanation": "IPv6 multicast addresses have a standardized mapping to MAC addresses, so Neighbor Discovery is not needed for multicast forwarding on LANs."
   },
   {
-    "id": 148,
+    "id": 147,
     "type": "multiple",
     "question": "Lo stack protocollare dell'interfaccia radio si articola nei seguenti livelli",
     "options": [
@@ -1895,7 +1895,7 @@
     "explanation": "The radio interface protocol stack in cellular networks typically includes MAC (Medium Access Control), RLC (Radio Link Control), and RRC (Radio Resource Control) layers."
   },
   {
-    "id": 149,
+    "id": 148,
     "type": "multiple",
     "question": "Il protocollo GRE serve per:",
     "options": [
@@ -1908,7 +1908,7 @@
     "explanation": "GRE is a tunneling protocol that encapsulates various network layer protocols inside IP packets for transport across IP networks."
   },
   {
-    "id": 150,
+    "id": 149,
     "type": "multiple",
     "question": "Due reti IP 130.192.0.0/24 e 130.192.2.0/24 sono aggregabili in:",
     "options": [
@@ -1921,7 +1921,7 @@
     "explanation": "The networks 130.192.0.0/24 and 130.192.2.0/24 can be aggregated into 130.192.0.0/22, which covers addresses from 130.192.0.0 to 130.192.3.255."
   },
   {
-    "id": 151,
+    "id": 150,
     "type": "multiple",
     "question": "In topology-based control-driven label binding:",
     "options": [
@@ -1934,7 +1934,7 @@
     "explanation": "In topology-based label binding, LSPs are automatically established based on routing information from IGP protocols for each discovered destination."
   },
   {
-    "id": 152,
+    "id": 151,
     "type": "multiple",
     "question": "A device equipped with the NAT64 functionality is able to",
     "options": [
@@ -1947,7 +1947,7 @@
     "explanation": "NAT64 devices translate between IPv6 and IPv4 by replacing packet headers, allowing IPv6-only hosts to communicate with IPv4-only hosts."
   },
   {
-    "id": 154,
+    "id": 152,
     "type": "multiple",
     "question": "Le cosiddette soluzioni VPN (virtual private network) di accesso o virtual dial-up VPN attualmente più diffuse sono basate su",
     "options": [
@@ -1960,7 +1960,7 @@
     "explanation": "Modern remote access VPNs primarily use IP tunneling technologies like IPsec, SSL/TLS, or L2TP over IP networks."
   },
   {
-    "id": 155,
+    "id": 153,
     "type": "multiple",
     "question": "L'autoconfigurazione stateless di IPv6 presenta problemi di riservatezza?",
     "options": [
@@ -1973,7 +1973,7 @@
     "explanation": "Stateless address autoconfiguration using EUI-64 creates predictable interface identifiers from MAC addresses, which can be tracked across different networks, raising privacy concerns."
   },
   {
-    "id": 156,
+    "id": 154,
     "type": "multiple",
     "question": "Nel protocollo OSPF a regime tutti i router hanno in memoria:",
     "options": [
@@ -1986,7 +1986,7 @@
     "explanation": "In OSPF, routers within an area maintain identical link-state databases for that area, but different areas may have different databases."
   },
   {
-    "id": 157,
+    "id": 155,
     "type": "multiple",
     "question": "Nei protocolli di routing, il periodo di transitorio:",
     "options": [
@@ -1999,7 +1999,7 @@
     "explanation": "The transient period occurs whenever there's a topology change as routers converge to a new consistent view of the network."
   },
   {
-    "id": 158,
+    "id": 156,
     "type": "multiple",
     "question": "Il routing inter-dominio:",
     "options": [
@@ -2012,7 +2012,7 @@
     "explanation": "Inter-domain routing uses policy-based path selection where business agreements and policies often override technical metrics."
   },
   {
-    "id": 159,
+    "id": 157,
     "type": "multiple",
     "question": "A device equipped with the NAT64 functionality is able to",
     "options": [
@@ -2025,7 +2025,7 @@
     "explanation": "NAT64 performs protocol translation between IPv6 and IPv4 by replacing packet headers to enable communication between the two address families."
   },
   {
-    "id": 160,
+    "id": 158,
     "type": "multiple",
     "question": "Le reti ottiche sono caratterizzate in modo specifico e univoco dall'uso di apparati in grado di:",
     "options": [
@@ -2038,7 +2038,7 @@
     "explanation": "Optical networks are characterized by optical switches that route entire light channels (wavelengths) without converting them to electrical signals."
   },
   {
-    "id": 161,
+    "id": 159,
     "type": "multiple",
     "question": "What is the typical role of IPSec in VPNs?",
     "options": [
@@ -2051,7 +2051,7 @@
     "explanation": "IPsec's primary role in VPNs is to create secure encrypted tunnels over public networks, providing confidentiality, integrity, and authentication for VPN traffic."
   },
   {
-    "id": 162,
+    "id": 160,
     "type": "multiple",
     "question": "In una rete IPv4:",
     "options": [
@@ -2064,7 +2064,7 @@
     "explanation": "In IPv4, a host may receive multicast packets even without joining the group, depending on network configuration and layer-2 technology used."
   },
   {
-    "id": 163,
+    "id": 161,
     "type": "multiple",
     "question": "i gruppi multicast in ipv4",
     "options": [
@@ -2077,7 +2077,7 @@
     "explanation": "IPv4 multicast groups use addresses in the range 224.0.0.0 to 239.255.255.255, which are reserved specifically for multicast and cannot be assigned to individual hosts."
   },
   {
-    "id": 164,
+    "id": 162,
     "type": "multiple",
     "question": "La tecnica di transizione IPv4-IPv6 denominata DS-lite prevede che:",
     "options": [
@@ -2090,7 +2090,7 @@
     "explanation": "DS-Lite moves the NAT function from customer equipment to the service provider's AFTR device, allowing IPv4 communication over IPv6 infrastructure."
   },
   {
-    "id": 165,
+    "id": 163,
     "type": "multiple",
     "question": "Gli indirizzi IPv6",
     "options": [
@@ -2103,7 +2103,7 @@
     "explanation": "IPv6 addresses maintain flexible subnetting similar to IPv4, though they typically use a fixed /64 prefix for host addresses."
   },
   {
-    "id": 166,
+    "id": 164,
     "type": "multiple",
     "question": "tabella di filtering di una VLAN:",
     "options": [
@@ -2115,7 +2115,7 @@
     "explanation": "VLAN filtering tables (MAC address tables) can be updated manually by administrators or automatically through learning protocols."
   },
   {
-    "id": 167,
+    "id": 165,
     "type": "multiple",
     "question": "Qual è una conseguenza dell'uso di VLAN in una rete locale?",
     "options": [
@@ -2128,7 +2128,7 @@
     "explanation": "VLANs create separate broadcast domains, so broadcast traffic is contained within the VLAN where it originates."
   },
   {
-    "id": 168,
+    "id": 166,
     "type": "multiple",
     "question": "Gli algoritmi di scheduling vengono utilizzati:",
     "options": [
@@ -2141,7 +2141,7 @@
     "explanation": "Scheduling algorithms determine the order in which packets are transmitted from output interfaces, managing bandwidth allocation and QoS."
   },
   {
-    "id": 169,
+    "id": 167,
     "type": "multiple",
     "question": "Il protocollo BGP è utilizzato in Internet per",
     "options": [
@@ -2154,7 +2154,7 @@
     "explanation": "BGP is the standard exterior gateway protocol used for exchanging routing information between different autonomous systems on the Internet."
   },
   {
-    "id": 170,
+    "id": 168,
     "type": "multiple",
     "question": "Il protocollo IGMP (Internet Group Management Protocol)",
     "options": [
@@ -2167,7 +2167,7 @@
     "explanation": "IGMP allows IPv4 routers to discover which multicast groups have members on their directly connected networks."
   },
   {
-    "id": 171,
+    "id": 169,
     "type": "multiple",
     "question": "Il protocollo IPv6 prevede che l'intestazione dei pacchetti IP:",
     "options": [
@@ -2180,7 +2180,7 @@
     "explanation": "The IPv6 base header has a fixed 40-byte length with only essential fields, using extension headers for optional features."
   },
   {
-    "id": 173,
+    "id": 170,
     "type": "multiple",
     "question": "A differenza della versione 4 dell'IP, la versione 6:",
     "options": [
@@ -2193,7 +2193,7 @@
     "explanation": "IPv6 has a fixed 40-byte base header, unlike IPv4 which has a variable-length header due to options."
   },
   {
-    "id": 174,
+    "id": 171,
     "type": "multiple",
     "question": "The Mapping Address and Port (MAP) technique for the IPv4-IPv6 transition is based on",
     "options": [
@@ -2206,7 +2206,7 @@
     "explanation": "MAP uses algorithmic mapping where the IPv6 address incorporates both the IPv4 address and port set information for efficient IPv4-over-IPv6 transition."
   },
   {
-    "id": 175,
+    "id": 172,
     "type": "multiple",
     "question": "Le reti ottiche si basano sull'utilizzo di",
     "options": [
@@ -2218,7 +2218,7 @@
     "explanation": "Optical networks use optical switches that route light signals (wavelengths) directly without converting them to electrical signals."
   },
   {
-    "id": 176,
+    "id": 173,
     "type": "multiple",
     "question": "Il frequency hopping (FH) permette",
     "options": [
@@ -2231,7 +2231,7 @@
     "explanation": "Frequency hopping spreads transmission across multiple frequencies to improve interference resistance, but may reduce overall capacity due to overhead."
   },
   {
-    "id": 177,
+    "id": 174,
     "type": "multiple",
     "question": "Una extranet è",
     "options": [
@@ -2244,7 +2244,7 @@
     "explanation": "An extranet extends a private network to include external organizations, enabling secure collaboration between different companies."
   },
   {
-    "id": 178,
+    "id": 175,
     "type": "multiple",
     "question": "Per realizzare una VPN usando MPLS, al livello 3 secondo il modello peer, è possibile:",
     "options": [
@@ -2257,7 +2257,7 @@
     "explanation": "MPLS Layer 3 VPNs typically use MP-BGP (Multiprotocol BGP) extensions to exchange VPN routing information between PE routers."
   },
   {
-    "id": 179,
+    "id": 176,
     "type": "multiple",
     "question": "La differenza tra gli algoritmi di instradamento di tipo link state e distance vector si può riassumere come segue",
     "options": [
@@ -2269,7 +2269,7 @@
     "explanation": "Link state protocols flood local connectivity information to all routers, while distance vector protocols send entire routing tables only to neighbors."
   },
   {
-    "id": 180,
+    "id": 177,
     "type": "multiple",
     "question": "L'architettura DiffServ è caratterizzata da:",
     "options": [
@@ -2282,7 +2282,7 @@
     "explanation": "DiffServ uses per-hop behaviors (PHBs) where packets are classified into service classes that receive specific forwarding treatment at each router."
   },
   {
-    "id": 181,
+    "id": 178,
     "type": "multiple",
     "question": "Relativamente a soluzioni di VPN basate su SSL (Secure Socket Layer), quale di queste affermazioni è falsa?",
     "options": [
@@ -2295,7 +2295,7 @@
     "explanation": "While SSL/TLS is standardized, SSL VPN implementations often use proprietary extensions and are less standardized than IPsec VPNs."
   },
   {
-    "id": 182,
+    "id": 179,
     "type": "multiple",
     "question": "L'importanza di MPLS (multi-protocol label switching) nelle reti odierne e future deriva dalla possibilità di",
     "options": [
@@ -2308,7 +2308,7 @@
     "explanation": "MPLS provides a unified control plane that can manage various forwarding technologies, enabling consistent network operations and traffic engineering."
   },
   {
-    "id": 183,
+    "id": 180,
     "type": "multiple",
     "question": "Le soluzioni per la realizzazione di VPN (virtual private network) di livello 3 attraverso una dorsale MPLS sono caratterizzate da",
     "options": [
@@ -2321,7 +2321,7 @@
     "explanation": "MPLS Layer 3 VPNs are highly scalable due to their use of BGP for route distribution and the separation of customer routing from the core network."
   },
   {
-    "id": 184,
+    "id": 181,
     "type": "multiple",
     "question": "indirizzi global unicast aggregatable",
     "options": [
@@ -2333,7 +2333,7 @@
     "explanation": "Aggregatable Global Unicast addresses are allocated hierarchically by geographic region to enable efficient route aggregation in the global routing table."
   },
   {
-    "id": 185,
+    "id": 182,
     "type": "multiple",
     "question": "Le reti private virtuali (virtual private network, VPN) vengono utilizzate per",
     "options": [
@@ -2345,7 +2345,7 @@
     "explanation": "VPNs create secure virtual networks over shared public infrastructure, providing the same security and privacy as dedicated private networks."
   },
   {
-    "id": 186,
+    "id": 183,
     "type": "multiple",
     "question": "Due host collegati ad una rete switch ethernet attraverso porte configurate in modalità Access:",
     "options": [
@@ -2358,7 +2358,7 @@
     "explanation": "Inter-VLAN communication can occur through layer-3 routing devices regardless of access port configuration on individual switches."
   },
   {
-    "id": 187,
+    "id": 184,
     "type": "multiple",
     "question": "Quale è la funzione dello 'scope' associato agli indirizzi IPv6?",
     "options": [
@@ -2371,7 +2371,7 @@
     "explanation": "The scope field in IPv6 addresses helps resolve ambiguity in certain scenarios, particularly with link-local addresses that may be duplicated on different links."
   },
   {
-    "id": 188,
+    "id": 185,
     "type": "multiple",
     "question": "L'autoconfigurazione stateless in IPv6 richiede:",
     "options": [
@@ -2384,7 +2384,7 @@
     "explanation": "IPv6 stateless autoconfiguration can work without any servers or routers by generating link-local addresses, though global addresses require router advertisements."
   },
   {
-    "id": 189,
+    "id": 186,
     "type": "multiple",
     "question": "L'algoritmo di routing di tipo Distance Vector:",
     "options": [
@@ -2397,7 +2397,7 @@
     "explanation": "Split horizon reduces but doesn't eliminate count-to-infinity problems in distance vector protocols, especially in networks without loops."
   },
   {
-    "id": 190,
+    "id": 187,
     "type": "multiple",
     "question": "La distribuzione delle etichette in MPLS (Multi-Protocol Label Switching)",
     "options": [
@@ -2410,7 +2410,7 @@
     "explanation": "RSVP-TE is commonly used for label distribution in MPLS networks, especially for traffic-engineered LSPs."
   },
   {
-    "id": 191,
+    "id": 188,
     "type": "multiple",
     "question": "Due stazioni A e B hanno rispettivamente 130.192.1.1/25 e 130.192.1.100/24",
     "options": [
@@ -2423,7 +2423,7 @@
     "explanation": "Host A (130.192.1.1/25) is in network 130.192.1.0/25, and host B (130.192.1.100/24) is in network 130.192.1.0/24. Since 130.192.1.0/25 is a subset of 130.192.1.0/24, both hosts can communicate directly."
   },
   {
-    "id": 192,
+    "id": 189,
     "type": "multiple",
     "question": "Nel IPv6 cosa sparisce dalle intestazioni, rispetto a IPv4?",
     "options": [
@@ -2436,7 +2436,7 @@
     "explanation": "IPv6 removes the header checksum, relying on higher-layer protocols and link-layer error detection for integrity."
   },
   {
-    "id": 193,
+    "id": 190,
     "type": "multiple",
     "question": "Si supponga l'esistenza di tre AS (Autonomous System) collegati sequenzialmente (A-B-C). Se l'AS intermedio B vuole impedire che la sua rete venga usato come transito da A verso C:",
     "options": [
@@ -2449,7 +2449,7 @@
     "explanation": "To prevent transit traffic, AS B needs both route filtering (to not advertise routes through it) and packet filtering (to block transit packets)."
   },
   {
-    "id": 194,
+    "id": 191,
     "type": "multiple",
     "question": "Il protocollo RIP prevede meccanismi per ridurre la possibilità di verificarsi di loop:",
     "options": [
@@ -2462,7 +2462,7 @@
     "explanation": "RIP uses split horizon (don't advertise routes back to the source) and hold-down timers to reduce routing loops."
   },
   {
-    "id": 195,
+    "id": 192,
     "type": "multiple",
     "question": "In una stazione utente collegata ad una VPN con accesso centralizzato, i messaggi diretti a stazioni esterne alla VPN passano attraverso:",
     "options": [
@@ -2475,7 +2475,7 @@
     "explanation": "With centralized Internet access, all traffic (including Internet-bound) is routed through the corporate VPN gateway."
   },
   {
-    "id": 196,
+    "id": 193,
     "type": "multiple",
     "question": "La caratteristica di una VPN di accesso centralizzata è che",
     "options": [
@@ -2488,7 +2488,7 @@
     "explanation": "In centralized VPN access, all traffic (including Internet traffic) is forced through the VPN gateway for security and policy enforcement."
   },
   {
-    "id": 197,
+    "id": 194,
     "type": "multiple",
     "question": "Gli LSP (label switched path) nell'architettura MPLS (multi-protocol label switching)",
     "options": [
@@ -2501,7 +2501,7 @@
     "explanation": "LSPs are established through label distribution protocols where network nodes agree on label bindings for specific FECs."
   },
   {
-    "id": 198,
+    "id": 195,
     "type": "multiple",
     "question": "Il protocollo RIP è imbustato:",
     "options": [
@@ -2514,7 +2514,7 @@
     "explanation": "RIP uses UDP for transport, which supports broadcast transmission needed for routing updates in some network configurations."
   },
   {
-    "id": 199,
+    "id": 196,
     "type": "multiple",
     "question": "La combinazione di meccanismi di secchiello dei token (o secchio bucato) e Weighted Fair Queueing (WFQ) serve a garantire:",
     "options": [
@@ -2527,7 +2527,7 @@
     "explanation": "Token bucket controls traffic shaping while WFQ manages scheduling, together they can bound maximum delay through a router."
   },
   {
-    "id": 200,
+    "id": 197,
     "type": "multiple",
     "question": "La procedura di Neighbor Discovery in IPv6",
     "options": [
@@ -2540,7 +2540,7 @@
     "explanation": "IPv6 Neighbor Discovery uses ICMPv6 messages sent to multicast addresses for functions like address resolution and duplicate address detection."
   },
   {
-    "id": 201,
+    "id": 198,
     "type": "multiple",
     "question": "Cos'è l'effetto ping-pong?",
     "options": [
@@ -2552,7 +2552,7 @@
     "explanation": "The ping-pong effect occurs when a mobile terminal repeatedly hands over between two cells, often due to unstable signal conditions at cell boundaries."
   },
   {
-    "id": 202,
+    "id": 199,
     "type": "multiple",
     "question": "Un Host A ha indirizzo 192.168.1.1/24 e un Host B 192.168.1.129/25.",
     "options": [
@@ -2565,7 +2565,7 @@
     "explanation": "Host A (192.168.1.1/24) can reach B (in 192.168.1.128/25) since A's network includes B's, but B cannot reach A directly as A is outside B's network range."
   },
   {
-    "id": 203,
+    "id": 200,
     "type": "multiple",
     "question": "vantaggio fibra ottica",
     "options": [
@@ -2576,7 +2576,7 @@
     "explanation": "Optical fiber provides significantly higher bandwidth and transmission speeds compared to copper cables."
   },
   {
-    "id": 204,
+    "id": 201,
     "type": "multiple",
     "question": "fixing cell size G and DECREASING radius R",
     "options": [
@@ -2588,7 +2588,7 @@
     "explanation": "Decreasing cell radius while keeping cell size fixed allows more frequent frequency reuse, increasing overall network capacity."
   },
   {
-    "id": 205,
+    "id": 202,
     "type": "multiple",
     "question": "L'indirizzo IPv6 2001:4600::0201:06FF:FEAS:3A4C è:",
     "options": [
@@ -2601,7 +2601,7 @@
     "explanation": "2001:4600::/32 is part of the global unicast address space allocated for public IPv6 Internet use."
   },
   {
-    "id": 206,
+    "id": 203,
     "type": "multiple",
     "question": "In MPLS, il protocollo per l'assegnazione delle Label è:",
     "options": [
@@ -2614,7 +2614,7 @@
     "explanation": "RSVP-TE (Resource Reservation Protocol - Traffic Engineering) is commonly used for label distribution in MPLS networks, especially for traffic-engineered paths."
   },
   {
-    "id": 207,
+    "id": 204,
     "type": "multiple",
     "question": "In una rete IPV4",
     "options": [
@@ -2627,7 +2627,7 @@
     "explanation": "In IPv4, a host may receive multicast packets even without joining the group, depending on network configuration and layer-2 technology."
   },
   {
-    "id": 208,
+    "id": 205,
     "type": "multiple",
     "question": "Un Neutral Access Point è una particolare rete in cui:",
     "options": [
@@ -2640,7 +2640,7 @@
     "explanation": "A Neutral Access Point is a layer-2 network where multiple ASes connect routers to exchange BGP routing information."
   },
   {
-    "id": 209,
+    "id": 206,
     "type": "multiple",
     "question": "Gli indirizzi IPv6 di tipo Site Local",
     "options": [
@@ -2653,7 +2653,7 @@
     "explanation": "Site Local addresses (fec0::/10) were deprecated in favor of Unique Local Addresses (ULA) but may still be found in some existing networks."
   },
   {
-    "id": 210,
+    "id": 207,
     "type": "multiple",
     "question": "Il termine 'Peering' si riferisce a:",
     "options": [
@@ -2666,7 +2666,7 @@
     "explanation": "Peering refers to the interconnection and traffic exchange between different Internet Service Providers at Internet exchange points."
   },
   {
-    "id": 211,
+    "id": 208,
     "type": "multiple",
     "question": "In una interfaccia radio, tra le tante funzioni il MAC layer",
     "options": [
@@ -2679,7 +2679,7 @@
     "explanation": "The MAC layer in wireless networks manages access to the shared radio medium using protocols like CSMA/CA or TDMA."
   },
   {
-    "id": 212,
+    "id": 209,
     "type": "multiple",
     "question": "La modalità di funzionamento 'Tunnel mode' di IPsec prevede che venga criptato",
     "options": [
@@ -2692,7 +2692,7 @@
     "explanation": "In IPsec Tunnel Mode, the entire original IP packet (headers and payload) is encrypted and encapsulated within a new IP packet."
   },
   {
-    "id": 213,
+    "id": 210,
     "type": "multiple",
     "question": "Gli indirizzi link-local",
     "options": [
@@ -2705,7 +2705,7 @@
     "explanation": "Link-local addresses are automatically configured using the fe80::/64 prefix combined with the interface identifier (often derived from MAC address)."
   },
   {
-    "id": 214,
+    "id": 211,
     "type": "multiple",
     "question": "Le reti 192.168.1.0/24 e 192.168.2.0/24 sono aggregabili in:",
     "options": [
@@ -2718,7 +2718,7 @@
     "explanation": "192.168.1.0/24 and 192.168.2.0/24 are not contiguous in a way that allows meaningful aggregation. The default route is the only valid aggregation."
   },
   {
-    "id": 215,
+    "id": 212,
     "type": "multiple",
     "question": "Le soluzioni di VPN (virtual private network) di livello 3 attraverso una dorsale MPLS sono caratterizzate da",
     "options": [
@@ -2731,7 +2731,7 @@
     "explanation": "MPLS Layer 3 VPNs provide excellent automation and integration between service provider networks and customer networks through BGP and other protocols."
   },
   {
-    "id": 216,
+    "id": 213,
     "type": "multiple",
     "question": "Un Network Provider considerato 'Tier-1':",
     "options": [
@@ -2744,7 +2744,7 @@
     "explanation": "Tier-1 ISPs peer with other Tier-1 providers without paying for transit, as they can reach all Internet destinations through their peering relationships."
   },
   {
-    "id": 217,
+    "id": 214,
     "type": "multiple",
     "question": "La tecnica di 'Split Horizon':",
     "options": [
@@ -2757,7 +2757,7 @@
     "explanation": "Split horizon prevents advertising routes back to the neighbor from which they were learned, reducing routing loops."
   },
   {
-    "id": 218,
+    "id": 215,
     "type": "multiple",
     "question": "redistribuzione nel contesto dei protocolli di routing consiste nel",
     "options": [
@@ -2770,7 +2770,7 @@
     "explanation": "Route redistribution involves exchanging routing information between different routing protocols, which may result in metric conversion and potential information loss."
   },
   {
-    "id": 219,
+    "id": 216,
     "type": "multiple",
     "question": "Gli indirizzi IPv6 di tipo Private",
     "options": [
@@ -2783,7 +2783,7 @@
     "explanation": "IPv6 Unique Local Addresses (ULAs) use a randomly generated 40-bit global ID that makes them globally unique with high probability, but they are not routable on the global Internet."
   },
   {
-    "id": 220,
+    "id": 217,
     "type": "multiple",
     "question": "In che modo MPLS può essere utilizzato per realizzare una VPN?",
     "options": [
@@ -2796,7 +2796,7 @@
     "explanation": "MPLS can provide point-to-point connections in overlay VPNs or complete routing mechanisms in peer-based VPNs."
   },
   {
-    "id": 221,
+    "id": 218,
     "type": "multiple",
     "question": "Quanti tipi di bursts esistono?",
     "options": [
@@ -2809,7 +2809,7 @@
     "explanation": "GSM uses five types of bursts: Regular (traffic), Access (random access), Synchronization (timing), Frequency Correction, and Dummy (filler)."
   },
   {
-    "id": 222,
+    "id": 219,
     "type": "multiple",
     "question": "Per il supporto dei prefissi di rete a lunghezza variabile in una zona della rete in cui sia utilizzato routing dinamico:",
     "options": [
@@ -2822,7 +2822,7 @@
     "explanation": "Classless routing protocols like OSPF, EIGRP, and BGP include subnet mask information in routing updates to support variable-length subnet masking (VLSM)."
   },
   {
-    "id": 223,
+    "id": 220,
     "type": "multiple",
     "question": "La differenza tra gli algoritmi di instradamento di tipo link state e distance vector si può riassumere come segue",
     "options": [
@@ -2834,7 +2834,7 @@
     "explanation": "Link state protocols flood local connectivity information to all routers, while distance vector protocols send entire routing tables only to immediate neighbors."
   },
   {
-    "id": 224,
+    "id": 221,
     "type": "multiple",
     "question": "La principale limitazione del protocollo de routing RIP rispetto all'IGRP è che:",
     "options": [
@@ -2847,7 +2847,7 @@
     "explanation": "RIP uses simple hop count as metric, while IGRP uses a composite metric considering bandwidth, delay, reliability, and load."
   },
   {
-    "id": 225,
+    "id": 222,
     "type": "multiple",
     "question": "Nella soluzione DS-Lite per la transizione IPv4-IP6",
     "options": [
@@ -2860,7 +2860,7 @@
     "explanation": "DS-Lite moves the NAT function from customer equipment to the service provider's AFTR (Address Family Transition Router)."
   },
   {
-    "id": 226,
+    "id": 223,
     "type": "multiple",
     "question": "E' possibile l'instaurazione di un loop in una rete che utilizza un routing di tipo Link State?",
     "options": [
@@ -2873,7 +2873,7 @@
     "explanation": "While link state protocols are less prone to loops, transient loops can still occur during convergence periods before all routers have synchronized their databases."
   },
   {
-    "id": 227,
+    "id": 224,
     "type": "multiple",
     "question": "In Diffserv, una 'Classe di Servizio' identifica:",
     "options": [
@@ -2885,7 +2885,7 @@
     "explanation": "In DiffServ, packets are classified into behavior aggregates (classes of service) that receive similar per-hop forwarding treatment."
   },
   {
-    "id": 228,
+    "id": 225,
     "type": "multiple",
     "question": "Nella soluzione DS-Lite per la transizione IPv4-IPV6",
     "options": [
@@ -2898,7 +2898,7 @@
     "explanation": "DS-Lite centralizes NAT functionality at the service provider's AFTR device, eliminating the need for NAT on customer equipment."
   },
   {
-    "id": 229,
+    "id": 226,
     "type": "multiple",
     "question": "La modalità di funzionamento 'Tunnel mode' di IPsec prevede che vanga criptato:",
     "options": [
@@ -2911,7 +2911,7 @@
     "explanation": "In IPsec Tunnel Mode, the entire original IP packet (including headers and payload) is encrypted and encapsulated within a new IP packet."
   },
   {
-    "id": 230,
+    "id": 227,
     "type": "multiple",
     "question": "Due reti IP 130.192.0.0/24 e 130.192.2.0/24 sono aggregabili in:",
     "options": [
@@ -2924,7 +2924,7 @@
     "explanation": "The networks 130.192.0.0/24 and 130.192.2.0/24 can be aggregated into 130.192.0.0/22, which covers addresses from 130.192.0.0 to 130.192.3.255."
   },
   {
-    "id": 231,
+    "id": 228,
     "type": "multiple",
     "question": "In MPLS, il protocollo per l'assegnazione delle label è:",
     "options": [
@@ -2937,7 +2937,7 @@
     "explanation": "RSVP-TE (Resource Reservation Protocol - Traffic Engineering) is commonly used for label distribution in MPLS networks, especially for traffic-engineered paths."
   },
   {
-    "id": 232,
+    "id": 229,
     "type": "multiple",
     "question": "uno dei motivi che sta favorendo la diffusione di ipv6 è",
     "options": [
@@ -2950,7 +2950,7 @@
     "explanation": "The inefficiency of private IPv4 addressing with NAT and the exhaustion of public IPv4 addresses are major drivers for IPv6 adoption."
   },
   {
-    "id": 233,
+    "id": 230,
     "type": "multiple",
     "question": "In quale situazione è possibile che un pacchetto abbia due intestazioni IP?",
     "options": [
@@ -2963,7 +2963,7 @@
     "explanation": "IP tunneling protocols like IPsec, GRE, or L2TP add an additional IP header, resulting in packets with two IP headers."
   },
   {
-    "id": 234,
+    "id": 231,
     "type": "multiple",
     "question": "Nel protocollo IPv6:",
     "options": [
@@ -2976,7 +2976,7 @@
     "explanation": "IPv6 supports stateless address autoconfiguration (SLAAC) where hosts automatically configure addresses using information from Router Advertisement messages."
   },
   {
-    "id": 235,
+    "id": 232,
     "type": "multiple",
     "question": "Il Multipath routing:",
     "options": [
@@ -2989,7 +2989,7 @@
     "explanation": "Multipath routing can cause routing loops if packets take asymmetric paths with different costs, potentially creating inconsistent forwarding states."
   },
   {
-    "id": 236,
+    "id": 233,
     "type": "multiple",
     "question": "La più piccola aggregazione che può contenere le due reti IP 130.192.0.0/25 e 130.192.1.0/25",
     "options": [
@@ -3002,7 +3002,7 @@
     "explanation": "The networks 130.192.0.0/25 and 130.192.1.0/25 can be aggregated into 130.192.0.0/23, which covers addresses from 130.192.0.0 to 130.192.1.255."
   },
   {
-    "id": 237,
+    "id": 234,
     "type": "multiple",
     "question": "Nel routing isolato:",
     "options": [
@@ -3015,7 +3015,7 @@
     "explanation": "In isolated routing, routers make forwarding decisions based solely on local information without exchanging routing updates with other routers."
   },
   {
-    "id": 238,
+    "id": 235,
     "type": "multiple",
     "question": "La procedura di Neighbor Discovery in IPv6",
     "options": [
@@ -3028,7 +3028,7 @@
     "explanation": "IPv6 Neighbor Discovery uses ICMPv6 messages sent to multicast addresses for functions like address resolution and duplicate address detection."
   },
   {
-    "id": 239,
+    "id": 236,
     "type": "multiple",
     "question": "La redistribuzione:",
     "options": [
@@ -3041,7 +3041,7 @@
     "explanation": "Route redistribution involves exchanging routing information between different routing domains or protocols."
   },
   {
-    "id": 240,
+    "id": 237,
     "type": "multiple",
     "question": "La tecnica di forwarding 'Label Swapping':",
     "options": [
@@ -3054,7 +3054,7 @@
     "explanation": "Label swapping in MPLS typically requires a path setup phase where labels are distributed and LSPs are established before data forwarding begins."
   },
   {
-    "id": 241,
+    "id": 238,
     "type": "multiple",
     "question": "Un Neutral Access Point è una particolare rete in cui:",
     "options": [
@@ -3067,7 +3067,7 @@
     "explanation": "A Neutral Access Point is a layer-2 network infrastructure where multiple autonomous systems connect to exchange BGP routing information."
   },
   {
-    "id": 242,
+    "id": 239,
     "type": "multiple",
     "question": "Il indirizzi in IPv6 di tipo Site Local",
     "options": [
@@ -3080,7 +3080,7 @@
     "explanation": "Site Local addresses (fec0::/10) were deprecated in favor of Unique Local Addresses (ULA) but may still be used in existing networks."
   },
   {
-    "id": 243,
+    "id": 240,
     "type": "multiple",
     "question": "Due stazioni A e B appartengono alla stessa rete fisica e hanno rispettivamente indirizzi IP 130.192.1.1/25 e 130.192.1.129/24",
     "options": [
@@ -3093,7 +3093,7 @@
     "explanation": "Host A (130.192.1.1/25) is in network 130.192.1.0/25, while host B (130.192.1.129/24) is in network 130.192.1.0/24. They are on different logical subnets requiring a router."
   },
   {
-    "id": 244,
+    "id": 241,
     "type": "multiple",
     "question": "Le entry del filtering database di uno switch Ethernet",
     "options": [
@@ -3106,7 +3106,7 @@
     "explanation": "MAC address table entries in Ethernet switches typically have configurable aging timers that can be set by the administrator."
   },
   {
-    "id": 245,
+    "id": 242,
     "type": "multiple",
     "question": "Un Autonomous System è:",
     "options": [
@@ -3119,7 +3119,7 @@
     "explanation": "An Autonomous System is a collection of IP networks and routers under the control of one entity that presents a common routing policy to the Internet."
   },
   {
-    "id": 246,
+    "id": 243,
     "type": "multiple",
     "question": "Il protocollo di routing OSPF sceglie il percorso verso una destinazione tenendo conto di:",
     "options": [
@@ -3132,7 +3132,7 @@
     "explanation": "OSPF uses a configurable metric that can be based on various factors like bandwidth, delay, or cost as defined by the network administrator."
   },
   {
-    "id": 247,
+    "id": 244,
     "type": "multiple",
     "question": "Quali di queste tecnologie è più adatta a gestire percorsi multipli verso la stessa destinazione ('multipath')?",
     "options": [
@@ -3145,7 +3145,7 @@
     "explanation": "MPLS with label swapping naturally supports multipath routing through multiple LSPs to the same destination."
   },
   {
-    "id": 248,
+    "id": 245,
     "type": "multiple",
     "question": "Data una certa LAN su cui sono state definite delle VLAN, una frame broadcast:",
     "options": [
@@ -3156,7 +3156,7 @@
     "explanation": "VLANs create separate broadcast domains, so broadcast frames are confined to the VLAN where they originate."
   },
   {
-    "id": 249,
+    "id": 246,
     "type": "multiple",
     "question": "Gli LSP (label switched path) nell'architettura MPLS (multi-protocol label switching):",
     "options": [
@@ -3169,7 +3169,7 @@
     "explanation": "LSPs are established to forward packets belonging to specific Forwarding Equivalence Classes through the MPLS network."
   },
   {
-    "id": 250,
+    "id": 247,
     "type": "multiple",
     "question": "Un LSA Router Link del protocollo OSPF descrive:",
     "options": [
@@ -3182,7 +3182,7 @@
     "explanation": "Router LSA (Type 1) in OSPF describe the advertising router's links to adjacent routers within the same area."
   },
   {
-    "id": 251,
+    "id": 248,
     "type": "multiple",
     "question": "Il protocollo di routing BGP:",
     "options": [
@@ -3195,7 +3195,7 @@
     "explanation": "BGP is a policy-based routing protocol where administrative policies often override technical metrics in path selection decisions."
   },
   {
-    "id": 252,
+    "id": 249,
     "type": "multiple",
     "question": "LTE uses which channel access?",
     "options": [
@@ -3208,7 +3208,7 @@
     "explanation": "LTE uses OFDMA (Orthogonal Frequency Division Multiple Access) for the downlink and SC-FDMA for the uplink."
   },
   {
-    "id": 253,
+    "id": 250,
     "type": "multiple",
     "question": "La qualità del servizio può essere garantita sulle reti a pacchetto quando",
     "options": [
@@ -3220,7 +3220,7 @@
     "explanation": "QoS in packet networks requires mechanisms like traffic classification, queue management, and scheduling algorithms in network nodes."
   },
   {
-    "id": 254,
+    "id": 251,
     "type": "multiple",
     "question": "Un Host A ha indirizzo 192.168.1.1/24 e un Host B 192.168.1.129/25.",
     "options": [
@@ -3233,7 +3233,7 @@
     "explanation": "Host A (192.168.1.1/24) can reach B (in 192.168.1.128/25) since A's network includes B's, but B cannot reach A directly as A is outside B's network range."
   },
   {
-    "id": 255,
+    "id": 252,
     "type": "multiple",
     "question": "In riferimento agli Short Message Service (SMS), se il Mobile Terminal è off:",
     "options": [
@@ -3246,7 +3246,7 @@
     "explanation": "GSM networks can store SMS messages and deliver them when the mobile terminal becomes available again."
   },
   {
-    "id": 256,
+    "id": 253,
     "type": "multiple",
     "question": "Quale di queste tecniche non è una soluzione per la transizione IPv4-IPv6?",
     "options": [
@@ -3259,7 +3259,7 @@
     "explanation": "6mixt4 is not a standard IPv4-IPv6 transition mechanism. Valid techniques include 6over4, 6to4, and Teredo."
   },
   {
-    "id": 257,
+    "id": 254,
     "type": "multiple",
     "question": "Due trame ethernet possono collidere per quale motivo?",
     "options": [
@@ -3272,7 +3272,7 @@
     "explanation": "Collisions can occur in half-duplex Ethernet networks where multiple devices share the same collision domain and contend for access to the medium."
   },
   {
-    "id": 258,
+    "id": 255,
     "type": "multiple",
     "question": "La tecnica di forwarding 'Source Routing':",
     "options": [
@@ -3285,7 +3285,7 @@
     "explanation": "In source routing, the sending node specifies the complete path to the destination, requiring knowledge of the network topology."
   },
   {
-    "id": 259,
+    "id": 256,
     "type": "multiple",
     "question": "Un host IPv6 al reboot, acquisirà il seguente indirizzo:",
     "options": [
@@ -3298,7 +3298,7 @@
     "explanation": "Link-local addresses are typically derived from the MAC address, so they remain consistent across reboots unless privacy extensions are used."
   },
   {
-    "id": 260,
+    "id": 257,
     "type": "multiple",
     "question": "L'architettura DiffServ è caratterizzata da:",
     "options": [
@@ -3311,7 +3311,7 @@
     "explanation": "DiffServ uses per-hop behaviors (PHBs) where packets are classified into service classes that receive specific forwarding treatment at each router."
   },
   {
-    "id": 261,
+    "id": 258,
     "type": "multiple",
     "question": "Il protocollo IS-IS",
     "options": [
@@ -3324,7 +3324,7 @@
     "explanation": "IS-IS is a link-state interior gateway protocol commonly used in large service provider networks and enterprise backbones."
   },
   {
-    "id": 262,
+    "id": 259,
     "type": "multiple",
     "question": "Nell'algoritmo di routing di tipo Path Vector:",
     "options": [
@@ -3337,7 +3337,7 @@
     "explanation": "Path vector protocols like BGP store the complete AS path to each destination, which helps prevent routing loops and enables policy-based routing."
   },
   {
-    "id": 263,
+    "id": 260,
     "type": "multiple",
     "question": "In una rete 802.11, al verificarsi di una collisione:",
     "options": [
@@ -3350,7 +3350,7 @@
     "explanation": "In 802.11 networks, collisions are detected when the sender doesn't receive an ACK frame after transmitting a unicast data frame."
   },
   {
-    "id": 264,
+    "id": 261,
     "type": "multiple",
     "question": "Relativamente a soluzioni di VPN (Virtual Private Network) quali di queste affermazioni è corretta?",
     "options": [
@@ -3363,7 +3363,7 @@
     "explanation": "In customer-provisioned VPNs, the customer is responsible for all VPN functionality including configuration, management, and security."
   },
   {
-    "id": 265,
+    "id": 262,
     "type": "multiple",
     "question": "La porta di uno switch Ethernet configurata in modalità trunk è in grado di:",
     "options": [
@@ -3376,7 +3376,7 @@
     "explanation": "Trunk ports use VLAN tagging (like 802.1Q) to identify which VLAN each frame belongs to, allowing multiple VLANs to share the same physical link."
   },
   {
-    "id": 266,
+    "id": 263,
     "type": "multiple",
     "question": "Nella soluzione 6PE i pacchetti che transitano sulla dorsale hanno due etichette. Quali sono i loro utilizzi?",
     "options": [
@@ -3389,7 +3389,7 @@
     "explanation": "In 6PE, the outer label is used for transport through the MPLS backbone to reach the egress PE router."
   },
   {
-    "id": 267,
+    "id": 264,
     "type": "multiple",
     "question": "Nella soluzione di livello 3 VPN basate su MPLS e BGP i pacchetti che transitano sulla dorsale MPLS hanno due etichette. Quali sono i loro utilizzi?",
     "options": [
@@ -3402,7 +3402,7 @@
     "explanation": "In MPLS VPNs, the outer label (transport label) is used by P routers to forward packets toward the egress PE router."
   },
   {
-    "id": 268,
+    "id": 265,
     "type": "multiple",
     "question": "La cifratura del traffico nelle VPN (Virtual Private Network) è:",
     "options": [
@@ -3415,7 +3415,7 @@
     "explanation": "While encryption is common in VPNs, some VPN technologies (like some MPLS VPNs) rely on the provider's security rather than encryption."
   },
   {
-    "id": 269,
+    "id": 266,
     "type": "multiple",
     "question": "In una rete cellulare operante secondo la tecnologia Frequency Division Multiple Access (FDMA):",
     "options": [
@@ -3428,7 +3428,7 @@
     "explanation": "FDMA systems use frequency reuse patterns where the same frequencies are reused in distant cells to increase capacity while minimizing interference."
   },
   {
-    "id": 270,
+    "id": 267,
     "type": "multiple",
     "question": "Un terminale mobile effettua un handover quando",
     "options": [
@@ -3441,7 +3441,7 @@
     "explanation": "Handover (or handoff) refers to the process of transferring an ongoing call or data session from one cell to another without interruption."
   },
   {
-    "id": 271,
+    "id": 268,
     "type": "multiple",
     "question": "Le moderne reti Ethernet sono",
     "options": [
@@ -3454,7 +3454,7 @@
     "explanation": "Modern Ethernet networks predominantly use switches for interconnection and VLANs for logical segmentation, providing better performance and flexibility."
   },
   {
-    "id": 272,
+    "id": 269,
     "type": "multiple",
     "question": "Uno dei principali punti di forza del protocollo IPv6 è",
     "options": [
@@ -3467,7 +3467,7 @@
     "explanation": "The primary advantage of IPv6 is its enormous address space (128 bits vs 32 bits in IPv4), which eliminates address exhaustion concerns."
   },
   {
-    "id": 273,
+    "id": 270,
     "type": "multiple",
     "question": "Two hosts A and B belong to the same physical network and have IP addresses 80.60.6.55/21 and 80.60.2.114/22, respectively.",
     "options": [
@@ -3480,7 +3480,7 @@
     "explanation": ""
   },
   {
-    "id": 274,
+    "id": 271,
     "type": "multiple",
     "question": "What is the smallest aggregation (i.e., the longest prefix) that can contain the ranges of IP addresses 10.20.30.64/30 and 10.20.30.32/28?",
     "options": [
@@ -3493,7 +3493,7 @@
     "explanation": ""
   },
   {
-    "id": 275,
+    "id": 272,
     "type": "multiple",
     "question": "A packet with IP address 90.80.70.193 will have a longest match in which of the following lines belonging to a routing table?",
     "options": [
@@ -3506,7 +3506,7 @@
     "explanation": ""
   },
   {
-    "id": 276,
+    "id": 273,
     "type": "multiple",
     "question": "Identify the only valid IP Network among the following:",
     "options": [
@@ -3519,7 +3519,7 @@
     "explanation": ""
   },
   {
-    "id": 277,
+    "id": 274,
     "type": "multiple",
     "question": "The Solicited Node Multicast Address in IPv6 plays a role in",
     "options": [
@@ -3532,7 +3532,7 @@
     "explanation": ""
   },
   {
-    "id": 278,
+    "id": 275,
     "type": "multiple",
     "question": "The use to the \"Next Header\" field in the IPv6 header allows the elimination of the IPV4",
     "options": [
@@ -3545,7 +3545,7 @@
     "explanation": "In IPv4, the Protocol field is used to tell the receiver which protocol is encapsulated in the payload of the IP packet (e.g., TCP, UDP, or ICMP). In IPv6, this functionality was replaced and expanded by the Next Header field, which is more versatile than the old Protocol field because it can point to either an upper-layer protocol (TCP/UDP) or an intermediate IPv6 Extension Header."
   },
   {
-    "id": 279,
+    "id": 276,
     "type": "multiple",
     "question": "A border router (i.e., a router giving access to the Internet) receiving a packet with source address: fd00: 1: : 3",
     "options": [
@@ -3558,7 +3558,7 @@
     "explanation": ""
   },
   {
-    "id": 280,
+    "id": 277,
     "type": "multiple",
     "question": "The purpose of EUI-48 to EUI-64 mapping in IPv6 is to",
     "options": [
@@ -3571,7 +3571,7 @@
     "explanation": ""
   },
   {
-    "id": 281,
+    "id": 278,
     "type": "multiple",
     "question": "Tunneling IPv6 traffic through an IPv4 network involves",
     "options": [
@@ -3584,7 +3584,7 @@
     "explanation": ""
   },
   {
-    "id": 282,
+    "id": 279,
     "type": "multiple",
     "question": "The main motivation to have the NAT deployed at the CPE in the A+P transition solution is",
     "options": [
@@ -3597,7 +3597,7 @@
     "explanation": ""
   },
   {
-    "id": 283,
+    "id": 280,
     "type": "multiple",
     "question": "Which of the following actions enables the Roaming functionality in cellular networks?",
     "options": [
@@ -3610,7 +3610,7 @@
     "explanation": ""
   },
   {
-    "id": 284,
+    "id": 281,
     "type": "multiple",
     "question": "In GSM networks, the VLR (Visitor Location Register) is used to record",
     "options": [
@@ -3623,7 +3623,7 @@
     "explanation": ""
   },
   {
-    "id": 285,
+    "id": 282,
     "type": "multiple",
     "question": "A single Physical Channel in GSM is defined as",
     "options": [
@@ -3636,7 +3636,7 @@
     "explanation": ""
   },
   {
-    "id": 286,
+    "id": 283,
     "type": "multiple",
     "question": "In case of handover in LTE, which of the established bearer may change?",
     "options": [
@@ -3649,7 +3649,7 @@
     "explanation": ""
   },
   {
-    "id": 287,
+    "id": 284,
     "type": "multiple",
     "question": "Which of the following functions is not carried out in the LTE EPC?",
     "options": [
@@ -3662,7 +3662,7 @@
     "explanation": ""
   },
   {
-    "id": 288,
+    "id": 285,
     "type": "multiple",
     "question": "In an RTS/CTS exchange in 802.11 a collision between the frames of a hidden station and that of an Access point may happen when",
     "options": [
@@ -3675,7 +3675,7 @@
     "explanation": ""
   },
   {
-    "id": 289,
+    "id": 286,
     "type": "multiple",
     "question": "A node implementing a Distance Vector algorithm increases the cost to reach a destination when:",
     "options": [
@@ -3688,7 +3688,7 @@
     "explanation": ""
   },
   {
-    "id": 290,
+    "id": 287,
     "type": "multiple",
     "question": "In Distance Vector routing, a routing table is derived from the distance table by",
     "options": [
@@ -3701,7 +3701,7 @@
     "explanation": ""
   },
   {
-    "id": 291,
+    "id": 288,
     "type": "multiple",
     "question": "In a Link State algorithm, the connectivity (i.e., the number of links) of another node is know when",
     "options": [
@@ -3714,7 +3714,7 @@
     "explanation": ""
   },
   {
-    "id": 292,
+    "id": 289,
     "type": "multiple",
     "question": "An eBGP connection operates between",
     "options": [
@@ -3727,7 +3727,7 @@
     "explanation": ""
   },
   {
-    "id": 293,
+    "id": 290,
     "type": "multiple",
     "question": "Conventionally, BGP identifies as NEXT-HOP:",
     "options": [
@@ -3740,7 +3740,7 @@
     "explanation": ""
   },
   {
-    "id": 294,
+    "id": 291,
     "type": "multiple",
     "question": "A network Z with a public BGP peering will not carry:",
     "options": [
@@ -3751,5 +3751,808 @@
     ],
     "answer": 3,
     "explanation": ""
+  },
+  {
+    "id": 292,
+    "type": "multiple",
+    "question": "The difference between link state and distance vector routing algorithms can be summarized as follows:",
+    "explanation": "Link State (OSPF) floods the entire network with local connectivity info to build a full map. Distance Vector (RIP) only talks to neighbors but shares its entire summarized routing table (global view).",
+    "options": [
+      "Link state algorithms send local information only to neighboring nodes; distance vector algorithms send global information to all nodes in the network",
+      "Link state algorithms send global information to all nodes in the network; distance vector algorithms send local information only to neighboring nodes",
+      "Link state algorithms send local information to all nodes in the network; distance vector algorithms send global information only to neighboring nodes"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 293,
+    "type": "multiple",
+    "question": "A device equipped with the NAT64 functionality is able to",
+    "explanation": "NAT64 translates between the two protocols by stripping the header of one (e.g., IPv6) and constructing a new header for the other (e.g., IPv4).",
+    "options": [
+      "Operate on 64-bit IP addresses",
+      "Replace the IPv6 header of a packet with an IPv4 one, and vice versa 1,",
+      "Convert an IPv6 packet in an Ethernet frame",
+      "Replace the IPv6 destination address in the IPv6 header of a packet with an IPv4 one, and vice versa"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 294,
+    "type": "multiple",
+    "question": "The IPsec \"Tunnel Mode\" encompasses the encryption of",
+    "explanation": "In Tunnel Mode, the original IP packet (Header + Payload) is encapsulated inside a new IP packet. Therefore, the entire original (internal) packet is protected.",
+    "options": [
+      "Only the TCP/UDP header and payload",
+      "Only the payload of the internal packet",
+      "The whole external packet, header included",
+      "The IP header, TCP/UDP header, and payload of the internal packet"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 295,
+    "type": "multiple",
+    "question": "In order to setup a label switched path (LSP)",
+    "explanation": "For an LSP to work, all routers in the path must agree on what the labels mean, which requires them to use the same Label Distribution Protocol (LDP).",
+    "options": [
+      "MPLS routers on the path must perform a mapping operation",
+      "The same layer-two protocol must be deployed on all links on the path",
+      "Final destinations of IP packets traveling on the LSP must support MPLS",
+      "MPLS routers on the path must deploy the same protocol for label distribution"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 296,
+    "type": "multiple",
+    "question": "The Interface ID of an IPv6 address",
+    "explanation": "The Interface ID (last 64 bits) can be randomly generated, manually set, or derived from the MAC address (EUI-64).",
+    "options": [
+      "Is the same for all devices within the same link",
+      "Can be arbitrarily selected, sometimes it is derived from the MAC address of the interface",
+      "Is assigned by the ISP according to a hierarchical schema",
+      "Is assigned by the network administrator according to a hierarchical schema"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 297,
+    "type": "multiple",
+    "question": "An Autonomous System:",
+    "explanation": "An AS is a collection of IP networks managed by a single entity (like an ISP or University) with a common routing policy.",
+    "options": [
+      "is identified by means of a 4 bytes long ID assigned by the CSA",
+      "is a set of subnets with a short topological proximity and managed by a single organization unit",
+      "is a subnet configured by leveraging the static routing",
+      "is identified by means of a 4 bytes long ID automatically computed by the BGP"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 298,
+    "type": "multiple",
+    "question": "The static routing",
+    "explanation": "Static routing is not obsolete; it is simply the manual entry of routes by an administrator. It’s still used for simple setups or management.",
+    "options": [
+      "It is an obsolete technology no longer deployed since dynamic routing is preferred over it",
+      "Consists in one network node computing routes for other network nodes and providing the computed routes to them",
+      "Consists in the automatic learning of routes without exchanging routing information",
+      "Consists in the network administrator manually configuring routing information in each router"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 299,
+    "type": "multiple",
+    "question": "Among the four proposed alternatives, which is the smallest valid aggregation that can represent the IP networks 130.192.1.0/24 and 130.192.2.0/24 in a routing table?",
+    "explanation": "It is necessary a /22 subnet mask.",
+    "options": [
+      "130.192.1.0/23",
+      "0.0.0.0/0",
+      "130.192.1.0/23",
+      "130.192.0.0/23"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 300,
+    "type": "multiple",
+    "question": "The Mapping Address and Port (MAP) technique for the IPv4-IPv6 transition is based on",
+    "explanation": "MAP-E/T uses a stateless calculation where the user's IPv6 address is mathematically derived from their assigned IPv4 address and port range.",
+    "options": [
+      "The utilization, on the Customer Premises Equipment (CPE), of an IPv6 address derived from the IPv4 address and the Port Set ID assigned by the provider to the customer",
+      "The utilization, on the Border Relay, of an IPv6 address derived from the IPv4 address and the Port Set ID assigned by the provider to the various customers",
+      "The utilization, on the Customer Premises Equipment (CPE), of an IPv6 address selected among a fixed set of addresses defined by a standard",
+      "The utilization, on the Customer Premises Equipment (CPE), of an IPv6 address which varies on the basis of the IPv4 destination address that the user would like to reach"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 301,
+    "type": "multiple",
+    "question": "The Integrated Services (IntServ) solution has been standardized to",
+    "explanation": "IntServ uses RSVP to reserve bandwidth end-to-end, allowing applications to \"request\" a specific guarantee of service.",
+    "options": [
+      "Allow applications to request to and receive from the network the quality of service they need.",
+      "Mark packets as belonging to a specific class of service so that they can receive the most suitable service.",
+      "Integrate within the network traditional IP routers and MPLS (Multi-Protocol Label Switching) Label Switch Routers (LSRs), thanks to the common deployment of RSVP (Resource ReSerVation Protocol).",
+      "Enable the integrated deployment of IP routers and Ethernet switches to guarantee network connectivity."
+    ],
+    "answer": 0
+  },
+  {
+    "id": 302,
+    "type": "multiple",
+    "question": "The main contribution to the latency experienced in the nodes of a heavily loaded packet network is given by",
+    "explanation": "When a network is \"heavily loaded,\" the biggest delay is Queuing Delay—packets sitting in a buffer waiting for their turn to be transmitted.",
+    "options": [
+      "The time needed to process the packet.",
+      "The time taken to transmit the packet on an output link (transmission delay).",
+      "The time taken to locate, in the routing table or in the forwarding table, the information need to forward the packet.",
+      "The time spent in buffers while waiting for resources occupied by other packets to become available (for example, the transmission capacity of a link)."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 303,
+    "type": "multiple",
+    "question": "With respect to previous solutions, The Long Term Evolution (LTE) technology is characterized, among the other things, by",
+    "explanation": "LTE moved away from \"Circuit Switching\" (used for old voice calls) to an all-IP packet-switched architecture for everything.",
+    "options": [
+      "The usage of switching technique based on virtual circuits",
+      "The usage of a circuit switching technique",
+      "The usage of mobile terminals that are able to use the IP protocol for sending data",
+      "The usage of an \"all-IP\" network architecture with shared communication channels"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 304,
+    "type": "multiple",
+    "question": "The IGMP protocol",
+    "explanation": "IGMP is used by hosts to tell their local router \"I want to join this multicast group.",
+    "options": [
+      "Allows a host to communicate to other hosts belonging to a given multicast group its own interest in entering the group",
+      "Allows a router to communicate to other routers in the Internet network its own interest in receiving the traffic related to a given multicast group",
+      "Carries the multicast traffic generated by hosts",
+      "Allows a host to communicate to routers in the network its own interest in receiving the traffic related to a given multicast group"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 305,
+    "type": "multiple",
+    "question": "One of the reasons that are favoring the spread of the IPv6 protocol is",
+    "explanation": "The exhaustion of the public IPv4 address space and the inefficiency of massive NAT layers is the primary driver for IPv6.",
+    "options": [
+      "The more and more widespread need to use multicast applications",
+      "The low inclination of network operators to modify the configuration of their own networks",
+      "The possible inefficiency of the private IPv4 addressing",
+      "The lack of MAC addresses"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 306,
+    "type": "multiple",
+    "question": "The paging procedure in a cellular network is used for",
+    "explanation": "Paging is used to \"find\" a mobile terminal that is in idle mode when there is an incoming call or data for it.",
+    "options": [
+      "Notifying the mobile terminal that it has to be contacted",
+      "Notifying the mobile terminal that it is going to change the cell",
+      "Forcing the mobile terminal to apply proper memory sharing policies",
+      "Sending an SMS"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 307,
+    "type": "multiple",
+    "question": "One of the main strengths of the IPv6 protocol is",
+    "explanation": "The jump from 32-bit (IPv4) to 128-bit (IPv6) addresses provides a virtually inexhaustible address space.",
+    "options": [
+      "The possibility to use 10Gb/s channels, a feature not available in IPv4",
+      "The possibility to enable a routing mechanism based on names and no longer on addresses",
+      "The large size of the addressing space",
+      "The encryption of the packet payload, available by default for all the packets sent by a host"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 308,
+    "type": "multiple",
+    "question": "When an IPv6 host needs to learn the MAC address associated to a given IPv6 address",
+    "explanation": "IPv6 uses ICMPv6 Neighbor Solicitation (multicast) instead of ARP (broadcast).",
+    "options": [
+      "It can send a specific ICMPv6 message in multicast over the network",
+      "It can send a specific ICMPv6 message in unicast over the network",
+      "It can send an ARP Request in broadcast over the network",
+      "It can send a specific ICMPv6 message in broadcast over the network"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 309,
+    "type": "multiple",
+    "question": "In the 6PE solution packets traveling through the MPLS backbone have two labels;",
+    "explanation": "In 6PE, the top (external) label gets the packet through the IPv4 core to the exit PE, while the inner label identifies the IPv6 prefix.",
+    "options": [
+      "The internal label is used by internal (P) routers to forward packets towards an IPv6 destination.",
+      "The external label is used by internal (P) routers to forward packets towards an IPv6 destination.",
+      "The internal label is used by internal (P) routers to forward packets towards a PE router.",
+      "The external label is used by internal (P) routers to forward packets towards a PE router."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 310,
+    "type": "multiple",
+    "question": "Given a network based on several physical networks interconnected by routers and a range of IP addresses to use in that network, it is possible to define an addressing plan that optimizes routing on a given router of the network by",
+    "explanation": "Hierarchical addressing (summarization) allows one routing entry to represent many subnets, keeping routing tables small.",
+    "options": [
+      "Assigning to the various physical networks distinct network IDs randomly selected within the address range given for the entire network",
+      "Splitting the network in areas and defining, within the given address range, smaller distinct address ranges to use in each area",
+      "Assigning to the various physical networks distinct network IDs selected within the address range given for the entire network. In particular, this assignment must proceed from in a decreasing order of network size"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 311,
+    "type": "multiple",
+    "question": "The application of Frequency Hopping (FH) in a GSM network results in",
+    "explanation": "FH reduces interference and fading, which improves quality and allows more users to coexist without dropping calls.",
+    "options": [
+      "An increase of the maximum number of users the cell can serve, but with a reduction of the communication quality",
+      "A reduction of both the communication quality and the maximum number of users the cell can serve",
+      "An increase of the communication quality, but with a reduction of the maximum number of users the cell can serve",
+      "An increase of both the communication quality and the maximum number of users the cell can serve"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 312,
+    "type": "multiple",
+    "question": "The Random Access CHannel (RACH) in a GSM network is used",
+    "explanation": "GSM uses Slotted-ALOHA, not CSMA, for the Random Access Channel. The primary purpose is for the mobile terminal to request a dedicated channel from the network to start a call or send a message.",
+    "options": [
+      "By mobile terminals for sending voice samples by means of a Slotted-Aloha technique for the medium access",
+      "By the network, for offering dedicated communication channels to mobile terminals",
+      "By mobile terminals, for requesting dedicated communication channels to the network",
+      "By mobile terminals for sending voice samples by means of a CSMA technique for the medium access"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 313,
+    "type": "multiple",
+    "question": "VPNs (virtual private networks) are used to",
+    "explanation": "VPNs \"tunnel\" private data over public/shared infrastructure so it acts as if it were on a private, secure line.",
+    "options": [
+      "Divide a corporate local area network in a set of separate subnets, each for a different corporate function (e.g., sales, procurement, engineering, marketing)",
+      "Transport private traffic through a shared infrastructure while creating the same conditions the traffic would undergo through a private infrastructure",
+      "Optimize a public network in multiple networks virtually separated",
+      "Partition a private network (for example the one of a parent company with various subsidiaries) in multiple networks virtually separated"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 314,
+    "type": "multiple",
+    "question": "LSP (Label Switched Path) setup in MPLS (Multi-Protocol Label Switching) implies that",
+    "explanation": "MPLS is based on neighboring routers agreeing on which label represents which destination.",
+    "options": [
+      "Routers connected at the ends of a link share which label should be prepended to packets belonging to the LSP.",
+      "The hosts sending and receiving packets belonging to the LSP support MPLS.",
+      "Routers at the two ends of the LSP (Label Edge Routers) directly exchange routing information.",
+      "The upstream router on a link communicates to the downstream router which label should be prepended to packets belonging to the LSP."
+    ],
+    "answer": 0
+  },
+  {
+    "id": 315,
+    "type": "multiple",
+    "question": "DWDM (Dense Wavelength Division Multiplexing) is a technology allowing to",
+    "explanation": "DWDM puts multiple wavelengths of light onto one fiber, multiplying capacity.",
+    "options": [
+      "Switch an optical signal from the input of a device to its output port",
+      "Multiplex/demultiplex optical signals (characterized by different wavelengths) on the same optical fiber",
+      "Package in a dense way a large number of optical fibers in the same cable",
+      "Multiplex/demultiplex various bit flows at different bit rates on a single optical channel (characterized by a specific wavelength)"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 316,
+    "type": "multiple",
+    "question": "SSL-based VPN (Virtual Private Network) solutions are widely deployed because",
+    "explanation": "Because SSL VPNs use standard HTTPS ports (443), they pass through firewalls and NATs much easier than IPsec.",
+    "options": [
+      "They do not have any problems when packets go through a NAT (Network Address Translation) function on their path to their destination.",
+      "They are the only VPN solutions providing a robust packet encryption and authentication functionality.",
+      "Allow packets to be encrypted and authenticated without the need of negotiating cryptographic keys.",
+      "Allow the layer 3 (network layer) header to be encrypted and authenticated."
+    ],
+    "answer": 0
+  },
+  {
+    "id": 317,
+    "type": "multiple",
+    "question": "When the link between two MPLS routers deploys a layer 2 protocol that supports virtual connections (such as ATM and Frame Relay)",
+    "explanation": "When running over ATM, the MPLS label is often mapped directly into the VPI/VCI fields of the ATM header.",
+    "options": [
+      "Routing protocols specified for the given layer 2 protocol must be deployed (for example, a routing protocol of the ATM standard).",
+      "Labels can be bound only to FECs that include layer 2 destination identifiers (e.g., ATM addresses)",
+      "It is not possible to use more than one label for each packet.",
+      "The most external MPLS label is carried inside the layer 2 header."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 318,
+    "type": "multiple",
+    "question": "An IPSec-based VPN (Virtual Private Network)",
+    "explanation": "IPsec VPNs use tunneling (typically ESP) to encapsulate and protect private IP packets.",
+    "options": [
+      "Requires that the end points support the IPSec protocol",
+      "Requires that the involved Gateway supports the IPsec protocol",
+      "Deploys tunneling to allow encryption and/or authentication of IP packets exchanged by corporate hosts",
+      "The encryption is mandatory, while the authentication is optional"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 319,
+    "type": "multiple",
+    "question": "A host A with IP address 130.192.225.79/24 sends an ARP Request on the local network in order to learn the MAC address of a host with IP address 130.192.225.1/26. The corresponding ARP Reply sent from B",
+    "explanation": "ARP operates at Layer 2. If the two devices are physically on the same switch/wire, they ignore the subnet mask mismatch and communicate directly via MAC addresses.",
+    "options": [
+      "Is sent to the MAC address of B's default gateway, because A is outside the IP network of B",
+      "Is not sent",
+      "Arrives to A only if the network is based on a shared medium (e.g., a Ethernet hub)",
+      "Is sent to the MAC address of A"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 320,
+    "type": "multiple",
+    "question": "The IPv6 Extension Headers are",
+    "explanation": "Extension headers keep the main header simple (40 bytes) while allowing extra features like fragmentation or security to be added only when needed.",
+    "options": [
+      "Header chains that can be added to the main IPv6 header in order to move to the network layer some features that are typically of the transport layer (e.g., the transmission of acknowledges)",
+      "Padding techniques adopted to make the IPv6 packet of fixed size equal to 40 bytes",
+      "Header chains that can be added to the main IPv6 header in order to offer additional features",
+      "Padding techniques adopted to fix the size of the layer 2 frame containing the IPv6 packet"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 321,
+    "type": "multiple",
+    "question": "The Integrated IS-IS protocol",
+    "explanation": "IS-IS is a Link-State protocol (like OSPF) that is very popular in service provider backbones because it is highly scalable.",
+    "options": [
+      "Is an obsolete routing protocol no longer used due to its low performance",
+      "Is a protocol used by Ethernet switches to create a routing tree in the network (spanning tree) removing closed paths (i.e., loops)",
+      "Is a protocol derived as an evolution of BGP for the exchange of information between routers belonging to different autonomous systems",
+      "Is a protocol based on the link state routing algorithm widely used in large networks"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 322,
+    "type": "multiple",
+    "question": "The term handover in cellular networks refers to:",
+    "explanation": "Handover specifically refers to maintaining an active session (like a call) as the user moves between base stations.",
+    "options": [
+      "The movement of a mobile terminal from a cell to another without the interruption of an active communication (e.g., a call)",
+      "The movement of a mobile terminal from a cell to another, even if in that moment there are no active communications",
+      "The turn-on of the mobile terminal after a long period of inactivity",
+      "The use of a mobile terminal in the network of a different operator with respect to the one the SIM card installed in the terminal belongs to"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 323,
+    "type": "multiple",
+    "question": "With respect to previous solutions, The Long Term Evolution (LTE) technology is characterized, among the other things, by:",
+    "explanation": "LTE uses an \"All-IP\" architecture where user data is carried through GTP tunnels (GPRS Tunnelling Protocol) between the base station and the Evolved Packet Core (EPC).",
+    "options": [
+      "The use of switching technique based on virtual circuits",
+      "The separation between physical and logical channels",
+      "The use of a circuit switching technique",
+      "The use of IP tunnels connecting terminals with elements of the EPC"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 324,
+    "type": "multiple",
+    "question": "An optical switch is a device capable of switching:",
+    "explanation": "A basic optical switch (at the physical layer) moves a specific wavelength from an input fiber to an output fiber. Option (b) describes a packet switch, which is more complex than a standard optical switch.",
+    "options": [
+      "Different optical channels on a given wavelength on different input fibers to a given wavelength on a given output fiber.",
+      "Packets arriving on a given optical channel from a given input fiber to different optical channels to different output fibers based on information in the header of each packet.",
+      "An optical channel on a given wavelength from a given input fiber to different wavelengths on different output fibers.",
+      "An optical channel on a given wavelength from a given input fiber to a given output fiber."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 325,
+    "type": "multiple",
+    "question": "An IPSec-based VPN (Virtual Private Network) The encryption is mandatory",
+    "explanation": "IPsec uses tunneling (encapsulating the original packet) to provide security services for data crossing public networks.",
+    "options": [
+      "Is based on a specific cryptographic algorithm defined by the IPsec standard itself.",
+      "Deploys tunneling to allow encryption and/or authentication of IP packets exchanged.",
+      "Requires that all communicating hosts support the IPsec protocol."
+    ],
+    "answer": 2
+  },
+  {
+    "id": 326,
+    "type": "multiple",
+    "question": "The shortcut IPv6 address 1070: 5: : 1: 2A4:E8: 7782:BB59 corresponds to which of the following full-length addresses?",
+    "explanation": "",
+    "options": [
+      "1070: 5001: 0000: 0000: 02A4:E008: 7782:BB59",
+      "1070: 0005: 0000: 0001: 2A40:E008: 7782:BB59",
+      "1070: 5000: 0000: 1000: 2A40:E800: 7782:BB59",
+      "1070: 0005: 0000: 0001: 02A4: 00E8: 7782:BB59"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 327,
+    "type": "multiple",
+    "question": "A packet with destination IP address 180.3.13.223 will have a longest match in which of the following lines belonging to a routing table?",
+    "explanation": "180.3.13.224/28 starts at .224. (.223 is not in this range). 180.3.13.208/29 range is .208 to .215. (.223 is not in this range). 180.3.13.192/28 range is .192 to .207. (.223 is not in this range).",
+    "options": [
+      "180.3.13.224/28",
+      "None of the proposed solutions",
+      "180.3.13.208/29",
+      "180.3.13.192/28"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 328,
+    "type": "multiple",
+    "question": "The Solicited Node Multicast Address:",
+    "explanation": "It is a specific multicast group designed so that only nodes with the same last 24 bits of their IPv6 address listen. Usually, this results in only one node responding.",
+    "options": [
+      "Is a special multicast group that can contain one or more nodes. These nodes receive and process the ICMP Neighbor Solicitation, but only one will reply with an ICMP Neighbor Advertisement.",
+      "Is a special multicast group that contains all nodes of a given Link, as it replaces the broadcast address in the IPv6 context. All nodes receive and process the ICMP Neighbor Solicitation, but only one will reply with an ICMP Neighbor Advertisement.",
+      "Is an obsolete Neighbor Discovery technique, now replaced by a more efficient solution based on ARP.",
+      "Is a special multicast group that contains only one node. This node receives and processes the ICMP Neighbor Solicitation, and then it will reply with an ICMP Neighbor Advertisement."
+    ],
+    "answer": 0
+  },
+  {
+    "id": 329,
+    "type": "multiple",
+    "question": "OSPF-TE and ISIS-TE include enhancements to traditional routing protocols OSPF and ISIS that have been standardized in the context of MPLS in order to:",
+    "explanation": "Traffic Engineering (TE) extensions allow routers to share \"constraints\" (like available bandwidth or link color) so paths can be calculated based on more than just the shortest hop count.",
+    "options": [
+      "Allow the independence of control plane and data plane in MPLS routers, which ultimately enables traffic engineering.",
+      "Ensure faster convergence and enhanced stability.",
+      "Enable the distribution of additional information (named constrained data) in support of constraint based routing.",
+      "Include adequate fields in routing messages to support explicit routing."
+    ],
+    "answer": 2
+  },
+  {
+    "id": 330,
+    "type": "multiple",
+    "question": "The IPv6 Aggregatable Global Unicast addresses are:",
+    "explanation": "These are the public, globally routable addresses of the IPv6 world (equivalent to IPv4 public IPs).",
+    "options": [
+      "Globally unique, substantially equivalent to the IPv4 public addresses",
+      "Aggregable only in very small address ranges, in order to favor the precision of the evaluation of routing paths",
+      "Usable in a global IPv6 network only with proper Network Address Translation (NAT) techniques",
+      "Usable only on devices belonging to the same local area network"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 331,
+    "type": "multiple",
+    "question": "The smallest aggregation that can contain the IP networks 130.192.0.0/25 and 130.192.1.0/25 is",
+    "explanation": "130.192.0.0/23 covers 130.192.0.0 through 130.192.1.255, perfectly containing both networks.",
+    "options": [
+      "130.192.1.0/23",
+      "130.192.0.0/24",
+      "130.192.0.0/23",
+      "130.192.1.0/24"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 332,
+    "type": "multiple",
+    "question": "The IPv6 address 2001: 4600: : 0201: 06FF:FEA5: 3A4C is:",
+    "explanation": "This is a Global Unicast Address (starts with 2001:). It is a public address used on the global internet.",
+    "options": [
+      "An address that can be used on a server to offer a service over the public IPv6 Internet",
+      "An address currently not valid in IPv6",
+      "An address that can be used by a host only to perform communications with another host on the same link",
+      "A private address"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 333,
+    "type": "multiple",
+    "question": "Which of the following choices is not an Adaptive Routing algorithm?",
+    "explanation": "Flooding is a static/blind mechanism; it doesn't adapt to network congestion or link states.",
+    "options": [
+      "Isolated Routing",
+      "Link State",
+      "Centralized Routing",
+      "Selective Flooding"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 334,
+    "type": "multiple",
+    "question": "One of the reasons that are favoring the spread of the IPv6 protocol is:",
+    "explanation": "Private IPv4 addressing (NAT) is complex and inefficient at scale, driving the need for IPv6.",
+    "options": [
+      "The possible inefficiency of the private IPv4 addressing",
+      "The low inclination of network operators to modify the configuration of their own networks",
+      "The lack of MAC addresses",
+      "The more and more widespread need to use multicast applications"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 335,
+    "type": "multiple",
+    "question": "In order to setup a label switched path (LSP):",
+    "explanation": "",
+    "options": [
+      "MPLS routers on the path must identify a label that is unused on all links of the path.",
+      "MPLS routers on the path must perform a mapping operation",
+      "Final destinations of IP packets traveling on the LSP must support MPLS",
+      "The same layer-two protocol must be deployed on all links on the path"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 336,
+    "type": "multiple",
+    "question": "The adoption of the MAC address as Interface ID of an IPv6 host:",
+    "explanation": "",
+    "options": [
+      "Allows the host to perform a direct communication without the need to insert a Layer 2 header",
+      "Is not possible due to privacy issues",
+      "Is part of one of the possible autoconfiguration solutions available in IPv6",
+      "Is the only possible solution available in IPv6 for the Interface ID configuration"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 337,
+    "type": "multiple",
+    "question": "One of the functions of the IPv4 protocol suite that was replaced by ICMPv6 is:",
+    "explanation": "IGMP (Multicast management) was merged into ICMPv6 for IPv6 networks.",
+    "options": [
+      "IPsec",
+      "PPP",
+      "OSPF",
+      "IGMP"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 338,
+    "type": "multiple",
+    "question": "The static routing:",
+    "explanation": "It is the manual configuration of the routing table by a human administrator.",
+    "options": [
+      "Consists in the automatic learning of routes without exchanging routing information",
+      "Consists in one network node computing routes for other network nodes and providing the computed routes to them",
+      "Consists in the network administrator manually configuring routing information",
+      "It is an obsolete technology no longer deployed since dynamic routing is preferred"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 339,
+    "type": "multiple",
+    "question": "The configuration of a switch port in access mode is used for:",
+    "explanation": "Access ports take \"untagged\" traffic from a host and assign it to a specific VLAN inside the switch.",
+    "options": [
+      "Assigning a packet sent through that port to a specific VLAN",
+      "Assigning a packet received on that port to a specific VLAN",
+      "Enabling the access to the network",
+      "Allowing the access to the switch only to specific flows that are not considered"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 340,
+    "type": "multiple",
+    "question": "The IPv6 Extension Headers are:",
+    "explanation": "They provide a flexible way to add options (like security or fragmentation) without cluttering the main 40-byte header.",
+    "options": [
+      "Header chains that can be added to the main IPv6 header in order to move to the network some features that are typically of the transport layer (e.g., the transmission of acknowledgments)",
+      "Padding techniques adopted to make the IPv6 packet of fixed size equal to 40 bytes",
+      "Header chains that can be added to the main IPv6 header in order to offer additional features",
+      "Padding techniques adopted to fix the size of the layer 2 frame containing the IPv6"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 341,
+    "type": "multiple",
+    "question": "The GRE (Generic Routing Encapsulation) protocol is utilized for:",
+    "explanation": "GRE is a \"Swiss Army Knife\" of tunneling; it can wrap almost any Layer 3 protocol inside an IP packet.",
+    "options": [
+      "Encapsulation of any protocol into an IP packet",
+      "Exchanging routing information in various protocol architectures",
+      "Multiple transmission operations",
+      "Implementing encrypted tunneling in secure VPNs (Virtual Private Networks)"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 342,
+    "type": "multiple",
+    "question": "A Layer2 Ethernet switch is used for interconnecting 47 hosts belonging to three different VLANs: 20 hosts belong to VLAN 2, 20 hosts belong to VLAN 3, 17 hosts belong to VLAN 4. All the 47 ports of the switch must be in Access mode.",
+    "explanation": "Hosts in different VLANs cannot talk to each other by default. You need one port connected to a router (Router-on-a-stick) or a Layer 3 device to move traffic between the VLANs.",
+    "options": [
+      "It is not possible to enable the communication among all the hosts because at least two available ports would be needed",
+      "It is possible to enable the communication among all the hosts using the single port that is still available in addition to proper network devices",
+      "It is not possible to enable the communication among all the hosts because, being them connected to three VLANs at least three available ports would be needed",
+      "The 47 hosts can communicate without any further change to the network configuration"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 343,
+    "type": "multiple",
+    "question": "In LTE networks the use of tunnels facilitates:",
+    "explanation": "Tunnels (GTP) allow the user's IP address to remain the same even as they move between different base stations (mobility).",
+    "options": [
+      "The encryption of traffic between operators",
+      "The connectivity between operators",
+      "The compression of control packet headers",
+      "The mobility of users between cells"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 344,
+    "type": "multiple",
+    "question": "Why is label-based forwarding less complex (and hence can be implemented using simpler hardware with lower power consumption) than IP address-based forwarding?",
+    "explanation": "Tunnels (GTP) allow the user's IP address to remain the same even as they move between different base stations (mobility).",
+    "options": [
+      "Because label's validity is local to a link, while IP address's validity is global across the network",
+      "Because label-based forwarding can be implemented with an exact match in a table, while address- based forwarding requires a longest prefix match",
+      "Because labels can be chosen by routers, while IP addresses must be chosen by network administrators",
+      "Because labels don't need to be unique, while IP addresses must be unique across the network (unless NAT is deployed)"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 345,
+    "type": "multiple",
+    "question": "What is a typical operation of an all-optical switch?",
+    "explanation": "It physically routes light frequencies (wavelengths) from one port to another without converting them to electricity.",
+    "options": [
+      "Process and switch individual bits transmitted on wavelengths belonging to the optical portion of the spectrum",
+      "Route an optical channel (at a specific frequency) from an input port to an output port",
+      "Switch packets received from an optical channel to different optical channels",
+      "Multiplex over a single outgoing optical channel data received over different incoming channels"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 346,
+    "type": "multiple",
+    "question": "When an MPLS frame has multiple labels, routers:",
+    "options": [
+      "Only process the most external label to decide how to forward the frame",
+      "Only can swap the most external and the next label with each other",
+      "Only process the most internal label to decide how to forward the frame",
+      "Can swap any of the labels"
+    ],
+    "answer": 0,
+    "explanation": "Routers only look at the top (outer) label. They don't care about the labels underneath until the top one is \"popped\"."
+  },
+  {
+    "id": 347,
+    "type": "multiple",
+    "question": "In IEEE 802.11 networks, the \"hidden terminal problem\" refers to:",
+    "explanation": "This happens when two nodes can see the Access Point but cannot see each other, causing them to transmit at the same time and collide.",
+    "options": [
+      "a security threat caused by an intruder in the BSS",
+      "the use of the same MAC address by more than one node in the same BSS",
+      "the possibility that two or more wireless nodes can interfere with each other without",
+      "a failure in the association to an Access Point during the passive scanning procedure"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 348,
+    "type": "multiple",
+    "question": "Concerning the DiffServ (Differentiated Services) standard and practice of traffic engineering:",
+    "explanation": "They work together: DiffServ prioritizes traffic types, while TE ensures those types take the best available path through the network.",
+    "options": [
+      "they both rely on information included in the IP header",
+      "they are completely independent and unrelated solutions that are never used in conjunction",
+      "they are two different tools to do the same",
+      "they can be used in conjunction to perform per-class traffic engineering, which enables efficient utilization of network capacity"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 349,
+    "type": "multiple",
+    "question": "Multicast communications in an IPv4 network:",
+    "explanation": "IPv4 requires the IGMP protocol and multicast-aware routing protocols (like PIM) to function.",
+    "options": [
+      "Are not possible without the deployment of additional protocols in the network",
+      "Are possible at global scale, it is only required to enable the IGMP protocol in the network",
+      "Are always possible, IGMP only makes them more efficient",
+      "Are possible only within a single LAN, even if additional protocols are used"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 350,
+    "type": "multiple",
+    "question": "Which of the following methods is used by Content Delivery Networks (CDNs) to handle content updates efficiently while minimizing disruptions to users?",
+    "explanation": "Edge caching puts content near users, and invalidation policies ensure they don't see \"stale\" or old data.",
+    "options": [
+      "Multi-path TCP (MPTCP): Utilizing multiple TCP connections simultaneously to enhance performance and reliability between clients and origin servers",
+      "Compression Algorithms: Applying real-time compression to reduce the size of content from the origin server",
+      "Edge Caching: Storing frequently accessed content on servers located closer to end users with cache invalidation policies to ensure content freshness",
+      "Dynamic Content Acceleration: Optimizing the delivery of dynamically generated content by bypassing the CDN cache and fetching content directly from the origin server"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 351,
+    "type": "multiple",
+    "question": "When MPLS was standardized, what was the main motivation for having labels pushed into packets by network nodes (specifically by Label Edge Routers) rather than end hosts?",
+    "explanation": "The goal was to make MPLS transparent to the user. End hosts don't need to know MPLS exists; the network handles everything.",
+    "options": [
+      "End hosts are less trusted than network nodes because they can be more easily hacked",
+      "End hosts don't need to be aware of MPLS, which made the introduction of MPLS less problematic",
+      "Pushing the label requires modifying the layer two header that is not present when a packet is transmitted and received by an end host",
+      "Network nodes have higher performance than end hosts"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 352,
+    "type": "multiple",
+    "question": "A network interface with both an IPv4 and an IPv6 address can receive:",
+    "explanation": "A dual-stack device speaks both \"languages\" natively and can receive both types of packets.",
+    "options": [
+      "Only IPv6 packets encapsulated in IPv4, according to the approach called \"tunneling\"",
+      "Only IPv4 packets encapsulated in IPv6, according to the approach called \"tunneling\"",
+      "Both IPv4 and IPv6 packets",
+      "Only IPv6 packets, since in such kind of configuration the operating system considers IPv4 as obsolete"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 353,
+    "type": "multiple",
+    "question": "Given a network based on several physical networks interconnected by routers and a range of IP addresses to use in that network, it is possible to define an addressing plan that optimizes routing on a",
+    "explanation": "Summarization works best when you divide the network into hierarchical areas (clusters), allowing a single route entry to represent many sub-networks.",
+    "options": [
+      "given router of the network by:",
+      "Assigning to the various physical networks distinct network IDs randomly selected within the address range given for the entire network",
+      "Assigning to the various physical networks distinct network IDs selected within the address range given for the entire network. In particular, this assignment must proceed from in a decreasing order of network size",
+      "Splitting the network in areas and defining, within the given address range, smaller distinct address ranges to use in each area"
+    ],
+    "answer": 3
   }
 ]
