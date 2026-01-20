@@ -83,7 +83,8 @@ class QuizApp {
             correctionMode: 'instant', // 'instant' or 'final'
             isReviewing: false,
             flaggedQuestions: new Set(),
-            shuffleQuestions: true // Default to true
+            shuffleQuestions: true, // Default to true
+            pendingConfirmationAction: null // 'finish' or 'exit'
         };
 
         this.init();
@@ -163,6 +164,7 @@ class QuizApp {
      */
     bindGlobalEvents() {
         window.goHome = () => this.showScreen(CONFIG.SCREENS.HOME);
+        window.attemptCloseQuiz = () => this.attemptCloseQuiz();
         window.setSliderValue = (val) => this.setSliderValue(val);
         window.startQuizFromSlider = () => this.startQuizFromSlider();
         window.previousQuestion = () => this.navigateQuestion(-1);
@@ -751,21 +753,65 @@ class QuizApp {
         }
     }
 
-    showFinishConfirmation() {
-        if (this.state.isReviewing) {
+    attemptCloseQuiz() {
+        // If reviewing, just exit review (which goes to results or home depending on implementation, here we might want to just go home since it's the close button)
+        // Actually, the close button in review mode IS 'btnQuizClose' but the code toggles it 'hidden' in review mode (line 596 of original file).
+        // Let's check: 
+        // line 596: document.getElementById(CONFIG.SELECTORS.BTN_CLOSE).classList.toggle('hidden', this.state.isReviewing);
+        // So this button is NOT visible in review mode. In review mode, we have 'btnReviewBack' (line 597) which calls exitReview().
+        // So if this button is clicked, we are DEFINITELY in an active quiz and not reviewing.
+
+        // Double check if quiz is completed but somehow we are here?
+        if (this.state.quizCompleted) {
+            this.showScreen(CONFIG.SCREENS.HOME);
+            return;
+        }
+
+        this.showConfirmation('exit');
+    }
+
+    showConfirmation(action = 'finish') {
+        if (this.state.isReviewing && action === 'finish') {
             this.exitReview();
             return;
         }
-        document.getElementById('confirmationModal').classList.remove('hidden');
+
+        this.state.pendingConfirmationAction = action;
+
+        const modal = document.getElementById('confirmationModal');
+        const title = modal.querySelector('.modal-title');
+        const text = modal.querySelector('.modal-text');
+
+        if (action === 'exit') {
+            title.textContent = 'Exit Quiz?';
+            text.textContent = 'Are you sure you want to exit and lose the current progress?';
+        } else {
+            title.textContent = 'Finish Quiz?';
+            text.textContent = "Are you sure you want to finish the quiz? You can't change your answers after submitting.";
+        }
+
+        modal.classList.remove('hidden');
+    }
+
+    // Legacy wrapper if needed, or we just update calls
+    showFinishConfirmation() {
+        this.showConfirmation('finish');
     }
 
     hideFinishConfirmation() {
         document.getElementById('confirmationModal').classList.add('hidden');
+        this.state.pendingConfirmationAction = null;
     }
 
     confirmFinish() {
+        const action = this.state.pendingConfirmationAction;
         this.hideFinishConfirmation();
-        this.finishQuiz();
+
+        if (action === 'exit') {
+            this.showScreen(CONFIG.SCREENS.HOME);
+        } else {
+            this.finishQuiz();
+        }
     }
 
     jumpToQuestion(index) {
