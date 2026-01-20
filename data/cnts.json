@@ -1061,19 +1061,6 @@
     "explanation": "Routing is the process of determining the best path to a destination, while forwarding is the process of sending packets to the appropriate output interface based on the routing decisions."
   },
   {
-    "id": 83,
-    "type": "multiple",
-    "question": "Per l'instaurazione di un LSP è indispensabile che",
-    "options": [
-      "tutti i link sul percorso utilizzino lo stesso protocollo di livello due",
-      "i router mpls sul percorso utilizzino lo stesso protocollo per la distribuzione delle etichette",
-      "le destinazioni finali dei pacchetti che viaggiano sull'LSP supportino mpls",
-      "i router mpls sul percorso eseguano un' operazione di mapping"
-    ],
-    "answer": 3,
-    "explanation": "MPLS routers must perform label mapping operations to establish and maintain Label Switched Paths through the network."
-  },
-  {
     "id": 84,
     "type": "multiple",
     "question": "Header IPv6",
@@ -1327,18 +1314,6 @@
     ],
     "answer": 0,
     "explanation": "MPLS uses label-based forwarding instead of traditional IP longest prefix match, enabling faster packet processing and traffic engineering."
-  },
-  {
-    "id": 104,
-    "type": "multiple",
-    "question": "La metrica (costo) in un algoritmo di instradamento esprime",
-    "options": [
-      "Il peso da assegnare ad un collegamento e usato nella selezione del cammino",
-      "La probabilità che venga utilizzato il cammino più breve",
-      "La complessità di calcolo dell'algoritmo"
-    ],
-    "answer": 0,
-    "explanation": "Routing metrics represent the cost or weight associated with network links, used by routing algorithms to determine the best path to destinations."
   },
   {
     "id": 105,
@@ -1598,19 +1573,6 @@
     "explanation": "Host A (130.192.1.1/25) is in network 130.192.1.0/25, while host B (130.192.1.129/24) is in network 130.192.1.0/24. They are on different logical subnets requiring a router."
   },
   {
-    "id": 125,
-    "type": "multiple",
-    "question": "L'importanza di MPLS (multi-protocol label switching) nelle reti odierne e future deriva dalla possibilità di",
-    "options": [
-      "Realizzare commutatori con supporto specifico per garantire qualità del servizio",
-      "Avere un unico piano di controllo per diverse tecnologie di commutazione",
-      "Realizzare apparati in grado di operare senza bisogno de configurazione",
-      "Distribuire il traffico su batterie de server"
-    ],
-    "answer": 1,
-    "explanation": "MPLS provides a unified control plane that can work across various forwarding technologies, enabling consistent management and traffic engineering."
-  },
-  {
     "id": 126,
     "type": "multiple",
     "question": "Le soluzioni di VPN (virtual private network) basate su SSL (secure socket layer) consentono:",
@@ -1689,19 +1651,6 @@
     "explanation": "In a ring topology with flooding, packets will travel in both directions around the ring, resulting in 2 copies reaching the destination router D."
   },
   {
-    "id": 132,
-    "type": "multiple",
-    "question": "DWDM è una tecnologia che permette di",
-    "options": [
-      "impaccare in modo denso un elevato numero de fibre ottiche sullo stesso cavo",
-      "commutare un segnale ottico dall'ingresso all'uscita di un dispositivo",
-      "multiplare/demultiplare segnali ottici a diverse lunghezze d'onda sulla stessa fibra",
-      "multiplare/demultiplare vari flussi di bit rate su un singolo canale ottico a una specifica lunghezza d'onda"
-    ],
-    "answer": 2,
-    "explanation": "Dense Wavelength Division Multiplexing combines multiple optical signals on different wavelengths onto a single fiber for high-capacity transmission."
-  },
-  {
     "id": 133,
     "type": "multiple",
     "question": "indirizzi global unicast aggregatable",
@@ -1714,19 +1663,6 @@
     "explanation": "Aggregatable Global Unicast addresses in IPv6 are allocated hierarchically to enable efficient route aggregation and reduce global routing table size."
   },
   {
-    "id": 134,
-    "type": "multiple",
-    "question": "Quale di queste tecniche non è una soluzione per la transizione IPV4-IPV6?",
-    "options": [
-      "6to4",
-      "Teredo",
-      "6over4",
-      "6mix4"
-    ],
-    "answer": 3,
-    "explanation": "6mix4 is not a standard IPv4-IPv6 transition mechanism. Valid techniques include 6to4, Teredo, and 6over4."
-  },
-  {
     "id": 135,
     "type": "multiple",
     "question": "Nel protocollo OSPF, gli LSA di tipo Network Link presenti nel Link State Database di un router contengono:",
@@ -1737,7 +1673,7 @@
       "Le adiacenze con le reti di transito presenti nell'area in esame"
     ],
     "answer": 3,
-    "explanation": "Network LSA (Type 2) describe transit networks within an OSPF area, typically broadcast networks with multiple attached routers."
+    "explanation": "In OSPF, Type 2 LSAs (Network Link Advertisements) are generated exclusively by the Designated Router (DR) of a multi-access network (transit network) and list all routers (neighbors) that are currently connected to that particular network segment; they are not propagated outside the area in which they were generated."
   },
   {
     "id": 136,
@@ -2257,18 +2193,6 @@
     "explanation": "MPLS Layer 3 VPNs typically use MP-BGP (Multiprotocol BGP) extensions to exchange VPN routing information between PE routers."
   },
   {
-    "id": 176,
-    "type": "multiple",
-    "question": "La differenza tra gli algoritmi di instradamento di tipo link state e distance vector si può riassumere come segue",
-    "options": [
-      "Gli algoritmi link state inviano informazioni sulla rete nella sua interezza a tutti i nodi della rete; gli algoritmi distance vector inviano informazioni sulla topologia locale solo ai nodi vicini",
-      "Gli algoritmi link state inviano informazioni sulla topologia locale solo ai nodi vicini; gli algoritmi distance vector inviano informazioni sulla rete nella sua interezza a tutti i nodi",
-      "Gli algoritmi link state inviano informazioni sulla topologia locale a tutti i nodi della rete; gli algoritmi distance vector inviano informazioni sulla rete nella sua interezza solo ai nodi vicini"
-    ],
-    "answer": 2,
-    "explanation": "Link state protocols flood local connectivity information to all routers, while distance vector protocols send entire routing tables only to neighbors."
-  },
-  {
     "id": 177,
     "type": "multiple",
     "question": "L'architettura DiffServ è caratterizzata da:",
@@ -2755,19 +2679,6 @@
     ],
     "answer": 1,
     "explanation": "Split horizon prevents advertising routes back to the neighbor from which they were learned, reducing routing loops."
-  },
-  {
-    "id": 215,
-    "type": "multiple",
-    "question": "redistribuzione nel contesto dei protocolli di routing consiste nel",
-    "options": [
-      "distribuire la tabella di routing su più dispositivi in modo da ridurre l'occupazione di memoria su ogni dispositivo",
-      "redistribuire il traffico su più percorsi alternativi per sfruttare a pieno le risorse di rete ed evitare la congestione su percorsi specifici",
-      "comunicare tramite un protocollo di routing route acquisite con un altro, per quanto questo risulti in una perdita di informazione",
-      "apprendere come raggiungere le destinazioni senza dover scambiare informazioni di routing con altri computer"
-    ],
-    "answer": 2,
-    "explanation": "Route redistribution involves exchanging routing information between different routing protocols, which may result in metric conversion and potential information loss."
   },
   {
     "id": 216,
@@ -3428,19 +3339,6 @@
     "explanation": "FDMA systems use frequency reuse patterns where the same frequencies are reused in distant cells to increase capacity while minimizing interference."
   },
   {
-    "id": 267,
-    "type": "multiple",
-    "question": "Un terminale mobile effettua un handover quando",
-    "options": [
-      "si sposta dalla rete di un operatore a quella di un altro",
-      "si riattiva grazie al passaggio della mano dell'utente sullo schermo",
-      "si sposta da una cella ad un'altra durante una chiamata, senza che questa si interrompa",
-      "deve essere raggiunto all'interno della rete di un altro operatore"
-    ],
-    "answer": 2,
-    "explanation": "Handover (or handoff) refers to the process of transferring an ongoing call or data session from one cell to another without interruption."
-  },
-  {
     "id": 268,
     "type": "multiple",
     "question": "Le moderne reti Ethernet sono",
@@ -3555,7 +3453,7 @@
       "Discards it"
     ],
     "answer": 3,
-    "explanation": ""
+    "explanation": "The address fd00:1::3 belongs to the Unique Local Address (ULA) range (fc00::/7). By definition, ULAs are not routable on the global Internet."
   },
   {
     "id": 277,
@@ -3646,7 +3544,7 @@
       "The S1 bearer"
     ],
     "answer": 3,
-    "explanation": ""
+    "explanation": "In an LTE architecture, the S1 bearer is the tunnel (based on the GTP-U protocol) that transports data between the eNodeB (the base station) and the Serving Gateway (S-GW). During a handover (whether based on the X2 or S1 interface), the User Equipment (UE) moves from a source eNodeB to a target eNodeB."
   },
   {
     "id": 284,
@@ -3762,7 +3660,7 @@
       "Link state algorithms send global information to all nodes in the network; distance vector algorithms send local information only to neighboring nodes",
       "Link state algorithms send local information to all nodes in the network; distance vector algorithms send global information only to neighboring nodes"
     ],
-    "answer": 1
+    "answer": 2
   },
   {
     "id": 293,
@@ -3801,7 +3699,7 @@
       "Final destinations of IP packets traveling on the LSP must support MPLS",
       "MPLS routers on the path must deploy the same protocol for label distribution"
     ],
-    "answer": 3
+    "answer": 0
   },
   {
     "id": 296,
@@ -3975,7 +3873,7 @@
   {
     "id": 309,
     "type": "multiple",
-    "question": "In the 6PE solution packets traveling through the MPLS backbone have two labels;",
+    "question": "In the 6PE solution packets traveling through the MPLS backbone have two labels:",
     "explanation": "In 6PE, the top (external) label gets the packet through the IPv4 core to the exit PE, while the inner label identifies the IPv6 prefix.",
     "options": [
       "The internal label is used by internal (P) routers to forward packets towards an IPv6 destination.",
@@ -4048,19 +3946,6 @@
       "The upstream router on a link communicates to the downstream router which label should be prepended to packets belonging to the LSP."
     ],
     "answer": 0
-  },
-  {
-    "id": 315,
-    "type": "multiple",
-    "question": "DWDM (Dense Wavelength Division Multiplexing) is a technology allowing to",
-    "explanation": "DWDM puts multiple wavelengths of light onto one fiber, multiplying capacity.",
-    "options": [
-      "Switch an optical signal from the input of a device to its output port",
-      "Multiplex/demultiplex optical signals (characterized by different wavelengths) on the same optical fiber",
-      "Package in a dense way a large number of optical fibers in the same cable",
-      "Multiplex/demultiplex various bit flows at different bit rates on a single optical channel (characterized by a specific wavelength)"
-    ],
-    "answer": 3
   },
   {
     "id": 316,
@@ -4170,7 +4055,7 @@
     "id": 324,
     "type": "multiple",
     "question": "An optical switch is a device capable of switching:",
-    "explanation": "A basic optical switch (at the physical layer) moves a specific wavelength from an input fiber to an output fiber. Option (b) describes a packet switch, which is more complex than a standard optical switch.",
+    "explanation": "A basic optical switch (at the physical layer) moves a specific wavelength from an input fiber to an output fiber.",
     "options": [
       "Different optical channels on a given wavelength on different input fibers to a given wavelength on a given output fiber.",
       "Packets arriving on a given optical channel from a given input fiber to different optical channels to different output fibers based on information in the header of each packet.",
@@ -4182,14 +4067,15 @@
   {
     "id": 325,
     "type": "multiple",
-    "question": "An IPSec-based VPN (Virtual Private Network) The encryption is mandatory",
+    "question": "IPSec-based VPN (Virtual Private Network)",
     "explanation": "IPsec uses tunneling (encapsulating the original packet) to provide security services for data crossing public networks.",
     "options": [
       "Is based on a specific cryptographic algorithm defined by the IPsec standard itself.",
       "Deploys tunneling to allow encryption and/or authentication of IP packets exchanged.",
-      "Requires that all communicating hosts support the IPsec protocol."
+      "Requires that all communicating hosts support the IPsec protocol.",
+      "The encryption is mandatory"
     ],
-    "answer": 2
+    "answer": 1
   },
   {
     "id": 326,
@@ -4332,7 +4218,7 @@
       "Is part of one of the possible autoconfiguration solutions available in IPv6",
       "Is the only possible solution available in IPv6 for the Interface ID configuration"
     ],
-    "answer": 3
+    "answer": 2
   },
   {
     "id": 337,
@@ -4514,7 +4400,7 @@
       "Edge Caching: Storing frequently accessed content on servers located closer to end users with cache invalidation policies to ensure content freshness",
       "Dynamic Content Acceleration: Optimizing the delivery of dynamically generated content by bypassing the CDN cache and fetching content directly from the origin server"
     ],
-    "answer": 3
+    "answer": 2
   },
   {
     "id": 351,
@@ -4527,7 +4413,7 @@
       "Pushing the label requires modifying the layer two header that is not present when a packet is transmitted and received by an end host",
       "Network nodes have higher performance than end hosts"
     ],
-    "answer": 2
+    "answer": 1
   },
   {
     "id": 352,
