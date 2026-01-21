@@ -499,7 +499,7 @@
       "None of the other answers is correct",
       "Helps to understand if a node no longer reachable."
     ],
-    "answer": 1,
+    "answer": 2,
     "explanation": "Count to infinity is a problem in distance vector routing protocols where routers slowly increment their metric to a destination that has become unreachable."
   },
   {
@@ -3170,19 +3170,6 @@
     "explanation": "6mixt4 is not a standard IPv4-IPv6 transition mechanism. Valid techniques include 6over4, 6to4, and Teredo."
   },
   {
-    "id": 254,
-    "type": "multiple",
-    "question": "Due trame ethernet possono collidere per quale motivo?",
-    "options": [
-      "Switched full duplex",
-      "Switched half duplex",
-      "Per colpa della coda nei buffer dello switch",
-      "Capita spesso a causa della contesa del canale"
-    ],
-    "answer": 1,
-    "explanation": "Collisions can occur in half-duplex Ethernet networks where multiple devices share the same collision domain and contend for access to the medium."
-  },
-  {
     "id": 255,
     "type": "multiple",
     "question": "La tecnica di forwarding 'Source Routing':",
@@ -4440,5 +4427,900 @@
       "Splitting the network in areas and defining, within the given address range, smaller distinct address ranges to use in each area"
     ],
     "answer": 3
+  },
+  {
+    "id": 354,
+    "type": "multiple",
+    "question": "Inter-domain routing:",
+    "options": [
+      "It requires each router to know exactly the path, in terms of routers traversed, made by packets to a destination",
+      "It requires an exterior gateway to make choices of routes, based on information collected through inter-domain routing protocols, consistent with existing agreements with other autonomous systems",
+      "It is a concept that will tend to disappear",
+      "It requires each router to know exactly the cost of reaching any destination (for example in terms of the bandwidth of the links crossed) in order to calculate the path at a lower cost (for example at higher bandwidth)"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 355,
+    "type": "multiple",
+    "question": "DiffServ architecture is characterized by:",
+    "options": [
+      "Sophisticated reporting protocols for reserving resources",
+      "The ability to provide guaranteed quality service to applications or flows that explicitly request it from the network",
+      "A mechanism for separating traffic into classes, each of which can receive a specific service in each node traversed",
+      "Sophisticated routing protocols to choose the path of each individual packet in order to ensure that it receives the service it needs"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 356,
+    "type": "multiple",
+    "question": "The combination of token bucket and Weighted Fair Queueing (WFQ) mechanisms serves to ensure:",
+    "options": [
+      "A maximum burst of consecutive packets, for each stream",
+      "A maximum traversal time of a router",
+      "A maximum traversal time of a NAT",
+      "A maximum bandwidth for each packet stream"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 357,
+    "type": "multiple",
+    "question": "A university has to design the IP networks for two teaching labs Lab1(120 hosts) and Lab2(64 hosts). Which of the following solution is WRONG?",
+    "options": [
+      "Lab1: 192.168.0.0/24 - Lab2: 192.168.1.0/25",
+      "Lab1: 192.168.0.0/25 - Lab2: 192.168.0.128/25",
+      "Lab1: 192.168.0.0/25 - Lab2: 192.168.0.128/26",
+      "Lab1: 192.168.0.0/24 - Lab2: 192.168.1.0/24"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 358,
+    "type": "multiple",
+    "question": "Indicate the false claim among the below statements about the Link State algorithm:",
+    "options": [
+      "The Link State algorithm seldom generates loops",
+      "The RIP (Routing Information Protocol) protocol is based on the Link State algorithm",
+      "The Link State algorithm exchanges less information than the Distance Vector algorithm",
+      "The Link State algorithm converges faster than the Distance Vector algorithm"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 359,
+    "type": "multiple",
+    "question": "An IPv6 router that receives a datagram bigger than the MTU",
+    "options": [
+      "discards it and returns a “Packet Too Big” ICMP Error message",
+      "fragments it using the Fragment Extension Header of IPv6",
+      "redirects it to a router with a suitable MTU using an ICMP Redirect message",
+      "forwards it on its destination route with the “Packet Too Big” flag set"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 360,
+    "type": "multiple",
+    "question": "In a packet traveling over an MPLS network, is it possible to have multiple labels at the same time?",
+    "options": [
+      "Yes, but no more than 20.",
+      "Yes, but only in the MPLS tunnels used for VPNs.",
+      "No, it is not planned.",
+      "Yes, but no more than 2."
+    ],
+    "answer": 0
+  },
+  {
+    "id": 361,
+    "type": "multiple",
+    "question": "A selective flooding routing algorithm:",
+    "options": [
+      "Allows you to reduce the number of times a packet is sent over the same portion of the network",
+      "Requires packets sent to contain a sequence number",
+      "It is certainly more robust than a classic flooding algorithm",
+      "It is substantially similar to the classic flooding algorithm, with the difference that each incoming packet is retransmitted on all lines except the one on which it was received."
+    ],
+    "answer": 0
+  },
+  {
+    "id": 362,
+    "type": "multiple",
+    "question": "In what situation is it possible for a packet to have two IP headers?",
+    "options": [
+      "The packet went through an inbound firewall",
+      "The packet is on the public network after passing through a firewall outbound",
+      "The packet is in the public network, having passed through a NAT outbound",
+      "The packet is on the public network in transit over an IP tunnel connecting two segments of an IP-based VPN"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 363,
+    "type": "multiple",
+    "question": "IP Telephone provides:",
+    "options": [
+      "To equip each user's computer with voice over IP telephony software for communicating with other IP telephony users, and a traditional telephone to communicate with traditional telephone users.",
+      "Upgrading the IP network cabling to connect each telephone user via optical fiber.",
+      "The installation of a network in IP technology parallel to the data one, dedicated to the transport of voice.",
+      "The use of voice gateways to allow communication with users connected to traditional networks (POTS)."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 364,
+    "type": "multiple",
+    "question": "A Neutral Access Point is a particular network in which:",
+    "options": [
+      "The connection between the devices is made at level 2",
+      "various ASs exchange traffic in a \"peering\" mode, i.e., not for a fee",
+      "All equipment is connected through the use of a high-performance central router equipped multiple network interfaces",
+      "Each connected router sees at layer 3 all other routers on the network and can peer with each of them"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 365,
+    "type": "multiple",
+    "question": "In the IPv6 protocol:",
+    "options": [
+      "Like IPv4, IPv6 does not provide mechanisms for reconfiguring routers.",
+      "Routing protocols (e.g., packet format) do not change from IPv4.",
+      "The ARP protocol is incorporated into ICMPv6, but retains exactly the previous scheme operation (broadcast request, unicast response).",
+      "There is a possibility for a station on a network segment to self-configure by listening for Router Advertisement messages."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 366,
+    "type": "multiple",
+    "question": "What are bursts?",
+    "options": [
+      "They are the groupings of cells of dimension G",
+      "They are packets that travel on the IP network",
+      "They are plots that travel through radio waves",
+      "They are data blocks that travel on circuit-switched networks"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 367,
+    "type": "multiple",
+    "question": "The link-local addresses",
+    "options": [
+      "They cannot be assigned to routers.",
+      "They are valid within an organization that can use them to assign addresses to machines in the various subnets of its intranet (they are the counterparts of IPv4 private addresses).",
+      "They are used to identify machines that perform a certain service (e.g. DNS servers).",
+      "They are normally built automatically by the station from the MAC address its own card, to which it prepends a predefined prefix."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 368,
+    "type": "multiple",
+    "question": "In the steady-state OSPF protocol, all routers have in memory:",
+    "options": [
+      "A set of Distance Vectors of all adjacent routers",
+      "The database describing the area to which they belong",
+      "The same database that describes the entire AS",
+      "The same tree of excellent paths"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 369,
+    "type": "multiple",
+    "question": "Indicate the false claim among the below statements about an Autonomous System",
+    "options": [
+      "Autonomous Systems use the Exterior Gateway Protocol to distribute the information among them",
+      "it is identified by means of a 2 bytes long ID",
+      "it is subnet configured by leveraging the static routing",
+      "it is a set of subnets with a short topological proximity and manage by a single organisation unit"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 370,
+    "type": "multiple",
+    "question": "In the coin bucket algorithm:",
+    "options": [
+      "Bucket capacity is related to average speed over the long run.",
+      "The capacity of the bucket is related to the maximum burst size.",
+      "It is used to implement weighted fair queuing.",
+      "The capacity of the bucket has direct relationship with the band."
+    ],
+    "answer": 1
+  },
+  {
+    "id": 371,
+    "type": "multiple",
+    "question": "Two hosts connected to a Switched Ethernet network through ports configured in mode",
+    "options": [
+      "If they belong to different VLANs, they may be able to communicate even if they are connected to different switches and the switch ports are configured in Access mode.",
+      "They can communicate only if they belong to the same VLAN",
+      "They cannot communicate",
+      "If they belong to different VLANs, they can only communicate if they are connected to different switches and the link between the switches is configured in Trunk mode"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 372,
+    "type": "multiple",
+    "question": "Label distribution in MPLS(Multi-Protocol Label Switching)",
+    "options": [
+      "Involves both network nodes and hosts",
+      "Can be performed implicity through the routing protocol OSPF(Open Shortest Path First)",
+      "Can be performed with the RSVP(Resource ReSerVation Protocol)",
+      "Is not needed when network nodes deploy the BGP(Border Gateway Protocol) routing protocol"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 373,
+    "type": "multiple",
+    "question": "The Multipath routing:",
+    "options": [
+      "It is only recommended if the data traffic is mainly composed TCP packets",
+      "It can be a cause of loops if one admits that the paths used may have different costs",
+      "Is supported by major implementations of RIP",
+      "Allows routers to use multiple routes during transients on the network, so as to speed up the dissemination of routing information and decrease the duration of the transient"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 374,
+    "type": "multiple",
+    "question": "A Neutral Access Point is a particular network in which:",
+    "options": [
+      "Multiple Autonomous Systems connect, at layer 3, a number of routers in order exchange routing information",
+      "Multiple Autonomous Systems connect, at layer 2, a number of routers in order exchange routing information",
+      "An Autonomous System connects, at layer 2, a number of routers so as to speed up the exchange of routing information within the domain",
+      "An Autonomous System connects, at layer 3, a number of routers so as to speed up the exchange of routing information within the domain"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 375,
+    "type": "multiple",
+    "question": "In the IPv6 protocol:",
+    "options": [
+      "Like IPv4, IPv6 does not provide mechanisms for reconfiguring routers.",
+      "There is a possibility for a station on a network segment to self-configure by listening for Router Advertisement messages.",
+      "Routing protocols (e.g., packet format) do not change from IPv4.",
+      "The ARP protocol is incorporated into ICMPv6, but retains exactly the previous scheme operation (broadcast request, unicast response)."
+    ],
+    "answer": 1
+  },
+  {
+    "id": 376,
+    "type": "multiple",
+    "question": "IPsec's \"Tunnel\" of operation requires that it be encrypted:",
+    "options": [
+      "The IP header, TCP/UDP header and the internal packet payload",
+      "Only the payload of the internal package",
+      "Exclusively the TCP/UDP header and payload.",
+      "The whole external package, including the IP header."
+    ],
+    "answer": 0
+  },
+  {
+    "id": 377,
+    "type": "multiple",
+    "question": "In the Path Vector type routing algorithm:",
+    "options": [
+      "Each record contained in the Path Vector contains the destination, the distance from the router under consideration, and the list of routers to be traversed to reach that destination",
+      "Each record contained in the Path Vector contains the destination, the distance to the router under consideration, and the next hop router to reach that destination",
+      "Each record contained in the Path Vector contains the destination, the distance from the router under consideration, and the list of Autonomous Systems to be traversed to reach that destination",
+      "Each record contained in the Path Vector contains the destination, the distance to the router under consideration, and the next Autonomous System to reach that destination"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 378,
+    "type": "multiple",
+    "question": "In a cellular network operating according to the Frequency Division Multiple Access(FDMA) technology",
+    "options": [
+      "Voice calls are not possible. The network is used for data traffic",
+      "Only one frequency is adopted for the entire network",
+      "Available frequencies are divided among a group of neighboring cells and then reused in suffiently for away",
+      "Frequencies to use are randomly selected by mobile terminalsi which then resend voice samples in the case"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 379,
+    "type": "multiple",
+    "question": "An 802.11 frame has four MAC addresses, of which:",
+    "options": [
+      "one is the MAC address of the switch attached to the Access Point",
+      "one is always a broadcast address",
+      "none is the MAC address of the Access Point",
+      "one is the MAC address of the Access Point"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 380,
+    "type": "multiple",
+    "question": "In the final stage of a Link State routing algorithm, each router:",
+    "options": [
+      "Runs the Shortest Path First algorithm, using the Link State Database as input.",
+      "Performs the DUAL algorithm (Diffusing Update ).",
+      "Flooding your State Links to neighbors",
+      "Flood all Link State to neighbors"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 381,
+    "type": "multiple",
+    "question": "What is a key advantage of using MPLS over traditional IP routing?",
+    "options": [
+      "MPLS eliminates the need for routing tables in backbone networks",
+      "MPLS does not require any routing protocols to function",
+      "MPLS provides a single control plane for multiple network layers",
+      "MPLS uses a simpler packet format than IP"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 382,
+    "type": "multiple",
+    "question": "An Autonomous System is:",
+    "options": [
+      "The network of an ISP",
+      "A network device that can autonomously discover the best route along which to forward packets for destinations",
+      "An area of an IP network that is administered, especially from a routing perspective, independently of others and with connections to at least two other Autonomous Systems",
+      "A computer capable of self-configuration"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 383,
+    "type": "multiple",
+    "question": "When two nodes share the same Solicited Node Multicast Address",
+    "options": [
+      "Both reply with the Neighbor Advertisement",
+      "Only one node(the correct one) replies with the Neighbor Advertisement",
+      "It is not a possible scenario in IPv6",
+      "Only one nodes replies with the Neighbor Advertisement, but it could be the wrong one"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 384,
+    "type": "multiple",
+    "question": "The IPv6 addresses are",
+    "options": [
+      "32 bits long, with a network part followed by a host part",
+      "128 bits long, with a prefix followed by an interface ID, which might be derived by the MAC address.",
+      "Of variable length, which depends on the size of the MAC address",
+      "128 bits long, with a Interface ID followed by a suffix defined according to the position of the the node in the ISP n"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 385,
+    "type": "multiple",
+    "question": "The technique of \"Split Horizon\":",
+    "options": [
+      "Predicts that routes received in neighbor router announcements are always announced to that neighbor with metric equal to infinity",
+      "None of the above answers",
+      "Provides that a prefix is not announced to the neighbor representing the \"next hop\" to that destination",
+      "Provides for a destination to be declared unattainable when the cost exceeds a certain threshold of infinity."
+    ],
+    "answer": 2
+  },
+  {
+    "id": 386,
+    "type": "multiple",
+    "question": "The combination of token bucket (or bucket hole) and Weighted Fair Queueing (WFQ) mechanisms serves to ensure:",
+    "options": [
+      "A maximum traversal time of a router.",
+      "A maximum burst of consecutive packets, per stream.",
+      "A maximum crossing time of a NAT.",
+      "A maximum bandwidth per packet stream."
+    ],
+    "answer": 0
+  },
+  {
+    "id": 387,
+    "type": "multiple",
+    "question": "The IPv4-IPv6 transition",
+    "options": [
+      "Will take place at a spesific point in time, with the simultaneous switch-on of the new IPv6 devices",
+      "Is important to ensure the scalability of the Internet, which is growing in size and requires more IP addresses",
+      "Has been stopped by the IETF because of security issues.",
+      "Finished in 2011, with the assignment of the last /8 IPv4 block"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 388,
+    "type": "multiple",
+    "question": "What is the distinguishing feature of a VPN that implements an overlay model?",
+    "options": [
+      "Allowing you to create a tunnel in a layer 4 VPN",
+      "Allows you to tunnel into a peer-type site-to-site VPN",
+      "Allowing you to create a tunnel in an access VPN",
+      "Allows you to create a tunnel in an overlay-type site-to-site VPN"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 389,
+    "type": "multiple",
+    "question": "The technique of \"Split Horizon\":",
+    "options": [
+      "Predicts that routes received in neighbor router announcements are always announced to that neighbor with metric equal to infinity",
+      "Provides that a prefix is not announced to the neighbor representing the \"next hop\" to that destination",
+      "None of the above answers",
+      "Provides for a destination to be declared unattainable when the cost exceeds a certain threshold of infinity."
+    ],
+    "answer": 1
+  },
+  {
+    "id": 390,
+    "type": "multiple",
+    "question": "RIP protocol is bagged:",
+    "options": [
+      "In UDP, to enable broadcast transmission of packets",
+      "In UDP, for issues mainly related to the greater simplicity of software development"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 391,
+    "type": "multiple",
+    "question": "In the BGP routing protocol:",
+    "options": [
+      "Topology information always takes precedence over the application of routing policies ('policy')",
+      "The lowest-cost route to each destination is always chosen, unless there are inherent limitations to the operation of hierarchical routing",
+      "The application of routing policies ('policies') always takes precedence over topology information",
+      "The cheapest route to each destination is always chosen"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 392,
+    "type": "multiple",
+    "question": "Two Ethernet plots can collide for what reason?",
+    "options": [
+      "It happens often because of channel contention",
+      "Switched full duplex",
+      "Because of the queue in the switch buffers",
+      "Switched half duplex"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 393,
+    "type": "multiple",
+    "question": "To build a VPN using MPLS, at level 3 according to the peer model, you can:",
+    "options": [
+      "Use an appropriately modified version of the RTP",
+      "Use a suitably modified version of the RIP",
+      "Use a suitably modified version of the TCP",
+      "Use an appropriately modified version of the BGP"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 394,
+    "type": "multiple",
+    "question": "What mechanism is used to forward IPv6 packets over the LAN?",
+    "options": [
+      "The adjacent discovery mechanism is used for all possible types of IPv6 addresses",
+      "The near detection mechanism is not used for IPv6 multicast packets as there is an algorithm to map the IPv6 address to the MAC address",
+      "Near discovery is not used for IPv6 multicast and broadcast packets as there is an algorithm to map the IPv6 address to the MAC address",
+      "No adjacent discovery mechanism is used as there is an algorithm to map any possible address to a MAC address"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 395,
+    "type": "multiple",
+    "question": "What is the role of the GRE protocol?",
+    "options": [
+      "Allows you to encapsulate a layer 2 frame in an IP packet",
+      "Allows you to increase the address space",
+      "Introduces an encryption mechanism for packets",
+      "Allows encapsulation but it is not possible to encapsulate lower layer units in a layer 3 packet"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 396,
+    "type": "multiple",
+    "question": "What is ping-pong effect?",
+    "options": [
+      "An alternative way to define the concept of handover",
+      "The bouncing of signals within a cell.",
+      "The proposing the release cell as the docking cell"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 397,
+    "type": "multiple",
+    "question": "The MPLS (Multiprotocol Label Switching) architecture is characterized by:",
+    "options": [
+      "Final system capable of negotiating the label of the generated packets with the network",
+      "Extremely fast routing protocols in updating routing tables when topology changes occur to ensure rapid error recovery",
+      "A different mechanism (than pure IP) to select the output interface to which the packet is to be forwarded",
+      "Intelligent terminals able to customize the service received from the network"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 398,
+    "type": "multiple",
+    "question": "The link-local addresses",
+    "options": [
+      "They are used to identify machines that perform a certain service (e.g. DNS servers).",
+      "They cannot be assigned to routers.",
+      "They are valid within an organization that can use them to assign addresses to machines in the various subnets of its intranet (they are the counterparts of IPv4 private addresses).",
+      "They are normally built automatically by the station from the MAC address its own card, to which it prepends a predefined prefix."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 399,
+    "type": "multiple",
+    "question": "The IPv6 address 2001:4600::0201:06FF:FEA5:3A4C is:",
+    "options": [
+      "A private address",
+      "An address that a host can only use to communicate with another host on the same link",
+      "An address that a server can use to offer a service on the IPv6 public Internet",
+      "An address that is currently not valid in IPv6"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 400,
+    "type": "multiple",
+    "question": "What is a consequence of using VLANs in a local network?",
+    "options": [
+      "They all have a temporal validity of less than one second in order to better manage the movements of the devices",
+      "They have a time validity that can generally be set by the switch administrator",
+      "They all have infinite temporal validity",
+      "They have a temporal validity that varies over time, based on the number of frames received"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 401,
+    "type": "multiple",
+    "question": "In an MPLS-based VPN at level 3, the packets that traverse the MPLS backbone have two labels:",
+    "options": [
+      "Internal routers (P) never change (swap) the outermost label",
+      "The innermost label is used by internal routers (P) to forward packets to a PE router",
+      "Both labels are used by internal routers (P) to forward packets to PE routers",
+      "The outermost label is used by internal routers (P) to forward packets to a PE router"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 402,
+    "type": "multiple",
+    "question": "How can MPLS be used to build a VPN?",
+    "options": [
+      "MPLS cannot be used to build VPNs",
+      "To make an access VPN",
+      "It can provide point-to-point connections in overlay networks or all routing mechanism in peer networks",
+      "It can provide all the routing mechanism in overlay networks or point-to-point links in peer networks"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 403,
+    "type": "multiple",
+    "question": "LSPs (label switched paths) in the MPLS (multi-protocol label switching) architecture",
+    "options": [
+      "They are created (set up) by applications to transport packets belonging to a forwarding equivalence class (FEC).",
+      "They are obtained by reserving resources in network nodes so as to ensure appropriate quality of service to the applications that created them.",
+      "They constitute the shortest route to a destination.",
+      "They are created by network nodes agreeing on the labels to be used for packets belonging to a forwarding equivalence class (FEC)."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 403,
+    "type": "multiple",
+    "question": "What is the goal of PPTP?",
+    "options": [
+      "To implement site-to-site VPNs.",
+      "To implement VPN with centralized access.",
+      "To implement access VPN.",
+      "To implement VPN with distributed access."
+    ],
+    "answer": 2
+  },
+  {
+    "id": 404,
+    "type": "multiple",
+    "question": "Which IPv6 address type is used for communication between nodes on the same link?",
+    "options": [
+      "Link-local",
+      "Anycast",
+      "Site-local",
+      "Global unicast"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 405,
+    "type": "multiple",
+    "question": "The IPv6 protocol requires that the header of IP packets:",
+    "options": [
+      "It makes use of neighbor discovery mechanisms for all types of IPv6 addresses.",
+      "It does not use neighbor discovery mechanism for forwarding IPv6 multicast and broadcast packets as there is a rule to map these IPv6 addresses to a MAC address.",
+      "It does not use neighbor discovery mechanisms as there is a rule to map any IPv6 address to a MAC address.",
+      "It does not use neighbor discovery mechanisms with regards to forwarding IPv6 multicast packets as there is a rule to map these IPv6 addresses to a MAC address."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 406,
+    "type": "multiple",
+    "question": "An OSPF Area Border Router:",
+    "options": [
+      "Knows the details of the backbone area",
+      "It has summary information on the areas it overlooks and disseminates it in the areas; it does not know the details of those areas",
+      "Through the flooding mechanism, it forwards all the LSAs it receives from an area to all the others it overlooks",
+      "Generate Type 5 LSA to describe destinations outside the routing domain"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 407,
+    "type": "multiple",
+    "question": "A difference of the OSPF routing protocol compared to the IGRP is that:",
+    "options": [
+      "OSPF also allows routing between different ASs",
+      "OSPF allows the simultaneous transport of routing information related to different protocol architectures (integrated routing)",
+      "OSPF is proprietary",
+      "OSPF is hierarchical"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 408,
+    "type": "multiple",
+    "question": "Why are virtual private networks used?",
+    "options": [
+      "They are used to enable an existing cabling infrastructure to provide broadband services",
+      "They are used to allow access to the public internet via a private access network",
+      "They are used to connect two sites of an organization using a dedicated line",
+      "They are used to build a private infrastructure using a public one"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 409,
+    "type": "multiple",
+    "question": "The OSPF routing protocol chooses the path to a destination taking into account:",
+    "options": [
+      "Bandwidth and delay for each link",
+      "Hop Count",
+      "Length of each link along the path",
+      "It can be configured to use various metrics whose semantics are established by the network manager"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 410,
+    "type": "multiple",
+    "question": "A consequence of the deployment of VLANs in a local area network is:",
+    "options": [
+      "Broadcast traffic is limited to the VLAN in which it was generated",
+      "The creation on virtual interfaces on switches, which, since virtual, cannot have failures",
+      "The network security increases as frames are encrypted",
+      "Users must be authenticated before connecting to the VLAN"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 411,
+    "type": "multiple",
+    "question": "What does MPLS use instead of IP addresses for packet forwarding?",
+    "options": [
+      "MAC addresses",
+      "Labels",
+      "Tunnel IDs",
+      "Checksums"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 412,
+    "type": "multiple",
+    "question": "What does a VPN tunnel do?",
+    "options": [
+      "Automatically assigns a public IP address to a private network",
+      "Converts IP packets into a different protocol",
+      "Redirects all network traffic through a firewall",
+      "Encapsulates private network traffic within a secure connection"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 413,
+    "type": "multiple",
+    "question": "What is a feature of the IPv6 addressing scheme?",
+    "options": [
+      "Multicast addresses are not used",
+      "The entire address is assigned by a single authority",
+      "The addresses are distributed to facilitate aggregation in the forwarding tables of the backbone router",
+      "Variable length addresses are used"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 414,
+    "type": "multiple",
+    "question": "The IPv6 addressing scheme:",
+    "options": [
+      "It provides for each entity (e.g., company) to have a set of addresses globally assigned to it, which become its property in perpetuity.",
+      "Provides only addresses uniquely assigned by a designated body.",
+      "It does not provide for the existence of multicast addresses.",
+      "It provides that the first 64 bits of an address are normally identified as the network prefix, at least on LANs."
+    ],
+    "answer": 3
+  },
+  {
+    "id": 415,
+    "type": "multiple",
+    "question": "The main limitation of RIP routing protocol compared with IGRP is that:",
+    "options": [
+      "Does not, unlike IGRP, allow hierarchical routing",
+      "is a Distance Vector type protocol, thus less scalable than IGRP (Link State)",
+      "Since RIP is proprietary, it is not available on all routers",
+      "The RIP metric is less indicative than the IGRP metric of the true degree to which one network route is preferred over others"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 416,
+    "type": "multiple",
+    "question": "IPv6 Header",
+    "options": [
+      "The header is of variable size.",
+      "The header is fixed size and no options can be added.",
+      "Fixed header size but with possible addition of additional headers"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 417,
+    "type": "multiple",
+    "question": "What is a main function of NSS (Network Switching Subsystem)?",
+    "options": [
+      "Paging",
+      "Authentication",
+      "Resource allocation"
+    ],
+    "answer": 2
+  },
+  {
+    "id": 418,
+    "type": "multiple",
+    "question": "One difference of the OSPF routing protocol from IGRP is that:",
+    "options": [
+      "OSPF is hierarchical",
+      "OSPF owns",
+      "OSPF also allows routing between different ASs",
+      "OSPF allows routing information related to different protocol architectures to be carried simultaneously (integrated routing)"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 419,
+    "type": "multiple",
+    "question": "In OSPF, a package of \"Link State Update\":",
+    "options": [
+      "It is also used in the Exchange procedure to exchange all LSAs held by routers, and it transports each LSA in full form",
+      "Carries key information related to a Link State Advertisement",
+      "It is sent for under steady state network conditions, when the transient is now exhausted",
+      "And used to update adjacency status with a neighboring router and only carries information about that change"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 420,
+    "type": "multiple",
+    "question": "The MAC address of the network card of switch S to which station A is connected is used as the destination MAC address in an ethernet frame:",
+    "options": [
+      "Sent from A to B",
+      "Sent from A to S, for example, for management or configuration purposes",
+      "Sent from B to A",
+      "Sent from A to a destination outside the network"
+    ],
+    "answer": 1
+  },
+  {
+    "id": 421,
+    "type": "multiple",
+    "question": "Redistribution:",
+    "options": [
+      "Is used to allow routing information to be passed from routing domain A to routing domain B",
+      "Is that process that needs to be enabled on the router for it to be able to sort packets to the appropriate destination",
+      "Is used to exchange information between an internal router (interior gateway) and an external router (exterior gateway) using the BGP protocol",
+      "It is mainly used by peripheral routing domains, which connect to a single Internet service provider for Internet access"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 422,
+    "type": "multiple",
+    "question": "Two Ethernet frames can collide for what reason?",
+    "options": [
+      "Collision domains decrease",
+      "Broadcast domains are increasing",
+      "Broadcast domains are decreasing",
+      "Collision domains increase"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 423,
+    "type": "multiple",
+    "question": "Optical networks are characterized in a specific and univocal way by the use of equipment capable of:",
+    "options": [
+      "Route packets by processing their header via optical circuits (not electronic circuits)",
+      "Carry huge amounts of data thanks to their ability to switch traffic according to the information contained in a label, present in a special packet header",
+      "Transmit optical signals over fiber optic links",
+      "Switch an optical channel from an input port to an output port"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 424,
+    "type": "multiple",
+    "question": "What is the distinguishing feature of a VPN that implements an overlay model?",
+    "options": [
+      "Allows you to create a tunnel in an overlay-type site-to-site VPN",
+      "Allowing you to create a tunnel in an access VPN",
+      "Allows you to tunnel into a peer-type site-to-site VPN",
+      "Allowing you to create a tunnel in a layer 4 VPN"
+    ],
+    "answer": 0
+  },
+  {
+    "id": 425,
+    "type": "multiple",
+    "question": "In the RTS-CTS exchange foreseen by the 802.11 protocol in infrastructure mode, the CTS frame is sent",
+    "options": [
+      "by the hidden terminal",
+      "by the terminal closest to the sender of the RTS frame",
+      "by every terminal receiving the RTS frame",
+      "by the access point"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 426,
+    "type": "multiple",
+    "question": "The Solicited Node Multicast Address is:",
+    "options": [
+      "The multicast address used as the source address in a Neighbor Solicitation packet",
+      "The multicast address that is inserted in the payload (ARPv6 Target Address field) of a Neighbor Solicitation packet",
+      "The multicast address that is inserted in the payload (ICMPv6 Target Address field) of a Neighbor Solicitation packet",
+      "The multicast address used as the destination address in a Neighbor Solicitation packet"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 427,
+    "type": "multiple",
+    "question": "What is the advantage of using a Link State routing algorithm compared to a Distance Vector type?",
+    "options": [
+      "By having the Link State Database available, each router is able to independently calculate the routes to each destination",
+      "A lower requirement in terms of processing power for the execution of the algorithm",
+      "The presence of the Link State Database eliminates the need for a routing table, saving memory",
+      "Fewer routing errors as link states are exchanged by routers at a very high frequency"
+    ],
+    "answer": 0
   }
 ]
