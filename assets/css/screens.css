@@ -240,6 +240,13 @@
     white-space: nowrap;
 }
 
+@media (prefers-color-scheme: dark) {
+    .quiz-timer-display {
+        color: #e0e7ff;
+        background: rgba(79, 70, 229, 0.5);
+    }
+}
+
 .question-card {
     background: var(--bg-card);
     border-radius: var(--radius-l);
@@ -917,4 +924,3 @@
         grid-column: 1 / -1;
     }
 }
-
