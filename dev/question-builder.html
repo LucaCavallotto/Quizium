@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Tool: Question Builder</title>
+    <style>
+        :root {
+            --bg: #f4f4f5;
+            --surface: #ffffff;
+            --border: #e4e4e7;
+            --text: #18181b;
+            --text-sec: #71717a;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --danger: #ef4444;
+            --danger-bg: #fee2e2;
+            --success: #22c55e;
+            --success-bg: #dcfce7;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--surface);
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 120px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+        }
+
+        .status {
+            margin-top: 20px;
+            margin-bottom: 24px;
+            padding: 16px;
+            border-radius: 6px;
+            display: none;
+            white-space: pre-wrap;
+        }
+
+        .status.error {
+            background: var(--danger-bg);
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .status.success {
+            background: var(--success-bg);
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .legend {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+
+        .legend code {
+            display: block;
+            background: #eee;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            margin: 8px 0;
+            white-space: pre;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            background: #e4e4e7;
+            color: #18181b;
+        }
+
+        .btn-secondary:hover {
+            background: #d4d4d8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Dev Tool: Question Builder</h1>
+
+        <div class="legend">
+            <div class="grid">
+                <div>
+                    <strong>Multiple Choice</strong>
+                    <p>Line 2 is simply the <strong>First Option</strong>.</p>
+                    <code>Question Text
+Option A
+Option B
+Option C
+0
+Explanation (Optional)</code>
+                </div>
+                <div>
+                    <strong>Boolean</strong>
+                    <p>Line 2 must be <strong>'b'</strong>.</p>
+                    <code>Question Text
+b
+0
+Explanation (Optional)</code>
+                    <p style="font-size: 0.85em; color: var(--text-sec)">0 = True, 1 = False</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="startId">Starting ID (Required)</label>
+            <input type="number" id="startId" min="0" placeholder="ID">
+        </div>
+
+        <div class="form-group">
+            <label for="rawInput">Raw Question Input</label>
+            <textarea id="rawInput" placeholder="Paste your questions here..."></textarea>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div class="actions">
+            <button onclick="generateJSON()">Generate & Copy JSON</button>
+            <button class="btn-secondary" onclick="clearInput()">Clear Input</button>
+        </div>
+    </div>
+
+    <script>
+        function clearInput() {
+            document.getElementById('rawInput').value = '';
+            document.getElementById('startId').value = '';
+            const statusEl = document.getElementById('status');
+            statusEl.style.display = 'none';
+        }
+
+        function generateJSON() {
+            const input = document.getElementById('rawInput').value;
+            const startIdStr = document.getElementById('startId').value;
+            const statusEl = document.getElementById('status');
+
+            statusEl.style.display = 'none';
+            statusEl.className = 'status';
+
+            if (!input.trim()) {
+                showStatus('Please enter some questions.', 'error');
+                return;
+            }
+
+            if (!startIdStr.trim()) {
+                showStatus('Please enter a Starting ID.', 'error');
+                return;
+            }
+
+            let startId = parseInt(startIdStr);
+            if (isNaN(startId) || startId < 0) {
+                showStatus('Invalid Starting ID.', 'error');
+                return;
+            }
+
+            // Split by double newlines to separate question blocks
+            const blocks = input.split(/\n\s*\n/);
+            const jsonOutput = [];
+            let currentId = startId;
+            const errors = [];
+
+            blocks.forEach((block, index) => {
+                if (!block.trim()) return;
+
+                // 1. Get all lines, trimming whitespace
+                const lines = block.split('\n').map(l => l.trim()).filter(l => l !== '');
+
+                if (lines.length < 2) {
+                    errors.push(`Question ${index + 1}: Malformed block (too few lines).`);
+                    return;
+                }
+
+                const questionText = lines[0];
+                const line2 = lines[1].toLowerCase();
+
+                let type = 'multiple';
+                let contentStartIndex = 1; // Default: Line 1 (2nd line) is content
+
+                // 2. Determine Type
+                // If Line 2 is exactly 'b', it's Boolean and content starts after it.
+                // Otherwise, it's Multiple Choice and Line 2 is the first option.
+                if (line2 === 'b') {
+                    type = 'boolean';
+                    contentStartIndex = 2; // Line 0=Q, Line 1='b', Line 2=AnswerIndex
+                } else {
+                    type = 'multiple';
+                    contentStartIndex = 1; // Line 0=Q, Line 1=Option A
+                }
+
+                let questionObj = {
+                    id: currentId,
+                    type: type,
+                    question: questionText
+                };
+
+                // Extract content based on determined start index
+                const contentLines = lines.slice(contentStartIndex);
+
+                if (type === 'multiple') {
+                    if (contentLines.length < 3) {
+                        // Need at least 2 options + 1 answer index
+                        errors.push(`Question ${index + 1}: Insufficient content for multiple choice.`);
+                        return;
+                    }
+
+                    // Find answer index line (standalone number)
+                    let answerIndex = -1;
+                    let optionLines = [];
+                    let foundAnswerLineIndex = -1; // relative to contentLines
+
+                    for (let i = 0; i < contentLines.length; i++) {
+                        if (/^\d+$/.test(contentLines[i])) {
+                            foundAnswerLineIndex = i;
+                            answerIndex = parseInt(contentLines[i]);
+                            break;
+                        }
+                        optionLines.push(contentLines[i]);
+                    }
+
+                    if (foundAnswerLineIndex === -1) {
+                        errors.push(`Question ${index + 1}: Could not find answer index.`);
+                        return;
+                    }
+
+                    if (optionLines.length < 2 || optionLines.length > 5) {
+                        errors.push(`Question ${index + 1}: Invalid number of options (${optionLines.length}). Must be 2-4.`);
+                        return;
+                    }
+
+                    if (answerIndex < 0 || answerIndex >= optionLines.length) {
+                        errors.push(`Question ${index + 1}: Answer index ${answerIndex} out of bounds.`);
+                        return;
+                    }
+
+                    questionObj.options = optionLines;
+                    questionObj.answer = answerIndex;
+
+                    // Explanation (lines after answer index)
+                    if (foundAnswerLineIndex + 1 < contentLines.length) {
+                        questionObj.explanation = contentLines.slice(foundAnswerLineIndex + 1).join(' ');
+                    }
+
+                } else { // Boolean
+                    // Content should contain: AnswerIndex (0/1), then optionally Explanation.
+
+                    if (contentLines.length < 1) {
+                        errors.push(`Question ${index + 1}: Missing answer index for boolean.`);
+                        return;
+                    }
+
+                    if (!/^\d+$/.test(contentLines[0])) {
+                        errors.push(`Question ${index + 1}: Expected numeric answer index (0 or 1).`);
+                        return;
+                    }
+
+                    let rawAnswerIndex = parseInt(contentLines[0]);
+                    if (rawAnswerIndex !== 0 && rawAnswerIndex !== 1) {
+                        errors.push(`Question ${index + 1}: Boolean answer index must be 0 (True) or 1 (False).`);
+                        return;
+                    }
+
+                    // Map User Input: 0=True, 1=False (UI standard) -> JSON: 1=True, 0=False (App standard)
+                    questionObj.answer = (rawAnswerIndex === 0) ? 1 : 0;
+
+                    // Explanation
+                    if (contentLines.length > 1) {
+                        questionObj.explanation = contentLines.slice(1).join(' ');
+                    }
+                }
+
+                jsonOutput.push(questionObj);
+                currentId++;
+            });
+
+            if (errors.length > 0) {
+                showStatus(errors.join('\n'), 'error');
+                return;
+            }
+
+            let jsonString = JSON.stringify(jsonOutput, null, 2);
+
+            // If appending (ID > 0), strip array brackets to facilitate pasting into existing file
+            if (startId > 0) {
+                // Remove first char [ and last char ]
+                // jsonString is roughly "[\n  {...}\n]"
+                // Slicing 1 to -1 usually works, then trim.
+                jsonString = jsonString.trim();
+                if (jsonString.startsWith('[') && jsonString.endsWith(']')) {
+                    jsonString = jsonString.slice(1, -1).trim();
+                    // If stripping brackets breaks indentation visually for the first item, 
+                    // typically pasted content is auto-formatted by IDEs or doesn't matter much.
+                    // But we will trim it to ensure clean pasting.
+                    // Appending a comma might be useful, but the user said "[] are not required".
+                    // We'll leave it as objects comma-separated.
+                }
+            }
+
+            navigator.clipboard.writeText(jsonString).then(() => {
+                let msg = `Successfully generated ${jsonOutput.length} questions!\nJSON copied to clipboard.`;
+                if (startId > 0) {
+                    msg += `\n(Brackets [] removed for appending)`;
+                }
+                showStatus(msg, 'success');
+            }).catch(err => {
+                showStatus('Generated JSON but failed to copy automatically. See console.', 'error');
+                console.error(err);
+            });
+        }
+
+        function showStatus(msg, type) {
+            const el = document.getElementById('status');
+            el.innerText = msg;
+            el.className = `status ${type}`; // resets to status + type
+            el.style.display = 'block';
+        }
+    </script>
+
+</body>
+
+</html>

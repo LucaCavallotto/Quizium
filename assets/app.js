@@ -179,6 +179,7 @@ class QuizApp {
         window.hideFinishConfirmation = () => this.hideFinishConfirmation();
         window.confirmFinish = () => this.confirmFinish();
         window.toggleFlag = () => this.toggleFlag();
+        window.toggleFlag = () => this.toggleFlag();
         window.toggleShuffle = (checked) => this.toggleShuffle(checked);
     }
 

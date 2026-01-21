@@ -111,6 +111,7 @@ The file must contain an array of question objects. Each object should have the 
     *   For `multiple`: Integer index (0-based) of the correct option.
     *   For `boolean`: Integer `0` (False) or `1` (True).
 
+
 ### 2. Register the Subject in the App
 
 Open `assets/app.js` and find the `subjects` array inside the `QuizApp` constructor state. Add a single line for your new subject:
@@ -136,5 +137,31 @@ subjects: [
 *   **color**: Main accent color (CSS hex or var).
 *   **bg**: Light background color.
 *   **lang**: Language code (`'EN'` or `'IT'`) for formatting boolean question labels (e.g., True/False vs Vero/Falso).
+*   **file**: (Optional) If your JSON file name differs from the ID, specify it here (e.g., `file: 'my-history.json'`).
 
 Once this is done, refresh the page to see your new subject!
+
+## Developer Tools
+
+### Question Builder
+
+A standalone tool is available for developers to easily convert raw text questions into the application's JSON format.
+
+-   **Location**: [`dev/question-builder.html`](dev/question-builder.html)
+-   **Usage**: Open the file directly in your browser.
+-   **Features**:
+    -   **Parsing**: Smart detection of Multiple Choice (default) vs Boolean ('b').
+    -   **Validation**: Validates structure and indices before generation.
+    -   **Smart JSON**: Generates a full array for new files (Start ID = 0) or an append-ready list (Start ID > 0).
+
+**Input Format Example:**
+```text
+Question text?
+Option A
+Option B
+Option C
+0
+Explanation
+```
+(See tool legend for full details)
+
