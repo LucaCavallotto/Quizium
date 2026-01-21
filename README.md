@@ -143,25 +143,23 @@ Once this is done, refresh the page to see your new subject!
 
 ## Developer Tools
 
-### Question Builder
+### Question Builder & Utility
 
-A standalone tool is available for developers to easily convert raw text questions into the application's JSON format.
+A standalone tool is available for developers to assist in content creation and management.
 
 -   **Location**: [`dev/question-builder.html`](dev/question-builder.html)
 -   **Usage**: Open the file directly in your browser.
--   **Features**:
-    -   **Parsing**: Smart detection of Multiple Choice (default) vs Boolean ('b').
-    -   **Validation**: Validates structure and indices before generation.
-    -   **Smart JSON**: Generates a full array for new files (Start ID = 0) or an append-ready list (Start ID > 0).
 
-**Input Format Example:**
-```text
-Question text?
-Option A
-Option B
-Option C
-0
-Explanation
-```
-(See tool legend for full details)
+**Features:**
+1.  **Question Builder Tab**:
+    -   Converts raw text questions into valid JSON.
+    -   Smart detection of Multiple Choice vs Boolean.
+    -   Validates structure and indices.
+    -   Smart JSON output (array vs list) based on Starting ID.
+
+2.  **Reorder IDs Tab**:
+    -   Accepts an existing JSON array of questions.
+    -   Sorts them by their current `id`.
+    -   Renumbers `id` sequentially starting from 1.
+    -   Outputs normalized JSON ready for use.
 
