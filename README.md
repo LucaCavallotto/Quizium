@@ -47,6 +47,7 @@ Improve your workflow with these keyboard shortcuts (Desktop):
 | **Numbers 1-9** | Select Answer Option (1 for 1st, 2 for 2nd, etc.) |
 | **Enter** | Confirm/Finish Quiz (when Modal is open) |
 | **Backspace** | Cancel/Close Modal (when Modal is open) |
+| **Escape** | Exit Quiz or Cancel/Close Modal |
 
 *Note: Number keys are disabled if the corresponding option is not available or if navigation modifiers (Ctrl/Alt) are held. Navigation/Selection keys are blocked when the confirmation modal is open.*
 
@@ -64,6 +65,9 @@ After completing a quiz, you can review your performance:
 -   **Review Answers**: Click the "Review Answers" button on the results screen to navigate through the questions again.
     -   See exactly what you answered vs. the correct answer.
     -   Read detailed explanations for each question.
+-   **Review Wrong Answers**: A specific mode to review only the questions you missed.
+    -   Focus your study time on weak points.
+    -   Visible only if you have incorrectly answered questions.
 
 ## Accessibility
 
@@ -80,6 +84,8 @@ To add a new subject to Quizium, you need to follow these steps:
 ### 1. Create the Data File
 
 Create a new JSON file in the `data/` folder. The filename should be the unique ID of your subject (e.g., `history.json`).
+
+> **Tip**: You can use the [Question Builder Tool](https://lucacavallotto.github.io/Quizium/dev/question-builder.html) to easily generate the JSON structure.
 
 **JSON Format:**
 The file must contain an array of question objects. Each object should have the following structure:
@@ -147,7 +153,7 @@ Once this is done, refresh the page to see your new subject!
 
 A standalone tool is available for developers to assist in content creation and management.
 
--   **Location**: [`dev/question-builder.html`](dev/question-builder.html)
+-   **Location**: [`dev/question-builder.html`](https://lucacavallotto.github.io/Quizium/dev/question-builder.html)
 -   **Usage**: Open the file directly in your browser.
 
 **Features:**
