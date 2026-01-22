@@ -350,7 +350,7 @@
   {
     "id": 28,
     "type": "multiple",
-    "question": "Two hosts A and B belong to the same physical network and have IP addresses 130.192.1.1./25 and 130.192.1.100/24, respectively",
+    "question": "Two hosts A and B belong to the same physical network and have IP addresses 130.192.1.1/25 and 130.192.1.100/24, respectively",
     "options": [
       "B communicates with A but not vice versa",
       "A communicate with B only by means of a router",
@@ -812,7 +812,7 @@
       "130.192.3.0/24 e 130.192.4.0/24",
       "130.192.4.0/25 e 130.192.4.128/25"
     ],
-    "answer": 3,
+    "answer": 1,
     "explanation": "130.192.4.0/23 is the smallest aggregation that contains both 130.192.4.0/25 and 130.192.4.128/25, as it covers the entire 130.192.4.0-130.192.5.255 range."
   },
   {
@@ -1734,7 +1734,7 @@
     "question": "Il pacchetto ICMPv6 Router Advertisement",
     "options": [
       "Viene inviato in risposta ad un pacchetto ICMPv6 Neighbor Solicitation",
-      "è un pacchetto broadcast",
+      "È un pacchetto broadcast",
       "Permette l'autoconfigurazione dei dispositivi senza l'utilizzo del protocollo DHCP",
       "Viene inviato periodicamente da un router a tutti gli altri router della rete internet"
     ],
@@ -2315,7 +2315,7 @@
     "question": "La distribuzione delle etichette in MPLS (Multi-Protocol Label Switching)",
     "options": [
       "Può essere operata utilizzando il protocollo RSVP (Resource ReSerVation Protocol)",
-      "Non è necessaria quando i nodi della rete utilizzano il protocollo de routing BGP (Border Gateway Protocol)",
+      "Non è necessaria quando i nodi della rete utilizzano il protocollo di routing BGP (Border Gateway Protocol)",
       "Coinvolge nodi di rete e stazioni",
       "Può essere fatta implicitamente tramite il protocollo di routing OSPF (Open Shortest Path First)"
     ],
@@ -2487,19 +2487,6 @@
     ],
     "answer": 0,
     "explanation": "Decreasing cell radius while keeping cell size fixed allows more frequent frequency reuse, increasing overall network capacity."
-  },
-  {
-    "id": 202,
-    "type": "multiple",
-    "question": "L'indirizzo IPv6 2001:4600::0201:06FF:FEAS:3A4C è:",
-    "options": [
-      "Un indirizzo di tipo privato",
-      "Un indirizzo utilizzabile da un server per offrire un servizio sulla Internet pubblica IPv6",
-      "Un indirizzo utilizzabile da un host unicamente per effettuare delle comunicazioni con un altro host sullo stesso link",
-      "Un indirizzo al momento non valido in IPv6"
-    ],
-    "answer": 1,
-    "explanation": "2001:4600::/32 is part of the global unicast address space allocated for public IPv6 Internet use."
   },
   {
     "id": 203,
@@ -3391,7 +3378,7 @@
       "Discover the MAC address of the destination in direct delivery"
     ],
     "answer": 1,
-    "explanation": ""
+    "explanation": "The mapping from EUI-48 (the classic 48-bit MAC address) to EUI-64 is a process used in IPv6 to automatically generate the second half of an IPv6 address (the last 64 bits), called the Interface Identifier."
   },
   {
     "id": 278,
@@ -3560,7 +3547,7 @@
       "The IP address of the router interface of the gateway router in the same AS"
     ],
     "answer": 1,
-    "explanation": ""
+    "explanation": "In BGP, the Next-Hop attribute represents the IP address of the boundary router (the gateway) in the adjacent Autonomous System used to reach a specific destination. This means the Next-Hop typically corresponds to the entry point of the **first AS** listed in the AS-PATH attribute."
   },
   {
     "id": 291,
@@ -3594,7 +3581,7 @@
     "explanation": "NAT64 translates between the two protocols by stripping the header of one (e.g., IPv6) and constructing a new header for the other (e.g., IPv4).",
     "options": [
       "Operate on 64-bit IP addresses",
-      "Replace the IPv6 header of a packet with an IPv4 one, and vice versa 1,",
+      "Replace the IPv6 header of a packet with an IPv4 one, and vice versa",
       "Convert an IPv6 packet in an Ethernet frame",
       "Replace the IPv6 destination address in the IPv6 header of a packet with an IPv4 one, and vice versa"
     ],
@@ -4283,10 +4270,10 @@
     "options": [
       "a security threat caused by an intruder in the BSS",
       "the use of the same MAC address by more than one node in the same BSS",
-      "the possibility that two or more wireless nodes can interfere with each other without",
+      "the possibility that two or more wireless nodes can interfere with each other without being able to hear each other",
       "a failure in the association to an Access Point during the passive scanning procedure"
     ],
-    "answer": 3
+    "answer": 2
   },
   {
     "id": 348,
@@ -4405,14 +4392,15 @@
   {
     "id": 357,
     "type": "multiple",
-    "question": "A university has to design the IP networks for two teaching labs Lab1(120 hosts) and Lab2(64 hosts). Which of the following solution is WRONG?",
+    "question": "A university has to design the IP networks for two teaching labs Lab1 (120 hosts) and Lab2 (64 hosts). Which of the following solution is WRONG?",
     "options": [
       "Lab1: 192.168.0.0/24 - Lab2: 192.168.1.0/25",
       "Lab1: 192.168.0.0/25 - Lab2: 192.168.0.128/25",
       "Lab1: 192.168.0.0/25 - Lab2: 192.168.0.128/26",
       "Lab1: 192.168.0.0/24 - Lab2: 192.168.1.0/24"
     ],
-    "answer": 3
+    "answer": 2,
+    "explanation": "Lab1 (Requires 120 hosts): A /25 subnet mask is assigned that contains 2^(32-25) - 2 = 2^7 - 2 = 128 - 2 = 126, ok. Lab2 (Requires 64 hosts): A /26 subnet mask is assigned that contains 2^(32-26) - 2 = 2^6 - 2 = 64 - 2 = 62, but the lab requires 64 addresses."
   },
   {
     "id": 359,
@@ -4641,7 +4629,7 @@
       "Each record contained in the Path Vector contains the destination, the distance from the router under consideration, and the list of Autonomous Systems to be traversed to reach that destination",
       "Each record contained in the Path Vector contains the destination, the distance to the router under consideration, and the next Autonomous System to reach that destination"
     ],
-    "answer": 1
+    "answer": 2
   },
   {
     "id": 378,
@@ -4725,7 +4713,7 @@
       "Of variable length, which depends on the size of the MAC address",
       "128 bits long, with a Interface ID followed by a suffix defined according to the position of the the node in the ISP n"
     ],
-    "answer": 2
+    "answer": 1
   },
   {
     "id": 385,
@@ -5084,7 +5072,8 @@
       "The addresses are distributed to facilitate aggregation in the forwarding tables of the backbone router",
       "Variable length addresses are used"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "IPv6 addresses are designed with a hierarchical structure that allows for efficient aggregation of routing information, reducing the size of routing tables."
   },
   {
     "id": 414,
@@ -5179,7 +5168,8 @@
       "Is used to exchange information between an internal router (interior gateway) and an external router (exterior gateway) using the BGP protocol",
       "It is mainly used by peripheral routing domains, which connect to a single Internet service provider for Internet access"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "Redistribution is the process of exchanging routing information between different routing domains (e.g., between OSPF and BGP, or between different OSPF areas)."
   },
   {
     "id": 422,
@@ -5227,7 +5217,8 @@
       "by every terminal receiving the RTS frame",
       "by the access point"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "In an 802.11 infrastructure network, the Access Point (AP) acts as the central hub for all traffic. To solve the hidden node problem, the protocol uses a handshake mechanism: RTS (Request to Send): The sending station transmits an RTS frame to the AP to request channel access. CTS (Clear to Send): The AP responds with a CTS frame. Since the AP is centrally located, this signal reaches all stations in the BSS, effectively informing even the hidden nodes that they must remain silent during the upcoming transmission."
   },
   {
     "id": 426,
