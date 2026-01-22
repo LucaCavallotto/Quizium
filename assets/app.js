@@ -128,11 +128,18 @@ class QuizApp {
                 if (e.key === 'Enter') {
                     e.preventDefault();
                     this.confirmFinish();
-                } else if (e.key === 'Backspace') {
+                } else if (e.key === 'Backspace' || e.key === 'Escape') {
                     e.preventDefault();
                     this.hideFinishConfirmation();
                 }
                 return; // Block other inputs
+            }
+
+            // Escape to Exit
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                this.attemptCloseQuiz();
+                return;
             }
 
             // Navigation
