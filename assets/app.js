@@ -84,7 +84,8 @@ class QuizApp {
             isReviewing: false,
             flaggedQuestions: new Set(),
             shuffleQuestions: true, // Default to true
-            pendingConfirmationAction: null // 'finish' or 'exit'
+            pendingConfirmationAction: null, // 'finish' or 'exit'
+            reviewIndices: [] // Stores indices of questions to review
         };
 
         this.init();
@@ -180,7 +181,7 @@ class QuizApp {
         window.selectSubject = (id) => this.selectSubject(id);
         window.selectTimeMode = (mode) => this.selectTimeMode(mode);
         window.selectCorrectionMode = (mode) => this.selectCorrectionMode(mode);
-        window.startReview = () => this.startReview();
+        window.startReview = (filter) => this.startReview(filter);
         window.exitReview = () => this.exitReview();
         window.showFinishConfirmation = () => this.showFinishConfirmation();
         window.hideFinishConfirmation = () => this.hideFinishConfirmation();
@@ -531,13 +532,28 @@ class QuizApp {
 
     updateProgressBar() {
         const answeredCount = this.state.allAnswers.filter(a => a !== null).length;
-        const progress = (answeredCount / this.state.totalQuestions) * 100;
+        // In review mode, progress bar reflects progress through review set
+        const total = this.state.totalQuestions;
+        const progress = (answeredCount / total) * 100;
+
+        // Use a clearer logic for review mode if needed, but standard logic works if totalQuestions is updated.
+        // Actually answeredCount is from allAnswers (global). 
+        // In review mode, we might want purely visual progress 1..N?
+        // Let's stick to standard for now, as updating totalQuestions makes this consistent for "current session".
         document.getElementById(CONFIG.SELECTORS.PROGRESS_BAR).style.width = `${progress}%`;
     }
 
+    getRealQuestionIndex(viewIndex = this.state.currentQuestionIndex) {
+        if (this.state.isReviewing && this.state.reviewIndices && this.state.reviewIndices.length > 0) {
+            return this.state.reviewIndices[viewIndex];
+        }
+        return viewIndex;
+    }
+
     loadQuestion() {
-        const question = this.state.questions[this.state.currentQuestionIndex];
-        const savedAnswer = this.state.allAnswers[this.state.currentQuestionIndex];
+        const realIndex = this.getRealQuestionIndex();
+        const question = this.state.questions[realIndex];
+        const savedAnswer = this.state.allAnswers[realIndex];
 
         // Update Meta
         document.getElementById(CONFIG.SELECTORS.CURRENT_QUESTION).textContent = this.state.currentQuestionIndex + 1;
@@ -594,7 +610,7 @@ class QuizApp {
         const flagBtn = document.getElementById('btnFlagQuestion');
         if (this.state.correctionMode === 'final' && !this.state.quizCompleted && !this.state.isReviewing) {
             flagBtn.classList.remove('hidden');
-            const isFlagged = this.state.flaggedQuestions.has(this.state.currentQuestionIndex);
+            const isFlagged = this.state.flaggedQuestions.has(realIndex);
             if (isFlagged) {
                 flagBtn.classList.add('active');
                 flagBtn.querySelector('svg').setAttribute('fill', '#f59e0b');
@@ -836,7 +852,7 @@ class QuizApp {
     toggleFlag() {
         if (this.state.correctionMode !== 'final' || this.state.quizCompleted) return;
 
-        const idx = this.state.currentQuestionIndex;
+        const idx = this.getRealQuestionIndex();
         if (this.state.flaggedQuestions.has(idx)) {
             this.state.flaggedQuestions.delete(idx);
         } else {
@@ -869,11 +885,13 @@ class QuizApp {
             const dot = document.getElementById(`nav-dot-${i}`);
             if (!dot) continue;
 
+            const realIndex = this.getRealQuestionIndex(i);
+
             dot.className = 'nav-dot'; // Reset
             dot.removeAttribute('style'); // Clear inline styles
             if (i === this.state.currentQuestionIndex) dot.classList.add('current');
 
-            const ans = this.state.allAnswers[i];
+            const ans = this.state.allAnswers[realIndex];
 
             // In Final Mode (during quiz), show answered state but not correct/wrong colors?
             // User requested: "do not show any correctness feedback during the quiz"
@@ -892,18 +910,17 @@ class QuizApp {
                 // Quiz over, if null it's skipped
                 dot.classList.add('answered-skipped');
             }
+
+            // Apply flagged status to dots
+            if (this.state.flaggedQuestions.has(realIndex)) {
+                dot.classList.add('flagged');
+            }
         }
 
         const currentDot = document.getElementById(`nav-dot-${this.state.currentQuestionIndex}`);
         if (currentDot) {
             currentDot.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
-
-        // Apply flagged status to dots
-        this.state.flaggedQuestions.forEach(idx => {
-            const dot = document.getElementById(`nav-dot-${idx}`);
-            if (dot) dot.classList.add('flagged');
-        });
     }
 
     showResults(isTimeOut = false) {
@@ -929,6 +946,15 @@ class QuizApp {
 
         // Show/Hide Review Button
         document.getElementById(CONFIG.SELECTORS.BTN_REVIEW).style.display = 'flex';
+
+        // Update Review Wrong Button
+        const btnWrong = document.getElementById('btnReviewWrong');
+        if (this.state.wrongAnswers > 0) {
+            btnWrong.style.display = 'flex';
+            btnWrong.textContent = `Review Wrong (${this.state.wrongAnswers})`;
+        } else {
+            btnWrong.style.display = 'none';
+        }
 
         const title = document.getElementById('resultTitle');
         const msg = document.getElementById('resultMessage');
@@ -1009,9 +1035,23 @@ class QuizApp {
         return array;
     }
 
-    startReview() {
+    startReview(filter = 'all') {
         this.state.isReviewing = true;
         this.state.currentQuestionIndex = 0;
+
+        // Populate Indices based on filter
+        if (filter === 'wrong') {
+            this.state.reviewIndices = this.state.allAnswers
+                .map((ans, idx) => (ans && !ans.isCorrect ? idx : -1))
+                .filter(idx => idx !== -1);
+        } else {
+            // All questions
+            this.state.reviewIndices = this.state.questions.map((_, idx) => idx);
+        }
+
+        // Temporarily override totalQuestions for the navigator/progress to work naturally
+        this.state.originalTotalQuestions = this.state.totalQuestions; // Backup
+        this.state.totalQuestions = this.state.reviewIndices.length;
 
         // Show correct/wrong counts in header for review
         document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.style.display = 'flex';
@@ -1022,10 +1062,18 @@ class QuizApp {
         this.renderNavigator();
         this.loadQuestion();
         this.showScreen(CONFIG.SCREENS.QUIZ);
+
+        // Reset scroll
+        const nav = document.getElementById(CONFIG.SELECTORS.NAVIGATOR);
+        if (nav) nav.scrollLeft = 0;
     }
 
     exitReview() {
         this.state.isReviewing = false;
+        // Restore total questions
+        if (this.state.originalTotalQuestions) {
+            this.state.totalQuestions = this.state.originalTotalQuestions;
+        }
         this.showScreen(CONFIG.SCREENS.RESULTS);
     }
 
