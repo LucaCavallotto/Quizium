@@ -6,7 +6,8 @@
     "options": [
       "Partition a private network (for example the one of a parent company with various subsidiaries) in multiple networks virtually separated",
       "Divide a corporate local area network in a set of separate subnets, each for a different corporate function (e.g., sales, procurement, engineering, marketing)",
-      "Transport private traffic through a shared infrastructure while creating the same conditions the traffic would undergo through a private infrastructure"
+      "Transport private traffic through a shared infrastructure while creating the same conditions the traffic would undergo through a private infrastructure",
+      "Access Netflix's library of another country"
     ],
     "answer": 2,
     "explanation": "VPNs are designed to securely extend a private network across a public network, enabling users to send and receive data as if their devices were directly connected to the private network."
@@ -1067,7 +1068,8 @@
     "options": [
       "L'header è di dimensione fissa e non possono essere aggiunte opzioni",
       "L'header è di dimensione variabile",
-      "Dimensione dell'header fissa ma con eventuale aggiunta di Header aggiuntivi"
+      "Dimensione dell'header fissa ma con eventuale aggiunta di Header aggiuntivi",
+      "Uguale a IPv4"
     ],
     "answer": 2,
     "explanation": "IPv6 has a fixed 40-byte base header, with optional extension headers for additional features, making the overall header structure extensible."
@@ -1417,19 +1419,6 @@
     ],
     "answer": 2,
     "explanation": "Selective flooding reduces unnecessary packet duplication by forwarding packets only to links that lead toward the destination, unlike simple flooding."
-  },
-  {
-    "id": 113,
-    "type": "multiple",
-    "question": "Un Area Border Router (OSPF)",
-    "options": [
-      "Dispone di informazioni riassuntive sulle aree su cui si affaccia e le diffonde nelle aree; non conosce i dettagli di tali aree.",
-      "Conosce i dettagli della backbone area",
-      "Genera LSA di tipo 5 per descrivere destinazioni esterne al dominio di routing.",
-      "Inoltra, mediante il meccanismo del flooding, tutti gli LSA che riceve da un'area a tutte le altre su cui si affaccia"
-    ],
-    "answer": 1,
-    "explanation": "An Area Border Router in OSPF maintains detailed topology information for the backbone area and summary information for other areas."
   },
   {
     "id": 114,
@@ -1926,7 +1915,7 @@
     "type": "multiple",
     "question": "Nei protocolli di routing, il periodo di transitorio:",
     "options": [
-      "è presente solo quando vengono adottati gli algoritmi più semplici (es. Distance Vector)",
+      "È presente solo quando vengono adottati gli algoritmi più semplici (es. Distance Vector)",
       "Non è mai presente, in quanto è una caratteristica dei protocolli che lavorano a livello data-link (es. Spanning Tree)",
       "Si verifica sempre nel periodo immediatamente successivo al rilevamento di un guasto",
       "Si verifica sempre nel momento in cui una parte della rete cambia di stato"
@@ -2002,12 +1991,12 @@
   {
     "id": 161,
     "type": "multiple",
-    "question": "i gruppi multicast in ipv4",
+    "question": "I gruppi multicast in ipv4",
     "options": [
-      "vengono identificati da particolari indirizzi IP che non possono essere assegnati alle singole stazioni",
-      "vengono identificati dalla lista degli indirizzi MAC delle stazioni appartenenti ad un dato gruppo. Questi indirizzi vengono poi utilizzati come indirizzi mac destinazione nelle trame multicast indirizzate",
-      "non esistono",
-      "vengono identificati dalla lista degli indirizzi IP delle stazioni appartenenti ad un dato gruppo. questi indirizzi vengono poi utilizzati come indirizzi IP destinazione nelle trame multicast indirizzate a tali stazioni"
+      "Vengono identificati da particolari indirizzi IP che non possono essere assegnati alle singole stazioni",
+      "Vengono identificati dalla lista degli indirizzi MAC delle stazioni appartenenti ad un dato gruppo. Questi indirizzi vengono poi utilizzati come indirizzi mac destinazione nelle trame multicast indirizzate",
+      "Non esistono",
+      "Vengono identificati dalla lista degli indirizzi IP delle stazioni appartenenti ad un dato gruppo. questi indirizzi vengono poi utilizzati come indirizzi IP destinazione nelle trame multicast indirizzate a tali stazioni"
     ],
     "answer": 0,
     "explanation": "IPv4 multicast groups use addresses in the range 224.0.0.0 to 239.255.255.255, which are reserved specifically for multicast and cannot be assigned to individual hosts."
@@ -2464,18 +2453,6 @@
     "explanation": "IPv6 Neighbor Discovery uses ICMPv6 messages sent to multicast addresses for functions like address resolution and duplicate address detection."
   },
   {
-    "id": 198,
-    "type": "multiple",
-    "question": "Cos'è l'effetto ping-pong?",
-    "options": [
-      "Il proporre la cella di sgancio come cella di aggancio",
-      "Il rimbalzo dei segnali all'interno di una cella",
-      "Un modo alternativo per definire il concetto di handover"
-    ],
-    "answer": 0,
-    "explanation": "The ping-pong effect occurs when a mobile terminal repeatedly hands over between two cells, often due to unstable signal conditions at cell boundaries."
-  },
-  {
     "id": 199,
     "type": "multiple",
     "question": "Un Host A ha indirizzo 192.168.1.1/24 e un Host B 192.168.1.129/25.",
@@ -2614,19 +2591,6 @@
     ],
     "answer": 2,
     "explanation": "In IPsec Tunnel Mode, the entire original IP packet (headers and payload) is encrypted and encapsulated within a new IP packet."
-  },
-  {
-    "id": 210,
-    "type": "multiple",
-    "question": "Gli indirizzi link-local",
-    "options": [
-      "Sono validi all'interno di una organizzazione che li pub utilizzare per assegnare indirizzi alle macchine nelle varie sottoreti della propria intranet (sono gli omologhi degli indirizzi privati di IPv4).",
-      "Non possono essere assegnati ai router.",
-      "Sono normalmente costruiti automaticamente dalla stazione a partire dall'indirizzo MAC della propria scheda, a cui si pre-pende un prefisso predefinito.",
-      "Vengono utilizzati per identificare macchine che svolgono un certo servizio (ad esempio server DNS)."
-    ],
-    "answer": 2,
-    "explanation": "Link-local addresses are automatically configured using the fe80::/64 prefix combined with the interface identifier (often derived from MAC address)."
   },
   {
     "id": 211,
@@ -3196,19 +3160,6 @@
     "explanation": "Link-local addresses are typically derived from the MAC address, so they remain consistent across reboots unless privacy extensions are used."
   },
   {
-    "id": 257,
-    "type": "multiple",
-    "question": "L'architettura DiffServ è caratterizzata da:",
-    "options": [
-      "Un meccanismo per separare il traffico in classi ognuna delle quali può ricevere un servizio specifico in ogni nodo attraversato",
-      "Protocolli di segnalazione sofisticati per la prenotazione delle risorse",
-      "La capacità di fornire servizio a qualità garantita alle applicazioni o flussi che nefacciano esplicita richiesta alla rete",
-      "Protocolli di routing sofisticati per scegliere il percorso di ogni singolo pacchetto in modo da assicurare che esso riceva il servizio di cui necessita"
-    ],
-    "answer": 0,
-    "explanation": "DiffServ uses per-hop behaviors (PHBs) where packets are classified into service classes that receive specific forwarding treatment at each router."
-  },
-  {
     "id": 258,
     "type": "multiple",
     "question": "Il protocollo IS-IS",
@@ -3285,19 +3236,6 @@
     ],
     "answer": 3,
     "explanation": "In 6PE, the outer label is used for transport through the MPLS backbone to reach the egress PE router."
-  },
-  {
-    "id": 264,
-    "type": "multiple",
-    "question": "Nella soluzione di livello 3 VPN basate su MPLS e BGP i pacchetti che transitano sulla dorsale MPLS hanno due etichette. Quali sono i loro utilizzi?",
-    "options": [
-      "Entrambe le etichette sono usate dai router interni (P) per inoltrare pacchetti verso un router PE.",
-      "I router interni (P) non modificano (swap) mai l'etichetta più interna.",
-      "L'etichetta più esterna è usata dai router interni (P) per inoltrare pacchetti verso un router PE.",
-      "L'etichetta più interna è usata dai router interni (P) per inoltrare pacchetti verso un router PE."
-    ],
-    "answer": 2,
-    "explanation": "In MPLS VPNs, the outer label (transport label) is used by P routers to forward packets toward the egress PE router."
   },
   {
     "id": 265,
@@ -3557,7 +3495,7 @@
       "An RTS and a CTS are sent at the same time"
     ],
     "answer": 3,
-    "explanation": ""
+    "explanation": "The specific window for this collision is after a station sends an RTS, but before the AP has successfully transmitted the CTS."
   },
   {
     "id": 286,
@@ -4477,18 +4415,6 @@
     "answer": 3
   },
   {
-    "id": 358,
-    "type": "multiple",
-    "question": "Indicate the false claim among the below statements about the Link State algorithm:",
-    "options": [
-      "The Link State algorithm seldom generates loops",
-      "The RIP (Routing Information Protocol) protocol is based on the Link State algorithm",
-      "The Link State algorithm exchanges less information than the Distance Vector algorithm",
-      "The Link State algorithm converges faster than the Distance Vector algorithm"
-    ],
-    "answer": 1
-  },
-  {
     "id": 359,
     "type": "multiple",
     "question": "An IPv6 router that receives a datagram bigger than the MTU",
@@ -4554,7 +4480,7 @@
     "question": "A Neutral Access Point is a particular network in which:",
     "options": [
       "The connection between the devices is made at level 2",
-      "various ASs exchange traffic in a \"peering\" mode, i.e., not for a fee",
+      "Various ASs exchange traffic in a \"peering\" mode, i.e., not for a fee",
       "All equipment is connected through the use of a high-performance central router equipped multiple network interfaces",
       "Each connected router sees at layer 3 all other routers on the network and can peer with each of them"
     ],
@@ -4594,7 +4520,8 @@
       "They are used to identify machines that perform a certain service (e.g. DNS servers).",
       "They are normally built automatically by the station from the MAC address its own card, to which it prepends a predefined prefix."
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "Link-local addresses are automatically configured using the fe80::/64 prefix combined with the interface identifier (often derived from MAC address)."
   },
   {
     "id": 368,
@@ -4733,12 +4660,12 @@
     "type": "multiple",
     "question": "An 802.11 frame has four MAC addresses, of which:",
     "options": [
-      "one is the MAC address of the switch attached to the Access Point",
-      "one is always a broadcast address",
-      "none is the MAC address of the Access Point",
-      "one is the MAC address of the Access Point"
+      "One is the MAC address of the switch attached to the Access Point",
+      "One is always a broadcast address",
+      "None is the MAC address of the Access Point",
+      "One is the MAC address of the Access Point"
     ],
-    "answer": 2
+    "answer": 3
   },
   {
     "id": 380,
@@ -4939,7 +4866,8 @@
       "The bouncing of signals within a cell.",
       "The proposing the release cell as the docking cell"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "The ping-pong effect occurs when a mobile terminal repeatedly hands over between two cells, often due to unstable signal conditions at cell boundaries."
   },
   {
     "id": 397,
@@ -4999,7 +4927,7 @@
       "Both labels are used by internal routers (P) to forward packets to PE routers",
       "The outermost label is used by internal routers (P) to forward packets to a PE router"
     ],
-    "answer": 2
+    "answer": 3
   },
   {
     "id": 402,
@@ -5071,7 +4999,8 @@
       "Through the flooding mechanism, it forwards all the LSAs it receives from an area to all the others it overlooks",
       "Generate Type 5 LSA to describe destinations outside the routing domain"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "An Area Border Router in OSPF maintains detailed topology information for the backbone area and summary information for other areas."
   },
   {
     "id": 407,
@@ -5175,7 +5104,7 @@
     "question": "The main limitation of RIP routing protocol compared with IGRP is that:",
     "options": [
       "Does not, unlike IGRP, allow hierarchical routing",
-      "is a Distance Vector type protocol, thus less scalable than IGRP (Link State)",
+      "RIP is a Distance Vector type protocol, thus less scalable than IGRP (Link State)",
       "Since RIP is proprietary, it is not available on all routers",
       "The RIP metric is less indicative than the IGRP metric of the true degree to which one network route is preferred over others"
     ],
@@ -5225,7 +5154,8 @@
       "It is sent for under steady state network conditions, when the transient is now exhausted",
       "And used to update adjacency status with a neighboring router and only carries information about that change"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "A Link State Update (LSU) is a routing packet in link-state protocols (like OSPF) that carries Link State Advertisements (LSAs) to distribute changes in network topology, ensuring all routers have an accurate map of the network for calculating shortest paths using algorithms like Dijkstra."
   },
   {
     "id": 420,
