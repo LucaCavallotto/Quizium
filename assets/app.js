@@ -461,9 +461,15 @@ class QuizApp {
         // Start Timer
         this.startTimerLogic();
 
+        this.showScreen(CONFIG.SCREENS.QUIZ);
+
+        // Render navigator and load question AFTER showing screen to ensure scroll logic works (elements must be visible)
         this.renderNavigator();
         this.loadQuestion();
-        this.showScreen(CONFIG.SCREENS.QUIZ);
+
+        // Explicitly force scroll to start
+        const nav = document.getElementById(CONFIG.SELECTORS.NAVIGATOR);
+        if (nav) nav.scrollLeft = 0;
     }
 
     startTimerLogic() {
