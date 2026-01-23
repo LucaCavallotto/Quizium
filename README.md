@@ -48,6 +48,7 @@ Improve your workflow with these keyboard shortcuts (Desktop):
 | **Enter** | Confirm/Finish Quiz (when Modal is open) |
 | **Backspace** | Cancel/Close Modal (when Modal is open) |
 | **Escape** | Exit Quiz or Cancel/Close Modal |
+| **f** | Flag/Unflag Question (Final Correction Mode only) |
 
 *Note: Number keys are disabled if the corresponding option is not available or if navigation modifiers (Ctrl/Alt) are held. Navigation/Selection keys are blocked when the confirmation modal is open.*
 

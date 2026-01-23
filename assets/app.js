@@ -143,6 +143,11 @@ class QuizApp {
                 return;
             }
 
+            // Toggle Flag (f key)
+            if (e.key === 'f' || e.key === 'F') {
+                this.toggleFlag();
+            }
+
             // Navigation
             if (e.key === 'ArrowRight') {
                 e.preventDefault();
