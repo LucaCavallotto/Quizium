@@ -999,7 +999,7 @@
   {
     "id": 78,
     "type": "multiple",
-    "question": "Si consideri una semplice topologia di rete in cui sono presenti quattro router (A, B, C, D). I primi 3 sono collegati tra di loro ad anello (A-B-C-A), mentre il quarto ` e collegato a C attraverso un link punto-punto (C-D). Se gli host utilizzano un algoritmo di routing di tipo flooding e il router A invia un pacchetto a D, quante copie del medesimo pacchetto saranno recapitate al router D?",
+    "question": "Si consideri una semplice topologia di rete in cui sono presenti quattro router (A, B, C, D). I primi 3 sono collegati tra di loro ad anello (A-B-C-A), mentre il quarto è collegato a C attraverso un link punto-punto (C-D). Se gli host utilizzano un algoritmo di routing di tipo flooding e il router A invia un pacchetto a D, quante copie del medesimo pacchetto saranno recapitate al router D?",
     "options": [
       "1",
       "2",
@@ -1606,9 +1606,9 @@
     "question": "Lo schema di indirizzamento IPv6:",
     "options": [
       "Prevede esclusivamente indirizzi assegnati in modo univoco da un ente preposto.",
-      "Prevede che ogni entità (es. azienda) si faccia assegnare globalmente un insieme de indirizzi, che diventano de sua proprietà a tempo illimitato",
+      "Prevede che ogni entità (es. azienda) si faccia assegnare globalmente un insieme di indirizzi, che diventano de sua proprietà a tempo illimitato",
       "Prevede che i primi 64 bit di un indirizzo siano normalmente identificati come il prefisso de rete, almeno sulle LAN.",
-      "Non prevede l'esistenza de indirizzi de multicast."
+      "Non prevede l'esistenza i indirizzi multicast."
     ],
     "answer": 2,
     "explanation": "IPv6 addressing typically uses the first 64 bits as the network prefix and the remaining 64 bits as the interface identifier."
@@ -3108,19 +3108,6 @@
     "explanation": "GSM networks can store SMS messages and deliver them when the mobile terminal becomes available again."
   },
   {
-    "id": 253,
-    "type": "multiple",
-    "question": "Quale di queste tecniche non è una soluzione per la transizione IPv4-IPv6?",
-    "options": [
-      "6over4",
-      "6to4",
-      "6mixt4",
-      "Teredo"
-    ],
-    "answer": 2,
-    "explanation": "6mixt4 is not a standard IPv4-IPv6 transition mechanism. Valid techniques include 6over4, 6to4, and Teredo."
-  },
-  {
     "id": 255,
     "type": "multiple",
     "question": "La tecnica di forwarding 'Source Routing':",
@@ -4029,19 +4016,6 @@
     "answer": 0
   },
   {
-    "id": 329,
-    "type": "multiple",
-    "question": "OSPF-TE and ISIS-TE include enhancements to traditional routing protocols OSPF and ISIS that have been standardized in the context of MPLS in order to:",
-    "explanation": "Traffic Engineering (TE) extensions allow routers to share \"constraints\" (like available bandwidth or link color) so paths can be calculated based on more than just the shortest hop count.",
-    "options": [
-      "Allow the independence of control plane and data plane in MPLS routers, which ultimately enables traffic engineering.",
-      "Ensure faster convergence and enhanced stability.",
-      "Enable the distribution of additional information (named constrained data) in support of constraint based routing.",
-      "Include adequate fields in routing messages to support explicit routing."
-    ],
-    "answer": 2
-  },
-  {
     "id": 330,
     "type": "multiple",
     "question": "The IPv6 Aggregatable Global Unicast addresses are:",
@@ -4565,9 +4539,9 @@
     "question": "Label distribution in MPLS(Multi-Protocol Label Switching)",
     "options": [
       "Involves both network nodes and hosts",
-      "Can be performed implicity through the routing protocol OSPF(Open Shortest Path First)",
-      "Can be performed with the RSVP(Resource ReSerVation Protocol)",
-      "Is not needed when network nodes deploy the BGP(Border Gateway Protocol) routing protocol"
+      "Can be performed implicity through the routing protocol OSPF (Open Shortest Path First)",
+      "Can be performed with the RSVP (Resource ReSerVation Protocol)",
+      "Is not needed when network nodes deploy the BGP (Border Gateway Protocol) routing protocol"
     ],
     "answer": 2
   },
@@ -4761,7 +4735,8 @@
       "Allowing you to create a tunnel in an access VPN",
       "Allows you to create a tunnel in an overlay-type site-to-site VPN"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "In networking, an overlay refers to a virtual network that is built on top of an existing physical underlay network (like the Internet or a Service Provider's MPLS backbone). In an overlay model, the service provider provides the transport (the pipes), but they are not aware of the customer's routes. The customer’s edge devices establish logical tunnels directly to each other."
   },
   {
     "id": 389,
