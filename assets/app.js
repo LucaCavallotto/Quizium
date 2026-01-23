@@ -880,7 +880,14 @@ class QuizApp {
         for (let i = 0; i < this.state.totalQuestions; i++) {
             const dot = document.createElement('div');
             dot.className = 'nav-dot';
-            dot.textContent = i + 1;
+
+            // Use original ID index + 1 if reviewing
+            let displayNum = i + 1;
+            if (this.state.isReviewing && this.state.reviewIndices && this.state.reviewIndices[i] !== undefined) {
+                displayNum = this.state.reviewIndices[i] + 1;
+            }
+
+            dot.textContent = displayNum;
             dot.id = `nav-dot-${i}`;
             dot.onclick = () => this.jumpToQuestion(i);
             nav.appendChild(dot);
@@ -956,9 +963,11 @@ class QuizApp {
 
         // Update Review Wrong Button
         const btnWrong = document.getElementById('btnReviewWrong');
-        if (this.state.wrongAnswers > 0) {
+        const actionableCount = this.state.wrongAnswers + this.state.skippedAnswers;
+
+        if (actionableCount > 0) {
             btnWrong.style.display = 'flex';
-            btnWrong.textContent = `Review Wrong (${this.state.wrongAnswers})`;
+            btnWrong.textContent = `Review Wrong (${actionableCount})`;
         } else {
             btnWrong.style.display = 'none';
         }
@@ -1049,7 +1058,7 @@ class QuizApp {
         // Populate Indices based on filter
         if (filter === 'wrong') {
             this.state.reviewIndices = this.state.allAnswers
-                .map((ans, idx) => (ans && !ans.isCorrect ? idx : -1))
+                .map((ans, idx) => ((!ans || !ans.isCorrect) ? idx : -1)) // Include null (skipped) OR wrong
                 .filter(idx => idx !== -1);
         } else {
             // All questions
