@@ -258,6 +258,7 @@ class QuizApp {
 
     async selectSubject(subjectId) {
         this.state.currentSubject = this.state.subjects.find(s => s.id === subjectId);
+        this.state.flaggedQuestions.clear(); // Ensure flags are cleared on new subject selection
 
         // Update Titles
         document.getElementById(CONFIG.SELECTORS.SELECTED_SUBJECT_TITLE).textContent = this.state.currentSubject.name;
@@ -464,6 +465,7 @@ class QuizApp {
         this.state.allAnswers = new Array(this.state.totalQuestions).fill(null);
         this.state.quizCompleted = false;
         this.state.isReviewing = false;
+        this.state.flaggedQuestions.clear();
 
         // Reset UI
         document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.style.display = (this.state.correctionMode === 'final') ? 'none' : 'flex';
