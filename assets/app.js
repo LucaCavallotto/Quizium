@@ -563,8 +563,17 @@ class QuizApp {
         const savedAnswer = this.state.allAnswers[realIndex];
 
         // Update Meta
-        document.getElementById(CONFIG.SELECTORS.CURRENT_QUESTION).textContent = this.state.currentQuestionIndex + 1;
-        document.getElementById(CONFIG.SELECTORS.TOTAL_QUESTIONS).textContent = this.state.totalQuestions;
+        // Update Meta
+        let displayCurrent = this.state.currentQuestionIndex + 1;
+        let displayTotal = this.state.totalQuestions;
+
+        if (this.state.isReviewing) {
+            displayCurrent = realIndex + 1;
+            displayTotal = this.state.originalTotalQuestions || this.state.questions.length;
+        }
+
+        document.getElementById(CONFIG.SELECTORS.CURRENT_QUESTION).textContent = displayCurrent;
+        document.getElementById(CONFIG.SELECTORS.TOTAL_QUESTIONS).textContent = displayTotal;
         document.getElementById(CONFIG.SELECTORS.QUESTION_ID).innerHTML = `ID <span class="id-val">${question.id}</span>`;
 
         // Progress Bar (Update based on answered count)
