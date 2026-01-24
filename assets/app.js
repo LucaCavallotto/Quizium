@@ -65,6 +65,7 @@ class QuizApp {
             ],
             currentSubject: null,
             questions: [],
+            allQuestions: [], // Store full pool of questions
             allAnswers: [],
             currentQuestionIndex: 0,
             correctAnswers: 0,
@@ -268,7 +269,8 @@ class QuizApp {
             const response = await fetch(`${CONFIG.PATHS.DATA}${subjectId}.json`);
             if (!response.ok) throw new Error('Failed to load questions');
 
-            this.state.questions = await response.json();
+            this.state.allQuestions = await response.json();
+            this.state.questions = [...this.state.allQuestions]; // Initialize with all questions
             this.setupSlider();
             this.showScreen(CONFIG.SCREENS.COUNT);
         } catch (error) {
@@ -453,7 +455,11 @@ class QuizApp {
        Quiz Logic
        =========================== */
     startQuiz(count) {
-        const questionsToUse = [...this.state.questions];
+        // Always sample from the full pool (allQuestions)
+        const questionsToUse = (this.state.allQuestions && this.state.allQuestions.length > 0)
+            ? [...this.state.allQuestions]
+            : [...this.state.questions];
+
         const shuffled = this.state.shuffleQuestions ? this.shuffleArray(questionsToUse) : questionsToUse;
         this.state.totalQuestions = Math.min(count, shuffled.length);
         this.state.questions = shuffled.slice(0, this.state.totalQuestions);
