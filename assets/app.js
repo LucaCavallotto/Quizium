@@ -966,8 +966,21 @@ class QuizApp {
         const actionableCount = this.state.wrongAnswers + this.state.skippedAnswers;
 
         if (actionableCount > 0) {
-            btnWrong.style.display = 'flex';
-            btnWrong.textContent = `Review Wrong (${actionableCount})`;
+            btnWrong.style.display = 'block'; // Or flex, depending on CSS, but block inside flex item is fine or let CSS handle it. Actually my CSS sets display flex on .review-buttons-row .btn.
+            // Wait, if I set style.display = 'flex' here it overrides CSS if not careful.
+            // But the button is a flex item. style.display='block' or '' (empty) is better if CSS handles it.
+            // The original code used 'flex'.
+            // Let's use removeProperty('display') to let CSS handle it, OR set it to 'block'/'flex'.
+            // Since it's a button, default is inline-block, but I want it visible.
+            // Let's just set it to 'block' or remove the display style if I want it visible?
+            // Actually, best to just set style.display = 'block' or 'flex'.
+            // The constraint is: if hidden, display:none. If visible, remove display:none.
+            btnWrong.style.display = '';
+            btnWrong.classList.remove('hidden'); // Ensure we don't have hidden class
+            // In fact the original code used style.display = 'none' / 'flex'.
+            // I will use style.display = 'block' because it is inside a flex row container, so it will behave as a flex item.
+            btnWrong.style.display = 'block';
+            btnWrong.textContent = 'Review Wrong';
         } else {
             btnWrong.style.display = 'none';
         }

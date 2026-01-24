@@ -561,11 +561,75 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 24px;
+    margin-top: 32px;
     width: 100%;
-    max-width: 360px;
+    max-width: 420px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.primary-actions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.review-buttons-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.review-buttons-row .btn {
+    flex: 1;
+    padding: 0 12px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.btn-soft-red {
+    background-color: var(--bg-card);
+    color: #ef4444;
+    border: 2px solid #fecaca;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-soft-red:hover {
+    background-color: var(--bg-body);
+    border-color: #ef4444;
+    color: #ef4444 !important;
+    /* Override btn-secondary hover color */
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+@media (prefers-color-scheme: dark) {
+    .btn-soft-red {
+        background-color: rgba(69, 10, 10, 0.5);
+        /* Dark Red Background */
+        color: white;
+        /* White text as requested */
+        border-color: rgba(248, 113, 113, 0.3);
+    }
+
+    .btn-soft-red:hover {
+        background-color: rgba(69, 10, 10, 0.8);
+        border-color: #fca5a5;
+        color: #fff !important;
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+.btn-home-bottom {
+    margin-top: 24px;
+    color: var(--text-tertiary);
+    font-size: 0.95rem;
+}
+
+.btn-home-bottom:hover {
+    color: var(--text-main);
 }
 
 .results-actions .btn {
@@ -790,6 +854,8 @@
         margin-left: 0;
         margin-right: 0;
         padding-top: 24px;
+        align-self: center;
+        /* Vertically center in the grid cell */
     }
 
     .result-title {
@@ -902,25 +968,18 @@
         padding-top: 24px;
         justify-self: center;
         width: 100%;
-        max-width: 500px;
-        gap: 12px;
+        max-width: 420px;
+        gap: 16px;
 
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        /* Enforce Flexbox Centering as requested */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    /* Button Specific Placement */
-    .results-actions .btn-primary {
-        grid-column: 1;
-    }
-
+    /* Reset child overrides */
     .results-actions #btnReviewAnswers {
-        grid-column: 2;
         margin-top: 0 !important;
-        /* Override inline margin */
-    }
-
-    .results-actions .btn-ghost {
-        grid-column: 1 / -1;
+        /* No grid column overrides needed */
     }
 }
