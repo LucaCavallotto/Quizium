@@ -779,12 +779,12 @@
   {
     "id": 61,
     "type": "multiple",
-    "question": "Quando un host IPv6 ha necessità di imparare l'indirizzo MAC associato ad un indirizzo …..",
+    "question": "When an IPv6 host needs to learn the MAC address associated with an address...",
     "options": [
-      "Può inviare in broadcast sulla rete un particolare messaggio ICMPv6",
-      "Può inviare in broadcast sulla rete un messaggio ARP Request",
-      "Può inviare in multicast sulla rete un particolare messaggio ICMPv6",
-      "Può inviare in unicast sulla rete un particolare messaggio ICMPv6"
+      "It can broadcast a particular ICMPv6 message on the network",
+      "It can broadcast an ARP Request message on the network",
+      "It can multicast a particular ICMPv6 message on the network",
+      "It can unicast a particular ICMPv6 message on the network"
     ],
     "answer": 2,
     "explanation": "IPv6 uses Neighbor Solicitation ICMPv6 messages sent to the solicited-node multicast address for address resolution, replacing ARP used in IPv4."
@@ -792,12 +792,12 @@
   {
     "id": 62,
     "type": "multiple",
-    "question": "Se un host IPv4 vuole comunicare con un host IPv6",
+    "question": "If an IPv4 host wants to communicate with an IPv6 host",
     "options": [
-      "Può farlo senza problemi in quanto in IPv6 è stata garantita la retro-compatibilità",
-      "Può farlo utilizzando un terzo nodo che sia in grado si sostituire, nei pacchetti, l'opportuno header IPv6",
-      "Non può farlo, è necessario sostituire il sistema operativo di uno dei due host",
-      "Può farlo utilizzando un terzo nodo che sia in grado si sostituire, nell'header del pacchetto, l'indirizzo IPv4 destinazione con il corrispondente indirizzo IPv6"
+      "It can do so without problems because backward compatibility has been guaranteed in IPv6",
+      "It can do so using a third node that is able to replace the appropriate IPv6 header in the packets",
+      "It cannot do this; it is necessary to replace the operating system of one of the two hosts",
+      "It can do so using a third node that is able to replace the destination IPv4 address in the packet header with the corresponding IPv6 address"
     ],
     "answer": 1,
     "explanation": "Communication between IPv4 and IPv6 hosts requires translation mechanisms like NAT64 or protocol translation gateways that convert between the two protocol versions."
@@ -805,12 +805,12 @@
   {
     "id": 63,
     "type": "multiple",
-    "question": "L'address range IP 130.192.4.0/23 rappresenta la più piccola aggregazione possibile ….",
+    "question": "The IP address range 130.192.4.0/23 represents the smallest possible aggregation for...",
     "options": [
-      "130.192.5.0/26 e 130.192.6.0/26",
-      "130.192.4.0/24 e 130.192.5.0/25",
-      "130.192.3.0/24 e 130.192.4.0/24",
-      "130.192.4.0/25 e 130.192.4.128/25"
+      "130.192.5.0/26 and 130.192.6.0/26",
+      "130.192.4.0/24 and 130.192.5.0/25",
+      "130.192.3.0/24 and 130.192.4.0/24",
+      "130.192.4.0/25 and 130.192.4.128/25"
     ],
     "answer": 1,
     "explanation": "130.192.4.0/23 is the smallest aggregation that contains both 130.192.4.0/25 and 130.192.4.128/25, as it covers the entire 130.192.4.0-130.192.5.255 range."
@@ -818,12 +818,12 @@
   {
     "id": 64,
     "type": "multiple",
-    "question": "Relativamente a un Autonomous System, quali di queste affermazioni è falsa.",
+    "question": "Regarding an Autonomous System, which of the following statements is false?",
     "options": [
-      "è un insieme di subnets con un prossimità topologica e gestite da una singola entità",
-      "utilizzano gli Exterior Gateway Protocol per distribuire le informazioni tra Autonomous System",
-      "è una subnet configurata attraverso algoritmi di routing statico",
-      "vengono identificati attraverso un ID di 2 bytes"
+      "An AS is a collection of subnets with topological proximity and managed by a single entity",
+      "An AS uses Exterior Gateway Protocols to distribute information between Autonomous Systems",
+      "An AS is a subnet configured using static routing algorithms",
+      "ASes are identified by a 2-byte ID"
     ],
     "answer": 2,
     "explanation": "An Autonomous System is not just a single subnet but a collection of networks under common administrative control, typically using dynamic routing protocols internally."
@@ -831,7 +831,7 @@
   {
     "id": 65,
     "type": "multiple",
-    "question": "Date due stazioni A e B appartenenti alla stessa rete fisica, indicare la configurazione che permette ad A di comunicare direttamente con B, ma a B di comunicare con A solo attraverso un router…..",
+    "question": "Given two stations A and B belonging to the same physical network, indicate the configuration that allows A to communicate directly with B, but B to communicate with A only through a router…",
     "options": [
       "A: 130.192.1.1/25 - B: 130.192.1.100/25",
       "A: 130.192.1.1/25 - B: 130.192.1.200/26",
@@ -883,12 +883,12 @@
   {
     "id": 69,
     "type": "multiple",
-    "question": "Net meccanismo del secchiello a gettoni si riesce a controllare:",
+    "question": "The token bucket mechanism can control:",
     "options": [
-      "Il tempo di attraversamento massimo di un router.",
-      "La gestione interna delle code con WFQ.",
-      "La velocità minima di immissione dei dati.",
-      "Il burst size massimo e la velocità media di immissione dei dati."
+      "The maximum router traversal time.",
+      "Internal queue management with WFQ.",
+      "The minimum data input rate.",
+      "The maximum burst size and average data input rate."
     ],
     "answer": 3,
     "explanation": "The token bucket algorithm controls both the maximum burst size (bucket capacity) and the average data rate (token generation rate)."
@@ -896,12 +896,12 @@
   {
     "id": 70,
     "type": "multiple",
-    "question": "A differenza della versione 4 dell'IP, la versione 6:",
+    "question": "Unlike IPv4, IPv6:",
     "options": [
-      "Non ha una versione dell'ICMP associata.",
-      "Non permette di scoprire l'indirizzo MAC di un'altra stazione, conoscendone l'indirizzo IP.",
-      "Non ha indirizzi broadcast.",
-      "Non ha un equivalente del campo TTL (time-to-live)."
+      "It does not have an associated ICMP version.",
+      "It does not allow you to discover another station's MAC address by knowing its IP address.",
+      "It does not have broadcast addresses.",
+      "It does not have a TTL (time-to-live) equivalent."
     ],
     "answer": 2,
     "explanation": "IPv6 eliminates broadcast addresses entirely, using multicast for all one-to-many communications instead."
@@ -909,7 +909,7 @@
   {
     "id": 71,
     "type": "multiple",
-    "question": "Un protocollo usato in MPLS per la distribuzione delle label è:",
+    "question": "A protocol used in MPLS for label distribution is:",
     "options": [
       "OSPF",
       "IS-IS",
@@ -924,9 +924,9 @@
     "type": "multiple",
     "question": "IPsec:",
     "options": [
-      "Usato solo per VPN",
-      "Gestisce Key encryption",
-      "Ha problemi con soluzioni che usano il NAT"
+      "Used for VPN only",
+      "Handles key encryption",
+      "Has problems with solutions that use NAT"
     ],
     "answer": 2,
     "explanation": "IPsec has compatibility issues with NAT because NAT modifies IP headers and ports, which can break IPsec integrity checks and encryption."
@@ -934,11 +934,11 @@
   {
     "id": 73,
     "type": "multiple",
-    "question": "Quale tra le seguenti definizioni è una novità dello standard UMTS?",
+    "question": "Which of the following definitions is new to the UMTS standard?"
     "options": [
       "Microdiversity",
       "Network Slicing",
-      "Nessuna delle presenti definizioni",
+      "None of these definitions",
       "Macrodiversity"
     ],
     "answer": 3,
@@ -947,12 +947,12 @@
   {
     "id": 74,
     "type": "multiple",
-    "question": "Aumentando il numero di VLAN:",
+    "question": "Increasing the number of VLANs:",
     "options": [
-      "Aumentano i domini di collisione",
-      "Diminuiscono i domini di collisione",
-      "Aumentano i domini di broadcast",
-      "Diminuiscono i domini di broadcast"
+      "Increase collision domains",
+      "Decrease collision domains",
+      "Increase broadcast domains",
+      "Decrease broadcast domains"
     ],
     "answer": 2,
     "explanation": "Each VLAN creates a separate broadcast domain, so increasing the number of VLANs increases the number of broadcast domains in the network."
@@ -960,12 +960,12 @@
   {
     "id": 75,
     "type": "multiple",
-    "question": "Handover è il meccanismo che permette di:",
+    "question": "Handover is the mechanism that allows you to:",
     "options": [
-      "criptare un canale di comunicazione",
-      "gestire lo sgancio da una cella e il riaggancio ad una nuova",
-      "notificare ad un utente una chiamata in arrivo",
-      "richiedere accesso alla rete da parte di un utente"
+      "Encrypt a communication channel",
+      "Manage the unhook from a cell and rehook to a new one",
+      "Notify a user of an incoming call",
+      "Request a user access to the network"
     ],
     "answer": 1,
     "explanation": "Handover is the process of transferring an ongoing call or data session from one cell to another without interruption."
@@ -973,12 +973,12 @@
   {
     "id": 76,
     "type": "multiple",
-    "question": "Il protocollo PPTP viene utilizzato di solito per:",
+    "question": "PPTP is typically used for:",
     "options": [
-      "Permettere di creare un tunnel in una VPN di accesso.",
-      "Permettere di creare un tunnel in una VPN site-to-site di tipo overlay.",
-      "Permettere di creare un tunnel in una VPN site-to-site di tipo peer.",
-      "Permettere di creare un tunnel in una VPN di livello 4."
+      "Allow tunneling in an access VPN.",
+      "Allow tunneling in a site-to-site overlay VPN.",
+      "Allow tunneling in a site-to-site peer VPN.",
+      "Allow tunneling in a layer 4 VPN."
     ],
     "answer": 0,
     "explanation": "PPTP (Point-to-Point Tunneling Protocol) is primarily used for remote access VPNs, allowing users to securely connect to corporate networks over the Internet."
@@ -986,12 +986,12 @@
   {
     "id": 77,
     "type": "multiple",
-    "question": "le comunicazioni multicast in una rete ipv4",
+    "question": "Multicast communications in an IPv4 network:",
     "options": [
-      "sono possibili solo all'interno di una singola rete lan, anche con l'utilizzo di protocolli aggiuntivi",
-      "sono sempre possibili, IGMP le rende solo più efficienti",
-      "non sono possibili senza l'utilizzo di protocolli aggiuntivi nella rete",
-      "sono possibili su scala geografica grazie all'utilizzo del solo protocollo IGMP"
+      "Are only possible within a single LAN, even with the use of additional protocols",
+      "They are always possible; IGMP just makes them more efficient",
+      "They are not possible without the use of additional protocols in the network",
+      "They are possible on a geographical scale using only IGMP"
     ],
     "answer": 2,
     "explanation": "While basic LAN multicast might work with IGMP, proper multicast routing across networks requires additional protocols like PIM (Protocol Independent Multicast)."
@@ -999,12 +999,12 @@
   {
     "id": 78,
     "type": "multiple",
-    "question": "Si consideri una semplice topologia di rete in cui sono presenti quattro router (A, B, C, D). I primi 3 sono collegati tra di loro ad anello (A-B-C-A), mentre il quarto è collegato a C attraverso un link punto-punto (C-D). Se gli host utilizzano un algoritmo di routing di tipo flooding e il router A invia un pacchetto a D, quante copie del medesimo pacchetto saranno recapitate al router D?",
+    "question": "Consider a simple network topology with four routers (A, B, C, D). The first three are connected to each other in a ring (A-B-C-A), while the fourth is connected to C via a point-to-point link (C-D). If the hosts use a flooding routing algorithm and router A sends a packet to D, how many copies of the same packet will be delivered to router D?"
     "options": [
       "1",
       "2",
       "3",
-      "E' proporzionale al valore del campo Time To Live presente nel pacchetto"
+      "It is proportional to the value of the Time To Live field in the packet."
     ],
     "answer": 3,
     "explanation": "With flooding, multiple copies of the packet will be forwarded through different paths, and the exact number depends on the TTL value and network topology."
@@ -1012,12 +1012,12 @@
   {
     "id": 79,
     "type": "multiple",
-    "question": "L'importanza di MPLS (multi-protocol label switching) nelle reti odierne e future deriva dalla possibilità di",
+    "question": "The importance of MPLS (Multi-Protocol Label Switching) in current and future networks stems from the ability to:",
     "options": [
-      "Trasportare efficientemente pacchetti IP sulle reti ATM",
-      "Collegare ad alta velocità i server ai loro dischi",
-      "Realizzare facilmente ed efficacemente ingegnerizzazione del traffico (traffic engineering)",
-      "Realizzare apparati in grado di operare senza bisogno di configurazione"
+      "Efficiently transport IP packets over ATM networks",
+      "High-speed connection between servers and their disks",
+      "Easily and efficiently perform traffic engineering",
+      "Build equipment capable of operating without the need for configuration"
     ],
     "answer": 2,
     "explanation": "MPLS enables sophisticated traffic engineering capabilities, allowing network operators to control the paths that traffic takes through their networks."
