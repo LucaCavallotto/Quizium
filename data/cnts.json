@@ -1025,12 +1025,12 @@
   {
     "id": 80,
     "type": "multiple",
-    "question": "La tecnica 'Path Vector' impiegata dal BGP:",
+    "question": "The 'Path Vector' technique used by BGP:",
     "options": [
-      "Memorizza nei Path Vectors l'elenco degli Autonomous Systems da attraversare per raggiungere una data rete di destinazione",
-      "Memorizza nei Path Vectors l'elenco di routers da attraversare per raggiungere una data rete di destinazione",
-      "Memorizza nei Path Vectors il prossimo Autonomous System da attraversare per raggiungere una data rete di destinazione",
-      "Memorizza nei Path Vectors il prossimo router da attraversare per raggiungere una data rete di destinazione"
+      "Stores in Path Vectors the list of Autonomous Systems to traverse to reach a given destination network",
+      "Stores in Path Vectors the list of routers to traverse to reach a given destination network",
+      "Stores in Path Vectors the next Autonomous System to traverse to reach a given destination network",
+      "Stores in Path Vectors the next router to traverse to reach a given destination network"
     ],
     "answer": 0,
     "explanation": "BGP's path vector algorithm stores the complete AS path to each destination, which helps prevent routing loops and enables policy-based routing."
@@ -1038,12 +1038,12 @@
   {
     "id": 81,
     "type": "multiple",
-    "question": "il fatto che una VPN offra accesso ad internet centralizzato implica che",
+    "question": "The fact that a VPN offers centralized Internet access implies that:",
     "options": [
-      "la rete aziendale utilizzi un singolo internet service provider",
-      "non è necessario utilizzare dispositivi per la protezione della rete aziendale,quali firewall, da attacchi provenienti da internet",
-      "i pacchetti inviati verso stazioni non appartenenti alla rete privata(cioè stazioni di internet) potrebbero seguire un percorso non ottimale sulla topologia fisica della rete",
-      "l'impatto del traffico pubblico (diretto o proveniente da internet) sulle infrastrutture di rete aziendali viene ridotto"
+      "The corporate network uses a single Internet service provider",
+      "It is not necessary to use devices to protect the corporate network, such as firewalls, from attacks from the Internet",
+      "Packets sent to stations not belonging to the private network (i.e., Internet stations) may follow a suboptimal path on the physical topology of the network",
+      "The impact of public traffic (to or from the Internet) on corporate network infrastructure is reduced"
     ],
     "answer": 2,
     "explanation": "With centralized Internet access, all Internet-bound traffic is routed through the corporate network, which may result in suboptimal paths compared to direct local Internet access."
@@ -1051,12 +1051,12 @@
   {
     "id": 82,
     "type": "multiple",
-    "question": "I concetti di Forwarding e Routing:",
+    "question": "The concepts of Forwarding and Routing:",
     "options": [
-      "Sono sinonimi; individuano il processo che permette di trovare un percorso valido per un pacchetto, dal mittente al destinatario",
-      "Sono sinonimi; individuano il processo che permette, a fronte di un pacchetto entrante in un nodo di rete, di determinare qual è la migliore porta di uscita verso la destinazione",
-      "Sono concetti differenti; il processo di forwarding mira ad individuare un percorso valido per un pacchetto, dal mittente al destinatario; il processo di routing permette, a fronte di un pacchetto entrante in un nodo di rete, di determinare qual è la migliore porta di uscita verso la destinazione",
-      "Sono concetti differenti; il processo di routing mira ad individuare un percorso valido per un pacchetto, dal mittente al destinatario; il processo di forwarding permette, a fronte di un pacchetto entrante in un nodo di rete, di determinare qual è la migliore porta di uscita verso la destinazione"
+      "They are synonymous; they identify the process of finding a valid path for a packet from the sender to the recipient",
+      "They are synonymous; they identify the process of determining the best exit port for a packet entering a network node",
+      "They are different concepts; the forwarding process aims to identify a valid path for a packet from the sender to the recipient; the routing process allows the best exit port for a packet entering a network node to be determined",
+      "They are different concepts; the routing process aims to identify a valid path for a packet from the sender to the recipient; the forwarding process allows the best exit port for a packet entering a network node to be determined"
     ],
     "answer": 3,
     "explanation": "Routing is the process of determining the best path to a destination, while forwarding is the process of sending packets to the appropriate output interface based on the routing decisions."
@@ -1064,12 +1064,12 @@
   {
     "id": 84,
     "type": "multiple",
-    "question": "Header IPv6",
+    "question": "IPv6 header:",
     "options": [
-      "L'header è di dimensione fissa e non possono essere aggiunte opzioni",
-      "L'header è di dimensione variabile",
-      "Dimensione dell'header fissa ma con eventuale aggiunta di Header aggiuntivi",
-      "Uguale a IPv4"
+      "The header is fixed size and no options can be added",
+      "The header is variable size",
+      "Fixed header size, but additional headers can be added",
+      "Same as IPv4"
     ],
     "answer": 2,
     "explanation": "IPv6 has a fixed 40-byte base header, with optional extension headers for additional features, making the overall header structure extensible."
@@ -1077,12 +1077,12 @@
   {
     "id": 85,
     "type": "multiple",
-    "question": "Qual è un vantaggio di utilizzare un algoritmo di routing di tipo Link State rispetto ad uno di tipo Distance Vector?",
+    "question": "What is the advantage of using a Link State routing algorithm over a Distance Vector one?"
     "options": [
-      "La presenza del Link State Database elimina la necessità di avere una routing table, con un risparmio di memoria",
-      "Avendo a disposizione il Link State Database, ogni router è in grado di calcolare autonomamente i percorsi verso ogni destinazione",
-      "Una minore richiesta in termini di potenza elaborativa per l'esecuzione dell'algoritmo",
-      "Minori errori di instradamento in quanto i Link State sono scambiati dai router con una frequenza molto elevata"
+      "The presence of the Link State Database eliminates the need for a routing table, saving memory",
+      "With the Link State Database available, each router can independently calculate routes to each destination",
+      "Reduced processing power required to run the algorithm",
+      "Fewer routing errors because Link States are exchanged very frequently by routers"
     ],
     "answer": 1,
     "explanation": "Link state protocols allow each router to independently compute optimal paths using Dijkstra's algorithm on the complete network topology database."
@@ -1090,13 +1090,15 @@
   {
     "id": 86,
     "type": "multiple",
-    "question": "Un host appartenente ad una certa VLAN",
+    "question": "A host belonging to a specific VLAN:",
     "options": [
-      "Può contattare solo host nella stessa VLAN",
-      "Può contattare host nelle altre VLAN tramite un router"
+      "Can only contact hosts within the same VLAN",
+      "Can contact hosts in other VLANs via a router",
+      "Can communicate directly with hosts in other VLANs using a layer 2 switch",
+      "Shares the same broadcast domain with hosts in all other VLANs"
     ],
     "answer": 1,
-    "explanation": "Communication between different VLANs requires routing functionality, typically provided by a router or layer-3 switch."
+    "explanation": "Communication between different VLANs requires routing functionality, typically provided by a router or Layer-3 switch."
   },
   {
     "id": 87,
@@ -1114,12 +1116,12 @@
   {
     "id": 88,
     "type": "multiple",
-    "question": "Quale tra questi elementi rappresenta un notevole svantaggio nella tecnica del routing centralizzato?",
+    "question": "Which of the following is a significant disadvantage of centralized routing?"
     "options": [
-      "Scarse prestazioni nel caso in cui il traffico trasportato sia di tipo voce",
-      "Difficoltà nel determinare l'effettiva topologia di rete in caso di guasti",
-      "Traffico dati particolarmente intenso nell'intorno del nodo centrale",
-      "Criticità del nodo centrale dal punto di vista della robustezza e della scalabilità"
+      "Poor performance when carrying voice traffic",
+      "Difficulty determining the actual network topology in the event of a failure",
+      "Particularly heavy data traffic near the central node",
+      "Criticality of the central node in terms of robustness and scalability"
     ],
     "answer": 3,
     "explanation": "Centralized routing creates a single point of failure and potential bottleneck at the central node, limiting scalability and reliability."
@@ -1127,12 +1129,12 @@
   {
     "id": 89,
     "type": "multiple",
-    "question": "Un indirizzo link-local:",
+    "question": "A link-local address:",
     "options": [
-      "E' utilizzabile per permettere la comunicazione tra stazioni su link locali (es. una LAN) in mancanza di altri indirizzi IPv6.",
-      "Serve per collegare fisicamente due stazioni su un link locale.",
-      "E' l'indirizzo utilizzato dalle stazioni su una LAN per scambiarsi i dati.",
-      "E' utilizzato in tutte le comunicazioni entre stazioni locali."
+      "It can be used to allow communication between stations on local links (e.g., a LAN) in the absence of other IPv6 addresses.",
+      "It is used to physically connect two stations on a local link.",
+      "It is the address used by stations on a LAN to exchange data.",
+      "It is used in all communications between local stations."
     ],
     "answer": 0,
     "explanation": "Link-local addresses (fe80::/10) are automatically configured and used for communication between nodes on the same link, even without global addresses."
@@ -1140,11 +1142,12 @@
   {
     "id": 90,
     "type": "multiple",
-    "question": "Data una rete composta da diverse reti fisiche interconnesse da opportuni router e un range di indirizzi IP da utilizzare in tale rete, è possibile realizzare un piano di indirizzamento in grado di ottimizzare il routing su un certo router di quella rete:",
+    "question": "Given a network composed of several physical networks interconnected by appropriate routers and a range of IP addresses to be used in that network, is it possible to create an addressing plan capable of optimizing routing on a given router in that network:",
     "options": [
-      "Assegnando alle varie reti fisiche presenti degli indirizzi scelti randomicamente all'interno del range di indirizzi definito per la rete",
-      "Assegnando alle varie reti fisiche presenti degli indirizzi scelti all'interno del range di indirizzi definito per la rete, procedendo con l'assegnazione in ordine decrescente di dimensione della rete",
-      "Dividendo la rete in aree e definendo, all'interno del range di indirizzi di partenza, dei range di indirizzi distinti da utilizzare in ciascuna di quelle aree"
+      "Assigning addresses chosen randomly within the defined range to the various physical networks",
+      "Assigning addresses chosen within the defined range to the various physical networks, proceeding in decreasing order of network size",
+      "Dividing the network into areas and defining distinct address ranges from the starting block to be used specifically in each of those areas",
+      "Assigning address blocks sequentially to networks as they are added, without considering the physical topology or hierarchy"
     ],
     "answer": 2,
     "explanation": "Hierarchical addressing with distinct address ranges for different areas enables route summarization and optimizes routing table sizes."
@@ -1152,12 +1155,12 @@
   {
     "id": 91,
     "type": "multiple",
-    "question": "Le procedure di Neighbor Discovery in IPv6",
+    "question": "IPv6 Neighbor Discovery Procedures:",
     "options": [
-      "è basata su ARPv6",
-      "è basata su un pacchetto ICMPv6 inviato in broadcast",
-      "è basata su nn pacchetto ICMPv6 inviato in multicast",
-      "richiede che la rete supporti anche IPv4"
+      "Is based on ARPv6",
+      "Is based on an ICMPv6 broadcast",
+      "Is based on an ICMPv6 multicast",
+      "Requires the network to also support IPv4"
     ],
     "answer": 2,
     "explanation": "IPv6 Neighbor Discovery uses ICMPv6 messages sent to multicast addresses for functions like address resolution and duplicate address detection."
@@ -1165,12 +1168,12 @@
   {
     "id": 92,
     "type": "multiple",
-    "question": "L'High speed packet access (HSPA):",
+    "question": "High-speed packet access (HSPA):",
     "options": [
-      "Utilizza canali dedicati per una migliore trasmissione",
-      "Il TTI aumenta 10ms (2ms in UMTS)",
-      "Utilizza canali condivisi per ridurre lo spreco di risorse",
-      "Il TTI di 1ms grazie all'utilizzo di OFDMA, sistemi MIMO e modulazione 64QAM"
+      "Use dedicated channels for better transmission",
+      "TTI increases to 10ms (2ms in UMTS)",
+      "Use shared channels to reduce resource waste",
+      "TTI of 1ms thanks to the use of OFDMA, MIMO systems, and 64QAM modulation"
     ],
     "answer": 2,
     "explanation": "HSPA uses shared channels more efficiently than dedicated channels, improving resource utilization and overall system capacity."
@@ -1178,11 +1181,12 @@
   {
     "id": 93,
     "type": "multiple",
-    "question": "RIP, caratteristica:",
+    "question": "RIP Feature:",
     "options": [
-      "Necessità della configurazione da parte dell'amministratore per funzionare",
-      "Comunica informazioni con i router vicini",
-      "È in grado di rilevare gli indirizzi IP degli host collegati e comunicarli ai router vicini"
+      "Requires administrator configuration to function",
+      "Shares information with neighboring routers",
+      "Can detect the IP addresses of connected hosts and share them with neighboring routers",
+      "Uses the Dijkstra algorithm to calculate the shortest path to a destination"
     ],
     "answer": 1,
     "explanation": "RIP exchanges routing information only with directly connected neighbor routers, using a distance vector algorithm."
@@ -1190,12 +1194,12 @@
   {
     "id": 94,
     "type": "multiple",
-    "question": "Qual è l'uso dei meccanismi di policing?",
+    "question": "What is the purpose of policing mechanisms?",
     "options": [
-      "Servono all'utente per concordare con il fornitore il livello di QoS da ottenere.",
-      "Servono al fornitore di servizi per verificare che il traffico immesso dal cliente sia conforme agli accordi presi.",
-      "Servono all'utente per verificare che il traffico in arrivo dal fornitore sia conforme agli accordi presi.",
-      "Sono usati nei vari router per garantire un tempo massimo di attraversamento per ciascuno di essi."
+      "They are used by the user to agree with the provider on the level of QoS to be achieved.",
+      "They are used by the service provider to verify that the traffic sent by the customer complies with the agreements made.",
+      "They are used by the user to verify that the traffic arriving from the provider complies with the agreements made.",
+      "They are used in the various routers to guarantee a maximum traversal time for each of them."
     ],
     "answer": 1,
     "explanation": "Traffic policing monitors traffic flows and enforces compliance with service level agreements by dropping or remarking non-conforming packets."
@@ -1203,12 +1207,12 @@
   {
     "id": 95,
     "type": "multiple",
-    "question": "DiffServ si differenzia da IntServ perché:",
+    "question": "DiffServ differs from IntServ because:",
     "options": [
-      "DiffServ tende a fornire una garanzia su QoS che IntServ non dà.",
-      "DiffServ introduce nuovi protocolli per permettere la prenotazione di risorse allo scopo di ottenere una data QoS.",
-      "IntServ tende a fornire una garanzia su QoS che DiffServ non dà.",
-      "DiffServ tende a garantire un tempo massimo di attraversamento, mentre IntServ tende a fornire una banda minima garantita."
+      "DiffServ tends to provide a QoS guarantee that IntServ does not.",
+      "DiffServ introduces new protocols to allow resource reservations to achieve a given QoS.",
+      "IntServ tends to provide a QoS guarantee that DiffServ does not.",
+      "DiffServ tends to guarantee a maximum traversal time, while IntServ tends to provide a minimum guaranteed bandwidth."
     ],
     "answer": 2,
     "explanation": "IntServ provides per-flow QoS guarantees with explicit resource reservation, while DiffServ provides class-based QoS with relative assurances but no strict guarantees."
@@ -1216,12 +1220,12 @@
   {
     "id": 96,
     "type": "multiple",
-    "question": "Il protocollo RIP è caratterizzato da",
+    "question": "The RIP protocol is characterized by",
     "options": [
-      "L'uso dell'algoritmo di routing link state",
-      "La possibilità di essere utilizzato sia per il routing interdominio che per il routing intradominio",
-      "La capacità di operare su reti di larghe dimensioni per via della sua capacità di operare in modo gerarchico",
-      "Frequenti instabilità e facilità nel creare percorsi di inoltro circolari"
+      "The use of the link-state routing algorithm",
+      "The ability to be used for both interdomain and intradomain routing",
+      "The ability to operate on large networks due to its hierarchical operation",
+      "Frequent instabilities and the ease of creating circular forwarding paths"
     ],
     "answer": 3,
     "explanation": "RIP is prone to routing loops and slow convergence, especially in larger networks or during topology changes."
@@ -1229,12 +1233,12 @@
   {
     "id": 97,
     "type": "multiple",
-    "question": "Il protocollo GRE ha lo scopo di:",
+    "question": "The GRE protocol is intended to:",
     "options": [
-      "Proteggere i pacchetti contro le intercettazioni.",
-      "Gestire l'incapsulamento di pacchetti da trasportare attraverso un tunnel.",
-      "Autenticare il mittente dei pacchetti.",
-      "Verificare l'integrità dei pacchetti in arrivo."
+      "Protect packets from eavesdropping.",
+      "Manage the encapsulation of packets to be transported through a tunnel.",
+      "Authenticate the sender of packets.",
+      "Verify the integrity of incoming packets."
     ],
     "answer": 1,
     "explanation": "GRE (Generic Routing Encapsulation) is a tunneling protocol that encapsulates various network layer protocols inside IP tunnels."
@@ -1242,12 +1246,12 @@
   {
     "id": 98,
     "type": "multiple",
-    "question": "Gli indirizzi IPv6 Aggregatable Global Unicast sono:",
+    "question": "IPv6 Aggregatable Global Unicast addresses are:",
     "options": [
-      "Aggregabili solo in address range molto piccoli, in modo da favorire la precisione del calcolo dei percorsi",
-      "Univoci a livello globale, sostanzialmente equivalenti agli indirizzi pubblici IPv4",
-      "Utilizzabili solo su dispositivi appartenenti alla stessa rete locale",
-      "Utilizzabili a livello globale solo insieme ad opportune tecniche di Network Address Translation (NAT)"
+      "Aggregatable only in very small address ranges, to improve route calculation accuracy",
+      "Globally unique, essentially equivalent to public IPv4 addresses",
+      "Can only be used on devices belonging to the same local network",
+      "Can only be used globally in conjunction with appropriate Network Address Translation (NAT) techniques"
     ],
     "answer": 1,
     "explanation": "Aggregatable Global Unicast addresses in IPv6 are globally routable and unique, serving the same purpose as public IPv4 addresses."
@@ -1255,12 +1259,12 @@
   {
     "id": 99,
     "type": "multiple",
-    "question": "Utilizzando l'algoritmo del secchiello a gettoni (o secchio bucato) di capacità B token e velocità di riempimento r token/s si riesce a controllare:",
+    "question": "Using the token bucket (or leaky bucket) algorithm with capacity B tokens and a filling rate of r tokens/s, we can control:",
     "options": [
-      "Che il tempo di attraversamento non superi rB secondi.",
-      "Il numero di pacchetti al secondo immessi non superi r, ed il massimo burst non superi B.",
-      "Il numero di pacchetti al secondo immessi non superi B, ed il massimo burst non superi r.",
-      "Il jitter non superi B/r."
+      "That the traversal time does not exceed rB seconds",
+      "The number of packets sent per second does not exceed r, and the maximum burst does not exceed B",
+      "The number of packets sent per second does not exceed B, and the maximum burst does not exceed r",
+      "The jitter does not exceed B/r"
     ],
     "answer": 1,
     "explanation": "The token bucket algorithm controls the average rate (r tokens/sec) and maximum burst size (B tokens), allowing bursts up to B tokens while maintaining the long-term average rate r."
@@ -1268,12 +1272,12 @@
   {
     "id": 100,
     "type": "multiple",
-    "question": "Un 'Internal Router' OSPF in un'area mantiene nell'archivio di LSA:",
+    "question": "An OSPF 'Internal Router' in an area maintains in the LSA archive:",
     "options": [
-      "La descrizione dettagliata della topologia di tutto il dominio OSPF",
-      "Solo ed esclusivamente una descrizione dettagliata della topologia dell'area di cui il router fa parte",
-      "La descrizione dettagliata della topologia dell'area di cui il router fa parte e i sommari di tutte le destinazioni presenti nel dominio di routing OSPF",
-      "La descrizione dettagliata della topologia dell'area di cui il router fa parte, la descrizione dettagliata dell'area backbone, e il sommario delle restanti destinazioni presenti nel dominio di routing OSPF"
+      "The detailed topology description of the entire OSPF domain",
+      "Only a detailed topology description of the area to which the router belongs",
+      "The detailed topology description of the area to which the router belongs and summaries of all destinations in the OSPF routing domain",
+      "The detailed topology description of the area to which the router belongs, the detailed description of the backbone area, and the summary of the remaining destinations in the OSPF routing domain"
     ],
     "answer": 2,
     "explanation": "An internal OSPF router maintains detailed topology information for its own area and summary information (type 3 LSAs) for other areas."
@@ -1281,12 +1285,12 @@
   {
     "id": 101,
     "type": "multiple",
-    "question": "In un pacchetto che viaggia su un tunnel GRE quante intestazioni possono essere presenti?",
+    "question": "How many headers can be present in a packet traveling over a GRE tunnel?",
     "options": [
-      "Una sola, altrimenti l'indirizzamento è ambiguo.",
-      "Due intestazioni, ma quella interna può solo contenere indirizzi privati.",
-      "Due intestazioni, senza particolari limitazioni.",
-      "Due intestazioni, ma quella esterna può solo contenere indirizzi privati."
+      "Only one, otherwise the addressing is ambiguous.",
+      "Two headers, but the inner one can only contain private addresses.",
+      "Two headers, without any particular restrictions.",
+      "Two headers, but the outer one can only contain private addresses."
     ],
     "answer": 2,
     "explanation": "GRE tunnels encapsulate the original packet with an additional IP header, resulting in two IP headers without restrictions on address types."
@@ -1294,12 +1298,12 @@
   {
     "id": 102,
     "type": "multiple",
-    "question": "Cosa sono i bursts?",
+    "question": "What are bursts?",
     "options": [
-      "Sono dei pacchetti che viaggiano sulla rete IP",
-      "Sono trame che viaggiano attraverso onde radio",
-      "Sono blocchi dati che viaggiano su circuit switched networks",
-      "Sono i raggruppamenti di celle di dimensione G"
+      "They are packets traveling on the IP network",
+      "They are frames traveling via radio waves",
+      "They are data blocks traveling on circuit-switched networks",
+      "They are groupings of cells of size G"
     ],
     "answer": 2,
     "explanation": "In circuit-switched networks like GSM, bursts refer to the time slots allocated for data transmission in TDMA systems."
@@ -1307,12 +1311,12 @@
   {
     "id": 103,
     "type": "multiple",
-    "question": "L'architettura MPLS (multi-protocol label switching) è caratterizzata da:",
+    "question": "The MPLS (Multi-Protocol Label Switching) architecture is characterized by:",
     "options": [
-      "Un diverso meccanismo (rispetto all'IP puro) per decidere l'interfaccia di uscita verso cui un pacchetto debba essere inoltrato",
-      "Protocolli di routing particolarmente veloci ad aggiornare le tabelle di routing in seguito a cambiamenti topologici in modo da recuperare velocemente i guasti.",
-      "Terminali di rete intelligenti in grado di personalizzare i servizi ricevuti dalla rete.",
-      "Un supporto particolarmente evoluto per fornire servizi a qualità garantita."
+      "A different mechanism (compared to pure IP) for deciding the egress interface to which a packet should be forwarded",
+      "Routing protocols that are particularly fast at updating routing tables following topological changes, thus enabling rapid failure recovery.",
+      "Intelligent network terminals capable of customizing the services received from the network.",
+      "Particularly advanced support for providing quality-assured services."
     ],
     "answer": 0,
     "explanation": "MPLS uses label-based forwarding instead of traditional IP longest prefix match, enabling faster packet processing and traffic engineering."
@@ -1320,12 +1324,12 @@
   {
     "id": 105,
     "type": "multiple",
-    "question": "Le reti 192.168.1.0/24 e 192.168.2.0/24 sono aggregabili in:",
+    "question": "The networks 192.168.1.0/24 and 192.168.2.0/24 can be aggregated into:",
     "options": [
       "192.168.0.0/23",
       "0.0.0.0/0",
       "192.168.1.0/23",
-      "Non sono aggregabili."
+      "They cannot be aggregated."
     ],
     "answer": 1,
     "explanation": "192.168.1.0/24 and 192.168.2.0/24 are not contiguous in a way that allows aggregation with a smaller prefix than /23. The default route 0.0.0.0/0 is the only valid aggregation that covers both."
@@ -1333,11 +1337,12 @@
   {
     "id": 106,
     "type": "multiple",
-    "question": "Le soluzioni di VPN (virtual private network) di livello 3 basate su MPLS sono caratterizzate da",
+    "question": "MPLS-based Layer 3 VPN (Virtual Private Network) solutions are characterized by:",
     "options": [
-      "Livelli particolarmente alti di sicurezza grazie all'utilizzo di tecniche crittografiche",
-      "Buon livello di automatizzazione e integrazione tra la dorsale pubblica e le reti private",
-      "Meccanismi di tunneling di livello 3, ovvero all'interno di pacchetti IP."
+      "Particularly high levels of security thanks to the use of cryptographic techniques",
+      "Good level of automation and integration between the public backbone and private networks",
+      "Layer 3 tunneling mechanisms, i.e., within IP packets",
+      "The extension of a single Layer 2 broadcast domain across multiple geographically dispersed sites"
     ],
     "answer": 1,
     "explanation": "MPLS Layer 3 VPNs provide excellent automation and integration between service provider networks and customer networks through BGP and other protocols."
@@ -1345,12 +1350,12 @@
   {
     "id": 107,
     "type": "multiple",
-    "question": "Il Solicited Node Multicast Address è:",
+    "question": "The Solicited Node Multicast Address is:",
     "options": [
-      "L'indirizzo multicast utilizzato come indirizzo sorgente in un pacchetto di Neighbor Solicitation",
-      "L'indirizzo multicast che viene inserito nel payload (campo Target Address di ARPv6) di un pacchetto di Neighbor Solicitation",
-      "L'indirizzo multicast che viene inserito nel payload (campo Target Address di ICMPv6) di un pacchetto di Neighbor Solicitation",
-      "L'indirizzo multicast utilizzato come indirizzo destinazione in un pacchetto di Neighbor Solicitation"
+      "The multicast address used as the source address in a Neighbor Solicitation packet",
+      "The multicast address inserted in the payload (ARPv6 Target Address field) of a Neighbor Solicitation packet",
+      "The multicast address inserted in the payload (ICMPv6 Target Address field) of a Neighbor Solicitation packet",
+      "The multicast address used as the destination address in a Neighbor Solicitation packet"
     ],
     "answer": 3,
     "explanation": "The solicited-node multicast address is used as the destination address in IPv6 Neighbor Solicitation messages for efficient address resolution."
@@ -1358,12 +1363,12 @@
   {
     "id": 108,
     "type": "multiple",
-    "question": "Le soluzioni di VPN (virtual private network) basate su SSL (secure socket layer) consentono:",
+    "question": "VPN (Virtual Private Network) solutions based on SSL (Secure Socket Layer) allow:",
     "options": [
-      "Di distribuire in modo sicuro su diversi server applicazioni basate sul web",
-      "Di creare cluster de server privati",
-      "Ad un'azienda di rendere disponibili in modo sicuro ai propri dipendenti fuori sede specifiche applicazioni aziendali.",
-      "La realizzazione di un backbone sul quale un fornitore di servizi (service provider) può facilmente ed efficientemente fornire servizi di connettività ai suoi clienti"
+      "Securely distribute web-based applications across multiple servers",
+      "Create clusters of private servers",
+      "A company can securely make specific business applications available to its remote employees",
+      "Create a backbone over which a service provider can easily and efficiently provide connectivity services to its customers"
     ],
     "answer": 2,
     "explanation": "SSL VPNs provide secure remote access to specific corporate applications through web browsers, without requiring full network-level VPN access."
@@ -1371,12 +1376,12 @@
   {
     "id": 109,
     "type": "multiple",
-    "question": "La tecnica 'Path Vector' permette di:",
+    "question": "The 'Path Vector' technique allows you to:",
     "options": [
-      "Risolvere il problema del count to infinity",
-      "Risolvere il problema delle route sovrapposte",
-      "Rendere il protocollo 'trasparente' rispetto all'informazione trasportata",
-      "Nessuna delle precedenti"
+      "Solve the count-to-infinity problem",
+      "Solve the overlapping route problem",
+      "Make the protocol 'transparent' with respect to the information being transported",
+      "None of the above"
     ],
     "answer": 0,
     "explanation": "Path vector protocols like BGP solve the count-to-infinity problem by storing the complete AS path, making routing loops easily detectable."
@@ -1384,12 +1389,12 @@
   {
     "id": 110,
     "type": "multiple",
-    "question": "Una BSC (Base Station Controller):",
+    "question": "A BSC (Base Station Controller):",
     "options": [
-      "è il punto di accesso per il MT",
-      "Contiene i dati statici dell'utente (come ID, servizi abilitati e parametri di sicurezza)",
-      "è in grado di controllare una singola BTS",
-      "è in grado di controllare un grande numero di BTS"
+      "Is the access point for the MT",
+      "Contains static user data (such as ID, enabled services, and security parameters)",
+      "Is capable of controlling a single BTS",
+      "Is capable of controlling a large number of BTSs"
     ],
     "answer": 3,
     "explanation": "A Base Station Controller manages multiple Base Transceiver Stations (BTSs) in a GSM network, handling radio resource management and handovers."
@@ -1397,12 +1402,12 @@
   {
     "id": 111,
     "type": "multiple",
-    "question": "Gli LSP (label switched path) nell'architettura MPLS:",
+    "question": "Label Switched Paths (LSPs) in MPLS architecture:",
     "options": [
-      "Rappresentano percorsi alternativi mantenuti nella tabella di un router per l'inoltro di pacchetti verso una destinazione",
-      "Vengono scambiati dai router per costruire una mappa della rete",
-      "Costituiscono il percorso più breve verso una destinazione",
-      "Vengono creati (set up) per il trasporto di pacchetti appartenenti ad una classe de equivalenza di inoltro (forwarding equivalence class, FEC)."
+      "They represent alternative paths maintained in a router's table for forwarding packets to a destination",
+      "They are exchanged by routers to build a network map",
+      "They constitute the shortest path to a destination",
+      "They are created (set up) to transport packets belonging to a forwarding equivalence class (FEC)"
     ],
     "answer": 3,
     "explanation": "LSPs are established to forward packets belonging to specific Forwarding Equivalence Classes through the MPLS network."
@@ -1410,12 +1415,12 @@
   {
     "id": 112,
     "type": "multiple",
-    "question": "Un algoritmo di routing di tipo selective flooding:",
+    "question": "A selective flooding routing algorithm:",
     "options": [
-      "E' sostanzialmente simile all'algoritmo di flooding classico, con la differenza che ciascun pacchetto in arrivo viene ritrasmesso su tutte le linee eccetto quella su cui è stato ricevuto",
-      "E' sicuramente più robusto di un classico algoritmo di flooding",
-      "Consente di ridurre il numero di volte in cui un pacchetto viene inviato sulla stessa porzione di rete",
-      "Richiede che i pacchetti inviati contengano un numero di sequenza"
+      "It is essentially similar to the classic flooding algorithm, except that each incoming packet is retransmitted on all lines except the one on which it was received",
+      "It is certainly more robust than a classic flooding algorithm",
+      "It allows reducing the number of times a packet is sent on the same portion of the network",
+      "It requires that sent packets contain a sequence number"
     ],
     "answer": 2,
     "explanation": "Selective flooding reduces unnecessary packet duplication by forwarding packets only to links that lead toward the destination, unlike simple flooding."
@@ -1423,12 +1428,12 @@
   {
     "id": 114,
     "type": "multiple",
-    "question": "In OSPF, un pacchetto di 'Database Description':",
+    "question": "In OSPF, a 'Database Description' packet:",
     "options": [
-      "Viene utilizzato durante la fase di 'Neighbor Discovery'",
-      "Viene utilizzato durante la fase di riallineamento delle adiacenze",
-      "Viene sempre inviato cifrato per evitare problemi di sicurezza",
-      "Viene sempre inviato cifrato per problemi di privacy"
+      "Is used during the 'Neighbor Discovery' phase",
+      "Is used during the Adjacency Realignment phase",
+      "Is always sent encrypted to avoid security issues",
+      "Is always sent encrypted to avoid privacy issues"
     ],
     "answer": 1,
     "explanation": "Database Description packets are used during the OSPF exchange process to synchronize link-state databases between adjacent routers."
@@ -1436,12 +1441,12 @@
   {
     "id": 115,
     "type": "multiple",
-    "question": "Il meccanismo dello 'Split Horizon' permette di:",
+    "question": "The 'Split Horizon' mechanism allows you to:",
     "options": [
-      "Eliminare la possibilità che si verifichino loop (percorsi de inoltro ciclici) in seguito a cambiamenti della topologia",
-      "Ridurre la probabilità che si verifichino loop in seguito a cambiamenti della topologia",
-      "Disabilitare, durante la fase di convergenza, l'invio di pacchetti dati verso quelle destinazioni che potrebbero dare luogo a loop",
-      "Diminuire il traffico de routing implementando la fase de neighbor discovery con dei pacchetti appositi ('Hello Packets')"
+      "Eliminate the possibility of loops (cyclic forwarding paths) arising from topology changes",
+      "Reduce the probability of loops arising from topology changes",
+      "During the convergence phase, disable the sending of data packets to destinations that could give rise to loops",
+      "Reduce routing traffic by implementing neighbor discovery with 'Hello Packets'"
     ],
     "answer": 1,
     "explanation": "Split horizon prevents routers from advertising routes back to the interface from which they were learned, reducing but not eliminating routing loops."
@@ -1449,12 +1454,12 @@
   {
     "id": 116,
     "type": "multiple",
-    "question": "Nell'algoritmo del secchiello a gettoni:",
+    "question": "In the token bucket algorithm:",
     "options": [
-      "La capacità del secchiello è legata alla velocità media sul lungo periodo.",
-      "La capacità del secchiello è legata al massimo burst size.",
-      "La capacità del secchiello ha relazione diretta con la banda.",
-      "Serve per implementare il weighted fair queuing."
+      "Bucket capacity is related to the long-term average throughput",
+      "Bucket capacity is related to the maximum burst size",
+      "Bucket capacity has a direct relationship with bandwidth",
+      "It is used to implement weighted fair queuing"
     ],
     "answer": 1,
     "explanation": "In the token bucket algorithm, the bucket capacity determines the maximum burst size that can be sent at once."
@@ -1462,12 +1467,12 @@
   {
     "id": 117,
     "type": "multiple",
-    "question": "Due host collegati ad uno switch Ethernet:",
+    "question": "Two hosts connected to an Ethernet switch:",
     "options": [
-      "Devono poter comunicare sempre senza utilizzare un router intermedio.",
-      "Possono comunicare anche se appartenenti a VLAN diverse, dipende dalla configurazione della rete.",
-      "Possono comunicare solo se appartenenti alla stessa VLAN, qualsiasi sia la configurazione della rete.",
-      "Non possono comunicare utilizzando un router in quanto connessi allo stesso switch."
+      "They must always be able to communicate without using an intermediate router",
+      "They can communicate even if they belong to different VLANs, depending on the network configuration",
+      "They can only communicate if they belong to the same VLAN, regardless of the network configuration",
+      "They cannot communicate using a router because they are connected to the same switch"
     ],
     "answer": 1,
     "explanation": "Hosts on different VLANs can communicate if the switch is configured for inter-VLAN routing (layer-3 switching) or connected to an external router."
@@ -1475,12 +1480,12 @@
   {
     "id": 118,
     "type": "multiple",
-    "question": "Il protocollo RSVP (Resource reServation Protocol) è in grado di:",
+    "question": "The Resource reServation Protocol (RSVP) can:",
     "options": [
-      "Limitare le variazioni di ritardo (jitter) subite dai pacchetti nei router",
-      "Far conoscere ai router le richieste di qualità di servizio avanzate dalle applicazioni",
-      "Riservare risorse di calcolo nei server che condividono i loro processori",
-      "Verificare i ritardi e le perdite subiti dai pacchetti di applicazioni multimediali sulla rete."
+      "Limit delay variations (jitter) experienced by packets in routers",
+      "Let routers know about quality of service requests made by applications",
+      "Reserve computing resources on servers that share their processors",
+      "Check for delays and losses experienced by multimedia application packets on the network"
     ],
     "answer": 1,
     "explanation": "RSVP is a signaling protocol that allows applications to communicate their QoS requirements to network routers along the path."
@@ -1488,12 +1493,12 @@
   {
     "id": 119,
     "type": "multiple",
-    "question": "Due host collegati ad una rete Switched Ethernet attraverso porte configurate in modalità VLAN",
+    "question": "Two hosts connected to a Switched Ethernet network through ports configured in VLAN mode:",
     "options": [
-      "Possono comunicare solo se appartenenti alla stessa VLAN",
-      "Non possono comunicare",
-      "Se appartengono a VLAN diverse, possono comunicare solo se sono collegati a switch diversi e il link tra gli switch è configurato in modalità Trunk",
-      "Se appartengono a VLAN diverse, è possibile che riescano a comunicare anche se sono collegati a switch diversi e le porte degli switch sono configurate in modalità Access."
+      "They can communicate only if they belong to the same VLAN",
+      "They cannot communicate",
+      "If they belong to different VLANs, they can communicate only if they are connected to different switches and the link between the switches is configured in Trunk mode",
+      "If they belong to different VLANs, they may be able to communicate even if they are connected to different switches and the switch ports are configured in Access mode"
     ],
     "answer": 3,
     "explanation": "Inter-VLAN communication is possible through layer-3 devices regardless of port configuration, as long as proper routing is configured between VLANs."
@@ -1501,12 +1506,12 @@
   {
     "id": 120,
     "type": "multiple",
-    "question": "In OSPF, un pacchetto di 'Link State Update':",
+    "question": "In OSPF, a 'Link State Update' packet:",
     "options": [
-      "Viene utilizzato anche nella procedura di Exchange per lo scambio di tutti gli LSA posseduti dai router, e trasporta ogni LSA in forma completa",
-      "Trasporta le informazioni principali relative ad un Link State Advertisement",
-      "E' utilizzato per aggiornare lo stato dell'adiacenza con un router vicino e trasporta solamente le informazioni relative a quel cambiamento",
-      "Viene inviato per in condizioni di rete a regime, quando il transitorio `e ormai esaurito"
+      "It is also used in the Exchange procedure to exchange all LSAs owned by routers, and carries each LSA in its entirety",
+      "It carries the main information related to a Link State Advertisement",
+      "It is used to update the adjacency state with a neighboring router and carries only the information related to that change",
+      "It is sent under steady-state network conditions, when the transient period has expired"
     ],
     "answer": 0,
     "explanation": "Link State Update packets carry complete LSA information and are used during database exchange and for flooding topology changes."
@@ -1514,10 +1519,12 @@
   {
     "id": 121,
     "type": "multiple",
-    "question": "vantaggio fibra ottica:",
+    "question": "Advantage of fiber optics:",
     "options": [
-      "maggiore velocità nelle trasmissioni sul canale",
-      "switch ottici performanti e bassa complessità"
+      "Faster transmission speed on the channel",
+      "High-performance optical switches and low complexity",
+      "Simplicity of connecting and splicing cables compared to copper",
+      "Ability to carry electrical power to remote devices (like Power over Ethernet)"
     ],
     "answer": 0,
     "explanation": "Optical fiber provides significantly higher bandwidth and transmission speeds compared to copper cables, with lower signal attenuation."
@@ -1525,12 +1532,12 @@
   {
     "id": 122,
     "type": "multiple",
-    "question": "In un pacchetto che viaggia su una rete MPLS, è possibile avere più label contemporaneamente?",
+    "question": "Is it possible to have multiple labels simultaneously in a packet traveling over an MPLS network?"
     "options": [
-      "No, non è previsto.",
-      "Sì, ma non più di 2.",
-      "Sì, ma non più di 20.",
-      "Sì, ma solo nei tunnel MPLS usati per le VPN."
+      "No, this is not possible.",
+      "Yes, but no more than 2.",
+      "Yes, but no more than 20.",
+      "Yes, but only in MPLS tunnels used for VPNs."
     ],
     "answer": 2,
     "explanation": "MPLS supports label stacking with multiple labels (typically up to 8-16 in practice, though the standard allows more), but 20 is a reasonable upper limit."
@@ -1538,12 +1545,12 @@
   {
     "id": 123,
     "type": "multiple",
-    "question": "Una differenza del protocollo di routing OSPF rispetto all'IGRP è che:",
+    "question": "One difference between OSPF and IGRP is that:",
     "options": [
-      "OSPF è gerarchico",
-      "OSPF consente di effettuare anche routing tra AS diversi",
-      "OSPF permette di trasportare contemporaneamente informazioni di routing relative a diverse architetture protocollari (routing integrato)",
-      "OSPF è proprietario"
+      "OSPF is hierarchical",
+      "OSPF also allows routing between different ASes",
+      "OSPF allows routing information for different protocol architectures to be carried simultaneously (integrated routing)",
+      "OSPF is proprietary"
     ],
     "answer": 0,
     "explanation": "OSPF uses a hierarchical area structure to improve scalability, while IGRP (and its successor EIGRP) uses a flat topology."
@@ -1551,12 +1558,12 @@
   {
     "id": 124,
     "type": "multiple",
-    "question": "Due stazioni A e B appartengono alla stessa rete fisica e hanno rispettivamente indirizzi IP 130.192.1.1/25 e 130.192.1.129/24.",
+    "question": "Two stations A and B belong to the same physical network and have IP addresses 130.192.1.1/25 and 130.192.1.129/24, respectively.",
     "options": [
-      "A comunica direttamente con B e viceversa",
-      "A comunica direttamente con B ma non viceversa",
-      "A comunica con B solo attraverso un router",
-      "A non può comunicare con B"
+      "A communicates directly with B and vice versa",
+      "A communicates directly with B but not vice versa",
+      "A communicates with B only through a router",
+      "A cannot communicate with B"
     ],
     "answer": 2,
     "explanation": "Host A (130.192.1.1/25) is in network 130.192.1.0/25, while host B (130.192.1.129/24) is in network 130.192.1.0/24. They are on different logical subnets requiring a router."
@@ -1564,12 +1571,12 @@
   {
     "id": 126,
     "type": "multiple",
-    "question": "Le soluzioni di VPN (virtual private network) basate su SSL (secure socket layer) consentono:",
+    "question": "VPN (Virtual Private Network) solutions based on SSL (Secure Socket Layer) allow:",
     "options": [
-      "Di distribuire in modo sicuro su diversi server applicazioni basate sul web",
-      "Di creare cluster de server privati",
-      "Ad un'azienda di rendere disponibili in modo sicuro ai propri dipendenti fuori sede specifiche applicazioni aziendali.",
-      "La realizzazione di un backbone sul quale un fornitore de servizi (service provider) può facilmente ed efficientemente fornire servizi de connettività ai suoi clienti"
+      "Securely distribute web-based applications across multiple servers",
+      "Create private server clusters",
+      "A company can securely make specific business applications available to its remote employees",
+      "Create a backbone over which a service provider can easily and efficiently provide connectivity services to its customers"
     ],
     "answer": 2,
     "explanation": "SSL VPNs provide application-level remote access security, allowing employees to securely access specific corporate applications from outside the corporate network."
@@ -1577,12 +1584,12 @@
   {
     "id": 127,
     "type": "multiple",
-    "question": "L'International Mobile Equipment Identity (IMEI) è:",
+    "question": "The International Mobile Equipment Identity (IMEI) is:",
     "options": [
-      "Un codice temporaneo assegnato dall'ISP",
-      "Un codice fisso assegnato dal BTS",
-      "Un numero telefonico temporaneo assegnato al terminale in base alla sua posizione",
-      "Identifica il dispositivo, è assegnato dal venditore e non è modificabile"
+      "A temporary code assigned by the ISP",
+      "A fixed code assigned by the BTS",
+      "A temporary telephone number assigned to the terminal based on its location",
+      "Identifies the device, is assigned by the vendor, and cannot be changed"
     ],
     "answer": 3,
     "explanation": "The IMEI is a unique identifier for mobile devices, assigned by the manufacturer and permanently associated with the hardware."
@@ -1590,12 +1597,12 @@
   {
     "id": 128,
     "type": "multiple",
-    "question": "Nel protocollo OSPF i router connessi ad una stessa LAN vengono rappresentati nel grafo che descrive la rete come:",
+    "question": "In the OSPF protocol, routers connected to the same LAN are represented in the network graph as:",
     "options": [
-      "Un unico nodo",
-      "Una struttura di connessioni logiche de forma stellare",
-      "Una struttura de connessioni logiche completamente magliata",
-      "Una struttura composta da un insieme de nodi su un link broadcast"
+      "A single node",
+      "A star-shaped structure of logical connections",
+      "A fully meshed structure of logical connections",
+      "A structure composed of a set of nodes on a broadcast link"
     ],
     "answer": 1,
     "explanation": "In OSPF, routers on a broadcast network are represented in a star topology with the Designated Router at the center."
@@ -1603,12 +1610,12 @@
   {
     "id": 129,
     "type": "multiple",
-    "question": "Lo schema di indirizzamento IPv6:",
+    "question": "The IPv6 addressing scheme:",
     "options": [
-      "Prevede esclusivamente indirizzi assegnati in modo univoco da un ente preposto.",
-      "Prevede che ogni entità (es. azienda) si faccia assegnare globalmente un insieme di indirizzi, che diventano de sua proprietà a tempo illimitato",
-      "Prevede che i primi 64 bit di un indirizzo siano normalmente identificati come il prefisso de rete, almeno sulle LAN.",
-      "Non prevede l'esistenza i indirizzi multicast."
+      "It provides exclusively for addresses uniquely assigned by a designated entity",
+      "It requires each entity (e.g., a company) to be assigned a global set of addresses, which become its property indefinitely",
+      "It requires the first 64 bits of an address to be normally identified as the network prefix, at least on LANs",
+      "It does not provide for multicast addresses"
     ],
     "answer": 2,
     "explanation": "IPv6 addressing typically uses the first 64 bits as the network prefix and the remaining 64 bits as the interface identifier."
@@ -1616,12 +1623,12 @@
   {
     "id": 130,
     "type": "multiple",
-    "question": "Nella fase finale di un algoritmo di routing di tipo Link State, ogni router:",
+    "question": "In the final stage of a link-state routing algorithm, each router:",
     "options": [
-      "Esegue l'algoritmo di Shortest Path First, utilizzando come input il Link State Database",
-      "Invia in flooding i propri Link State ai vicini",
-      "Invia in flooding tutti i Link State ai vicini",
-      "Esegue l'algoritmo DUAL (Diffusing Update Algorithm)"
+      "Executes the Shortest Path First algorithm, using the Link State Database as input",
+      "Floods its own link states to neighbors",
+      "Floods all link states to neighbors",
+      "Executes the Diffusing Update Algorithm (DUAL)"
     ],
     "answer": 0,
     "explanation": "In link state routing, each router independently runs the SPF (Dijkstra's) algorithm on its complete topology database to compute shortest paths."
@@ -5180,7 +5187,8 @@
       "Allows you to tunnel into a peer-type site-to-site VPN",
       "Allowing you to create a tunnel in a layer 4 VPN"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "In an Overlay VPN model, the service provider (SP) simply provides virtual point-to-point links (tunnels) between customer sites. The SP does not see or manage the customer's routing; the customer builds their own network 'over' the provider's infrastructure."
   },
   {
     "id": 425,
@@ -5205,7 +5213,8 @@
       "The multicast address that is inserted in the payload (ICMPv6 Target Address field) of a Neighbor Solicitation packet",
       "The multicast address used as the destination address in a Neighbor Solicitation packet"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "In IPv6, there are no Broadcasts. To find a specific neighbor's MAC address efficiently, the Neighbor Solicitation packet is sent to the Solicited-Node Multicast address (derived from the target IP) in the Destination field of the packet header."
   },
   {
     "id": 427,
@@ -5217,6 +5226,7 @@
       "The presence of the Link State Database eliminates the need for a routing table, saving memory",
       "Fewer routing errors as link states are exchanged by routers at a very high frequency"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "Link State protocols build a complete map of the network topology. This allows every router to independently calculate the best path to any destination, rather than relying on neighbor updates."
   }
 ]
