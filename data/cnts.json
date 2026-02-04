@@ -4759,13 +4759,13 @@
     "type": "multiple",
     "question": "The combination of token bucket (or bucket hole) and Weighted Fair Queueing (WFQ) mechanisms serves to ensure:",
     "options": [
-      "A maximum traversal time of a router.",
-      "A maximum burst of consecutive packets, per stream.",
-      "A maximum crossing time of a NAT.",
-      "A maximum bandwidth per packet stream."
+      "A maximum traversal time of a router",
+      "A maximum burst of consecutive packets, per stream",
+      "A maximum crossing time of a NAT",
+      "A maximum bandwidth per packet stream"
     ],
     "answer": 0,
-    "explanation": "To Add"
+    "explanation": "This combination provides a deterministic Quality of Service (QoS) guarantee known as a Delay Bound. The Token Bucket limits the maximum size of a traffic burst ($\\sigma$), while WFQ guarantees a minimum service rate ($R$). If the burst size is limited and the service speed is guaranteed, the maximum time a packet can be stuck in the queue (traversal time) can be mathematically calculated and guaranteed."
   },
   {
     "id": 387,
@@ -4774,11 +4774,11 @@
     "options": [
       "Will take place at a spesific point in time, with the simultaneous switch-on of the new IPv6 devices",
       "Is important to ensure the scalability of the Internet, which is growing in size and requires more IP addresses",
-      "Has been stopped by the IETF because of security issues.",
+      "Has been stopped by the IETF because of security issues",
       "Finished in 2011, with the assignment of the last /8 IPv4 block"
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "The primary driver for moving to IPv6 is the exhaustion of IPv4 addresses. IPv4 uses 32-bit addresses (limiting the total to ~4.3 billion), which is insufficient for the modern Internet. IPv6 uses 128-bit addresses, creating a virtually infinite address space that ensures the Internet can continue to scale and support billions of new devices."
   },
   {
     "id": 388,
@@ -4804,7 +4804,7 @@
       "Provides for a destination to be declared unattainable when the cost exceeds a certain threshold of infinity."
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "Split Horizon is a loop-prevention mechanism used in Distance Vector protocols (like RIP and EIGRP). The rule is simple: if a router learns about a route from a neighbor (Next Hop), it must not advertise that same route back to that neighbor. Doing so would be redundant and could create a routing loop."
   },
   {
     "id": 390,
@@ -4813,11 +4813,11 @@
     "options": [
       "In UDP, to enable broadcast transmission of packets",
       "In UDP, for issues mainly related to the greater simplicity of software development",
-      "...",
-      "..."
+      "In TCP, to ensure the reliability of the routing information exchange",
+      "Directly in IP, similar to OSPF, to maximize efficiency"
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "RIP (Routing Information Protocol) encapsulates its messages inside UDP segments (Port 520). The designers chose UDP primarily for simplicity: it avoids the complex overhead of establishing and maintaining connection states (like TCP handshakes) with every neighbor, making the software implementation much lighter and easier to develop."
   },
   {
     "id": 391,
@@ -4830,12 +4830,12 @@
       "The cheapest route to each destination is always chosen"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "BGP is defined as a 'Policy-Based' routing protocol, not just a technical one. Its primary purpose is to enforce business agreements between different organizations (Autonomous Systems). Therefore, manual administrative rules (policies)—such as preferring a cheaper ISP over a faster one—will always override technical metrics like path length."
   },
   {
     "id": 392,
     "type": "multiple",
-    "question": "Two Ethernet plots can collide for what reason?",
+    "question": "Two Ethernet plots/frames can collide for what reason?",
     "options": [
       "It happens often because of channel contention",
       "Switched full duplex",
@@ -4843,7 +4843,7 @@
       "Switched half duplex"
     ],
     "answer": 3,
-    "explanation": "To Add"
+    "explanation": "In a 'Half Duplex' configuration, a device cannot send and receive data at the same time (like a walkie-talkie). If the switch and the connected device both try to transmit on the wire simultaneously, their signals will crash into each other, causing a collision."
   },
   {
     "id": 393,
@@ -4856,7 +4856,7 @@
       "Use an appropriately modified version of the BGP"
     ],
     "answer": 3,
-    "explanation": "To Add"
+    "explanation": "MPLS Layer 3 VPNs rely on MP-BGP (Multiprotocol BGP). This is an extended version of the standard BGP routing protocol that can carry 'VPN-IPv4' addresses (customer IP + a unique tag called a Route Distinguisher). This allows the network to distinguish between different customers who might be using the exact same private IP addresses."
   },
   {
     "id": 394,
@@ -4869,7 +4869,7 @@
       "No adjacent discovery mechanism is used as there is an algorithm to map any possible address to a MAC address"
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "While Unicast traffic requires Neighbor Discovery (NDP) to resolve MAC addresses (replacing ARP), **Multicast** traffic does not. Instead, the destination Ethernet MAC address is generated algorithmically by mapping the last 32 bits of the IPv6 address to the reserved Ethernet prefix `33:33`."
   },
   {
     "id": 395,
@@ -4882,7 +4882,7 @@
       "Allows encapsulation but it is not possible to encapsulate lower layer units in a layer 3 packet"
     ],
     "answer": 0,
-    "explanation": "To Add"
+    "explanation": "GRE (Generic Routing Encapsulation) is a versatile tunneling protocol that can encapsulate almost any packet type (including multicast traffic and Layer 2 frames) inside a standard IP packet. This allows protocols that normally cannot travel across a public WAN (like IPX, AppleTalk, or broadcast/multicast routing updates) to be transported over the Internet."
   },
   {
     "id": 396,
@@ -4892,7 +4892,7 @@
       "An alternative way to define the concept of handover",
       "The bouncing of signals within a cell.",
       "The proposing the release cell as the docking cell",
-      "..."
+      "The permanent loss of connection during the handover procedure"
     ],
     "answer": 2,
     "explanation": "The ping-pong effect occurs when a mobile terminal repeatedly hands over between two cells, often due to unstable signal conditions at cell boundaries."
@@ -4908,20 +4908,20 @@
       "Intelligent terminals able to customize the service received from the network"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "Standard IP routing requires a complex lookup of the destination IP address (Longest Prefix Match) at every hop. MPLS replaces this mechanism with Label Swapping: routers make forwarding decisions based solely on a short, fixed-length label, which is distinct from the traditional IP lookup process."
   },
   {
     "id": 398,
     "type": "multiple",
     "question": "The link-local addresses:",
     "options": [
-      "They are used to identify machines that perform a certain service (e.g. DNS servers).",
-      "They cannot be assigned to routers.",
-      "They are valid within an organization that can use them to assign addresses to machines in the various subnets of its intranet (they are the counterparts of IPv4 private addresses).",
-      "They are normally built automatically by the station from the MAC address its own card, to which it prepends a predefined prefix."
+      "They are used to identify machines that perform a certain service (e.g. DNS servers)",
+      "They cannot be assigned to routers",
+      "They are valid within an organization that can use them to assign addresses to machines in the various subnets of its intranet (they are the counterparts of IPv4 private addresses)",
+      "They are normally built automatically by the station from the MAC address its own card, to which it prepends a predefined prefix"
     ],
     "answer": 3,
-    "explanation": "To Add"
+    "explanation": "Link-local addresses (which start with `FE80::`) are usually auto-generated by the device using a process called EUI-64. This method takes the 48-bit physical MAC address of the network card, inserts `FFFE` in the middle to stretch it to 64 bits, and combines it with the link-local prefix."
   },
   {
     "id": 399,
@@ -4934,7 +4934,7 @@
       "An address that is currently not valid in IPv6"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "IPv6 addresses beginning with `2000::/3` (meaning they start with a 2 or a 3, such as 2001) are classified as Global Unicast Addresses. These are the equivalent of public IPv4 addresses, meaning they are globally unique and fully routable over the public Internet."
   },
   {
     "id": 400,
@@ -4947,7 +4947,7 @@
       "They have a temporal validity that varies over time, based on the number of frames received"
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "This refers to the MAC address learning within the switch's forwarding table (FDB). Learned addresses are not kept forever; they have an 'aging time' (often defaulting to 300 seconds) to clear out old devices. The network administrator can configure this timer value."
   },
   {
     "id": 401,
@@ -4960,7 +4960,7 @@
       "The outermost label is used by internal routers (P) to forward packets to a PE router"
     ],
     "answer": 3,
-    "explanation": "To Add"
+    "explanation": "In an MPLS L3VPN, the Outer Label is the 'transport' label. Internal core routers (P routers) only look at this top label to determine how to route the packet to the correct exit router (Egress PE). They act blindly regarding the 'Inner Label,' which is hidden underneath."
   },
   {
     "id": 402,
@@ -4973,33 +4973,33 @@
       "It can provide all the routing mechanism in overlay networks or point-to-point links in peer networks"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "MPLS is versatile and supports both models: In Layer 2 VPNs (Overlay), it acts like a virtual wire providing point-to-point connections. In Layer 3 VPNs (Peer), the service provider actively participates in the routing mechanism to direct traffic between customer sites."
   },
   {
     "id": 403,
     "type": "multiple",
     "question": "LSPs (label switched paths) in the MPLS (multi-protocol label switching) architecture",
     "options": [
-      "They are created (set up) by applications to transport packets belonging to a forwarding equivalence class (FEC).",
-      "They are obtained by reserving resources in network nodes so as to ensure appropriate quality of service to the applications that created them.",
-      "They constitute the shortest route to a destination.",
-      "They are created by network nodes agreeing on the labels to be used for packets belonging to a forwarding equivalence class (FEC)."
+      "They are created (set up) by applications to transport packets belonging to a forwarding equivalence class (FEC)",
+      "They are obtained by reserving resources in network nodes so as to ensure appropriate quality of service to the applications that created them",
+      "They constitute the shortest route to a destination",
+      "They are created by network nodes agreeing on the labels to be used for packets belonging to a forwarding equivalence class (FEC)"
     ],
     "answer": 3,
-    "explanation": "To Add"
+    "explanation": "An LSP is the specific path a labeled packet travels. It is established when routers use a signaling protocol (like LDP) to 'agree' on label mappings, linking a specific Label number to a specific destination (FEC) at every hop to form a continuous virtual circuit."
   },
   {
     "id": 403,
     "type": "multiple",
     "question": "What is the goal of PPTP?",
     "options": [
-      "To implement site-to-site VPNs.",
-      "To implement VPN with centralized access.",
-      "To implement access VPN.",
-      "To implement VPN with distributed access."
+      "To implement site-to-site VPNs",
+      "To implement VPN with centralized access",
+      "To implement access VPN",
+      "To implement VPN with distributed access"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "PPTP (Point-to-Point Tunneling Protocol) was designed to allow individual remote users (like employees working from home) to connect securely to a corporate network. This specific model, connecting a single client device to a network gateway, is defined as an 'Access VPN' (or Remote Access VPN)."
   },
   {
     "id": 404,
@@ -5012,20 +5012,20 @@
       "Global unicast"
     ],
     "answer": 0,
-    "explanation": "To Add"
+    "explanation": "Link-local addresses (beginning with `FE80::`) are automatically assigned to every IPv6 interface. They are strictly limited to the local physical link (subnet); routers will never forward a packet with a Link-local destination outside of the local network."
   },
   {
     "id": 405,
     "type": "multiple",
     "question": "The IPv6 protocol requires that the header of IP packets:",
     "options": [
-      "It makes use of neighbor discovery mechanisms for all types of IPv6 addresses.",
-      "It does not use neighbor discovery mechanism for forwarding IPv6 multicast and broadcast packets as there is a rule to map these IPv6 addresses to a MAC address.",
-      "It does not use neighbor discovery mechanisms as there is a rule to map any IPv6 address to a MAC address.",
-      "It does not use neighbor discovery mechanisms with regards to forwarding IPv6 multicast packets as there is a rule to map these IPv6 addresses to a MAC address."
+      "It makes use of neighbor discovery mechanisms for all types of IPv6 addresses",
+      "It does not use neighbor discovery mechanism for forwarding IPv6 multicast and broadcast packets as there is a rule to map these IPv6 addresses to a MAC address",
+      "It does not use neighbor discovery mechanisms as there is a rule to map any IPv6 address to a MAC address",
+      "It does not use neighbor discovery mechanisms with regards to forwarding IPv6 multicast packets as there is a rule to map these IPv6 addresses to a MAC address"
     ],
     "answer": 3,
-    "explanation": "To Add"
+    "explanation": "Unicast traffic requires Neighbor Discovery (NDP) to find the destination MAC address. However, Multicast traffic does not use NDP because the destination MAC is calculated automatically using a mathematical rule (mapping the last 32 bits of the IPv6 address to the Ethernet prefix `33:33`)."
   },
   {
     "id": 406,
