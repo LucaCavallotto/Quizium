@@ -1636,12 +1636,12 @@
   {
     "id": 131,
     "type": "multiple",
-    "question": "Si consideri una semplice topologia di rete in cui sono presenti quattro router (A, B, C, D), collegati tra di loro ad anello (A-B-C-D-A). Se gli host utilizzano un algoritmo di routing di tipo flooding e il router A invia un pacchetto a D, quante copie del medesimo pacchetto saranno recapitate al router D?",
+    "question": "Consider a simple network topology with four routers (A, B, C, D) connected to each other in a ring (A-B-C-D-A). If the hosts use a flooding routing algorithm and router A sends a packet to router D, how many copies of the same packet will be delivered to router D?"
     "options": [
       "1",
       "2",
       "4",
-      "E proporzionale al valore del campo Time To Live presente nel pacchetto"
+      "It is proportional to the value of the Time To Live field in the packet."
     ],
     "answer": 1,
     "explanation": "In a ring topology with flooding, packets will travel in both directions around the ring, resulting in 2 copies reaching the destination router D."
@@ -1649,11 +1649,11 @@
   {
     "id": 133,
     "type": "multiple",
-    "question": "indirizzi global unicast aggregatable",
+    "question": "Aggregable global unicast addresses",
     "options": [
-      "Possono essere usati solo dai router",
-      "Possono essere usati solo dagli host",
-      "Sono distribuiti geograficamente in modo gerarchico"
+      "Can only be used by routers",
+      "Can only be used by hosts",
+      "Are geographically distributed in a hierarchical manner",
     ],
     "answer": 2,
     "explanation": "Aggregatable Global Unicast addresses in IPv6 are allocated hierarchically to enable efficient route aggregation and reduce global routing table size."
@@ -3281,7 +3281,7 @@
       "A directly communicates with B and viceversa"
     ],
     "answer": 0,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 271,
@@ -3294,7 +3294,7 @@
       "10.20.30.64/26"
     ],
     "answer": 0,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 272,
@@ -3307,7 +3307,7 @@
       "90.80.70.64/26"
     ],
     "answer": 1,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 273,
@@ -3320,7 +3320,7 @@
       "70.60.50.40/29"
     ],
     "answer": 3,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 274,
@@ -3333,7 +3333,7 @@
       "The resolution of an IPv6 address"
     ],
     "answer": 3,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 275,
@@ -3385,7 +3385,7 @@
       "Replacing an IPv4 header with an IPv6 one"
     ],
     "answer": 1,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 279,
@@ -3398,7 +3398,7 @@
       "To let customers configure their own port mappings"
     ],
     "answer": 3,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 280,
@@ -3411,7 +3411,7 @@
       "Transfer of an active connection from one operator to another"
     ],
     "answer": 2,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 281,
@@ -3424,7 +3424,7 @@
       "The opening of a connection with another operator"
     ],
     "answer": 1,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 282,
@@ -3437,7 +3437,7 @@
       "A set of frequencies that can be used without time constraints"
     ],
     "answer": 1,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 283,
@@ -3463,7 +3463,7 @@
       "Packet routing"
     ],
     "answer": 2,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 285,
@@ -3489,7 +3489,7 @@
       "The destination moves away by one or more hops"
     ],
     "answer": 2,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 287,
@@ -3502,7 +3502,7 @@
       "Merging the distance table with the incoming Distance Vector"
     ],
     "answer": 0,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 288,
@@ -3515,7 +3515,7 @@
       "A link state advertisement is received from that node through flooded multicast"
     ],
     "answer": 3,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 289,
@@ -3528,7 +3528,7 @@
       "Any two routers of the same AS"
     ],
     "answer": 2,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 290,
@@ -3554,7 +3554,7 @@
       "Traffic that does not have source or destination in Z"
     ],
     "answer": 3,
-    "explanation": ""
+    "explanation": "To Add"
   },
   {
     "id": 292,
@@ -3987,7 +3987,7 @@
     "id": 326,
     "type": "multiple",
     "question": "The shortcut IPv6 address 1070: 5: : 1: 2A4:E8: 7782:BB59 corresponds to which of the following full-length addresses?",
-    "explanation": "",
+    "explanation": "To Add",
     "options": [
       "1070: 5001: 0000: 0000: 02A4:E008: 7782:BB59",
       "1070: 0005: 0000: 0001: 2A40:E008: 7782:BB59",
@@ -4091,7 +4091,7 @@
     "id": 335,
     "type": "multiple",
     "question": "In order to setup a label switched path (LSP):",
-    "explanation": "",
+    "explanation": "To Add",
     "options": [
       "MPLS routers on the path must identify a label that is unused on all links of the path.",
       "MPLS routers on the path must perform a mapping operation",
@@ -4104,7 +4104,7 @@
     "id": 336,
     "type": "multiple",
     "question": "The adoption of the MAC address as Interface ID of an IPv6 host:",
-    "explanation": "",
+    "explanation": "To Add",
     "options": [
       "Allows the host to perform a direct communication without the need to insert a Layer 2 header",
       "Is not possible due to privacy issues",
@@ -4169,66 +4169,66 @@
     "id": 341,
     "type": "multiple",
     "question": "The GRE (Generic Routing Encapsulation) protocol is utilized for:",
-    "explanation": "GRE is a \"Swiss Army Knife\" of tunneling; it can wrap almost any Layer 3 protocol inside an IP packet.",
     "options": [
       "Encapsulation of any protocol into an IP packet",
       "Exchanging routing information in various protocol architectures",
       "Multiple transmission operations",
       "Implementing encrypted tunneling in secure VPNs (Virtual Private Networks)"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "GRE is a 'Swiss Army Knife' of tunneling; it can wrap almost any Layer 3 protocol inside an IP packet."
   },
   {
     "id": 342,
     "type": "multiple",
     "question": "A Layer2 Ethernet switch is used for interconnecting 47 hosts belonging to three different VLANs: 20 hosts belong to VLAN 2, 20 hosts belong to VLAN 3, 17 hosts belong to VLAN 4. All the 47 ports of the switch must be in Access mode.",
-    "explanation": "Hosts in different VLANs cannot talk to each other by default. You need one port connected to a router (Router-on-a-stick) or a Layer 3 device to move traffic between the VLANs.",
     "options": [
       "It is not possible to enable the communication among all the hosts because at least two available ports would be needed",
       "It is possible to enable the communication among all the hosts using the single port that is still available in addition to proper network devices",
       "It is not possible to enable the communication among all the hosts because, being them connected to three VLANs at least three available ports would be needed",
       "The 47 hosts can communicate without any further change to the network configuration"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "Hosts in different VLANs cannot talk to each other by default. You need one port connected to a router (Router-on-a-stick) or a Layer 3 device to move traffic between the VLANs."
   },
   {
     "id": 343,
     "type": "multiple",
     "question": "In LTE networks the use of tunnels facilitates:",
-    "explanation": "Tunnels (GTP) allow the user's IP address to remain the same even as they move between different base stations (mobility).",
     "options": [
       "The encryption of traffic between operators",
       "The connectivity between operators",
       "The compression of control packet headers",
       "The mobility of users between cells"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "Tunnels (GTP) allow the user's IP address to remain the same even as they move between different base stations (mobility)."
   },
   {
     "id": 344,
     "type": "multiple",
     "question": "Why is label-based forwarding less complex (and hence can be implemented using simpler hardware with lower power consumption) than IP address-based forwarding?",
-    "explanation": "Tunnels (GTP) allow the user's IP address to remain the same even as they move between different base stations (mobility).",
     "options": [
       "Because label's validity is local to a link, while IP address's validity is global across the network",
       "Because label-based forwarding can be implemented with an exact match in a table, while address- based forwarding requires a longest prefix match",
       "Because labels can be chosen by routers, while IP addresses must be chosen by network administrators",
       "Because labels don't need to be unique, while IP addresses must be unique across the network (unless NAT is deployed)"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "Tunnels (GTP) allow the user's IP address to remain the same even as they move between different base stations (mobility)."
   },
   {
     "id": 345,
     "type": "multiple",
     "question": "What is a typical operation of an all-optical switch?",
-    "explanation": "It physically routes light frequencies (wavelengths) from one port to another without converting them to electricity.",
     "options": [
       "Process and switch individual bits transmitted on wavelengths belonging to the optical portion of the spectrum",
       "Route an optical channel (at a specific frequency) from an input port to an output port",
       "Switch packets received from an optical channel to different optical channels",
       "Multiplex over a single outgoing optical channel data received over different incoming channels"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "It physically routes light frequencies (wavelengths) from one port to another without converting them to electricity."
   },
   {
     "id": 346,
@@ -4241,98 +4241,98 @@
       "Can swap any of the labels"
     ],
     "answer": 0,
-    "explanation": "Routers only look at the top (outer) label. They don't care about the labels underneath until the top one is \"popped\"."
+    "explanation": "Routers only look at the top (outer) label. They don't care about the labels underneath until the top one is 'popped'."
   },
   {
     "id": 347,
     "type": "multiple",
-    "question": "In IEEE 802.11 networks, the \"hidden terminal problem\" refers to:",
-    "explanation": "This happens when two nodes can see the Access Point but cannot see each other, causing them to transmit at the same time and collide.",
+    "question": "In IEEE 802.11 networks, the 'hidden terminal problem' refers to:",
     "options": [
-      "a security threat caused by an intruder in the BSS",
-      "the use of the same MAC address by more than one node in the same BSS",
-      "the possibility that two or more wireless nodes can interfere with each other without being able to hear each other",
-      "a failure in the association to an Access Point during the passive scanning procedure"
+      "A security threat caused by an intruder in the BSS",
+      "The use of the same MAC address by more than one node in the same BSS",
+      "The possibility that two or more wireless nodes can interfere with each other without being able to hear each other",
+      "A failure in the association to an Access Point during the passive scanning procedure"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "This happens when two nodes can see the Access Point but cannot see each other, causing them to transmit at the same time and collide."
   },
   {
     "id": 348,
     "type": "multiple",
     "question": "Concerning the DiffServ (Differentiated Services) standard and practice of traffic engineering:",
-    "explanation": "They work together: DiffServ prioritizes traffic types, while TE ensures those types take the best available path through the network.",
     "options": [
       "they both rely on information included in the IP header",
       "they are completely independent and unrelated solutions that are never used in conjunction",
       "they are two different tools to do the same",
       "they can be used in conjunction to perform per-class traffic engineering, which enables efficient utilization of network capacity"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "They work together: DiffServ prioritizes traffic types, while TE ensures those types take the best available path through the network."
   },
   {
     "id": 349,
     "type": "multiple",
     "question": "Multicast communications in an IPv4 network:",
-    "explanation": "IPv4 requires the IGMP protocol and multicast-aware routing protocols (like PIM) to function.",
     "options": [
       "Are not possible without the deployment of additional protocols in the network",
       "Are possible at global scale, it is only required to enable the IGMP protocol in the network",
       "Are always possible, IGMP only makes them more efficient",
       "Are possible only within a single LAN, even if additional protocols are used"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "IPv4 requires the IGMP protocol and multicast-aware routing protocols (like PIM) to function."
   },
   {
     "id": 350,
     "type": "multiple",
     "question": "Which of the following methods is used by Content Delivery Networks (CDNs) to handle content updates efficiently while minimizing disruptions to users?",
-    "explanation": "Edge caching puts content near users, and invalidation policies ensure they don't see \"stale\" or old data.",
     "options": [
       "Multi-path TCP (MPTCP): Utilizing multiple TCP connections simultaneously to enhance performance and reliability between clients and origin servers",
       "Compression Algorithms: Applying real-time compression to reduce the size of content from the origin server",
       "Edge Caching: Storing frequently accessed content on servers located closer to end users with cache invalidation policies to ensure content freshness",
       "Dynamic Content Acceleration: Optimizing the delivery of dynamically generated content by bypassing the CDN cache and fetching content directly from the origin server"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "Edge caching puts content near users, and invalidation policies ensure they don't see \"stale\" or old data.",
   },
   {
     "id": 351,
     "type": "multiple",
     "question": "When MPLS was standardized, what was the main motivation for having labels pushed into packets by network nodes (specifically by Label Edge Routers) rather than end hosts?",
-    "explanation": "The goal was to make MPLS transparent to the user. End hosts don't need to know MPLS exists; the network handles everything.",
     "options": [
       "End hosts are less trusted than network nodes because they can be more easily hacked",
       "End hosts don't need to be aware of MPLS, which made the introduction of MPLS less problematic",
       "Pushing the label requires modifying the layer two header that is not present when a packet is transmitted and received by an end host",
       "Network nodes have higher performance than end hosts"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "The goal was to make MPLS transparent to the user. End hosts don't need to know MPLS exists; the network handles everything."
   },
   {
     "id": 352,
     "type": "multiple",
     "question": "A network interface with both an IPv4 and an IPv6 address can receive:",
-    "explanation": "A dual-stack device speaks both \"languages\" natively and can receive both types of packets.",
     "options": [
-      "Only IPv6 packets encapsulated in IPv4, according to the approach called \"tunneling\"",
-      "Only IPv4 packets encapsulated in IPv6, according to the approach called \"tunneling\"",
+      "Only IPv6 packets encapsulated in IPv4, according to the approach called 'tunneling'",
+      "Only IPv4 packets encapsulated in IPv6, according to the approach called 'tunneling'",
       "Both IPv4 and IPv6 packets",
       "Only IPv6 packets, since in such kind of configuration the operating system considers IPv4 as obsolete"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "A dual-stack device speaks both \"languages\" natively and can receive both types of packets."
   },
   {
     "id": 353,
     "type": "multiple",
     "question": "Given a network based on several physical networks interconnected by routers and a range of IP addresses to use in that network, it is possible to define an addressing plan that optimizes routing on a",
-    "explanation": "Summarization works best when you divide the network into hierarchical areas (clusters), allowing a single route entry to represent many sub-networks.",
     "options": [
       "given router of the network by:",
       "Assigning to the various physical networks distinct network IDs randomly selected within the address range given for the entire network",
       "Assigning to the various physical networks distinct network IDs selected within the address range given for the entire network. In particular, this assignment must proceed from in a decreasing order of network size",
       "Splitting the network in areas and defining, within the given address range, smaller distinct address ranges to use in each area"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "Summarization works best when you divide the network into hierarchical areas (clusters), allowing a single route entry to represent many sub-networks."
   },
   {
     "id": 354,
@@ -4344,7 +4344,8 @@
       "It is a concept that will tend to disappear",
       "It requires each router to know exactly the cost of reaching any destination (for example in terms of the bandwidth of the links crossed) in order to calculate the path at a lower cost (for example at higher bandwidth)"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 355,
@@ -4356,7 +4357,8 @@
       "A mechanism for separating traffic into classes, each of which can receive a specific service in each node traversed",
       "Sophisticated routing protocols to choose the path of each individual packet in order to ensure that it receives the service it needs"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 356,
@@ -4368,7 +4370,8 @@
       "A maximum traversal time of a NAT",
       "A maximum bandwidth for each packet stream"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 357,
@@ -4393,7 +4396,8 @@
       "redirects it to a router with a suitable MTU using an ICMP Redirect message",
       "forwards it on its destination route with the “Packet Too Big” flag set"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 360,
@@ -4405,7 +4409,8 @@
       "No, it is not planned.",
       "Yes, but no more than 2."
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 361,
@@ -4417,7 +4422,8 @@
       "It is certainly more robust than a classic flooding algorithm",
       "It is substantially similar to the classic flooding algorithm, with the difference that each incoming packet is retransmitted on all lines except the one on which it was received."
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 362,
@@ -4429,7 +4435,8 @@
       "The packet is in the public network, having passed through a NAT outbound",
       "The packet is on the public network in transit over an IP tunnel connecting two segments of an IP-based VPN"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 363,
@@ -4441,7 +4448,8 @@
       "The installation of a network in IP technology parallel to the data one, dedicated to the transport of voice.",
       "The use of voice gateways to allow communication with users connected to traditional networks (POTS)."
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 364,
@@ -4453,7 +4461,8 @@
       "All equipment is connected through the use of a high-performance central router equipped multiple network interfaces",
       "Each connected router sees at layer 3 all other routers on the network and can peer with each of them"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 365,
@@ -4465,7 +4474,8 @@
       "The ARP protocol is incorporated into ICMPv6, but retains exactly the previous scheme operation (broadcast request, unicast response).",
       "There is a possibility for a station on a network segment to self-configure by listening for Router Advertisement messages."
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 366,
@@ -4477,7 +4487,8 @@
       "They are plots that travel through radio waves",
       "They are data blocks that travel on circuit-switched networks"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 367,
@@ -4502,7 +4513,8 @@
       "The same database that describes the entire AS",
       "The same tree of excellent paths"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 369,
@@ -4514,7 +4526,8 @@
       "it is subnet configured by leveraging the static routing",
       "it is a set of subnets with a short topological proximity and manage by a single organisation unit"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 370,
@@ -4526,7 +4539,8 @@
       "It is used to implement weighted fair queuing.",
       "The capacity of the bucket has direct relationship with the band."
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 371,
@@ -4538,19 +4552,21 @@
       "They cannot communicate",
       "If they belong to different VLANs, they can only communicate if they are connected to different switches and the link between the switches is configured in Trunk mode"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 372,
     "type": "multiple",
-    "question": "Label distribution in MPLS(Multi-Protocol Label Switching)",
+    "question": "Label distribution in MPLS (Multi-Protocol Label Switching)",
     "options": [
       "Involves both network nodes and hosts",
       "Can be performed implicity through the routing protocol OSPF (Open Shortest Path First)",
       "Can be performed with the RSVP (Resource ReSerVation Protocol)",
       "Is not needed when network nodes deploy the BGP (Border Gateway Protocol) routing protocol"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 373,
@@ -4562,7 +4578,8 @@
       "Is supported by major implementations of RIP",
       "Allows routers to use multiple routes during transients on the network, so as to speed up the dissemination of routing information and decrease the duration of the transient"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 374,
@@ -4574,7 +4591,8 @@
       "An Autonomous System connects, at layer 2, a number of routers so as to speed up the exchange of routing information within the domain",
       "An Autonomous System connects, at layer 3, a number of routers so as to speed up the exchange of routing information within the domain"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 375,
@@ -4586,19 +4604,21 @@
       "Routing protocols (e.g., packet format) do not change from IPv4.",
       "The ARP protocol is incorporated into ICMPv6, but retains exactly the previous scheme operation (broadcast request, unicast response)."
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 376,
     "type": "multiple",
-    "question": "IPsec's \"Tunnel\" of operation requires that it be encrypted:",
+    "question": "IPsec's 'Tunnel' of operation requires that it be encrypted:",
     "options": [
       "The IP header, TCP/UDP header and the internal packet payload",
       "Only the payload of the internal package",
       "Exclusively the TCP/UDP header and payload.",
       "The whole external package, including the IP header."
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 377,
@@ -4610,7 +4630,8 @@
       "Each record contained in the Path Vector contains the destination, the distance from the router under consideration, and the list of Autonomous Systems to be traversed to reach that destination",
       "Each record contained in the Path Vector contains the destination, the distance to the router under consideration, and the next Autonomous System to reach that destination"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 378,
@@ -4622,7 +4643,8 @@
       "Available frequencies are divided among a group of neighboring cells and then reused in suffiently for away",
       "Frequencies to use are randomly selected by mobile terminalsi which then resend voice samples in the case"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 379,
@@ -4634,7 +4656,8 @@
       "None is the MAC address of the Access Point",
       "One is the MAC address of the Access Point"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 380,
@@ -4646,7 +4669,8 @@
       "Flooding your State Links to neighbors",
       "Flood all Link State to neighbors"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 381,
@@ -4658,7 +4682,8 @@
       "MPLS provides a single control plane for multiple network layers",
       "MPLS uses a simpler packet format than IP"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 382,
@@ -4670,7 +4695,8 @@
       "An area of an IP network that is administered, especially from a routing perspective, independently of others and with connections to at least two other Autonomous Systems",
       "A computer capable of self-configuration"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 383,
@@ -4682,7 +4708,8 @@
       "It is not a possible scenario in IPv6",
       "Only one nodes replies with the Neighbor Advertisement, but it could be the wrong one"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 384,
@@ -4694,7 +4721,8 @@
       "Of variable length, which depends on the size of the MAC address",
       "128 bits long, with a Interface ID followed by a suffix defined according to the position of the the node in the ISP n"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 385,
@@ -4706,7 +4734,8 @@
       "Provides that a prefix is not announced to the neighbor representing the \"next hop\" to that destination",
       "Provides for a destination to be declared unattainable when the cost exceeds a certain threshold of infinity."
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 386,
@@ -4718,7 +4747,8 @@
       "A maximum crossing time of a NAT.",
       "A maximum bandwidth per packet stream."
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 387,
@@ -4730,7 +4760,8 @@
       "Has been stopped by the IETF because of security issues.",
       "Finished in 2011, with the assignment of the last /8 IPv4 block"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 388,
@@ -4748,14 +4779,15 @@
   {
     "id": 389,
     "type": "multiple",
-    "question": "The technique of \"Split Horizon\":",
+    "question": "The technique of 'Split Horizon':",
     "options": [
       "Predicts that routes received in neighbor router announcements are always announced to that neighbor with metric equal to infinity",
       "Provides that a prefix is not announced to the neighbor representing the \"next hop\" to that destination",
       "None of the above answers",
       "Provides for a destination to be declared unattainable when the cost exceeds a certain threshold of infinity."
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 390,
@@ -4765,7 +4797,8 @@
       "In UDP, to enable broadcast transmission of packets",
       "In UDP, for issues mainly related to the greater simplicity of software development"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 391,
@@ -4777,7 +4810,8 @@
       "The application of routing policies ('policies') always takes precedence over topology information",
       "The cheapest route to each destination is always chosen"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 392,
@@ -4789,7 +4823,8 @@
       "Because of the queue in the switch buffers",
       "Switched half duplex"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 393,
@@ -4801,7 +4836,8 @@
       "Use a suitably modified version of the TCP",
       "Use an appropriately modified version of the BGP"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 394,
@@ -4813,7 +4849,8 @@
       "Near discovery is not used for IPv6 multicast and broadcast packets as there is an algorithm to map the IPv6 address to the MAC address",
       "No adjacent discovery mechanism is used as there is an algorithm to map any possible address to a MAC address"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 395,
@@ -4825,7 +4862,8 @@
       "Introduces an encryption mechanism for packets",
       "Allows encapsulation but it is not possible to encapsulate lower layer units in a layer 3 packet"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 396,
@@ -4849,7 +4887,8 @@
       "A different mechanism (than pure IP) to select the output interface to which the packet is to be forwarded",
       "Intelligent terminals able to customize the service received from the network"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 398,
@@ -4861,7 +4900,8 @@
       "They are valid within an organization that can use them to assign addresses to machines in the various subnets of its intranet (they are the counterparts of IPv4 private addresses).",
       "They are normally built automatically by the station from the MAC address its own card, to which it prepends a predefined prefix."
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 399,
@@ -4873,7 +4913,8 @@
       "An address that a server can use to offer a service on the IPv6 public Internet",
       "An address that is currently not valid in IPv6"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 400,
@@ -4885,7 +4926,8 @@
       "They all have infinite temporal validity",
       "They have a temporal validity that varies over time, based on the number of frames received"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 401,
@@ -4897,7 +4939,8 @@
       "Both labels are used by internal routers (P) to forward packets to PE routers",
       "The outermost label is used by internal routers (P) to forward packets to a PE router"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 402,
@@ -4909,7 +4952,8 @@
       "It can provide point-to-point connections in overlay networks or all routing mechanism in peer networks",
       "It can provide all the routing mechanism in overlay networks or point-to-point links in peer networks"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 403,
@@ -4921,7 +4965,8 @@
       "They constitute the shortest route to a destination.",
       "They are created by network nodes agreeing on the labels to be used for packets belonging to a forwarding equivalence class (FEC)."
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 403,
@@ -4933,7 +4978,8 @@
       "To implement access VPN.",
       "To implement VPN with distributed access."
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 404,
@@ -4945,7 +4991,8 @@
       "Site-local",
       "Global unicast"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 405,
@@ -4957,7 +5004,8 @@
       "It does not use neighbor discovery mechanisms as there is a rule to map any IPv6 address to a MAC address.",
       "It does not use neighbor discovery mechanisms with regards to forwarding IPv6 multicast packets as there is a rule to map these IPv6 addresses to a MAC address."
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 406,
@@ -4982,7 +5030,8 @@
       "OSPF is proprietary",
       "OSPF is hierarchical"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 408,
@@ -4994,7 +5043,8 @@
       "They are used to connect two sites of an organization using a dedicated line",
       "They are used to build a private infrastructure using a public one"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 409,
@@ -5006,7 +5056,8 @@
       "Length of each link along the path",
       "It can be configured to use various metrics whose semantics are established by the network manager"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 410,
@@ -5018,7 +5069,8 @@
       "The network security increases as frames are encrypted",
       "Users must be authenticated before connecting to the VLAN"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 411,
@@ -5030,7 +5082,8 @@
       "Tunnel IDs",
       "Checksums"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 412,
@@ -5042,7 +5095,8 @@
       "Redirects all network traffic through a firewall",
       "Encapsulates private network traffic within a secure connection"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 413,
@@ -5067,7 +5121,8 @@
       "It does not provide for the existence of multicast addresses.",
       "It provides that the first 64 bits of an address are normally identified as the network prefix, at least on LANs."
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 415,
@@ -5079,7 +5134,8 @@
       "Since RIP is proprietary, it is not available on all routers",
       "The RIP metric is less indicative than the IGRP metric of the true degree to which one network route is preferred over others"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 416,
@@ -5090,7 +5146,8 @@
       "The header is fixed size and no options can be added.",
       "Fixed header size but with possible addition of additional headers"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 417,
@@ -5101,7 +5158,8 @@
       "Authentication",
       "Resource allocation"
     ],
-    "answer": 2
+    "answer": 2,
+    "explanation": "To Add"
   },
   {
     "id": 418,
@@ -5113,7 +5171,8 @@
       "OSPF also allows routing between different ASs",
       "OSPF allows routing information related to different protocol architectures to be carried simultaneously (integrated routing)"
     ],
-    "answer": 0
+    "answer": 0,
+    "explanation": "To Add"
   },
   {
     "id": 419,
@@ -5138,7 +5197,8 @@
       "Sent from B to A",
       "Sent from A to a destination outside the network"
     ],
-    "answer": 1
+    "answer": 1,
+    "explanation": "To Add"
   },
   {
     "id": 421,
@@ -5163,7 +5223,8 @@
       "Broadcast domains are decreasing",
       "Collision domains increase"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 423,
@@ -5175,7 +5236,8 @@
       "Transmit optical signals over fiber optic links",
       "Switch an optical channel from an input port to an output port"
     ],
-    "answer": 3
+    "answer": 3,
+    "explanation": "To Add"
   },
   {
     "id": 424,
