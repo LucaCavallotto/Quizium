@@ -2144,12 +2144,12 @@
   {
     "id": 172,
     "type": "multiple",
-    "question": "Le reti ottiche si basano sull'utilizzo di:",
+    "question": "Optical networks are based on the use of:",
     "options": [
-      "Collegamenti in fibra ottica tra commutatori di pacchetto ad elevate prestazioni",
-      "Router IP in grado di inoltrare i pacchetti in base al loro indirizzo destinazione realizzando il look-up nella tabella di routing con tecniche ottiche",
-      "Apparati in grado di commutare un segnale elettromagnetico ad una certa frequenza portante nel campo dell'ottica da una porta di ingresso ad una porta di uscita",
-      "..."
+      "Fiber-optic links between high-performance packet switches",
+      "IP routers capable of forwarding packets based on their destination address by performing a lookup in the routing table using optical techniques",
+      "Devices capable of switching an electromagnetic signal at a specific carrier frequency in the optical field from an input port to an output port",
+      "Electronic switches that convert the optical signal to electrical for processing at every node"
     ],
     "answer": 2,
     "explanation": "Optical networks use optical switches that route light signals (wavelengths) directly without converting them to electrical signals."
@@ -2248,12 +2248,12 @@
   {
     "id": 181,
     "type": "multiple",
-    "question": "Gli indirizzi Global Unicast Aggregatable:",
+    "question": "Global Unicast Aggregatable addresses:",
     "options": [
-      "Possono essere usati solo dai router",
-      "Possono essere usati solo dagli host",
-      "Sono distribuiti geograficamente in modo gerarchico",
-      "..."
+      "Can only be used by routers",
+      "Can only be used by hosts",
+      "Are geographically distributed in a hierarchical manner",
+      "Are intended for private networks and cannot be routed on the Internet"
     ],
     "answer": 2,
     "explanation": "Aggregatable Global Unicast addresses are allocated hierarchically by geographic region to enable efficient route aggregation in the global routing table."
@@ -2261,12 +2261,12 @@
   {
     "id": 182,
     "type": "multiple",
-    "question": "Le reti private virtuali (virtual private network, VPN) vengono utilizzate per:",
+    "question": "Virtual private networks (VPNs) are used to:",
     "options": [
-      "Trasportare traffico privato su una infrastruttura condivisa ricreando le stesse condizioni che si avrebbero tramite l'utilizzo di una infrastruttura privata",
-      "Suddividere una rete locale aziendale in una serie di sottoreti separate per le diverse funzioni aziendali (vendite, acquisti, engineering, marketing)",
-      "Partizionare una rete privata (per esempio quella di un'azienda madre con un certo numero di aziende sussidiare) in varie reti virtualmente separate",
-      "..."
+      "Transport private traffic over a shared infrastructure, recreating the same conditions as using a private infrastructure",
+      "Dividing a corporate local network into a series of separate subnets for different business functions (sales, purchasing, engineering, marketing)",
+      "Partitioning a private network (for example, that of a parent company with a number of subsidiaries) into multiple virtually separate networks",
+      "Establish a permanent physical circuit between two geographically distant offices"
     ],
     "answer": 0,
     "explanation": "VPNs create secure virtual networks over shared public infrastructure, providing the same security and privacy as dedicated private networks."
@@ -2703,15 +2703,15 @@
   {
     "id": 220,
     "type": "multiple",
-    "question": "La differenza tra gli algoritmi di routing di tipo Link State e Distance Vector si può riassumere come segue:",
+    "question": "The difference between Link State and Distance Vector routing algorithms can be summarized as follows:",
     "options": [
-      "Gli algoritmi Link State inviano informazioni sulla rete nella sua interezza a tutti i nodi della rete; gli algoritmi Distance Vector inviano informazioni sulla topologia locale solo ai nodi vicini",
-      "Gli algoritmi Link State inviano informazioni sulla topologia locale solo ai nodi vicini; gli algoritmi Distance Vector inviano informazioni sulla rete nella sua interezza a tutti i nodi",
-      "Gli algoritmi Link State inviano informazioni sulla topologia locale a tutti i nodi della rete; gli algoritmi Distance Vector inviano informazioni sulla rete nella sua interezza solo ai nodi vicini",
-      "..."
+      "Link State algorithms send information about the entire network to all nodes in the network; Distance Vector algorithms send information about the local topology only to neighboring nodes",
+      "Link State algorithms send information about the local topology only to neighboring nodes; Distance Vector algorithms send information about the entire network to all nodes",
+      "Link State algorithms send information about the local topology to all nodes in the network; Distance Vector algorithms send information about the entire network only to neighboring nodes",
+      "Link State algorithms calculate the path based on hop count only, whereas Distance Vector algorithms always use bandwidth as the metric"
     ],
     "answer": 2,
-    "explanation": "Link state protocols flood local connectivity information to all routers, while distance vector protocols send entire routing tables only to immediate neighbors."
+    "explanation": "Link State protocols flood local connectivity information to all routers, while Distance Vector protocols send entire routing tables only to immediate neighbors."
   },
   {
     "id": 221,
@@ -2755,12 +2755,12 @@
   {
     "id": 224,
     "type": "multiple",
-    "question": "In Diffserv, una 'Classe di Servizio' identifica:",
+    "question": "In Diffserv, a 'Class of Service' identifies:",
     "options": [
-      "Un set di pacchetti che appartengono alla stessa sessione VoIP",
-      "Un set di pacchetti che ricevono lo stesso trattamento da parte del router (ad esempio, tutto il traffico VoIP)",
-      "Una modalità operativa dei router di bordo, che devono classificare e marcare i pacchetti in arrivo",
-      "..."
+      "A set of packets belonging to the same VoIP session",
+      "A set of packets that receive the same treatment by the router (e.g., all VoIP traffic)",
+      "A mode of operation for edge routers, which must classify and mark incoming packets",
+      "A specific reservation of resources on every router along the path for a single flow"
     ],
     "answer": 1,
     "explanation": "In DiffServ, packets are classified into behavior aggregates (classes of service) that receive similar per-hop forwarding treatment."
@@ -3028,12 +3028,12 @@
   {
     "id": 245,
     "type": "multiple",
-    "question": "Data una certa LAN su cui sono state definite delle VLAN, una frame broadcast:",
+    "question": "Given a certain LAN on which VLANs have been defined, a broadcast frame:",
     "options": [
-      "Raggiunge possibilmente solo una porzione della LAN",
-      "Raggiunge tutti gli host della LAN",
-      "...",
-      "..."
+      "Possibly reaches only a portion of the LAN",
+      "Reaches all hosts on the LAN",
+      "Is propagated to all VLANs defined on the switch",
+      "Is automatically converted to a multicast packet"
     ],
     "answer": 0,
     "explanation": "VLANs create separate broadcast domains, so broadcast frames are confined to the VLAN where they originate."
@@ -3093,12 +3093,12 @@
   {
     "id": 250,
     "type": "multiple",
-    "question": "La qualità del servizio può essere garantita sulle reti a pacchetto quando",
+    "question": "Quality of service can be guaranteed on packet-based networks when",
     "options": [
-      "I pacchetti siano trasportati da un'infrastruttura a commutazione di cella (per esempio ATM)",
-      "I nodi di rete mettano in atto opportuni meccanismi che regolano il servizio dei pacchetti (per esempio algoritmi di scheduling)",
-      "Le applicazioni siano in grado di codificare le informazioni da trasferire secondo livelli (layer) di importanza differente",
-      "..."
+      "Packets are transported by a cell-switched infrastructure (e.g., ATM)",
+      "Network nodes implement appropriate mechanisms that regulate packet service (e.g., scheduling algorithms)",
+      "Applications are able to encode the information to be transferred according to layers of different importance",
+      "The Transmission Control Protocol (TCP) is used to ensure reliable delivery for all data streams"
     ],
     "answer": 1,
     "explanation": "QoS in packet networks requires mechanisms like traffic classification, queue management, and scheduling algorithms in network nodes."
@@ -3579,7 +3579,7 @@
       "Link state algorithms send local information only to neighboring nodes; distance vector algorithms send global information to all nodes in the network",
       "Link state algorithms send global information to all nodes in the network; distance vector algorithms send local information only to neighboring nodes",
       "Link state algorithms send local information to all nodes in the network; distance vector algorithms send global information only to neighboring nodes",
-      "..."
+      "Link state algorithms rely on the Bellman-Ford equation, whereas Distance Vector algorithms use Dijkstra's algorithm"
     ],
     "answer": 2,
     "explanation": "Link State (OSPF) floods the entire network with local connectivity info to build a full map. Distance Vector (RIP) only talks to neighbors but shares its entire summarized routing table (global view)."
@@ -3813,7 +3813,7 @@
       "Assigning to the various physical networks distinct network IDs randomly selected within the address range given for the entire network",
       "Splitting the network in areas and defining, within the given address range, smaller distinct address ranges to use in each area",
       "Assigning to the various physical networks distinct network IDs selected within the address range given for the entire network. In particular, this assignment must proceed from in a decreasing order of network size",
-      "..."
+      "Assigning the same network prefix to all physical networks to eliminate the need for routing protocols"
     ],
     "answer": 1,
     "explanation": "Hierarchical addressing (summarization) allows one routing entry to represent many subnets, keeping routing tables small."
@@ -4346,9 +4346,9 @@
       "Assigning to the various physical networks distinct network IDs randomly selected within the address range given for the entire network",
       "Assigning to the various physical networks distinct network IDs selected within the address range given for the entire network. In particular, this assignment must proceed from in a decreasing order of network size",
       "Splitting the network in areas and defining, within the given address range, smaller distinct address ranges to use in each area",
-      "..."
+      "Assigning the same network ID to all physical networks and relying on Layer 2 switching for connectivity"
     ],
-    "answer": 3,
+    "answer": 2,
     "explanation": "Summarization works best when you divide the network into hierarchical areas (clusters), allowing a single route entry to represent many sub-networks."
   },
   {
@@ -4609,20 +4609,20 @@
       "An Autonomous System connects, at layer 3, a number of routers so as to speed up the exchange of routing information within the domain"
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "A Neutral Access Point (NAP), now more commonly known as an Internet Exchange Point (IXP), is a physical facility where different Internet Service Providers (ISPs) and networks meet to exchange traffic. The facility itself provides a high-speed Layer 2 switching fabric (like a large Ethernet LAN). Routers from different Autonomous Systems plug into this shared Layer 2 network to peer with each other and exchange routing information."
   },
   {
     "id": 375,
     "type": "multiple",
     "question": "In the IPv6 protocol:",
     "options": [
-      "Like IPv4, IPv6 does not provide mechanisms for reconfiguring routers.",
-      "There is a possibility for a station on a network segment to self-configure by listening for Router Advertisement messages.",
-      "Routing protocols (e.g., packet format) do not change from IPv4.",
-      "The ARP protocol is incorporated into ICMPv6, but retains exactly the previous scheme operation (broadcast request, unicast response)."
+      "Like IPv4, IPv6 does not provide mechanisms for reconfiguring routers",
+      "There is a possibility for a station on a network segment to self-configure by listening for Router Advertisement messages",
+      "Routing protocols (e.g., packet format) do not change from IPv4",
+      "The ARP protocol is incorporated into ICMPv6, but retains exactly the previous scheme operation (broadcast request, unicast response)"
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "IPv6 introduces a major feature called Stateless Address Autoconfiguration (SLAAC). This allows a device to automatically generate its own valid IP address without needing a central DHCP server. The device listens for ICMPv6 'Router Advertisement' (RA) messages sent by the local router, which contain the network prefix. The device then combines this prefix with its own Interface ID to create a complete, routable address."
   },
   {
     "id": 376,
@@ -4635,7 +4635,7 @@
       "The whole external package, including the IP header."
     ],
     "answer": 0,
-    "explanation": "To Add"
+    "explanation": "In IPsec Tunnel Mode, the entire original IP packet is treated as the payload. This means the original IP header, the transport layer header (TCP/UDP), and the actual data are all encrypted and encapsulated. A new, unencrypted outer IP header is then added to route the packet across the network."
   },
   {
     "id": 377,
@@ -4648,12 +4648,12 @@
       "Each record contained in the Path Vector contains the destination, the distance to the router under consideration, and the next Autonomous System to reach that destination"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "The Path Vector algorithm (used primarily by BGP) is an evolution of the Distance Vector algorithm. Instead of just tracking the cost or distance to a destination, it records the entire sequence of Autonomous Systems (AS) that the routing information has traversed. This list, known as the AS Path, is essential for loop prevention: if an AS sees its own identifier in the list, it knows the route forms a loop and rejects it."
   },
   {
     "id": 378,
     "type": "multiple",
-    "question": "In a cellular network operating according to the Frequency Division Multiple Access(FDMA) technology",
+    "question": "In a cellular network operating according to the Frequency Division Multiple Access (FDMA) technology:",
     "options": [
       "Voice calls are not possible. The network is used for data traffic",
       "Only one frequency is adopted for the entire network",
@@ -4661,7 +4661,7 @@
       "Frequencies to use are randomly selected by mobile terminalsi which then resend voice samples in the case"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "Cellular networks rely on the concept of Frequency Reuse. Since the radio spectrum is limited, the available frequency channels are divided among a cluster of adjacent cells (e.g., a 7-cell cluster) so that no adjacent cells share the same frequency. These same frequencies can then be reused in other clusters located far enough away that the signal interference is negligible."
   },
   {
     "id": 379,
@@ -4674,20 +4674,20 @@
       "One is the MAC address of the Access Point"
     ],
     "answer": 3,
-    "explanation": "To Add"
+    "explanation": "The 802.11 frame format contains fields for four addresses. In a typical Infrastructure network (like Wi-Fi at home), one of these addresses is the BSSID (Basic Service Set Identifier). The BSSID is practically the MAC address of the Access Point's wireless interface, which identifies the specific network device managing the cell."
   },
   {
     "id": 380,
     "type": "multiple",
     "question": "In the final stage of a Link State routing algorithm, each router:",
     "options": [
-      "Runs the Shortest Path First algorithm, using the Link State Database as input.",
-      "Performs the DUAL algorithm (Diffusing Update ).",
+      "Runs the Shortest Path First algorithm, using the Link State Database as input",
+      "Performs the DUAL algorithm (Diffusing Update )",
       "Flooding your State Links to neighbors",
       "Flood all Link State to neighbors"
     ],
     "answer": 0,
-    "explanation": "To Add"
+    "explanation": "In a Link State protocol (like OSPF), the process begins with flooding information to build a complete map of the network called the Link State Database (LSDB). Once the database is synchronized, the final step is for each router to independently run the Shortest Path First (SPF) algorithm (also known as Dijkstra's algorithm) using that database to calculate the best route to every destination."
   },
   {
     "id": 381,
@@ -4700,7 +4700,7 @@
       "MPLS uses a simpler packet format than IP"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "MPLS separates the Control Plane (routing information) from the Data Plane (forwarding). This allows a single, unified control mechanism (using standard IP routing protocols) to manage traffic forwarding across various distinct Layer 2 technologies (such as Ethernet, ATM, or Frame Relay), effectively bridging the gap between layers."
   },
   {
     "id": 382,
@@ -4713,12 +4713,12 @@
       "A computer capable of self-configuration"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "An Autonomous System (AS) is a collection of connected IP networks and routers under the control of a single administrative entity (like an ISP, a university, or a large corporation) that presents a common routing policy to the Internet. To be a functional part of the global Internet, an AS typically uses BGP to peer with other Autonomous Systems."
   },
   {
     "id": 383,
     "type": "multiple",
-    "question": "When two nodes share the same Solicited Node Multicast Address",
+    "question": "When two nodes share the same Solicited Node Multicast Address:",
     "options": [
       "Both reply with the Neighbor Advertisement",
       "Only one node (the correct one) replies with the Neighbor Advertisement",
@@ -4726,20 +4726,20 @@
       "Only one nodes replies with the Neighbor Advertisement, but it could be the wrong one"
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "The Solicited-Node Multicast address is generated using only the last 24 bits of the IPv6 address, so collisions are possible. However, the Neighbor Solicitation (NS) packet itself contains the full Target IPv6 Address in its payload. All listening nodes receive the multicast packet, but they verify the target address inside; only the node that owns the specific full address will reply."
   },
   {
     "id": 384,
     "type": "multiple",
-    "question": "The IPv6 addresses are",
+    "question": "The IPv6 addresses are:",
     "options": [
       "32 bits long, with a network part followed by a host part",
-      "128 bits long, with a prefix followed by an interface ID, which might be derived by the MAC address.",
+      "128 bits long, with a prefix followed by an interface ID, which might be derived by the MAC address",
       "Of variable length, which depends on the size of the MAC address",
       "128 bits long, with a Interface ID followed by a suffix defined according to the position of the the node in the ISP n"
     ],
     "answer": 1,
-    "explanation": "To Add"
+    "explanation": "IPv6 addresses have a fixed length of 128 bits (quadrupling the 32 bits of IPv4). They are typically divided into two 64-bit halves: the Network Prefix (identifying the subnet) and the Interface ID (identifying the specific host). The Interface ID is often automatically generated by manipulating the device's physical MAC address (EUI-64)."
   },
   {
     "id": 385,
@@ -4749,10 +4749,10 @@
       "Predicts that routes received in neighbor router announcements are always announced to that neighbor with metric equal to infinity",
       "None of the above answers",
       "Provides that a prefix is not announced to the neighbor representing the Next-Hop to that destination",
-      "Provides for a destination to be declared unattainable when the cost exceeds a certain threshold of infinity."
+      "Provides for a destination to be declared unattainable when the cost exceeds a certain threshold of infinity"
     ],
     "answer": 2,
-    "explanation": "To Add"
+    "explanation": "Split Horizon is a rule designed to prevent routing loops. It dictates that a router must never advertise a route back out of the interface it learned it from. If Router A learns a path from Router B, it suppresses that specific update when talking back to Router B, because Router B is already the source of that information."
   },
   {
     "id": 386,
