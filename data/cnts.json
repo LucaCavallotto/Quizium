@@ -779,7 +779,7 @@
   {
     "id": 61,
     "type": "multiple",
-    "question": "When an IPv6 host needs to learn the MAC address associated with an address...",
+    "question": "When an IPv6 host needs to learn the MAC address associated with an address:",
     "options": [
       "It can broadcast a particular ICMPv6 message on the network",
       "It can broadcast an ARP Request message on the network",
@@ -805,7 +805,7 @@
   {
     "id": 63,
     "type": "multiple",
-    "question": "The IP address range 130.192.4.0/23 represents the smallest possible aggregation for...",
+    "question": "The IP address range 130.192.4.0/23 represents the smallest possible aggregation for:",
     "options": [
       "130.192.5.0/26 and 130.192.6.0/26",
       "130.192.4.0/24 and 130.192.5.0/25",
@@ -831,7 +831,7 @@
   {
     "id": 65,
     "type": "multiple",
-    "question": "Given two stations A and B belonging to the same physical network, indicate the configuration that allows A to communicate directly with B, but B to communicate with A only through a router…",
+    "question": "Given two stations A and B belonging to the same physical network, indicate the configuration that allows A to communicate directly with B, but B to communicate with A only through a router:",
     "options": [
       "A: 130.192.1.1/25 - B: 130.192.1.100/25",
       "A: 130.192.1.1/25 - B: 130.192.1.200/26",
