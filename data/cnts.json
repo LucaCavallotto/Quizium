@@ -935,7 +935,7 @@
   {
     "id": 73,
     "type": "multiple",
-    "question": "Which of the following definitions is new to the UMTS standard?"
+    "question": "Which of the following definitions is new to the UMTS standard?",
     "options": [
       "Microdiversity",
       "Network Slicing",
@@ -1000,7 +1000,7 @@
   {
     "id": 78,
     "type": "multiple",
-    "question": "Consider a simple network topology with four routers (A, B, C, D). The first three are connected to each other in a ring (A-B-C-A), while the fourth is connected to C via a point-to-point link (C-D). If the hosts use a flooding routing algorithm and router A sends a packet to D, how many copies of the same packet will be delivered to router D?"
+    "question": "Consider a simple network topology with four routers (A, B, C, D). The first three are connected to each other in a ring (A-B-C-A), while the fourth is connected to C via a point-to-point link (C-D). If the hosts use a flooding routing algorithm and router A sends a packet to D, how many copies of the same packet will be delivered to router D?",
     "options": [
       "1",
       "2",
@@ -1078,7 +1078,7 @@
   {
     "id": 85,
     "type": "multiple",
-    "question": "What is the advantage of using a Link State routing algorithm over a Distance Vector one?"
+    "question": "What is the advantage of using a Link State routing algorithm over a Distance Vector one?",
     "options": [
       "The presence of the Link State Database eliminates the need for a routing table, saving memory",
       "With the Link State Database available, each router can independently calculate routes to each destination",
@@ -1117,7 +1117,7 @@
   {
     "id": 88,
     "type": "multiple",
-    "question": "Which of the following is a significant disadvantage of centralized routing?"
+    "question": "Which of the following is a significant disadvantage of centralized routing?",
     "options": [
       "Poor performance when carrying voice traffic",
       "Difficulty determining the actual network topology in the event of a failure",
@@ -1533,7 +1533,7 @@
   {
     "id": 122,
     "type": "multiple",
-    "question": "Is it possible to have multiple labels simultaneously in a packet traveling over an MPLS network?"
+    "question": "Is it possible to have multiple labels simultaneously in a packet traveling over an MPLS network?",
     "options": [
       "No, this is not possible",
       "Yes, but no more than 2",
@@ -1637,7 +1637,7 @@
   {
     "id": 131,
     "type": "multiple",
-    "question": "Consider a simple network topology with four routers (A, B, C, D) connected to each other in a ring (A-B-C-D-A). If the hosts use a flooding routing algorithm and router A sends a packet to router D, how many copies of the same packet will be delivered to router D?"
+    "question": "Consider a simple network topology with four routers (A, B, C, D) connected to each other in a ring (A-B-C-D-A). If the hosts use a flooding routing algorithm and router A sends a packet to router D, how many copies of the same packet will be delivered to router D?",
     "options": [
       "1",
       "2",
@@ -1729,7 +1729,7 @@
     "id": 140,
     "type": "multiple",
     "question": "In OSPF, a 'Database Description' packet:",
-      "options": [
+    "options": [
       "Is used by two adjacent routers to exchange copies of the OSPF database",
       "Is used by two adjacent routers to exchange copies of the routing table",
       "Allows a router that has detected a new adjacency with another OSPF router to learn its missing LSAs",
@@ -1767,7 +1767,7 @@
   {
     "id": 143,
     "type": "multiple",
-    "question": "What distinguishes a VPN built using an overlay scheme?"
+    "question": "What distinguishes a VPN built using an overlay scheme?",
     "options": [
       "The user's equipment is the same as if the various corporate network segments were directly connected",
       "Confidential communications are not possible",
@@ -1897,7 +1897,7 @@
   {
     "id": 153,
     "type": "multiple",
-    "question": "Does IPv6 stateless autoconfiguration pose privacy issues?"
+    "question": "Does IPv6 stateless autoconfiguration pose privacy issues?",
     "options": [
       "There are no particular problems",
       "It does not allow payload encryption",
@@ -2053,7 +2053,7 @@
   {
     "id": 165,
     "type": "multiple",
-    "question": "What are the consequences of using VLANs in a local network?"
+    "question": "What are the consequences of using VLANs in a local network?",
     "options": [
       "Create virtual interfaces on switches that, as such, are always operational",
       "Broadcast traffic is limited to the VLAN in which it was generated",
@@ -2119,7 +2119,7 @@
     "id": 170,
     "type": "multiple",
     "question": "Unlike IPv4, IPv6:",
-  "options": [
+    "options": [
       "It has no variable-length header",
       "It does not allow the MAC address of another station to be discovered by knowing its IP address",
       "It has no equivalent of a TTL (time-to-live)",
@@ -2209,7 +2209,7 @@
   {
     "id": 178,
     "type": "multiple",
-    "question": "Regarding SSL (Secure Socket Layer)-based VPN solutions, which of the following statements is false?"
+    "question": "Regarding SSL (Secure Socket Layer)-based VPN solutions, which of the following statements is false?",
     "options": [
       "They do not perform IP header authentication",
       "They are vulnerable to DoS attacks",
@@ -3223,7 +3223,7 @@
   {
     "id": 263,
     "type": "multiple",
-    "question": "In the 6PE solution, packets traveling over the backbone have two labels. What are their uses?"
+    "question": "In the 6PE solution, packets traveling over the backbone have two labels. What are their uses?",
     "options": [
       "The innermost label is used by interior routers (P) to forward packets to an IPv6 destination",
       "The outermost label is used by interior routers (P) to forward packets to an IPv6 destination",
@@ -3672,7 +3672,7 @@
       "130.192.1.0/23",
       "130.192.0.0/23"
     ],
-    "answer": 1
+    "answer": 1,
     "explanation": "It is necessary a /22 subnet mask."
   },
   {
@@ -3725,7 +3725,7 @@
       "The usage of an 'All-IP' network architecture with shared communication channels"
     ],
     "answer": 3,
-    "explanation": "LTE moved away from 'Circuit Switching' (used for old voice calls) to an All-IP packet-switched architecture for everything.",
+    "explanation": "LTE moved away from 'Circuit Switching' (used for old voice calls) to an All-IP packet-switched architecture for everything."
   },
   {
     "id": 304,
@@ -4310,7 +4310,7 @@
       "Dynamic Content Acceleration: Optimizing the delivery of dynamically generated content by bypassing the CDN cache and fetching content directly from the origin server"
     ],
     "answer": 2,
-    "explanation": "Edge caching puts content near users, and invalidation policies ensure they don't see \"stale\" or old data.",
+    "explanation": "Edge caching puts content near users, and invalidation policies ensure they don't see \"stale\" or old data."
   },
   {
     "id": 351,
