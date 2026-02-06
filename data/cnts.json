@@ -5180,8 +5180,8 @@
       "Resource allocation",
       "Modulation of the signal over the air interface"
     ],
-    "answer": 2,
-    "explanation": "The NSS (specifically the MSC) acts as the telephone exchange. Its main job is Call Control, which involves allocating the necessary circuit resources (voice trunks/connections) to bridge the caller to the receiver."
+    "answer": 1,
+    "explanation": "Authentication is a core function of the NSS (managed by the AuC and VLR). 'Resource allocation' usually refers to Radio Resource (RR) management, which is the job of the BSC (Base Station Subsystem). Modulation is handled by the BTS (also BSS)."
   },
   {
     "id": 418,
