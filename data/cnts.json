@@ -721,8 +721,8 @@
       "Its own MAC address (extended to 64 bits if necessary) as interface ID, deriving the prefix from the IPv6 source address of the received packets",
       "Its own MAC address (extended to 64 bits if necessary) as interface ID and a locally generated random value as prefix"
     ],
-    "answer": 2,
-    "explanation": "IPv6 stateless address autoconfiguration (SLAAC) uses the MAC address to create the interface identifier and obtains the network prefix from Router Advertisement messages."
+    "answer": 1,
+    "explanation": "According to RFC 4941 (Privacy Extensions), hosts generate a random 64-bit Interface ID instead of using the permanent MAC address (EUI-64). This random ID is combined with the valid Network Prefix received from the router's Router Advertisement (RA) to form the full address, preventing the tracking of the device across different networks."
   },
   {
     "id": 57,
@@ -4166,8 +4166,8 @@
       "Enabling the access to the network",
       "Allowing the access to the switch only to specific flows that are not considered"
     ],
-    "answer": 3,
-    "explanation": "Access ports take 'untagged' traffic from a host and assign it to a specific VLAN inside the switch."
+    "answer": 1,
+    "explanation": "Access ports handle traffic in two ways: When an untagged frame arrives from a host, the switch assigns it to the configured VLAN. When the switch sends a frame out to a host, it strips the VLAN tag."
   },
   {
     "id": 340,
