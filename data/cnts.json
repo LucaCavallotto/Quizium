@@ -721,8 +721,8 @@
       "Its own MAC address (extended to 64 bits if necessary) as interface ID, deriving the prefix from the IPv6 source address of the received packets",
       "Its own MAC address (extended to 64 bits if necessary) as interface ID and a locally generated random value as prefix"
     ],
-    "answer": 2,
-    "explanation": "IPv6 stateless address autoconfiguration (SLAAC) uses the MAC address to create the interface identifier and obtains the network prefix from Router Advertisement messages."
+    "answer": 1,
+    "explanation": "According to RFC 4941 (Privacy Extensions), hosts generate a random 64-bit Interface ID instead of using the permanent MAC address (EUI-64). This random ID is combined with the valid Network Prefix received from the router's Router Advertisement (RA) to form the full address, preventing the tracking of the device across different networks."
   },
   {
     "id": 57,
@@ -4166,8 +4166,8 @@
       "Enabling the access to the network",
       "Allowing the access to the switch only to specific flows that are not considered"
     ],
-    "answer": 3,
-    "explanation": "Access ports take 'untagged' traffic from a host and assign it to a specific VLAN inside the switch."
+    "answer": 1,
+    "explanation": "Access ports handle traffic in two ways: When an untagged frame arrives from a host, the switch assigns it to the configured VLAN. When the switch sends a frame out to a host, it strips the VLAN tag."
   },
   {
     "id": 340,
@@ -5180,8 +5180,8 @@
       "Resource allocation",
       "Modulation of the signal over the air interface"
     ],
-    "answer": 2,
-    "explanation": "The NSS (specifically the MSC) acts as the telephone exchange. Its main job is Call Control, which involves allocating the necessary circuit resources (voice trunks/connections) to bridge the caller to the receiver."
+    "answer": 1,
+    "explanation": "Authentication is a core function of the NSS (managed by the AuC and VLR). 'Resource allocation' usually refers to Radio Resource (RR) management, which is the job of the BSC (Base Station Subsystem). Modulation is handled by the BTS (also BSS)."
   },
   {
     "id": 418,
