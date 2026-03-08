@@ -195,6 +195,7 @@ class QuizApp {
         window.toggleFlag = () => this.toggleFlag();
         window.toggleFlag = () => this.toggleFlag();
         window.toggleShuffle = (checked) => this.toggleShuffle(checked);
+        window.handleLocalQuizUpload = (event) => this.handleLocalQuizUpload(event);
     }
 
     /**
@@ -277,6 +278,65 @@ class QuizApp {
             console.error('Error selecting subject:', error);
             alert('Failed to load questions for this subject.');
         }
+    }
+
+    handleLocalQuizUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            try {
+                const data = JSON.parse(e.target.result);
+
+                // Validation
+                if (!Array.isArray(data) || data.length === 0) {
+                    throw new Error("Invalid Quiz File: Not a valid array of questions.");
+                }
+
+                // Check a basic signature on the first item
+                const signatureObj = data[0];
+                if (!signatureObj.hasOwnProperty('question') || !signatureObj.hasOwnProperty('type') || !signatureObj.hasOwnProperty('answer')) {
+                    throw new Error("Invalid Quiz File: Missing required properties (question, type, answer).");
+                }
+
+                // Clean up input value so the same file could be loaded again
+                event.target.value = '';
+
+                // Create a pseudo-subject for the custom quiz
+                const fileName = file.name.replace(/\.[^/.]+$/, ""); // Strip extension gracefully if present
+                this.state.currentSubject = {
+                    id: 'local',
+                    name: fileName,
+                    icon: '📁',
+                    color: '#3b82f6',
+                    bg: '#eff6ff',
+                    lang: 'EN'
+                };
+
+                this.state.flaggedQuestions.clear();
+
+                // Set Titles
+                document.getElementById(CONFIG.SELECTORS.SELECTED_SUBJECT_TITLE).textContent = fileName;
+                document.getElementById(CONFIG.SELECTORS.QUIZ_SUBJECT_TITLE).textContent = fileName;
+
+                // Set Data
+                this.state.allQuestions = data;
+                this.state.questions = [...data];
+
+                this.setupSlider();
+                this.showScreen(CONFIG.SCREENS.COUNT);
+
+            } catch (err) {
+                console.error("Local Quiz Upload Error:", err);
+                alert("Invalid Quiz File. Please check that the file is a properly formatted Quizium JSON.");
+                // Ensure reset on fail too
+                event.target.value = '';
+            }
+        };
+
+        reader.readAsText(file);
     }
 
     /* ===========================

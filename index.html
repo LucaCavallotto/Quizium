@@ -32,6 +32,14 @@
                 </div>
                 <div class="subjects-grid" id="subjectContainer"></div>
 
+                <div style="margin-top: 32px;">
+                    <button class="btn btn-secondary full-width"
+                        onclick="document.getElementById('local-file-input').click()">
+                        <span style="font-size: 1.2rem; margin-right: 8px;">📁</span> Load Local Quiz
+                    </button>
+                    <input type="file" id="local-file-input" accept=".json" class="hidden"
+                        onchange="handleLocalQuizUpload(event)" style="display: none;">
+                </div>
 
             </div>
         </div>
