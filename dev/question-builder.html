@@ -202,6 +202,41 @@
         .tab-content.active {
             display: block;
         }
+
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            margin: 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .preview-section {
+            display: none;
+            margin-top: 24px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .preview-section h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        button.btn-success {
+            background: var(--success) !important;
+            color: white !important;
+        }
+
+        button.btn-success:hover {
+            background: #16a34a !important;
+        }
     </style>
 </head>
 
@@ -254,8 +289,17 @@ Explanation (Optional)</code>
             <div id="builder-status" class="status"></div>
 
             <div class="actions">
-                <button onclick="generateJSON()">Generate & Copy JSON</button>
+                <button onclick="generateJSON()">Generate</button>
                 <button class="btn-secondary" onclick="clearBuilderInput()">Clear Input</button>
+            </div>
+
+            <div id="builder-preview-section" class="preview-section">
+                <h3>Preview</h3>
+                <pre><code id="builder-preview"></code></pre>
+                <div class="actions">
+                    <button id="builder-copy-btn" onclick="copyJSON('builder')">Copy to Clipboard</button>
+                    <button onclick="downloadJSON('builder')">Download .json</button>
+                </div>
             </div>
         </div>
 
@@ -283,8 +327,17 @@ Explanation (Optional)</code>
             <div id="reorder-status" class="status"></div>
 
             <div class="actions">
-                <button onclick="reorderIDs()">Reorder & Copy JSON</button>
+                <button onclick="reorderIDs()">Reorder</button>
                 <button class="btn-secondary" onclick="clearReorderInput()">Clear Input</button>
+            </div>
+
+            <div id="reorder-preview-section" class="preview-section">
+                <h3>Preview</h3>
+                <pre><code id="reorder-preview"></code></pre>
+                <div class="actions">
+                    <button id="reorder-copy-btn" onclick="copyJSON('reorder')">Copy to Clipboard</button>
+                    <button onclick="downloadJSON('reorder')">Download .json</button>
+                </div>
             </div>
         </div>
     </div>
@@ -313,6 +366,8 @@ Explanation (Optional)</code>
             document.getElementById('startId').value = '';
             const statusEl = document.getElementById('builder-status');
             statusEl.style.display = 'none';
+            document.getElementById('builder-preview-section').style.display = 'none';
+            document.getElementById('builder-preview').textContent = '';
         }
 
         function generateJSON() {
@@ -454,26 +509,11 @@ Explanation (Optional)</code>
 
             let jsonString = JSON.stringify(jsonOutput, null, 2);
 
-            if (startId > 0) {
-                jsonString = jsonString.trim();
-                // Check if bracket stripping is appropriate.
-                // If the user wants to append, they paste a list of objects.
-                // Standard behavior: if StartID > 0, we strip outer brackets.
-                if (jsonString.startsWith('[') && jsonString.endsWith(']')) {
-                    jsonString = jsonString.slice(1, -1).trim();
-                }
-            }
+            let msg = `Successfully generated ${jsonOutput.length} questions!`;
+            showStatus('builder-status', msg, 'success');
 
-            navigator.clipboard.writeText(jsonString).then(() => {
-                let msg = `Successfully generated ${jsonOutput.length} questions!\nJSON copied to clipboard.`;
-                if (startId > 0) {
-                    msg += `\n(Brackets [] removed for appending, remember to add a comma after the last object)`;
-                }
-                showStatus('builder-status', msg, 'success');
-            }).catch(err => {
-                showStatus('builder-status', 'Generated JSON but failed to copy map. See console.', 'error');
-                console.error(err);
-            });
+            document.getElementById('builder-preview').textContent = jsonString;
+            document.getElementById('builder-preview-section').style.display = 'block';
         }
 
         // --- REORDER LOGIC ---
@@ -481,6 +521,8 @@ Explanation (Optional)</code>
             document.getElementById('jsonInput').value = '';
             const statusEl = document.getElementById('reorder-status');
             statusEl.style.display = 'none';
+            document.getElementById('reorder-preview-section').style.display = 'none';
+            document.getElementById('reorder-preview').textContent = '';
         }
 
         function reorderIDs() {
@@ -515,21 +557,55 @@ Explanation (Optional)</code>
             }
 
             // Sort by current ID
-            questions.sort((a, b) => a.id - b.id);
+            // Map through array and reset ID sequentially from 1
+            const reorderedQuestions = questions.sort((a, b) => a.id - b.id).map((q, index) => ({
+                ...q,
+                id: index + 1
+            }));
 
-            // Renumber from 1
-            questions.forEach((q, index) => {
-                q.id = index + 1;
-            });
+            const jsonString = JSON.stringify(reorderedQuestions, null, 2);
 
-            const jsonString = JSON.stringify(questions, null, 2);
+            showStatus('reorder-status', `Successfully reordered ${reorderedQuestions.length} questions!\nIDs reset to 1-${reorderedQuestions.length}.`, 'success');
 
-            navigator.clipboard.writeText(jsonString).then(() => {
-                showStatus('reorder-status', `Successfully reordered ${questions.length} questions!\nIDs reset to 1-${questions.length}.\nJSON copied to clipboard.`, 'success');
+            document.getElementById('reorder-preview').textContent = jsonString;
+            document.getElementById('reorder-preview-section').style.display = 'block';
+        }
+
+        // --- SHARED UTILITIES ---
+        function copyJSON(type) {
+            const previewEl = document.getElementById(`${type}-preview`);
+            const btnEl = document.getElementById(`${type}-copy-btn`);
+            const text = previewEl.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = "Copy to Clipboard";
+                btnEl.innerText = "Copied!";
+                btnEl.classList.add("btn-success");
+                setTimeout(() => {
+                    btnEl.innerText = originalText;
+                    btnEl.classList.remove("btn-success");
+                }, 2000);
             }).catch(err => {
-                console.error(err);
-                showStatus('reorder-status', 'Processed but copy failed.', 'error');
+                console.error("Failed to copy text: ", err);
+                alert("Failed to copy to clipboard.");
             });
+        }
+
+        function downloadJSON(type) {
+            const previewEl = document.getElementById(`${type}-preview`);
+            const text = previewEl.textContent;
+
+            const blob = new Blob([text], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'quiz-data.json';
+            document.body.appendChild(a);
+            a.click();
+
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
 
