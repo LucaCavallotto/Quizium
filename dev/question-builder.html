@@ -442,7 +442,7 @@ Explanation (Optional)</code>
 b
 0
 Explanation (Optional)</code>
-                        <p style="font-size: 0.85em; color: var(--text-sec)">0 = True, 1 = False</p>
+                        <p style="font-size: 0.85em; color: var(--text-sec)">1 = True, 0 = False</p>
                     </div>
                 </div>
             </div>
@@ -743,11 +743,11 @@ Explanation (Optional)</code>
                     }
                     let raw = parseInt(answerLineDeet.text);
                     if (raw !== 0 && raw !== 1) {
-                        mkErr(answerLineDeet.lineNum, `Boolean answer index must be 0 (True) or 1 (False).`);
+                        mkErr(answerLineDeet.lineNum, `Boolean answer index must be 1 (True) or 0 (False).`);
                         return;
                     }
                     let questionObj = { id: currentId, type, question: questionText };
-                    questionObj.answer = (raw === 0) ? 1 : 0;
+                    questionObj.answer = raw;
                     if (contentLines.length > 1) {
                         questionObj.explanation = contentLines.slice(1).map(l => l.text).join(' ');
                     }
