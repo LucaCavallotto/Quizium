@@ -700,14 +700,20 @@ Explanation (Optional)</code>
                     }
                     let answerIndex = -1, optionLines = [], foundAnswerLineIndex = -1;
                     let answerLineNum = -1;
-                    for (let i = 1; i < linesDetails.length; i++) {
+
+                    for (let i = linesDetails.length - 1; i >= 1; i--) {
                         if (/^\d+$/.test(linesDetails[i].text)) {
                             foundAnswerLineIndex = i;
-                            answerIndex = parseInt(linesDetails[i].text);
+                            answerIndex = parseInt(linesDetails[i].text, 10);
                             answerLineNum = linesDetails[i].lineNum;
                             break;
                         }
-                        optionLines.push(linesDetails[i].text);
+                    }
+
+                    if (foundAnswerLineIndex !== -1) {
+                        for (let i = 1; i < foundAnswerLineIndex; i++) {
+                            optionLines.push(linesDetails[i].text);
+                        }
                     }
                     if (foundAnswerLineIndex === -1) {
                         mkErr(linesDetails[0].lineNum, `Could not find answer index.`);
