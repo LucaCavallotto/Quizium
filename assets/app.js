@@ -9,7 +9,8 @@ const CONFIG = {
         HOME: 'homeScreen',
         COUNT: 'questionCountScreen',
         QUIZ: 'quizScreen',
-        RESULTS: 'resultsScreen'
+        RESULTS: 'resultsScreen',
+        WORKSHOP: 'workshopScreen'
     },
     SELECTORS: {
         SUBJECT_CONTAINER: 'subjectContainer',
@@ -108,8 +109,13 @@ class QuizApp {
             const quizScreen = document.getElementById(CONFIG.SCREENS.QUIZ);
             const isQuizActive = !quizScreen.classList.contains('hidden');
 
+            const workshopScreen = document.getElementById(CONFIG.SCREENS.WORKSHOP);
+            const isWorkshopActive = workshopScreen && !workshopScreen.classList.contains('hidden');
+            const hasWorkshopContent = WorkshopManager && WorkshopManager.hasUnsavedContent();
+
             // Only protect if Quiz is visible AND not completed AND not reviewing
-            if (isQuizActive && !this.state.quizCompleted && !this.state.isReviewing) {
+            if ((isQuizActive && !this.state.quizCompleted && !this.state.isReviewing) ||
+                (isWorkshopActive && hasWorkshopContent)) {
                 // Standard way to trigger browser confirmation
                 e.preventDefault();
                 e.returnValue = ''; // Required for Chrome/Edge
@@ -196,6 +202,8 @@ class QuizApp {
         window.toggleFlag = () => this.toggleFlag();
         window.toggleShuffle = (checked) => this.toggleShuffle(checked);
         window.handleLocalQuizUpload = (event) => this.handleLocalQuizUpload(event);
+        window.openWorkshop = () => this.openWorkshop();
+        window.attemptCloseWorkshop = () => this.attemptCloseWorkshop();
     }
 
     /**
@@ -210,6 +218,26 @@ class QuizApp {
         // Stop timer if leaving quiz screen (except to results)
         if (screenId !== CONFIG.SCREENS.QUIZ && screenId !== CONFIG.SCREENS.RESULTS) {
             this.stopTimer();
+        }
+    }
+
+    /**
+     * Workshop Navigation
+     */
+    openWorkshop() {
+        this.showScreen(CONFIG.SCREENS.WORKSHOP);
+        if (typeof WorkshopManager !== 'undefined') {
+            WorkshopManager.init();
+        }
+    }
+
+    attemptCloseWorkshop() {
+        if (typeof WorkshopManager !== 'undefined' && WorkshopManager.hasUnsavedContent()) {
+            if (confirm("You have entered content in the Workshop. Are you sure you want to exit? Your progress will be lost.")) {
+                this.showScreen(CONFIG.SCREENS.HOME);
+            }
+        } else {
+            this.showScreen(CONFIG.SCREENS.HOME);
         }
     }
 

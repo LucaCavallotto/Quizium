@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Quizium</title>
     <link rel="stylesheet" href="assets/css/main.css">
+    <script>var quizApp = null;</script>
+    <script src="assets/workshop.js" defer></script>
     <script src="assets/app.js" defer></script>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
@@ -39,6 +41,12 @@
                     </button>
                     <input type="file" id="local-file-input" accept=".json" class="hidden"
                         onchange="handleLocalQuizUpload(event)" style="display: none;">
+                </div>
+
+                <div style="margin-top: 16px;">
+                    <button class="btn btn-primary full-width" onclick="openWorkshop()">
+                        <span style="font-size: 1.2rem; margin-right: 8px;">🛠️</span> Quiz Workshop
+                    </button>
                 </div>
 
             </div>
@@ -262,6 +270,91 @@
                 <div class="modal-actions">
                     <button class="btn btn-secondary" onclick="hideFinishConfirmation()">Cancel</button>
                     <button class="btn btn-primary" onclick="confirmFinish()">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Workshop Screen -->
+        <div id="workshopScreen" class="screen-container hidden"
+            style="max-height: 100vh; overflow: hidden; display: flex; flex-direction: column;">
+            <div class="nav-header" style="flex-shrink: 0; justify-content: flex-start; gap: 16px;">
+                <button class="btn btn-icon-back" onclick="attemptCloseWorkshop()" aria-label="Go Back">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"></path>
+                        <path d="M12 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <h1 class="page-title" style="margin: 0;">Quiz Workshop</h1>
+            </div>
+
+            <!-- Mobile Tabs -->
+            <div class="workshop-tabs mobile-only">
+                <button class="workshop-tab active" onclick="WorkshopManager.switchTab('editor')">Editor</button>
+                <button class="workshop-tab" onclick="WorkshopManager.switchTab('preview')">Preview</button>
+            </div>
+
+            <div class="workshop-layout" style="flex: 1; display: flex; overflow: hidden;">
+                <!-- Editor Panel -->
+                <div id="workshop-panel-editor" class="workshop-panel active">
+                    <div class="workshop-toolbar">
+                        <div class="toolbar-group">
+                            <input type="number" id="workshopStartId" class="workshop-input-sm" placeholder="Start ID"
+                                value="1" min="0">
+                        </div>
+                        <div class="toolbar-group actions-group">
+                            <button class="btn-tool" onclick="WorkshopManager.generate()" title="Generate (Parse text)">
+                                <span class="tool-icon">✨</span><span class="tool-label">Generate</span>
+                            </button>
+                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.clear()"
+                                title="Clear Input">
+                                <span class="tool-icon">🗑️</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ide-editor-container">
+                        <div class="ide-body" style="height: 100%;">
+                            <div class="ide-gutter" id="workshop-editor-gutter"></div>
+                            <textarea class="ide-textarea" id="workshop-editor-input"
+                                placeholder="Question Text&#10;Option A&#10;Option B&#10;Option C&#10;0&#10;Explanation (Optional)&#10;&#10;Question Text&#10;b&#10;0&#10;Explanation (Optional)"
+                                spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+                        </div>
+                    </div>
+
+                    <div id="workshop-status" class="workshop-status hidden"></div>
+                </div>
+
+                <!-- Preview Panel -->
+                <div id="workshop-panel-preview" class="workshop-panel">
+                    <div class="workshop-toolbar justify-end">
+                        <div class="toolbar-group actions-group">
+                            <button class="btn-tool" onclick="WorkshopManager.playQuiz()" title="Play This Quiz"
+                                id="workshop-play-btn" disabled>
+                                <span class="tool-icon">▶️</span><span class="tool-label">Play</span>
+                            </button>
+                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.copyJSON()"
+                                title="Copy JSON" id="workshop-copy-btn" disabled>
+                                <span class="tool-icon">📋</span>
+                            </button>
+                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.downloadJSON()"
+                                title="Download JSON" id="workshop-dl-btn" disabled>
+                                <span class="tool-icon">💾</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="workshop-preview-container">
+                        <div class="preview-scroll-area" id="workshop-preview-scroll">
+                            <div class="preview-placeholder" id="workshop-preview-placeholder">
+                                <span class="placeholder-icon">👀</span>
+                                <p>Generated preview will appear here</p>
+                            </div>
+                            <div id="workshop-preview-content" class="hidden">
+                                <!-- Cards injected via JS -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
