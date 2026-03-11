@@ -15,6 +15,8 @@ const WorkshopManager = (() => {
     let jsonContainer;
     let jsonContent;
     let jsonGutter;
+    let hintOverlay;
+    let hintBar;
     let isJsonView = false;
 
     // Action Buttons
@@ -34,6 +36,8 @@ const WorkshopManager = (() => {
         jsonContainer = document.getElementById('workshop-json-container');
         jsonContent = document.getElementById('workshop-json-content');
         jsonGutter = document.getElementById('workshop-json-gutter');
+        hintOverlay = document.getElementById('workshop-hint-overlay');
+        hintBar = document.getElementById('workshop-hint-bar');
 
         playBtn = document.getElementById('workshop-play-btn');
         copyBtn = document.getElementById('workshop-copy-btn');
@@ -41,6 +45,7 @@ const WorkshopManager = (() => {
 
         if (editorInput) {
             setupIDE();
+            SmartSuggestion.init(editorInput, hintOverlay, hintBar);
         }
 
         isInitialized = true;
@@ -93,6 +98,11 @@ const WorkshopManager = (() => {
         });
 
         buildGutter(1, 1);
+
+        // Keep hint overlay scroll in sync with textarea
+        editorInput.addEventListener('scroll', () => {
+            if (hintOverlay) hintOverlay.scrollTop = editorInput.scrollTop;
+        });
     };
 
     // --- Tab Management (Mobile) ---
@@ -146,6 +156,185 @@ const WorkshopManager = (() => {
     // --- Logic ---
     let currentErrors = [];
 
+    // ── Smart Suggestion Module ──────────────────────────────────────────────
+    const SmartSuggestion = (() => {
+        let _textarea, _overlay, _bar;
+
+        // Definitions for each hint type
+        const HINTS = {
+            question: { icon: '💬', label: 'Question text', cls: '' },
+            optionFirst: { icon: '🅰️', label: 'Option A  —  or type "b" for boolean', cls: '' },
+            optionNext: { icon: '➕', label: 'Option B / C / D', cls: '' },
+            optionOrAns: { icon: '➕', label: 'Another option (max 4)  or answer index (number)', cls: 'hint-pill-warn' },
+            answerIdx: { icon: '✅', label: 'Answer index (0-based number)', cls: 'hint-pill-warn' },
+            boolAnswer: { icon: '🔘', label: '0 = False  |  1 = True', cls: 'hint-pill-next' },
+            explanation: { icon: '💡', label: 'Explanation (optional)  —  or blank line for next question', cls: 'hint-pill-done' },
+            nextQ: { icon: '↵', label: 'Blank line to start next question', cls: 'hint-pill-done' },
+        };
+
+        /**
+         * Given the full textarea value and cursor position, extract the lines
+         * belonging to the current question block (lines since last blank line up
+         * to and including the cursor line).
+         * Returns { blockLines, cursorIndexInBlock, cursorLineContent }
+         */
+        const parseBlock = (value, cursorPos) => {
+            const allLines = value.split('\n');
+            const cursorLineIdx = value.slice(0, cursorPos).split('\n').length - 1;
+
+            // Walk backwards to find the start of this block
+            let blockStart = cursorLineIdx;
+            while (blockStart > 0 && allLines[blockStart - 1].trim() !== '') {
+                blockStart--;
+            }
+
+            // Collect block lines from blockStart up to cursorLineIdx (inclusive)
+            const blockLines = allLines.slice(blockStart, cursorLineIdx + 1);
+            const cursorIndexInBlock = cursorLineIdx - blockStart;
+            const cursorLineContent = allLines[cursorLineIdx];
+
+            return { blockLines, cursorIndexInBlock, cursorLineContent };
+        };
+
+        /**
+         * Determine which hint applies, given the parsed block context.
+         */
+        const getHint = (blockLines, cursorIndexInBlock) => {
+            const trimmed = (i) => (blockLines[i] !== undefined ? blockLines[i].trim() : '');
+            const isBoolean = trimmed(1).toLowerCase() === 'b';
+
+            // ── BOOLEAN path ────────────────────────────────────────────────────
+            if (isBoolean) {
+                if (cursorIndexInBlock === 0) return HINTS.question;
+                if (cursorIndexInBlock === 1) return HINTS.boolAnswer;  // still on "b" line or just after
+                if (cursorIndexInBlock === 2) return HINTS.boolAnswer;  // answer line
+                return HINTS.explanation; // line 3+
+            }
+
+            // ── MULTIPLE CHOICE path ─────────────────────────────────────────
+            if (cursorIndexInBlock === 0) return HINTS.question;
+            if (cursorIndexInBlock === 1) return HINTS.optionFirst;
+
+            // Count options: lines 1..last that are NOT a pure number
+            // The answer index is the LAST pure-number line
+            let answerLineIdx = -1;
+            for (let i = blockLines.length - 1; i >= 1; i--) {
+                if (/^\d+$/.test(trimmed(i))) {
+                    answerLineIdx = i;
+                    break;
+                }
+            }
+
+            // If the cursor is ON the answer line or after it → explanation hint
+            if (answerLineIdx !== -1 && cursorIndexInBlock >= answerLineIdx) {
+                return HINTS.explanation;
+            }
+
+            // Count options so far (lines 1..cursorIndexInBlock, excluding pure digits)
+            const optionsSoFar = blockLines.slice(1, cursorIndexInBlock).filter(l => !/^\d+$/.test(l.trim())).length;
+
+            if (optionsSoFar < 1) return HINTS.optionFirst;
+            if (optionsSoFar === 1) return HINTS.optionNext;   // Need option B at minimum
+            if (optionsSoFar === 2) return HINTS.optionOrAns;  // Can add C or answer
+            if (optionsSoFar === 3) return HINTS.optionOrAns;  // Can add D or answer
+            // 4 options filled — must give answer index
+            return HINTS.answerIdx;
+        };
+
+        /**
+         * Render ghost text inside the overlay div.
+         * We build an HTML string: for each line before the cursor we output a
+         * span with the text (in transparent colour), and on the cursor line we
+         * append the ghost hint after the user's text.
+         */
+        const renderOverlay = (value, cursorPos, hintText) => {
+            if (!_overlay) return;
+            const cursorLineIdx = value.slice(0, cursorPos).split('\n').length - 1;
+            const allLines = value.split('\n');
+
+            let html = '';
+            allLines.forEach((line, i) => {
+                // Escape html special chars to prevent XSS
+                const safe = line.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                if (i < cursorLineIdx) {
+                    html += safe + '\n';
+                } else if (i === cursorLineIdx) {
+                    const safeHint = hintText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    html += safe + '<span class="hint-ghost">' + safeHint + '</span>\n';
+                } else {
+                    html += safe + '\n';
+                }
+            });
+            _overlay.innerHTML = html;
+            // Keep scroll in sync
+            _overlay.scrollTop = _textarea.scrollTop;
+        };
+
+        /**
+         * Render hint bar pill.
+         */
+        const renderBar = (hint) => {
+            if (!_bar) return;
+            _bar.innerHTML = `<span class="hint-pill ${hint.cls}">${hint.icon} ${hint.label}</span>`;
+        };
+
+        /**
+         * Main update function — called on every textarea event.
+         */
+        const update = () => {
+            const value = _textarea.value;
+
+            // Hide everything when empty
+            if (!value) {
+                if (_overlay) _overlay.innerHTML = '';
+                if (_bar) _bar.classList.add('hidden');
+                return;
+            }
+
+            if (_bar) _bar.classList.remove('hidden');
+
+            const cursorPos = _textarea.selectionStart;
+            const { blockLines, cursorIndexInBlock } = parseBlock(value, cursorPos);
+
+            // If cursor is ON a blank line (between blocks), show restart hint
+            const cursorLineContent = value.split('\n')[value.slice(0, cursorPos).split('\n').length - 1];
+            if (cursorLineContent.trim() === '' && blockLines.every(l => l.trim() === '')) {
+                const restartHint = HINTS.question;
+                renderBar(restartHint);
+                renderOverlay(value, cursorPos, '  ← ' + restartHint.icon + ' ' + restartHint.label);
+                return;
+            }
+
+            const hint = getHint(blockLines, cursorIndexInBlock);
+
+            // Only show ghost text if the current line is "active" (cursor at EOL)
+            const lines = value.split('\n');
+            const cursorLineIdx = value.slice(0, cursorPos).split('\n').length - 1;
+            const afterCursor = cursorPos - value.lastIndexOf('\n', cursorPos - 1) - 1;
+            const lineLen = lines[cursorLineIdx] ? lines[cursorLineIdx].length : 0;
+            const ghostText = (afterCursor >= lineLen) ? '  ← ' + hint.icon + ' ' + hint.label : '';
+
+            renderOverlay(value, cursorPos, ghostText);
+            renderBar(hint);
+        };
+
+        const init = (textarea, overlay, bar) => {
+            _textarea = textarea;
+            _overlay = overlay;
+            _bar = bar;
+
+            if (!_textarea) return;
+
+            // Hide bar initially
+            if (_bar) _bar.classList.add('hidden');
+
+            const events = ['input', 'keyup', 'mouseup', 'click', 'focus', 'selectionchange'];
+            events.forEach(ev => _textarea.addEventListener(ev, update));
+        };
+
+        return { init, update };
+    })();
+
     const clear = () => {
         if (!editorInput) return;
         if (confirm("Clear all input?")) {
@@ -166,6 +355,9 @@ const WorkshopManager = (() => {
             const toggle = document.getElementById('workshop-view-toggle');
             if (toggle) toggle.checked = false;
             isJsonView = false;
+
+            // Reset smart suggestion state immediately
+            SmartSuggestion.update();
         }
     };
 

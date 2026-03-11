@@ -319,11 +319,16 @@
                     <div class="ide-editor-container">
                         <div class="ide-body" style="height: 100%;">
                             <div class="ide-gutter" id="workshop-editor-gutter"></div>
-                            <textarea class="ide-textarea" id="workshop-editor-input"
-                                placeholder="Question Text&#10;Option A&#10;Option B&#10;Option C&#10;0&#10;Explanation (Optional)&#10;&#10;Question Text&#10;b&#10;0&#10;Explanation (Optional)"
-                                spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+                            <div class="ide-textarea-wrap">
+                                <div class="hint-overlay" id="workshop-hint-overlay" aria-hidden="true"></div>
+                                <textarea class="ide-textarea" id="workshop-editor-input"
+                                    placeholder="Question Text&#10;Option A&#10;Option B&#10;Option C&#10;0&#10;Explanation (Optional)&#10;&#10;Question Text&#10;b&#10;0&#10;Explanation (Optional)"
+                                    spellcheck="false" autocomplete="off" autocorrect="off"
+                                    autocapitalize="off"></textarea>
+                            </div>
                         </div>
                     </div>
+                    <div class="hint-bar" id="workshop-hint-bar"></div>
 
                     <div id="workshop-status" class="workshop-status hidden"></div>
                 </div>

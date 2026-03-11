@@ -261,3 +261,97 @@
         display: flex;
     }
 }
+
+/* ── Smart Suggestion System ── */
+
+/* Wrapper so overlay can be absolutely positioned relative to it */
+.ide-textarea-wrap {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+}
+
+/* Ghost-text overlay — sits below the textarea, same geometry */
+.hint-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.6rem;
+    padding: 12px;
+    color: transparent;
+    /* real text invisible */
+    white-space: pre;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 0;
+}
+
+/* The textarea itself sits above the overlay */
+.ide-textarea-wrap .ide-textarea {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    flex: 1;
+}
+
+/* Individual ghost-hint span that appears on the current line */
+.hint-ghost {
+    color: #b0bec5;
+    font-style: italic;
+}
+
+/* ── Hint Bar ── */
+.hint-bar {
+    display: flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 4px 12px;
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+    gap: 6px;
+    flex-wrap: wrap;
+    transition: opacity 0.2s ease;
+}
+
+.hint-bar.hidden {
+    display: none;
+}
+
+.hint-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    background: #e8f4fd;
+    color: #1e6fa8;
+    border: 1px solid #bde0f8;
+    white-space: nowrap;
+}
+
+.hint-pill.hint-pill-next {
+    background: #edf7ed;
+    color: #1b6e27;
+    border-color: #b5e0b8;
+}
+
+.hint-pill.hint-pill-warn {
+    background: #fff8e1;
+    color: #7a5800;
+    border-color: #ffe08a;
+}
+
+.hint-pill.hint-pill-done {
+    background: #f3e8ff;
+    color: #6b21a8;
+    border-color: #d8b4fe;
+}
