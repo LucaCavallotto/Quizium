@@ -297,18 +297,21 @@
             <div class="workshop-layout" style="flex: 1; display: flex; overflow: hidden;">
                 <!-- Editor Panel -->
                 <div id="workshop-panel-editor" class="workshop-panel active">
-                    <div class="workshop-toolbar">
+                    <div class="workshop-toolbar" style="min-height: 70px;">
                         <div class="toolbar-group">
-                            <input type="number" id="workshopStartId" class="workshop-input-sm" placeholder="Start ID"
+                            <span class="tool-label"
+                                style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);">Start
+                                ID</span>
+                            <input type="number" id="workshopStartId" class="workshop-input-sm" placeholder="ID"
                                 value="1" min="0">
                         </div>
                         <div class="toolbar-group actions-group">
-                            <button class="btn-tool" onclick="WorkshopManager.generate()" title="Generate (Parse text)">
-                                <span class="tool-icon">✨</span><span class="tool-label">Generate</span>
-                            </button>
                             <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.clear()"
                                 title="Clear Input">
-                                <span class="tool-icon">🗑️</span>
+                                <span class="tool-icon">🗑️</span><span class="tool-label">Clear</span>
+                            </button>
+                            <button class="btn-tool" onclick="WorkshopManager.generate()" title="Generate (Parse text)">
+                                <span class="tool-icon">✨</span><span class="tool-label">Generate</span>
                             </button>
                         </div>
                     </div>
@@ -327,7 +330,15 @@
 
                 <!-- Preview Panel -->
                 <div id="workshop-panel-preview" class="workshop-panel">
-                    <div class="workshop-toolbar justify-end">
+                    <div class="workshop-toolbar justify-end" style="min-height: 70px;">
+                        <div class="toggle-wrapper" style="margin-right: auto; margin-bottom: 0;">
+                            <span class="toggle-label" style="font-size: 0.85rem; margin-right: 8px;">JSON View</span>
+                            <label class="toggle-switch" style="transform: scale(0.85);">
+                                <input type="checkbox" id="workshop-view-toggle"
+                                    onchange="WorkshopManager.toggleViewMode(this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
                         <div class="toolbar-group actions-group">
                             <button class="btn-tool" onclick="WorkshopManager.playQuiz()" title="Play This Quiz"
                                 id="workshop-play-btn" disabled>
@@ -335,11 +346,11 @@
                             </button>
                             <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.copyJSON()"
                                 title="Copy JSON" id="workshop-copy-btn" disabled>
-                                <span class="tool-icon">📋</span>
+                                <span class="tool-icon">📋</span><span class="tool-label">Copy</span>
                             </button>
                             <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.downloadJSON()"
                                 title="Download JSON" id="workshop-dl-btn" disabled>
-                                <span class="tool-icon">💾</span>
+                                <span class="tool-icon">💾</span><span class="tool-label">Download</span>
                             </button>
                         </div>
                     </div>
@@ -350,11 +361,19 @@
                                 <span class="placeholder-icon">👀</span>
                                 <p>Generated preview will appear here</p>
                             </div>
-                            <div id="workshop-preview-content" class="hidden">
+                            <div id="workshop-preview-content" class="hidden" style="padding: 20px;">
                                 <!-- Cards injected via JS -->
+                            </div>
+                            <div id="workshop-json-container" class="hidden ide-body"
+                                style="border-radius: 8px; background: #fafafa; overflow: hidden; height: 100%;">
+                                <div class="ide-gutter" id="workshop-json-gutter" style="overflow-y: hidden;"></div>
+                                <div id="workshop-json-content"
+                                    style="flex: 1; font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.6rem; padding: 12px; white-space: pre-wrap; color: var(--text); overflow-y: auto;">
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div id="workshop-status-preview" class="workshop-status hidden"></div>
                 </div>
             </div>
         </div>

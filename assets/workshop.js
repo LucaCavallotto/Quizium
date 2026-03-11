@@ -9,8 +9,13 @@ const WorkshopManager = (() => {
     let editorInput;
     let editorGutter;
     let statusEl;
+    let statusPreviewEl;
     let previewContent;
     let previewPlaceholder;
+    let jsonContainer;
+    let jsonContent;
+    let jsonGutter;
+    let isJsonView = false;
 
     // Action Buttons
     let playBtn;
@@ -23,8 +28,12 @@ const WorkshopManager = (() => {
         editorInput = document.getElementById('workshop-editor-input');
         editorGutter = document.getElementById('workshop-editor-gutter');
         statusEl = document.getElementById('workshop-status');
+        statusPreviewEl = document.getElementById('workshop-status-preview');
         previewContent = document.getElementById('workshop-preview-content');
         previewPlaceholder = document.getElementById('workshop-preview-placeholder');
+        jsonContainer = document.getElementById('workshop-json-container');
+        jsonContent = document.getElementById('workshop-json-content');
+        jsonGutter = document.getElementById('workshop-json-gutter');
 
         playBtn = document.getElementById('workshop-play-btn');
         copyBtn = document.getElementById('workshop-copy-btn');
@@ -32,15 +41,6 @@ const WorkshopManager = (() => {
 
         if (editorInput) {
             setupIDE();
-
-            // Auto-parse on debounce
-            let timeout = null;
-            editorInput.addEventListener('input', () => {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                    generate(true); // silent generate for preview/validation
-                }, 500);
-            });
         }
 
         isInitialized = true;
@@ -121,8 +121,20 @@ const WorkshopManager = (() => {
         }, 3000);
     };
 
+    const showPreviewStatus = (msg, type) => {
+        if (!statusPreviewEl) return;
+        statusPreviewEl.innerHTML = msg;
+        statusPreviewEl.className = `workshop-status ${type}`;
+        setTimeout(() => {
+            if (type === 'success') {
+                statusPreviewEl.classList.add('hidden');
+            }
+        }, 3000);
+    };
+
     const hideStatus = () => {
         statusEl.classList.add('hidden');
+        if (statusPreviewEl) statusPreviewEl.classList.add('hidden');
     };
 
     const toggleActionButtons = (enabled) => {
@@ -148,6 +160,12 @@ const WorkshopManager = (() => {
             previewPlaceholder.classList.remove('hidden');
             previewContent.classList.add('hidden');
             previewContent.innerHTML = '';
+            if (jsonContainer) jsonContainer.classList.add('hidden');
+            if (jsonContent) jsonContent.textContent = '';
+
+            const toggle = document.getElementById('workshop-view-toggle');
+            if (toggle) toggle.checked = false;
+            isJsonView = false;
         }
     };
 
@@ -304,17 +322,49 @@ const WorkshopManager = (() => {
         }
     };
 
+    // --- View Toggle ---
+    const toggleViewMode = (isJson) => {
+        isJsonView = isJson;
+        if (currentQuestions && currentQuestions.length > 0) {
+            renderPreview(currentQuestions);
+        }
+    };
+
     // --- Preview Rendering ---
     const renderPreview = (questions) => {
         if (!questions || questions.length === 0) {
             previewPlaceholder.classList.remove('hidden');
             previewContent.classList.add('hidden');
             previewContent.innerHTML = '';
+            if (jsonContainer) jsonContainer.classList.add('hidden');
+            if (jsonContent) jsonContent.textContent = '';
             return;
         }
 
         previewPlaceholder.classList.add('hidden');
-        previewContent.classList.remove('hidden');
+
+        if (isJsonView) {
+            previewContent.classList.add('hidden');
+            if (jsonContainer) jsonContainer.classList.remove('hidden');
+            if (jsonContent) {
+                const jsonStr = JSON.stringify(questions, null, 2);
+                jsonContent.textContent = jsonStr;
+
+                // Construct JSON Gutter
+                if (jsonGutter) {
+                    const lineCount = jsonStr.split('\n').length;
+                    let html = '';
+                    for (let i = 1; i <= Math.max(lineCount, 1); i++) {
+                        html += `<div class="ide-line-num">${i}</div>`;
+                    }
+                    jsonGutter.innerHTML = html;
+                }
+            }
+            return;
+        } else {
+            if (jsonContainer) jsonContainer.classList.add('hidden');
+            previewContent.classList.remove('hidden');
+        }
 
         let html = '';
         questions.forEach((q, idx) => {
@@ -389,9 +439,9 @@ const WorkshopManager = (() => {
         const jsonString = JSON.stringify(currentQuestions, null, 2);
         try {
             await navigator.clipboard.writeText(jsonString);
-            showStatus('JSON copied to clipboard!', 'success');
+            showPreviewStatus('JSON copied to clipboard!', 'success');
         } catch (err) {
-            showStatus('Failed to copy JSON.', 'error');
+            showPreviewStatus('Failed to copy JSON.', 'error');
         }
     };
 
@@ -404,7 +454,7 @@ const WorkshopManager = (() => {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        showStatus('Download started!', 'success');
+        showPreviewStatus('Download started!', 'success');
     };
 
     return {
@@ -415,6 +465,7 @@ const WorkshopManager = (() => {
         clear,
         playQuiz,
         copyJSON,
-        downloadJSON
+        downloadJSON,
+        toggleViewMode
     };
 })();
