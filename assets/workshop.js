@@ -13,11 +13,12 @@ const WorkshopManager = (() => {
     let previewContent;
     let previewPlaceholder;
     let jsonContainer;
-    let jsonContent;
+    let jsonInput;
     let jsonGutter;
     let hintOverlay;
     let hintBar;
     let isJsonView = false;
+    let isSyncing = false; // Prevent circular sync loops
 
     // Action Buttons
     let playBtn;
@@ -34,7 +35,7 @@ const WorkshopManager = (() => {
         previewContent = document.getElementById('workshop-preview-content');
         previewPlaceholder = document.getElementById('workshop-preview-placeholder');
         jsonContainer = document.getElementById('workshop-json-container');
-        jsonContent = document.getElementById('workshop-json-content');
+        jsonInput = document.getElementById('workshop-json-input');
         jsonGutter = document.getElementById('workshop-json-gutter');
         hintOverlay = document.getElementById('workshop-hint-overlay');
         hintBar = document.getElementById('workshop-hint-bar');
@@ -46,6 +47,19 @@ const WorkshopManager = (() => {
         if (editorInput) {
             setupIDE();
             SmartSuggestion.init(editorInput, hintOverlay, hintBar);
+            
+            // Real-time generation from text editor
+            editorInput.addEventListener('input', () => {
+                if (!isSyncing) {
+                    isSyncing = true;
+                    generate(true);
+                    isSyncing = false;
+                }
+            });
+        }
+
+        if (jsonInput) {
+            setupJsonIDE();
         }
 
         isInitialized = true;
@@ -103,6 +117,86 @@ const WorkshopManager = (() => {
         editorInput.addEventListener('scroll', () => {
             if (hintOverlay) hintOverlay.scrollTop = editorInput.scrollTop;
         });
+    };
+
+    const setupJsonIDE = () => {
+        const refreshJsonGutter = () => {
+            const lines = jsonInput.value.split('\n').length;
+            let html = '';
+            for (let i = 1; i <= Math.max(lines, 1); i++) {
+                html += `<span class="ide-line-num">${i}</span>`;
+            }
+            jsonGutter.innerHTML = html;
+            jsonGutter.scrollTop = jsonInput.scrollTop;
+        };
+
+        jsonInput.addEventListener('input', () => {
+            refreshJsonGutter();
+            if (!isSyncing) {
+                isSyncing = true;
+                onJsonInput();
+                isSyncing = false;
+            }
+        });
+
+        jsonInput.addEventListener('scroll', () => {
+            jsonGutter.scrollTop = jsonInput.scrollTop;
+        });
+
+        ['keyup', 'mouseup', 'click', 'focus'].forEach(ev => jsonInput.addEventListener(ev, refreshJsonGutter));
+        
+        refreshJsonGutter();
+    };
+
+    const onJsonInput = () => {
+        const val = jsonInput.value.trim();
+        if (!val) {
+            currentQuestions = [];
+            editorInput.value = '';
+            renderPreview([]);
+            toggleActionButtons(false);
+            return;
+        }
+
+        try {
+            const parsed = JSON.parse(val);
+            if (!Array.isArray(parsed)) throw new Error("JSON must be an array of questions.");
+            
+            currentQuestions = parsed;
+            // Sync back to text editor
+            editorInput.value = reverseGenerate(currentQuestions);
+            
+            // Update UI/Preview
+            renderPreview(currentQuestions);
+            toggleActionButtons(true);
+            hideStatus();
+            
+            // Re-build text gutter and hints
+            const lines = editorInput.value.split('\n').length;
+            buildGutter(lines, getActiveLine());
+            SmartSuggestion.update();
+            
+        } catch (e) {
+            showPreviewStatus(`Invalid JSON: ${e.message}`, 'error');
+            toggleActionButtons(false);
+            // Don't clear preview, just show error
+        }
+    };
+
+    const reverseGenerate = (questions) => {
+        return questions.map(q => {
+            let block = `${q.question}\n`;
+            if (q.type === 'boolean') {
+                block += `b\n${q.answer}`;
+            } else {
+                q.options.forEach(opt => block += `${opt}\n`);
+                block += `${q.answer}`;
+            }
+            if (q.explanation) {
+                block += `\n${q.explanation}`;
+            }
+            return block;
+        }).join('\n\n');
     };
 
     // --- Tab Management (Mobile) ---
@@ -350,7 +444,7 @@ const WorkshopManager = (() => {
             previewContent.classList.add('hidden');
             previewContent.innerHTML = '';
             if (jsonContainer) jsonContainer.classList.add('hidden');
-            if (jsonContent) jsonContent.textContent = '';
+            if (jsonInput) jsonInput.value = '';
 
             const toggle = document.getElementById('workshop-view-toggle');
             if (toggle) toggle.checked = false;
@@ -529,7 +623,7 @@ const WorkshopManager = (() => {
             previewContent.classList.add('hidden');
             previewContent.innerHTML = '';
             if (jsonContainer) jsonContainer.classList.add('hidden');
-            if (jsonContent) jsonContent.textContent = '';
+            if (jsonInput) jsonInput.value = '';
             return;
         }
 
@@ -538,16 +632,18 @@ const WorkshopManager = (() => {
         if (isJsonView) {
             previewContent.classList.add('hidden');
             if (jsonContainer) jsonContainer.classList.remove('hidden');
-            if (jsonContent) {
+            if (jsonInput) {
                 const jsonStr = JSON.stringify(questions, null, 2);
-                jsonContent.textContent = jsonStr;
+                if (jsonInput.value !== jsonStr) {
+                    jsonInput.value = jsonStr;
+                }
 
                 // Construct JSON Gutter
                 if (jsonGutter) {
                     const lineCount = jsonStr.split('\n').length;
                     let html = '';
                     for (let i = 1; i <= Math.max(lineCount, 1); i++) {
-                        html += `<div class="ide-line-num">${i}</div>`;
+                        html += `<span class="ide-line-num">${i}</span>`;
                     }
                     jsonGutter.innerHTML = html;
                 }

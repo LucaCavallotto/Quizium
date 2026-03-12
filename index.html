@@ -310,9 +310,6 @@
                                 title="Clear Input">
                                 <span class="tool-icon">🗑️</span><span class="tool-label">Clear</span>
                             </button>
-                            <button class="btn-tool" onclick="WorkshopManager.generate()" title="Generate (Parse text)">
-                                <span class="tool-icon">✨</span><span class="tool-label">Generate</span>
-                            </button>
                         </div>
                     </div>
 
@@ -370,9 +367,10 @@
                             <div id="workshop-json-container" class="hidden ide-body"
                                 style="border-radius: 8px; background: #fafafa; overflow: hidden; height: 100%;">
                                 <div class="ide-gutter" id="workshop-json-gutter" style="overflow-y: hidden;"></div>
-                                <div id="workshop-json-content"
-                                    style="flex: 1; font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.6rem; padding: 12px; white-space: pre-wrap; color: var(--text); overflow-y: auto;">
-                                </div>
+                                <textarea id="workshop-json-input"
+                                    style="flex: 1; font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.6rem; padding: 12px; white-space: pre; color: var(--text); overflow-y: auto; background: transparent; border: none; outline: none; resize: none;"
+                                    spellcheck="false" autocomplete="off" autocorrect="off"
+                                    autocapitalize="off"></textarea>
                             </div>
                         </div>
                         <div id="workshop-status-preview" class="workshop-status hidden"></div>
