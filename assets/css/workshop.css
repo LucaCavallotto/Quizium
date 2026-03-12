@@ -66,7 +66,7 @@
 }
 
 .btn-tool:hover:not(:disabled) {
-    background: var(--primary-hover);
+    opacity: 0.88;
     transform: translateY(-1px);
 }
 
@@ -151,29 +151,38 @@
 
 /* Status Notifications */
 .workshop-status {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 10px 16px;
     font-size: 0.85rem;
     font-weight: 500;
     border-top: 1px solid var(--border);
-    animation: slideUp 0.3s ease;
+    animation: slideUp 0.3s ease-out;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .workshop-status.error {
-    background: #fef2f2;
-    color: #b91c1c;
-    border-top-color: #fca5a5;
+    background: #fffafa;
+    color: #dc2626;
+    border-top: 2px solid #fca5a5;
 }
 
 .workshop-status.success {
     background: #f0fdf4;
-    color: #15803d;
-    border-top-color: #86efac;
+    color: #166534;
+    border-top: 2px solid #86efac;
 }
 
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(100%);
     }
 
     to {
@@ -308,14 +317,21 @@
 
 /* ── Hint Bar ── */
 .hint-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     align-items: center;
     min-height: 32px;
     padding: 4px 12px;
-    background: #f8fafc;
+    background: rgba(248, 250, 252, 0.92);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border-top: 1px solid var(--border);
     gap: 6px;
     flex-wrap: wrap;
+    z-index: 10;
     transition: opacity 0.2s ease;
 }
 
