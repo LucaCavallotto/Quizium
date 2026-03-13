@@ -15,7 +15,8 @@
     gap: 16px;
     padding: 16px 20px 20px;
     overflow: hidden;
-    min-height: 0; /* Crucial for scrolling flex items */
+    min-height: 0;
+    /* Crucial for scrolling flex items */
 }
 
 .workshop-panel {
@@ -27,7 +28,8 @@
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border);
     overflow: hidden;
-    min-height: 0; /* Crucial for scrolling flex items */
+    min-height: 0;
+    /* Crucial for scrolling flex items */
 }
 
 /* Toolbar */
@@ -58,12 +60,13 @@
     border-radius: 4px;
 }
 
-.workshop-toolbar > * {
+.workshop-toolbar>* {
     flex-shrink: 0;
 }
 
 .workshop-toolbar.justify-end {
-    justify-content: flex-start; /* Switch to start when overflowing */
+    justify-content: flex-start;
+    /* Switch to start when overflowing */
 }
 
 .toolbar-group {
@@ -177,7 +180,7 @@
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.6rem;
-    padding: 12px 12px 60px;
+    padding: 12px 12px 80px;
     border: none;
     outline: none;
     resize: none;
@@ -296,7 +299,8 @@
     }
 
     .workshop-tabs.mobile-only {
-        display: none !important; /* Hide tabs, we are stacking now */
+        display: none !important;
+        /* Hide tabs, we are stacking now */
     }
 
     .workshop-layout {
@@ -308,13 +312,15 @@
     }
 
     .workshop-panel {
-        display: flex !important; /* show both */
+        display: flex !important;
+        /* show both */
         border: 1px solid var(--border);
         border-radius: 12px;
         box-shadow: var(--shadow-sm);
         flex: none;
         width: 100%;
-        height: 600px; /* Fixed value for mobile view */
+        height: 600px;
+        /* Fixed value for mobile view */
         margin-bottom: 20px;
     }
 }
@@ -485,8 +491,15 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ── Hint Bar ── */

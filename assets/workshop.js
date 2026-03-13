@@ -208,6 +208,8 @@ const WorkshopManager = (() => {
 
     const onJsonInput = () => {
         const val = jsonInput.value.trim();
+        hideStatus(); // Clear phantom errors immediately when typing starts
+
         if (!val) {
             currentQuestions = [];
             editorInput.value = '';
@@ -717,7 +719,8 @@ const WorkshopManager = (() => {
                 if (!jsonInput.value.trim() && (!questions || questions.length === 0)) {
                     jsonInput.value = '[\n  \n]';
                 } else if (questions && questions.length > 0) {
-                    if (jsonInput.value !== jsonStr) {
+                    // Only update if not typing, or if content is significantly different
+                    if (document.activeElement !== jsonInput && jsonInput.value !== jsonStr) {
                         jsonInput.value = jsonStr;
                     }
                 }
