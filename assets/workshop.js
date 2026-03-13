@@ -611,13 +611,40 @@ const WorkshopManager = (() => {
     // --- View Toggle ---
     const toggleViewMode = (isJson) => {
         isJsonView = isJson;
-        if (currentQuestions && currentQuestions.length > 0) {
-            renderPreview(currentQuestions);
-        }
+        // Always render preview to update visibility of placeholders/inputs
+        renderPreview(currentQuestions);
     };
 
     // --- Preview Rendering ---
     const renderPreview = (questions) => {
+        if (isJsonView) {
+            previewPlaceholder.classList.add('hidden');
+            previewContent.classList.add('hidden');
+            if (jsonContainer) jsonContainer.classList.remove('hidden');
+            if (jsonInput) {
+                // If it's a new empty state, give them a starting array
+                if (!jsonInput.value.trim() && (!questions || questions.length === 0)) {
+                    jsonInput.value = '[\n  \n]';
+                } else if (questions && questions.length > 0) {
+                    const jsonStr = JSON.stringify(questions, null, 2);
+                    if (jsonInput.value !== jsonStr) {
+                        jsonInput.value = jsonStr;
+                    }
+                }
+
+                // Construct JSON Gutter
+                if (jsonGutter) {
+                    const lineCount = jsonInput.value.split('\n').length;
+                    let html = '';
+                    for (let i = 1; i <= Math.max(lineCount, 1); i++) {
+                        html += `<span class="ide-line-num">${i}</span>`;
+                    }
+                    jsonGutter.innerHTML = html;
+                }
+            }
+            return;
+        }
+
         if (!questions || questions.length === 0) {
             previewPlaceholder.classList.remove('hidden');
             previewContent.classList.add('hidden');
@@ -628,31 +655,8 @@ const WorkshopManager = (() => {
         }
 
         previewPlaceholder.classList.add('hidden');
-
-        if (isJsonView) {
-            previewContent.classList.add('hidden');
-            if (jsonContainer) jsonContainer.classList.remove('hidden');
-            if (jsonInput) {
-                const jsonStr = JSON.stringify(questions, null, 2);
-                if (jsonInput.value !== jsonStr) {
-                    jsonInput.value = jsonStr;
-                }
-
-                // Construct JSON Gutter
-                if (jsonGutter) {
-                    const lineCount = jsonStr.split('\n').length;
-                    let html = '';
-                    for (let i = 1; i <= Math.max(lineCount, 1); i++) {
-                        html += `<span class="ide-line-num">${i}</span>`;
-                    }
-                    jsonGutter.innerHTML = html;
-                }
-            }
-            return;
-        } else {
-            if (jsonContainer) jsonContainer.classList.add('hidden');
-            previewContent.classList.remove('hidden');
-        }
+        if (jsonContainer) jsonContainer.classList.add('hidden');
+        previewContent.classList.remove('hidden');
 
         let html = '';
         questions.forEach((q, idx) => {
