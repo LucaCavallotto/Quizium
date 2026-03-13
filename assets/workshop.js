@@ -20,6 +20,7 @@ const WorkshopManager = (() => {
     let filenameInput;
     let isJsonView = false;
     let isSyncing = false; // Prevent circular sync loops
+    let alertDismissed = false; // Allow users to hide the reorder suggestion
 
     // Action Buttons
     let playBtn;
@@ -711,6 +712,7 @@ const WorkshopManager = (() => {
             previewContent.classList.add('hidden');
             if (jsonContainer) jsonContainer.classList.remove('hidden');
             if (jsonInput) {
+                const jsonStr = JSON.stringify(questions, null, 2);
                 // If it's a new empty state, give them a starting array
                 if (!jsonInput.value.trim() && (!questions || questions.length === 0)) {
                     jsonInput.value = '[\n  \n]';
@@ -735,6 +737,9 @@ const WorkshopManager = (() => {
             return;
         }
 
+        const alertContainer = document.getElementById('workshop-alert-container');
+        if (alertContainer) alertContainer.innerHTML = '';
+
         if (!questions || questions.length === 0) {
             previewPlaceholder.classList.remove('hidden');
             previewContent.classList.add('hidden');
@@ -744,6 +749,11 @@ const WorkshopManager = (() => {
             
             updateSaveButtonState(questions || []);
             return;
+        }
+
+        // Show reorder suggestion if needed and not dismissed
+        if (!alertDismissed && checkNonLinearIds(questions)) {
+            showReorderSuggestion();
         }
 
         previewPlaceholder.classList.add('hidden');
@@ -925,8 +935,76 @@ const WorkshopManager = (() => {
         reader.readAsText(file);
     };
 
+    const checkNonLinearIds = (questions) => {
+        if (!questions || questions.length === 0) return false;
+        for (let i = 0; i < questions.length; i++) {
+            if (parseInt(questions[i].id) !== i + 1) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    const reorderIds = () => {
+        if (!currentQuestions || currentQuestions.length === 0) return;
+        
+        currentQuestions = currentQuestions.map((q, idx) => ({
+            ...q,
+            id: idx + 1
+        }));
+
+        // Update editor and preview
+        if (editorInput) {
+            editorInput.value = reverseGenerate(currentQuestions);
+            const lines = editorInput.value.split('\n').length;
+            buildGutter(lines, getActiveLine());
+            SmartSuggestion.update();
+        }
+        renderPreview(currentQuestions);
+        updateSaveButtonState(currentQuestions);
+        
+        // Ensure text editor version is also valid and in sync
+        generate(true);
+        
+        showPreviewStatus('IDs reordered sequentially!', 'success');
+    };
+
+    const dismissReorderAlert = () => {
+        alertDismissed = true;
+        const alertContainer = document.getElementById('workshop-alert-container');
+        if (alertContainer) alertContainer.innerHTML = '';
+    };
+
+    const showReorderSuggestion = () => {
+        const alertContainer = document.getElementById('workshop-alert-container');
+        if (!alertContainer) return;
+        
+        // Prevent duplicate alerts
+        if (alertContainer.querySelector('.reorder-alert')) return;
+
+        alertContainer.innerHTML = `
+            <div class="reorder-alert">
+                <div class="reorder-alert-content">
+                    <div class="reorder-alert-icon">🔢</div>
+                    <div class="reorder-alert-text">
+                        <div class="reorder-alert-title">Non-linear IDs Detected</div>
+                        <div class="reorder-alert-desc">The question IDs aren't sequential. Would you like to fix them automatically?</div>
+                    </div>
+                </div>
+                <div class="reorder-alert-actions">
+                    <button class="btn-reorder" onclick="WorkshopManager.reorderIds()">
+                        <span>🪄</span> Reorder Now
+                    </button>
+                    <button class="btn-tool btn-tool-outline" style="padding: 6px 14px; font-size: 0.82rem;" onclick="WorkshopManager.dismissReorderAlert()">Dismiss</button>
+                </div>
+            </div>
+        `;
+    };
+
     const loadQuestions = (questions, fileName = null, fileHandle = null) => {
         currentQuestions = [...questions];
+        currentErrors = []; // Clear any previous errors
+        alertDismissed = false; // Reset dismissal on new file load
         lastSavedJSON = JSON.stringify(currentQuestions);
         
         // Strip extension if present for display
@@ -943,7 +1021,10 @@ const WorkshopManager = (() => {
             const lines = editorInput.value.split('\n').length;
             buildGutter(lines, getActiveLine());
             SmartSuggestion.update();
+            // Ensure internal error state is updated based on the text just generated
+            generate(true);
         }
+
         renderPreview(currentQuestions);
         toggleActionButtons(true);
     };
@@ -997,6 +1078,8 @@ const WorkshopManager = (() => {
         toggleViewMode,
         loadQuestions,
         saveJSON,
-        reset
+        reset,
+        reorderIds,
+        dismissReorderAlert
     };
 })();

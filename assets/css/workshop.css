@@ -177,7 +177,7 @@
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.6rem;
-    padding: 12px;
+    padding: 12px 12px 60px;
     border: none;
     outline: none;
     resize: none;
@@ -242,6 +242,7 @@
 }
 
 .preview-scroll-area {
+    padding-bottom: 60px;
     flex: 1;
     overflow-y: auto;
 }
@@ -397,6 +398,95 @@
 .hint-ghost {
     color: var(--text-tertiary);
     font-style: italic;
+}
+
+/* ID Reorder Alert - Premium Look */
+#workshop-alert-container {
+    padding: 20px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reorder-alert {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--primary);
+    border-radius: 12px;
+    animation: fadeIn 0.4s ease-out;
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.1);
+    position: relative;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.reorder-alert-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.reorder-alert-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.2));
+}
+
+.reorder-alert-text {
+    flex: 1;
+}
+
+.reorder-alert-title {
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 2px;
+    font-size: 0.95rem;
+}
+
+.reorder-alert-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.reorder-alert-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.btn-reorder {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-reorder:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
+}
+
+.btn-reorder:active {
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Hint Bar ── */
