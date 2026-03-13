@@ -102,6 +102,11 @@ class QuizApp {
         this.setupTimerInput();
         this.setupKeyboardSupport();
         this.setupNavigationProtection();
+
+        // Initialize WorkshopManager early for global Drag & Drop
+        if (typeof WorkshopManager !== 'undefined') {
+            WorkshopManager.init();
+        }
     }
 
     setupNavigationProtection() {
@@ -248,9 +253,13 @@ class QuizApp {
     attemptCloseWorkshop() {
         if (typeof WorkshopManager !== 'undefined' && WorkshopManager.hasUnsavedContent()) {
             if (confirm("You have entered content in the Workshop. Are you sure you want to exit? Your progress will be lost.")) {
+                WorkshopManager.reset();
                 this.showScreen(CONFIG.SCREENS.HOME);
             }
         } else {
+            if (typeof WorkshopManager !== 'undefined') {
+                WorkshopManager.reset();
+            }
             this.showScreen(CONFIG.SCREENS.HOME);
         }
     }

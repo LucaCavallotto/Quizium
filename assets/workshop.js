@@ -75,6 +75,40 @@ const WorkshopManager = (() => {
             setupJsonIDE();
         }
 
+        // Global Drag and Drop
+        let dragCounter = 0; // Prevent flickering with children
+        window.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dragCounter++;
+            document.body.classList.add('drag-active');
+        });
+
+        window.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dragCounter--;
+            if (dragCounter === 0) {
+                document.body.classList.remove('drag-active');
+            }
+        });
+
+        window.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
+        window.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dragCounter = 0;
+            document.body.classList.remove('drag-active');
+            const files = e.dataTransfer.files;
+            if (files && files.length > 0) {
+                handleFileDrop(files[0]);
+            }
+        });
+
         lastSavedJSON = JSON.stringify(currentQuestions);
         updateSaveButtonState(currentQuestions);
 
@@ -466,33 +500,47 @@ const WorkshopManager = (() => {
         return { init, update };
     })();
 
+    const performReset = () => {
+        if (!editorInput) return;
+        editorInput.value = '';
+        currentQuestions = [];
+        currentErrors = [];
+        const startIdEl = document.getElementById('workshopStartId');
+        if (startIdEl) startIdEl.value = '1';
+        buildGutter(1, 1);
+        hideStatus();
+        toggleActionButtons(false);
+
+        if (previewPlaceholder) previewPlaceholder.classList.remove('hidden');
+        if (previewContent) {
+            previewContent.classList.add('hidden');
+            previewContent.innerHTML = '';
+        }
+        if (jsonContainer) jsonContainer.classList.add('hidden');
+        if (jsonInput) jsonInput.value = '';
+
+        const toggle = document.getElementById('workshop-view-toggle');
+        if (toggle) toggle.checked = false;
+        if (filenameInput) filenameInput.value = '';
+        isJsonView = false;
+        originalFileName = null;
+        currentFileHandle = null;
+        lastSavedJSON = null;
+
+        // Reset smart suggestion state immediately
+        if (typeof SmartSuggestion !== 'undefined' && SmartSuggestion.update) {
+            SmartSuggestion.update();
+        }
+    };
+
+    const reset = () => {
+        performReset();
+    };
+
     const clear = () => {
         if (!editorInput) return;
         if (confirm("Clear all input?")) {
-            editorInput.value = '';
-            currentQuestions = [];
-            currentErrors = [];
-            document.getElementById('workshopStartId').value = '1';
-            buildGutter(1, 1);
-            hideStatus();
-            toggleActionButtons(false);
-
-            previewPlaceholder.classList.remove('hidden');
-            previewContent.classList.add('hidden');
-            previewContent.innerHTML = '';
-            if (jsonContainer) jsonContainer.classList.add('hidden');
-            if (jsonInput) jsonInput.value = '';
-
-            const toggle = document.getElementById('workshop-view-toggle');
-            if (toggle) toggle.checked = false;
-            if (filenameInput) filenameInput.value = '';
-            isJsonView = false;
-            originalFileName = null;
-            currentFileHandle = null;
-            lastSavedJSON = null;
-
-            // Reset smart suggestion state immediately
-            SmartSuggestion.update();
+            performReset();
         }
     };
 
@@ -803,6 +851,80 @@ const WorkshopManager = (() => {
         showPreviewStatus('Download started!', 'success');
     };
 
+    const handleFileDrop = (file) => {
+        if (!file.name.toLowerCase().endsWith('.json')) {
+            const workshopScreen = document.getElementById('workshopScreen');
+            const isWorkshopVisible = workshopScreen && !workshopScreen.classList.contains('hidden');
+            const msg = 'Rejected: Only .json files are admitted.';
+            if (isWorkshopVisible) {
+                showPreviewStatus(msg, 'error');
+            } else {
+                alert(msg);
+            }
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const content = e.target.result;
+                const parsed = JSON.parse(content);
+                if (!Array.isArray(parsed)) throw new Error("File content must be a JSON array of questions.");
+                
+                // Check where we are to decide destination
+                const workshopScreen = document.getElementById('workshopScreen');
+                const isWorkshopVisible = workshopScreen && !workshopScreen.classList.contains('hidden');
+
+                if (isWorkshopVisible) {
+                    // Success! Load it in workshop
+                    loadQuestions(parsed, file.name);
+                    showPreviewStatus(`File "${file.name}" opened in Workshop!`, 'success');
+                } else {
+                    // We are likely in main-content. Open in quizApp
+                    if (window.quizApp) {
+                        window.quizApp.state.allQuestions = parsed;
+                        window.quizApp.state.questions = [...parsed];
+                        window.quizApp.state.currentSubject = {
+                            id: 'dropped',
+                            name: file.name.replace(/\.[^/.]+$/, ""),
+                            icon: '📂',
+                            color: '#6366f1',
+                            bg: '#eef2ff',
+                            lang: 'EN'
+                        };
+                        window.quizApp.setupSlider();
+                        window.quizApp.showScreen('questionCountScreen');
+                    } else {
+                        // Fallback: just open workshop
+                        loadQuestions(parsed, file.name);
+                        if (window.quizApp) window.quizApp.showScreen('workshopScreen');
+                    }
+                }
+            } catch (err) {
+                const workshopScreen = document.getElementById('workshopScreen');
+                const isWorkshopVisible = workshopScreen && !workshopScreen.classList.contains('hidden');
+                
+                const msg = `Invalid File Content: ${err.message}`;
+                if (isWorkshopVisible) {
+                    showPreviewStatus(msg, 'error');
+                } else {
+                    alert(msg);
+                }
+            }
+        };
+        reader.onerror = () => {
+            const workshopScreen = document.getElementById('workshopScreen');
+            const isWorkshopVisible = workshopScreen && !workshopScreen.classList.contains('hidden');
+            const msg = 'Error reading file.';
+            if (isWorkshopVisible) {
+                showPreviewStatus(msg, 'error');
+            } else {
+                alert(msg);
+            }
+        };
+        reader.readAsText(file);
+    };
+
     const loadQuestions = (questions, fileName = null, fileHandle = null) => {
         currentQuestions = [...questions];
         lastSavedJSON = JSON.stringify(currentQuestions);
@@ -874,6 +996,7 @@ const WorkshopManager = (() => {
         downloadJSON,
         toggleViewMode,
         loadQuestions,
-        saveJSON
+        saveJSON,
+        reset
     };
 })();
