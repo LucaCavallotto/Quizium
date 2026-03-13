@@ -28,6 +28,7 @@ const WorkshopManager = (() => {
     let saveBtn;
     let originalFileName = null;
     let currentFileHandle = null;
+    let lastSavedJSON = null;
 
     const init = () => {
         if (isInitialized) return;
@@ -53,7 +54,7 @@ const WorkshopManager = (() => {
         if (editorInput) {
             setupIDE();
             SmartSuggestion.init(editorInput, hintOverlay, hintBar);
-            
+
             // Real-time generation from text editor
             editorInput.addEventListener('input', () => {
                 if (!isSyncing) {
@@ -110,7 +111,14 @@ const WorkshopManager = (() => {
         editorInput.addEventListener('input', refreshGutter);
         editorInput.addEventListener('scroll', () => {
             editorGutter.scrollTop = editorInput.scrollTop;
+            if (hintOverlay) hintOverlay.scrollTop = editorInput.scrollTop;
         });
+
+        // Sync scroll from gutter to textarea (wheel/trackpad)
+        editorGutter.addEventListener('wheel', (e) => {
+            editorInput.scrollTop += e.deltaY;
+            e.preventDefault();
+        }, { passive: false });
         ['keyup', 'mouseup', 'click', 'focus'].forEach(ev => editorInput.addEventListener(ev, refreshGutter));
 
         editorInput.addEventListener('keydown', e => {
@@ -156,7 +164,7 @@ const WorkshopManager = (() => {
         });
 
         ['keyup', 'mouseup', 'click', 'focus'].forEach(ev => jsonInput.addEventListener(ev, refreshJsonGutter));
-        
+
         refreshJsonGutter();
     };
 
@@ -173,21 +181,21 @@ const WorkshopManager = (() => {
         try {
             const parsed = JSON.parse(val);
             if (!Array.isArray(parsed)) throw new Error("JSON must be an array of questions.");
-            
+
             currentQuestions = parsed;
             // Sync back to text editor
             editorInput.value = reverseGenerate(currentQuestions);
-            
+
             // Update UI/Preview
             renderPreview(currentQuestions);
+            updateSaveButtonState(currentQuestions);
             toggleActionButtons(true);
-            hideStatus();
-            
+
             // Re-build text gutter and hints
             const lines = editorInput.value.split('\n').length;
             buildGutter(lines, getActiveLine());
             SmartSuggestion.update();
-            
+
         } catch (e) {
             showPreviewStatus(`Invalid JSON: ${e.message}`, 'error');
             toggleActionButtons(false);
@@ -257,7 +265,21 @@ const WorkshopManager = (() => {
         if (playBtn) playBtn.disabled = !enabled;
         if (copyBtn) copyBtn.disabled = !enabled;
         if (dlBtn) dlBtn.disabled = !enabled;
-        if (saveBtn) saveBtn.disabled = !enabled;
+        // saveBtn state is managed separately by updateSaveButtonState
+    };
+
+    const updateSaveButtonState = (questions) => {
+        if (!saveBtn) return;
+        const currentJSON = JSON.stringify(questions);
+        const isDirty = currentJSON !== lastSavedJSON;
+        saveBtn.disabled = !isDirty;
+        
+        // Visual feedback for disabled state
+        if (!isDirty) {
+            saveBtn.classList.add('btn-tool-disabled');
+        } else {
+            saveBtn.classList.remove('btn-tool-disabled');
+        }
     };
 
     // --- Logic ---
@@ -465,6 +487,7 @@ const WorkshopManager = (() => {
             isJsonView = false;
             originalFileName = null;
             currentFileHandle = null;
+            lastSavedJSON = null;
 
             // Reset smart suggestion state immediately
             SmartSuggestion.update();
@@ -756,7 +779,7 @@ const WorkshopManager = (() => {
     const downloadJSON = () => {
         const jsonString = JSON.stringify(currentQuestions, null, 2);
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonString);
-        
+
         let fileName = originalFileName || "untitled_quiz";
         if (!fileName.toLowerCase().endsWith('.json')) {
             fileName += '.json';
@@ -768,11 +791,15 @@ const WorkshopManager = (() => {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+        
+        lastSavedJSON = jsonString;
+        updateSaveButtonState(currentQuestions);
         showPreviewStatus('Download started!', 'success');
     };
 
     const loadQuestions = (questions, fileName = null, fileHandle = null) => {
         currentQuestions = [...questions];
+        lastSavedJSON = JSON.stringify(currentQuestions);
         
         // Strip extension if present for display
         const displayName = fileName ? fileName.replace(/\.[^/.]+$/, "") : null;
@@ -783,6 +810,8 @@ const WorkshopManager = (() => {
             filenameInput.value = displayName || '';
         }
 
+        updateSaveButtonState(currentQuestions);
+        
         if (editorInput) {
             editorInput.value = reverseGenerate(currentQuestions);
             const lines = editorInput.value.split('\n').length;
@@ -795,7 +824,7 @@ const WorkshopManager = (() => {
 
     const saveJSON = async () => {
         // Force a generation to ensure everything is parsed and validated
-        generate(true); 
+        generate(true);
 
         // Check for syntax or logic errors from the generation step
         if (currentErrors && currentErrors.length > 0) {
@@ -813,6 +842,8 @@ const WorkshopManager = (() => {
                 const writable = await currentFileHandle.createWritable();
                 await writable.write(JSON.stringify(currentQuestions, null, 2));
                 await writable.close();
+                lastSavedJSON = JSON.stringify(currentQuestions);
+                updateSaveButtonState(currentQuestions);
                 showPreviewStatus('File saved successfully!', 'success');
             } catch (err) {
                 console.error("Failed to save file:", err);

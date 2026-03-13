@@ -1,42 +1,76 @@
 /* Workshop Styles overrides and layout */
+.workshop-screen-main {
+    max-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
 
 .workshop-layout {
     display: flex;
     flex-direction: row;
-    height: 100%;
+    flex: 1;
+    height: calc(100vh - var(--header-height));
     gap: 16px;
     padding: 16px 20px 20px;
+    overflow: hidden;
+    min-height: 0; /* Crucial for scrolling flex items */
 }
 
 .workshop-panel {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: var(--surface);
+    background: var(--bg-card);
     border-radius: 12px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border);
     overflow: hidden;
+    min-height: 0; /* Crucial for scrolling flex items */
 }
 
 /* Toolbar */
 .workshop-toolbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 12px;
     padding: 12px 16px;
-    background: #f8fafc;
+    background: var(--bg-body);
     border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Subtle scrollbar for visibility when needed */
+.workshop-toolbar::-webkit-scrollbar {
+    height: 4px;
+}
+
+.workshop-toolbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.workshop-toolbar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+.workshop-toolbar > * {
+    flex-shrink: 0;
 }
 
 .workshop-toolbar.justify-end {
-    justify-content: flex-end;
+    justify-content: flex-start; /* Switch to start when overflowing */
 }
 
 .toolbar-group {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
 }
 
 .workshop-input-sm {
@@ -46,7 +80,8 @@
     border-radius: 6px;
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    background: white;
+    background: var(--bg-card);
+    color: var(--text-main);
 }
 
 .btn-tool {
@@ -71,40 +106,43 @@
 }
 
 .btn-tool:disabled {
-    background: #e2e8f0;
-    color: #94a3b8;
+    background: var(--border);
+    color: var(--text-tertiary);
     cursor: not-allowed;
     transform: none;
 }
 
 .btn-tool-outline {
-    background: white;
-    color: var(--text);
+    background: var(--bg-card);
+    color: var(--text-main);
     border: 1px solid var(--border);
 }
 
 .btn-tool-outline:hover:not(:disabled) {
-    background: #f1f5f9;
+    background: var(--bg-body);
 }
 
 /* IDE Editor */
 .ide-editor-container {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     position: relative;
-    background: #fafafa;
-    min-height: 500px;
+    background: var(--bg-body);
+    min-height: 0;
 }
 
 .ide-body {
     display: flex;
     flex-direction: row;
-    height: 100%;
+    flex: 1;
+    min-height: 0;
 }
 
 .ide-gutter {
-    background: #f1f5f9;
-    border-right: 1px solid #e2e8f0;
+    background: var(--bg-body);
+    border-right: 1px solid var(--border);
     padding: 12px 0;
     min-width: 40px;
     text-align: right;
@@ -126,7 +164,7 @@
 .ide-line-num.error-line {
     color: #ef4444;
     font-weight: bold;
-    background-color: #fee2e2;
+    background-color: var(--error-bg);
 }
 
 .ide-line-num.active {
@@ -134,7 +172,8 @@
 }
 
 .ide-textarea {
-    flex: 1;
+    width: 100%;
+    height: 100%;
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.6rem;
@@ -143,9 +182,9 @@
     outline: none;
     resize: none;
     background: transparent;
-    color: var(--text);
+    color: var(--text-main);
     white-space: pre;
-    overflow: auto;
+    overflow-y: auto;
     tab-size: 2;
 }
 
@@ -161,22 +200,23 @@
     border-top: 1px solid var(--border);
     animation: slideUp 0.3s ease-out;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--bg-card);
+    opacity: 0.98;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .workshop-status.error {
-    background: #fffafa;
-    color: #dc2626;
-    border-top: 2px solid #fca5a5;
+    background: var(--error-bg);
+    color: var(--error-text);
+    border-top: 2px solid var(--error);
 }
 
 .workshop-status.success {
-    background: #f0fdf4;
-    color: #166534;
-    border-top: 2px solid #86efac;
+    background: var(--success-bg);
+    color: var(--success-text);
+    border-top: 2px solid var(--success);
 }
 
 @keyframes slideUp {
@@ -194,7 +234,7 @@
 /* Preview Area */
 .workshop-preview-container {
     flex: 1;
-    background: #f3f4f6;
+    background: var(--bg-body);
     overflow: hidden;
     position: relative;
     display: flex;
@@ -212,7 +252,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: #9ca3af;
+    color: var(--text-tertiary);
     text-align: center;
 }
 
@@ -227,7 +267,7 @@
     display: none;
     /* Desktop default */
     border-bottom: 1px solid var(--border);
-    background: white;
+    background: var(--bg-card);
 }
 
 .workshop-tab {
@@ -237,7 +277,7 @@
     border: none;
     border-bottom: 2px solid transparent;
     font-weight: 600;
-    color: var(--text-sec);
+    color: var(--text-secondary);
     cursor: pointer;
 }
 
@@ -248,26 +288,33 @@
 
 /* Responsive Overrides */
 @media (max-width: 768px) {
+    .workshop-screen-main {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
     .workshop-tabs.mobile-only {
-        display: flex;
+        display: none !important; /* Hide tabs, we are stacking now */
     }
 
     .workshop-layout {
-        padding: 0;
+        padding: 8px;
         flex-direction: column;
+        overflow-y: visible;
+        flex: none;
+        height: auto;
     }
 
     .workshop-panel {
-        display: none;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        flex: 1;
-        height: 100%;
-    }
-
-    .workshop-panel.active {
-        display: flex;
+        display: flex !important; /* show both */
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow-sm);
+        flex: none;
+        width: 100%;
+        height: 600px; /* Fixed value for mobile view */
+        margin-bottom: 20px;
     }
 }
 
@@ -280,7 +327,7 @@
 
 .workshop-filename-input {
     width: 100%;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--bg-body);
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 6px 12px;
@@ -292,7 +339,7 @@
 }
 
 .workshop-filename-input:focus {
-    background: white;
+    background: var(--bg-card);
     border-color: var(--primary);
     box-shadow: 0 0 0 3px var(--primary-light);
 }
@@ -315,7 +362,7 @@
     position: relative;
     flex: 1;
     overflow: hidden;
-    display: flex;
+    min-height: 0;
 }
 
 /* Ghost-text overlay — sits below the textarea, same geometry */
@@ -348,7 +395,7 @@
 
 /* Individual ghost-hint span that appears on the current line */
 .hint-ghost {
-    color: #b0bec5;
+    color: var(--text-tertiary);
     font-style: italic;
 }
 
@@ -362,7 +409,8 @@
     align-items: center;
     min-height: 32px;
     padding: 4px 12px;
-    background: rgba(248, 250, 252, 0.92);
+    background: var(--bg-body);
+    opacity: 0.95;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-top: 1px solid var(--border);
@@ -385,26 +433,39 @@
     font-size: 0.78rem;
     font-family: var(--font-mono);
     font-weight: 500;
-    background: #e8f4fd;
-    color: #1e6fa8;
-    border: 1px solid #bde0f8;
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid var(--border);
     white-space: nowrap;
 }
 
 .hint-pill.hint-pill-next {
-    background: #edf7ed;
-    color: #1b6e27;
-    border-color: #b5e0b8;
+    background: var(--success-bg);
+    color: var(--success-text);
+    border-color: var(--success);
 }
 
 .hint-pill.hint-pill-warn {
-    background: #fff8e1;
-    color: #7a5800;
-    border-color: #ffe08a;
+    background: var(--error-bg);
+    color: var(--error-text);
+    border-color: var(--error);
 }
 
 .hint-pill.hint-pill-done {
-    background: #f3e8ff;
-    color: #6b21a8;
-    border-color: #d8b4fe;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* --- JSON View Extension --- */
+.workshop-json-container {
+    height: 100% !important;
+    background: var(--bg-body) !important;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.workshop-json-input {
+    background: transparent !important;
+    color: var(--text-main) !important;
 }

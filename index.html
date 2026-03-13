@@ -279,8 +279,7 @@
         </div>
 
         <!-- Quiz Workshop Screen -->
-        <div id="workshopScreen" class="screen-container hidden"
-            style="max-height: 100vh; overflow: hidden; display: flex; flex-direction: column;">
+        <div id="workshopScreen" class="screen-container workshop-screen-main hidden">
             <div class="nav-header" style="flex-shrink: 0; justify-content: flex-start; gap: 16px;">
                 <button class="btn btn-icon-back" onclick="attemptCloseWorkshop()" aria-label="Go Back">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -302,7 +301,7 @@
                 <button class="workshop-tab" onclick="WorkshopManager.switchTab('preview')">Preview</button>
             </div>
 
-            <div class="workshop-layout" style="flex: 1; display: flex; overflow: hidden;">
+            <div class="workshop-layout">
                 <!-- Editor Panel -->
                 <div id="workshop-panel-editor" class="workshop-panel active">
                     <div class="workshop-toolbar" style="min-height: 70px;">
@@ -322,7 +321,7 @@
                     </div>
 
                     <div class="ide-editor-container">
-                        <div class="ide-body" style="height: 100%;">
+                        <div class="ide-body">
                             <div class="ide-gutter" id="workshop-editor-gutter"></div>
                             <div class="ide-textarea-wrap">
                                 <div class="hint-overlay" id="workshop-hint-overlay" aria-hidden="true"></div>
@@ -376,13 +375,13 @@
                             <div id="workshop-preview-content" class="hidden" style="padding: 20px;">
                                 <!-- Cards injected via JS -->
                             </div>
-                            <div id="workshop-json-container" class="hidden ide-body"
-                                style="border-radius: 8px; background: #fafafa; overflow: hidden; height: 100%;">
-                                <div class="ide-gutter" id="workshop-json-gutter" style="overflow-y: hidden;"></div>
-                                <textarea id="workshop-json-input"
-                                    style="flex: 1; font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.6rem; padding: 12px; white-space: pre; color: var(--text); overflow-y: auto; background: transparent; border: none; outline: none; resize: none;"
-                                    spellcheck="false" autocomplete="off" autocorrect="off"
-                                    autocapitalize="off"></textarea>
+                            <div id="workshop-json-container" class="hidden ide-body workshop-json-container">
+                                <div class="ide-gutter" id="workshop-json-gutter"></div>
+                                <div class="ide-textarea-wrap">
+                                    <textarea id="workshop-json-input" class="ide-textarea workshop-json-input"
+                                        spellcheck="false" autocomplete="off" autocorrect="off"
+                                        autocapitalize="off"></textarea>
+                                </div>
                             </div>
                         </div>
                         <div id="workshop-status-preview" class="workshop-status hidden"></div>
