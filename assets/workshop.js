@@ -24,6 +24,9 @@ const WorkshopManager = (() => {
     let playBtn;
     let copyBtn;
     let dlBtn;
+    let saveBtn;
+    let originalFileName = null;
+    let currentFileHandle = null;
 
     const init = () => {
         if (isInitialized) return;
@@ -43,6 +46,7 @@ const WorkshopManager = (() => {
         playBtn = document.getElementById('workshop-play-btn');
         copyBtn = document.getElementById('workshop-copy-btn');
         dlBtn = document.getElementById('workshop-dl-btn');
+        saveBtn = document.getElementById('workshop-save-btn');
 
         if (editorInput) {
             setupIDE();
@@ -245,6 +249,7 @@ const WorkshopManager = (() => {
         if (playBtn) playBtn.disabled = !enabled;
         if (copyBtn) copyBtn.disabled = !enabled;
         if (dlBtn) dlBtn.disabled = !enabled;
+        if (saveBtn) saveBtn.disabled = !enabled;
     };
 
     // --- Logic ---
@@ -449,6 +454,8 @@ const WorkshopManager = (() => {
             const toggle = document.getElementById('workshop-view-toggle');
             if (toggle) toggle.checked = false;
             isJsonView = false;
+            originalFileName = null;
+            currentFileHandle = null;
 
             // Reset smart suggestion state immediately
             SmartSuggestion.update();
@@ -742,11 +749,60 @@ const WorkshopManager = (() => {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonString);
         const a = document.createElement("a");
         a.href = dataStr;
-        a.download = "workshop_quiz.json";
+        a.download = originalFileName || "workshop_quiz.json";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         showPreviewStatus('Download started!', 'success');
+    };
+
+    const loadQuestions = (questions, fileName = null, fileHandle = null) => {
+        currentQuestions = [...questions];
+        originalFileName = fileName;
+        currentFileHandle = fileHandle;
+        if (editorInput) {
+            editorInput.value = reverseGenerate(currentQuestions);
+            const lines = editorInput.value.split('\n').length;
+            buildGutter(lines, getActiveLine());
+            SmartSuggestion.update();
+        }
+        renderPreview(currentQuestions);
+        toggleActionButtons(true);
+    };
+
+    const saveJSON = async () => {
+        // Force a generation to ensure everything is parsed and validated
+        generate(true); 
+
+        // Check for syntax or logic errors from the generation step
+        if (currentErrors && currentErrors.length > 0) {
+            showPreviewStatus('Cannot save: Please fix the errors in the editor first.', 'error');
+            return;
+        }
+
+        if (currentQuestions.length === 0) {
+            showPreviewStatus('Cannot save: No questions in the quiz.', 'error');
+            return;
+        }
+
+        if (currentFileHandle) {
+            try {
+                const writable = await currentFileHandle.createWritable();
+                await writable.write(JSON.stringify(currentQuestions, null, 2));
+                await writable.close();
+                showPreviewStatus('File saved successfully!', 'success');
+            } catch (err) {
+                console.error("Failed to save file:", err);
+                showPreviewStatus(`Failed to save: ${err.message}`, 'error');
+                // Fallback to download if save fails (e.g. permission denied)
+                if (confirm("Direct save failed. Download as a new file instead?")) {
+                    downloadJSON();
+                }
+            }
+        } else {
+            // Legacy/No handle fallback
+            downloadJSON();
+        }
     };
 
     return {
@@ -758,6 +814,8 @@ const WorkshopManager = (() => {
         playQuiz,
         copyJSON,
         downloadJSON,
-        toggleViewMode
+        toggleViewMode,
+        loadQuestions,
+        saveJSON
     };
 })();

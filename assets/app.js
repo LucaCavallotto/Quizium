@@ -201,7 +201,8 @@ class QuizApp {
         window.toggleFlag = () => this.toggleFlag();
         window.toggleFlag = () => this.toggleFlag();
         window.toggleShuffle = (checked) => this.toggleShuffle(checked);
-        window.handleLocalQuizUpload = (event) => this.handleLocalQuizUpload(event);
+        window.handleLocalQuizUpload = (event) => this.handleLocalQuizUpload(event); // Keep for legacy if needed, though we use persistent now
+        window.handlePersistentUpload = () => this.handlePersistentUpload();
         window.openWorkshop = () => this.openWorkshop();
         window.attemptCloseWorkshop = () => this.attemptCloseWorkshop();
     }
@@ -228,6 +229,19 @@ class QuizApp {
         this.showScreen(CONFIG.SCREENS.WORKSHOP);
         if (typeof WorkshopManager !== 'undefined') {
             WorkshopManager.init();
+        }
+    }
+
+    editWorkshop() {
+        if (!this.state.allQuestions || this.state.allQuestions.length === 0) return;
+        this.showScreen(CONFIG.SCREENS.WORKSHOP);
+        if (typeof WorkshopManager !== 'undefined') {
+            WorkshopManager.init();
+            WorkshopManager.loadQuestions(
+                this.state.allQuestions, 
+                this.state.currentSubject.originalFileName,
+                this.state.currentSubject.fileHandle
+            );
         }
     }
 
@@ -308,6 +322,63 @@ class QuizApp {
         }
     }
 
+    async handlePersistentUpload() {
+        if (!window.showOpenFilePicker) {
+            // Fallback for browsers that don't support File System Access API
+            document.getElementById('local-file-input').click();
+            return;
+        }
+
+        try {
+            const [handle] = await window.showOpenFilePicker({
+                types: [{
+                    description: 'Quizium JSON Files',
+                    accept: { 'application/json': ['.json'] }
+                }],
+                multiple: false
+            });
+
+            const file = await handle.getFile();
+            const content = await file.text();
+            const data = JSON.parse(content);
+
+            // Validation (same as legacy)
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error("Invalid Quiz File: Not a valid array of questions.");
+            }
+            if (data[0] && (!data[0].hasOwnProperty('question') || !data[0].hasOwnProperty('type') || !data[0].hasOwnProperty('answer'))) {
+                throw new Error("Invalid Quiz File: Missing required properties.");
+            }
+
+            const fileName = file.name.replace(/\.[^/.]+$/, "");
+            this.state.currentSubject = {
+                id: 'local',
+                name: fileName,
+                icon: '📁',
+                color: '#3b82f6',
+                bg: '#eff6ff',
+                lang: 'EN',
+                originalFileName: file.name,
+                fileHandle: handle // Store for persistent saving
+            };
+
+            this.state.flaggedQuestions.clear();
+            document.getElementById(CONFIG.SELECTORS.SELECTED_SUBJECT_TITLE).textContent = fileName;
+            document.getElementById(CONFIG.SELECTORS.QUIZ_SUBJECT_TITLE).textContent = fileName;
+
+            this.state.allQuestions = data;
+            this.state.questions = [...data];
+
+            this.setupSlider();
+            this.showScreen(CONFIG.SCREENS.COUNT);
+
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+            console.error("Local Quiz Upload Error:", err);
+            alert("Error loading file: " + err.message);
+        }
+    }
+
     handleLocalQuizUpload(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -340,7 +411,8 @@ class QuizApp {
                     icon: '📁',
                     color: '#3b82f6',
                     bg: '#eff6ff',
-                    lang: 'EN'
+                    lang: 'EN',
+                    originalFileName: file.name
                 };
 
                 this.state.flaggedQuestions.clear();

@@ -36,7 +36,7 @@
 
                 <div style="margin-top: 32px;">
                     <button class="btn btn-secondary full-width"
-                        onclick="document.getElementById('local-file-input').click()">
+                        onclick="quizApp.handlePersistentUpload()">
                         <span style="font-size: 1.2rem; margin-right: 8px;">📁</span> Load Local Quiz
                     </button>
                     <input type="file" id="local-file-input" accept=".json" class="hidden"
@@ -143,8 +143,12 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary full-width" onclick="startQuizFromSlider()"
-                    style="margin-top: 24px;">Start Quiz</button>
+                <div class="primary-actions-grid" style="margin-top: 24px;">
+                    <button class="btn btn-primary" onclick="startQuizFromSlider()">Start Quiz</button>
+                    <button class="btn btn-secondary" onclick="quizApp.editWorkshop()">
+                        <span style="font-size: 1.1rem; margin-right: 8px;">✏️</span> Edit Questions
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -340,7 +344,11 @@
                             </label>
                         </div>
                         <div class="toolbar-group actions-group">
-                            <button class="btn-tool" onclick="WorkshopManager.playQuiz()" title="Play This Quiz"
+                            <button class="btn-tool" onclick="WorkshopManager.saveJSON()" title="Save Changes"
+                                id="workshop-save-btn" disabled>
+                                <span class="tool-icon">💾</span><span class="tool-label">Save</span>
+                            </button>
+                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.playQuiz()" title="Play This Quiz"
                                 id="workshop-play-btn" disabled>
                                 <span class="tool-icon">▶️</span><span class="tool-label">Play</span>
                             </button>
