@@ -271,6 +271,43 @@
     }
 }
 
+/* --- Workshop Filename Input --- */
+.filename-container {
+    flex: 1;
+    max-width: 400px;
+    margin-left: 8px;
+}
+
+.workshop-filename-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.workshop-filename-input:focus {
+    background: white;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.workshop-filename-input::placeholder {
+    color: var(--text-tertiary);
+    opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+    .filename-container {
+        max-width: 180px;
+    }
+}
+
 /* ── Smart Suggestion System ── */
 
 /* Wrapper so overlay can be absolutely positioned relative to it */

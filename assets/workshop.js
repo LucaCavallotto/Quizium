@@ -17,6 +17,7 @@ const WorkshopManager = (() => {
     let jsonGutter;
     let hintOverlay;
     let hintBar;
+    let filenameInput;
     let isJsonView = false;
     let isSyncing = false; // Prevent circular sync loops
 
@@ -42,6 +43,7 @@ const WorkshopManager = (() => {
         jsonGutter = document.getElementById('workshop-json-gutter');
         hintOverlay = document.getElementById('workshop-hint-overlay');
         hintBar = document.getElementById('workshop-hint-bar');
+        filenameInput = document.getElementById('workshop-filename-input');
 
         playBtn = document.getElementById('workshop-play-btn');
         copyBtn = document.getElementById('workshop-copy-btn');
@@ -59,6 +61,12 @@ const WorkshopManager = (() => {
                     generate(true);
                     isSyncing = false;
                 }
+            });
+        }
+
+        if (filenameInput) {
+            filenameInput.addEventListener('input', () => {
+                originalFileName = filenameInput.value.trim() || null;
             });
         }
 
@@ -453,6 +461,7 @@ const WorkshopManager = (() => {
 
             const toggle = document.getElementById('workshop-view-toggle');
             if (toggle) toggle.checked = false;
+            if (filenameInput) filenameInput.value = '';
             isJsonView = false;
             originalFileName = null;
             currentFileHandle = null;
@@ -747,9 +756,15 @@ const WorkshopManager = (() => {
     const downloadJSON = () => {
         const jsonString = JSON.stringify(currentQuestions, null, 2);
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonString);
+        
+        let fileName = originalFileName || "untitled_quiz";
+        if (!fileName.toLowerCase().endsWith('.json')) {
+            fileName += '.json';
+        }
+
         const a = document.createElement("a");
         a.href = dataStr;
-        a.download = originalFileName || "workshop_quiz.json";
+        a.download = fileName;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -758,8 +773,16 @@ const WorkshopManager = (() => {
 
     const loadQuestions = (questions, fileName = null, fileHandle = null) => {
         currentQuestions = [...questions];
-        originalFileName = fileName;
+        
+        // Strip extension if present for display
+        const displayName = fileName ? fileName.replace(/\.[^/.]+$/, "") : null;
+        originalFileName = displayName;
         currentFileHandle = fileHandle;
+
+        if (filenameInput) {
+            filenameInput.value = displayName || '';
+        }
+
         if (editorInput) {
             editorInput.value = reverseGenerate(currentQuestions);
             const lines = editorInput.value.split('\n').length;

@@ -358,7 +358,7 @@ class QuizApp {
                 color: '#3b82f6',
                 bg: '#eff6ff',
                 lang: 'EN',
-                originalFileName: file.name,
+                originalFileName: fileName, // Store without extension
                 fileHandle: handle // Store for persistent saving
             };
 
