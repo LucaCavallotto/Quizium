@@ -75,6 +75,9 @@ const WorkshopManager = (() => {
             setupJsonIDE();
         }
 
+        lastSavedJSON = JSON.stringify(currentQuestions);
+        updateSaveButtonState(currentQuestions);
+
         isInitialized = true;
     };
 
@@ -188,7 +191,6 @@ const WorkshopManager = (() => {
 
             // Update UI/Preview
             renderPreview(currentQuestions);
-            updateSaveButtonState(currentQuestions);
             toggleActionButtons(true);
 
             // Re-build text gutter and hints
@@ -665,11 +667,12 @@ const WorkshopManager = (() => {
                 if (!jsonInput.value.trim() && (!questions || questions.length === 0)) {
                     jsonInput.value = '[\n  \n]';
                 } else if (questions && questions.length > 0) {
-                    const jsonStr = JSON.stringify(questions, null, 2);
                     if (jsonInput.value !== jsonStr) {
                         jsonInput.value = jsonStr;
                     }
                 }
+
+                updateSaveButtonState(questions);
 
                 // Construct JSON Gutter
                 if (jsonGutter) {
@@ -690,6 +693,8 @@ const WorkshopManager = (() => {
             previewContent.innerHTML = '';
             if (jsonContainer) jsonContainer.classList.add('hidden');
             if (jsonInput) jsonInput.value = '';
+            
+            updateSaveButtonState(questions || []);
             return;
         }
 
@@ -734,6 +739,7 @@ const WorkshopManager = (() => {
         });
 
         previewContent.innerHTML = html;
+        updateSaveButtonState(questions);
     };
 
     // --- Actions ---
@@ -809,8 +815,6 @@ const WorkshopManager = (() => {
         if (filenameInput) {
             filenameInput.value = displayName || '';
         }
-
-        updateSaveButtonState(currentQuestions);
         
         if (editorInput) {
             editorInput.value = reverseGenerate(currentQuestions);
