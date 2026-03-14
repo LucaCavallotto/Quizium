@@ -189,6 +189,7 @@ class QuizApp {
      */
     bindGlobalEvents() {
         window.goHome = () => this.showScreen(CONFIG.SCREENS.HOME);
+        window.backToSetup = () => this.showScreen(CONFIG.SCREENS.COUNT);
         window.attemptCloseQuiz = () => this.attemptCloseQuiz();
         window.setSliderValue = (val) => this.setSliderValue(val);
         window.startQuizFromSlider = () => this.startQuizFromSlider();
@@ -311,6 +312,9 @@ class QuizApp {
 
     async selectSubject(subjectId) {
         this.state.currentSubject = this.state.subjects.find(s => s.id === subjectId);
+        if (this.state.currentSubject) {
+            this.state.currentSubject.originalFileName = this.state.currentSubject.name;
+        }
         this.state.flaggedQuestions.clear(); // Ensure flags are cleared on new subject selection
 
         // Update Titles
@@ -996,7 +1000,7 @@ class QuizApp {
 
         // Double check if quiz is completed but somehow we are here?
         if (this.state.quizCompleted) {
-            this.showScreen(CONFIG.SCREENS.HOME);
+            this.showScreen(CONFIG.SCREENS.COUNT);
             return;
         }
 
@@ -1041,7 +1045,7 @@ class QuizApp {
         this.hideFinishConfirmation();
 
         if (action === 'exit') {
-            this.showScreen(CONFIG.SCREENS.HOME);
+            this.showScreen(CONFIG.SCREENS.COUNT);
         } else {
             this.finishQuiz();
         }

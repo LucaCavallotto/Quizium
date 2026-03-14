@@ -25,7 +25,6 @@ const WorkshopManager = (() => {
     // Action Buttons
     let playBtn;
     let copyBtn;
-    let dlBtn;
     let saveBtn;
     let originalFileName = null;
     let currentFileHandle = null;
@@ -49,7 +48,6 @@ const WorkshopManager = (() => {
 
         playBtn = document.getElementById('workshop-play-btn');
         copyBtn = document.getElementById('workshop-copy-btn');
-        dlBtn = document.getElementById('workshop-dl-btn');
         saveBtn = document.getElementById('workshop-save-btn');
 
         if (editorInput) {
@@ -319,7 +317,6 @@ const WorkshopManager = (() => {
     const toggleActionButtons = (enabled) => {
         if (playBtn) playBtn.disabled = !enabled;
         if (copyBtn) copyBtn.disabled = !enabled;
-        if (dlBtn) dlBtn.disabled = !enabled;
         // saveBtn state is managed separately by updateSaveButtonState
     };
 
@@ -1178,7 +1175,6 @@ const WorkshopManager = (() => {
         clear,
         playQuiz,
         copyJSON,
-        downloadJSON,
         toggleViewMode,
         loadQuestions,
         saveJSON,

@@ -259,7 +259,7 @@
                         </div>
                         <button class="btn btn-primary full-width" onclick="restartQuiz()">Try Again</button>
                     </div>
-                    <button class="btn btn-ghost full-width btn-home-bottom" onclick="goHome()">Back to Home</button>
+                    <button class="btn btn-ghost full-width btn-home-bottom" onclick="backToSetup()">Back to Home</button>
                 </div>
             </div>
         </div>
@@ -351,10 +351,6 @@
                             </label>
                         </div>
                         <div class="toolbar-group actions-group">
-                            <button class="btn-tool" onclick="WorkshopManager.saveJSON()" title="Save Changes"
-                                id="workshop-save-btn" disabled>
-                                <span class="tool-icon">💾</span><span class="tool-label">Save</span>
-                            </button>
                             <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.playQuiz()"
                                 title="Play This Quiz" id="workshop-play-btn" disabled>
                                 <span class="tool-icon">▶️</span><span class="tool-label">Play</span>
@@ -363,9 +359,9 @@
                                 title="Copy JSON" id="workshop-copy-btn" disabled>
                                 <span class="tool-icon">📋</span><span class="tool-label">Copy</span>
                             </button>
-                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.downloadJSON()"
-                                title="Download JSON" id="workshop-dl-btn" disabled>
-                                <span class="tool-icon">💾</span><span class="tool-label">Download</span>
+                            <button class="btn-tool" onclick="WorkshopManager.saveJSON()" title="Save Changes"
+                                id="workshop-save-btn" disabled>
+                                <span class="tool-icon">💾</span><span class="tool-label">Save</span>
                             </button>
                         </div>
                     </div>
