@@ -757,16 +757,12 @@ const WorkshopManager = (() => {
         const alertContainer = document.getElementById('workshop-alert-container');
         if (alertContainer) alertContainer.innerHTML = '';
 
-        if (!questions || questions.length === 0) {
+        if ((!questions || questions.length === 0) && !isJsonView) {
             previewPlaceholder.classList.remove('hidden');
             previewContent.classList.add('hidden');
             if (jsonContainer) jsonContainer.classList.add('hidden');
             if (jsonInput) {
-                if (isJsonView && !jsonInput.value.trim()) {
-                    jsonInput.value = '[\n  \n]';
-                } else if (!isJsonView) {
-                    jsonInput.value = '';
-                }
+                jsonInput.value = '';
             }
             updateSaveButtonState(questions || []);
             return;
