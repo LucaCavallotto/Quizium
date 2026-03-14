@@ -659,8 +659,14 @@ class QuizApp {
         this.state.flaggedQuestions.clear();
 
         // Reset UI
-        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.style.display = (this.state.correctionMode === 'final') ? 'none' : 'flex';
-        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.style.display = (this.state.correctionMode === 'final') ? 'none' : 'flex';
+        // Show/Hide counts based on correction mode
+        if (this.state.correctionMode === 'final') {
+            document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.classList.add('hidden');
+            document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.classList.add('hidden');
+        } else {
+            document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.classList.remove('hidden');
+            document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.classList.remove('hidden');
+        }
         document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = '0';
         document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = '0';
 
@@ -991,12 +997,8 @@ class QuizApp {
     }
 
     attemptCloseQuiz() {
-        // If reviewing, just exit review (which goes to results or home depending on implementation, here we might want to just go home since it's the close button)
-        // Actually, the close button in review mode IS 'btnQuizClose' but the code toggles it 'hidden' in review mode (line 596 of original file).
-        // Let's check: 
-        // line 596: document.getElementById(CONFIG.SELECTORS.BTN_CLOSE).classList.toggle('hidden', this.state.isReviewing);
-        // So this button is NOT visible in review mode. In review mode, we have 'btnReviewBack' (line 597) which calls exitReview().
-        // So if this button is clicked, we are DEFINITELY in an active quiz and not reviewing.
+        // If the close button is clicked, we are in an active quiz.
+        // The button is hidden in review mode (handled via CSS/JS toggle).
 
         // Double check if quiz is completed but somehow we are here?
         if (this.state.quizCompleted) {
@@ -1158,31 +1160,18 @@ class QuizApp {
         const skippedEl = document.getElementById('skippedResult');
         if (skippedEl) skippedEl.textContent = this.state.skippedAnswers;
 
-        // Show/Hide Review Button
-        document.getElementById(CONFIG.SELECTORS.BTN_REVIEW).style.display = 'flex';
+        // Show Review Button group
+        document.getElementById(CONFIG.SELECTORS.BTN_REVIEW).classList.remove('hidden');
 
-        // Update Review Wrong Button
+        // Update Review Wrong Button visibility
         const btnWrong = document.getElementById('btnReviewWrong');
         const actionableCount = this.state.wrongAnswers + this.state.skippedAnswers;
 
         if (actionableCount > 0) {
-            btnWrong.style.display = 'block'; // Or flex, depending on CSS, but block inside flex item is fine or let CSS handle it. Actually my CSS sets display flex on .review-buttons-row .btn.
-            // Wait, if I set style.display = 'flex' here it overrides CSS if not careful.
-            // But the button is a flex item. style.display='block' or '' (empty) is better if CSS handles it.
-            // The original code used 'flex'.
-            // Let's use removeProperty('display') to let CSS handle it, OR set it to 'block'/'flex'.
-            // Since it's a button, default is inline-block, but I want it visible.
-            // Let's just set it to 'block' or remove the display style if I want it visible?
-            // Actually, best to just set style.display = 'block' or 'flex'.
-            // The constraint is: if hidden, display:none. If visible, remove display:none.
-            btnWrong.style.display = '';
-            btnWrong.classList.remove('hidden'); // Ensure we don't have hidden class
-            // In fact the original code used style.display = 'none' / 'flex'.
-            // I will use style.display = 'block' because it is inside a flex row container, so it will behave as a flex item.
-            btnWrong.style.display = 'block';
+            btnWrong.classList.remove('hidden');
             btnWrong.textContent = 'Review Wrong';
         } else {
-            btnWrong.style.display = 'none';
+            btnWrong.classList.add('hidden');
         }
 
         const title = document.getElementById('resultTitle');
@@ -1283,8 +1272,8 @@ class QuizApp {
         this.state.totalQuestions = this.state.reviewIndices.length;
 
         // Show correct/wrong counts in header for review
-        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.style.display = 'flex';
-        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.style.display = 'flex';
+        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.classList.remove('hidden');
+        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.classList.remove('hidden');
         document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = this.state.correctAnswers;
         document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = this.state.wrongAnswers;
 

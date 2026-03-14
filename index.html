@@ -35,17 +35,17 @@
                 </div>
                 <div class="subjects-grid" id="subjectContainer"></div>
 
-                <div style="margin-top: 32px;">
+                <div class="mt-32">
                     <button class="btn btn-secondary full-width" onclick="quizApp.handlePersistentUpload()">
-                        <span style="font-size: 1.2rem; margin-right: 8px;">📁</span> Load Local Quiz
+                        <span class="text-xl mr-8">📁</span> Load Local Quiz
                     </button>
                     <input type="file" id="local-file-input" accept=".json" class="hidden"
                         onchange="handleLocalQuizUpload(event)" style="display: none;">
                 </div>
 
-                <div style="margin-top: 16px;">
+                <div class="mt-16">
                     <button class="btn btn-primary full-width" onclick="openWorkshop()">
-                        <span style="font-size: 1.2rem; margin-right: 8px;">🛠️</span> Quiz Workshop
+                        <span class="text-xl mr-8">🛠️</span> Quiz Workshop
                     </button>
                 </div>
 
@@ -65,7 +65,7 @@
             </div>
 
             <div class="options-block">
-                <p class="page-description" style="margin-bottom: 24px;">Customize your session.</p>
+                <p class="page-description mb-24">Customize your session.</p>
 
                 <div class="setup-grid">
                     <!-- Question Count Section -->
@@ -104,7 +104,7 @@
 
                     <!-- Time Mode Section -->
                     <div class="slider-wrapper">
-                        <div class="label-questions" style="margin-bottom: 16px;">Time Mode</div>
+                        <div class="label-questions mb-0">Time Mode</div>
                         <div class="preset-buttons vertical-options">
                             <button class="preset-btn active" id="btnTimeNone"
                                 onclick="selectTimeMode('none')">None</button>
@@ -114,8 +114,8 @@
                                 onclick="selectTimeMode('timer')">Timer</button>
                         </div>
 
-                        <div id="timerInputContainer" class="range-container slider-dimmed" style="margin-top: 20px;">
-                            <div class="count-display-group" style="padding-bottom: 12px;">
+                        <div id="timerInputContainer" class="range-container slider-dimmed mt-24">
+                            <div class="count-display-group pb-12">
                                 <input type="number" id="timerValueDisplay" class="slider-value-input" value="10"
                                     min="1" max="60">
                             </div>
@@ -129,23 +129,22 @@
 
                     <!-- Correction Mode Section -->
                     <div class="slider-wrapper">
-                        <div class="label-questions" style="margin-bottom: 16px;">Correction</div>
+                        <div class="label-questions mb-0">Correction</div>
                         <div class="preset-buttons vertical-options">
                             <button class="preset-btn active" id="btnCorrectionInstant"
                                 onclick="selectCorrectionMode('instant')">Instant</button>
                             <button class="preset-btn" id="btnCorrectionFinal"
                                 onclick="selectCorrectionMode('final')">Final</button>
                         </div>
-                        <div
-                            style="margin-top: 16px; font-size: 0.85rem; color: var(--text-tertiary); text-align: center; line-height: 1.4;">
+                        <div class="mt-16 text-sm text-secondary text-center">
                             <span id="correctionModeDesc">Instant feedback after each answer.</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="primary-actions-grid setup-actions" style="margin-top: 24px;">
+                <div class="primary-actions-grid setup-actions mt-24">
                     <button class="btn btn-secondary" onclick="quizApp.editWorkshop()">
-                        <span style="font-size: 1.1rem; margin-right: 8px;">✏️</span> Edit Questions
+                        <span class="text-lg mr-8">✏️</span> Edit Questions
                     </button>
                     <button class="btn btn-primary" onclick="startQuizFromSlider()">Start Quiz</button>
                 </div>
@@ -158,9 +157,8 @@
                     <div class="quiz-header-left">
                         <button class="btn btn-close" id="btnQuizClose" onclick="attemptCloseQuiz()"
                             aria-label="Exit Quiz">✕</button>
-                        <button class="btn btn-close hidden" id="btnReviewBack" onclick="exitReview()"
-                            aria-label="Back to Results"
-                            style="font-size: 1rem; width: auto; padding: 0 8px; border-radius: 20px;">← Back</button>
+                        <button class="btn btn-close hidden btn-review-back" id="btnReviewBack" onclick="exitReview()"
+                            aria-label="Back to Results">← Back</button>
                         <span class="quiz-subject-badge" id="quizSubjectTitle">Subject</span>
                     </div>
 
@@ -173,7 +171,7 @@
                     </div>
                 </div>
                 <div class="progress-track">
-                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                    <div class="progress-fill" id="progressBar"></div>
                 </div>
             </div>
 
@@ -182,7 +180,7 @@
                     <div class="question-meta">
                         <span class="q-number">Question <span id="currentQuestion">1</span>/<span
                                 id="totalQuestions">10</span></span>
-                        <div style="display: flex; gap: 12px; align-items: center;">
+                        <div class="d-flex items-center gap-16">
                             <button id="btnFlagQuestion" class="btn-flag hidden" aria-label="Flag Question"
                                 onclick="toggleFlag()">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -278,9 +276,8 @@
             </div>
         </div>
 
-        <!-- Quiz Workshop Screen -->
         <div id="workshopScreen" class="screen-container workshop-screen-main hidden">
-            <div class="nav-header" style="flex-shrink: 0; justify-content: flex-start; gap: 16px;">
+            <div class="nav-header flex-shrink-0 justify-start gap-16">
                 <button class="btn btn-icon-back" onclick="attemptCloseWorkshop()" aria-label="Go Back">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -288,13 +285,12 @@
                         <path d="M12 19l-7-7 7-7"></path>
                     </svg>
                 </button>
-                <h1 class="page-title" style="margin: 0;">Quiz Workshop</h1>
-                <div class="filename-container" style="display: flex; align-items: center; gap: 8px;">
+                <h1 class="page-title m-0">Quiz Workshop</h1>
+                <div class="filename-container d-flex items-center gap-8">
                     <input type="text" id="workshop-filename-input" class="workshop-filename-input"
                         placeholder="untitled_quiz" spellcheck="false" autocomplete="off">
-                    <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.closeFile()" title="Close File"
-                        style="padding: 6px 10px; flex-shrink: 0;">
-                        <span class="tool-icon" style="margin: 0;">❌</span>
+                    <button class="btn-tool btn-tool-outline workshop-close-btn" onclick="WorkshopManager.closeFile()" title="Close File">
+                        <span class="tool-icon m-0">❌</span>
                     </button>
                 </div>
             </div>
@@ -308,10 +304,9 @@
             <div class="workshop-layout">
                 <!-- Editor Panel -->
                 <div id="workshop-panel-editor" class="workshop-panel active">
-                    <div class="workshop-toolbar" style="min-height: 70px;">
+                    <div class="workshop-toolbar min-h-70">
                         <div class="toolbar-group">
-                            <span class="tool-label"
-                                style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);">Start
+                            <span class="tool-label text-sm font-semibold text-secondary">Start
                                 ID</span>
                             <input type="number" id="workshopStartId" class="workshop-input-sm" placeholder="ID"
                                 value="1" min="0">
@@ -341,10 +336,10 @@
 
                 <!-- Preview Panel -->
                 <div id="workshop-panel-preview" class="workshop-panel">
-                    <div class="workshop-toolbar justify-end" style="min-height: 70px;">
-                        <div class="toggle-wrapper" style="margin-right: auto; margin-bottom: 0;">
-                            <span class="toggle-label" style="font-size: 0.85rem; margin-right: 8px;">JSON View</span>
-                            <label class="toggle-switch" style="transform: scale(0.85);">
+                    <div class="workshop-toolbar justify-end min-h-70">
+                        <div class="toggle-wrapper mr-auto mb-0">
+                            <span class="toggle-label text-sm mr-8">JSON View</span>
+                            <label class="toggle-switch scale-85">
                                 <input type="checkbox" id="workshop-view-toggle"
                                     onchange="WorkshopManager.toggleViewMode(this.checked)">
                                 <span class="toggle-slider"></span>
@@ -373,7 +368,7 @@
                                 <span class="placeholder-icon">👀</span>
                                 <p>Generated preview will appear here</p>
                             </div>
-                            <div id="workshop-preview-content" class="hidden" style="padding: 20px;">
+                            <div id="workshop-preview-content" class="hidden p-20">
                                 <!-- Cards injected via JS -->
                             </div>
                             <div id="workshop-json-container" class="hidden ide-body workshop-json-container">
