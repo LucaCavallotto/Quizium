@@ -546,9 +546,34 @@ const WorkshopManager = (() => {
         currentFileHandle = null;
         lastSavedJSON = null;
 
+        // Clear alert dismissal state
+        alertDismissed = false;
+
+        // Keep app state in sync
+        if (window.quizApp && window.quizApp.state.currentSubject) {
+            window.quizApp.state.currentSubject.fileHandle = null;
+            window.quizApp.state.currentSubject.originalFileName = null;
+        }
+
         // Reset smart suggestion state immediately
         if (typeof SmartSuggestion !== 'undefined' && SmartSuggestion.update) {
             SmartSuggestion.update();
+        }
+    };
+
+    const closeFile = () => {
+        const hasContent = (editorInput && editorInput.value.trim() !== '') || 
+                          (jsonInput && jsonInput.value.trim() !== '') ||
+                          currentQuestions.length > 0;
+        
+        if (!hasContent) {
+            performReset();
+            return;
+        }
+
+        if (confirm("Are you sure you want to close this file? Any unsaved changes will be lost.")) {
+            performReset();
+            showPreviewStatus('File closed.', 'success');
         }
     };
 
@@ -1159,6 +1184,7 @@ const WorkshopManager = (() => {
         saveJSON,
         reset,
         reorderIds,
-        dismissReorderAlert
+        dismissReorderAlert,
+        closeFile
     };
 })();

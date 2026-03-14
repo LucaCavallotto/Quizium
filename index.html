@@ -36,8 +36,7 @@
                 <div class="subjects-grid" id="subjectContainer"></div>
 
                 <div style="margin-top: 32px;">
-                    <button class="btn btn-secondary full-width"
-                        onclick="quizApp.handlePersistentUpload()">
+                    <button class="btn btn-secondary full-width" onclick="quizApp.handlePersistentUpload()">
                         <span style="font-size: 1.2rem; margin-right: 8px;">📁</span> Load Local Quiz
                     </button>
                     <input type="file" id="local-file-input" accept=".json" class="hidden"
@@ -290,9 +289,13 @@
                     </svg>
                 </button>
                 <h1 class="page-title" style="margin: 0;">Quiz Workshop</h1>
-                <div class="filename-container">
-                    <input type="text" id="workshop-filename-input" class="workshop-filename-input" 
+                <div class="filename-container" style="display: flex; align-items: center; gap: 8px;">
+                    <input type="text" id="workshop-filename-input" class="workshop-filename-input"
                         placeholder="untitled_quiz" spellcheck="false" autocomplete="off">
+                    <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.closeFile()" title="Close File"
+                        style="padding: 6px 10px; flex-shrink: 0;">
+                        <span class="tool-icon" style="margin: 0;">❌</span>
+                    </button>
                 </div>
             </div>
 
@@ -352,8 +355,8 @@
                                 id="workshop-save-btn" disabled>
                                 <span class="tool-icon">💾</span><span class="tool-label">Save</span>
                             </button>
-                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.playQuiz()" title="Play This Quiz"
-                                id="workshop-play-btn" disabled>
+                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.playQuiz()"
+                                title="Play This Quiz" id="workshop-play-btn" disabled>
                                 <span class="tool-icon">▶️</span><span class="tool-label">Play</span>
                             </button>
                             <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.copyJSON()"

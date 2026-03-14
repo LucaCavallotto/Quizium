@@ -357,8 +357,20 @@
 }
 
 @media (max-width: 600px) {
-    .filename-container {
-        max-width: 180px;
+    .workshop-screen-main .nav-header {
+        flex-wrap: wrap;
+        padding-bottom: 12px;
+    }
+
+    .workshop-screen-main .filename-container {
+        flex: 1 1 100%;
+        margin-left: 0;
+        max-width: none;
+        order: 3; /* Ensure it stays after the title */
+    }
+
+    .workshop-screen-main .page-title {
+        flex: 1; /* Allow title to take remaining space on first row */
     }
 }
 
