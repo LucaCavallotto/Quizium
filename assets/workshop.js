@@ -56,14 +56,20 @@ const WorkshopManager = (() => {
             setupIDE();
             SmartSuggestion.init(editorInput, hintOverlay, hintBar);
 
-            // Real-time generation from text editor
-            editorInput.addEventListener('input', () => {
-                if (!isSyncing) {
-                    isSyncing = true;
-                    generate(true);
-                    isSyncing = false;
-                }
-            });
+                    // Real-time generation from text editor
+                    editorInput.addEventListener('input', () => {
+                        if (!isSyncing) {
+                            isSyncing = true;
+                            generate(true);
+                            isSyncing = false;
+                        }
+                    });
+
+                    document.getElementById('workshopStartId')?.addEventListener('input', () => {
+                        if (!isSyncing) {
+                            renderPreview(currentQuestions);
+                        }
+                    });
         }
 
         if (filenameInput) {
@@ -99,14 +105,24 @@ const WorkshopManager = (() => {
             e.stopPropagation();
         });
 
-        window.addEventListener('drop', (e) => {
+        window.addEventListener('drop', async (e) => {
             e.preventDefault();
             e.stopPropagation();
             dragCounter = 0;
             document.body.classList.remove('drag-active');
+            
             const files = e.dataTransfer.files;
             if (files && files.length > 0) {
-                handleFileDrop(files[0]);
+                let handle = null;
+                // Try to get FileSystemHandle if supported
+                if (e.dataTransfer.items && e.dataTransfer.items[0] && e.dataTransfer.items[0].getAsFileSystemHandle) {
+                    try {
+                        handle = await e.dataTransfer.items[0].getAsFileSystemHandle();
+                    } catch (err) {
+                        console.warn("Failed to get FileSystemHandle on drop:", err);
+                    }
+                }
+                handleFileDrop(files[0], handle);
             }
         });
 
@@ -709,20 +725,39 @@ const WorkshopManager = (() => {
 
     // --- Preview Rendering ---
     const renderPreview = (questions) => {
+        const alertContainer = document.getElementById('workshop-alert-container');
+        if (alertContainer) alertContainer.innerHTML = '';
+
+        if (!questions || questions.length === 0) {
+            previewPlaceholder.classList.remove('hidden');
+            previewContent.classList.add('hidden');
+            if (jsonContainer) jsonContainer.classList.add('hidden');
+            if (jsonInput) {
+                if (isJsonView && !jsonInput.value.trim()) {
+                    jsonInput.value = '[\n  \n]';
+                } else if (!isJsonView) {
+                    jsonInput.value = '';
+                }
+            }
+            updateSaveButtonState(questions || []);
+            return;
+        }
+
+        // Show reorder suggestion if needed and not dismissed
+        // This now happens before the isJsonView return so it's visible in both views
+        if (!alertDismissed && checkNonLinearIds(questions)) {
+            showReorderSuggestion();
+        }
+
         if (isJsonView) {
             previewPlaceholder.classList.add('hidden');
             previewContent.classList.add('hidden');
             if (jsonContainer) jsonContainer.classList.remove('hidden');
             if (jsonInput) {
                 const jsonStr = JSON.stringify(questions, null, 2);
-                // If it's a new empty state, give them a starting array
-                if (!jsonInput.value.trim() && (!questions || questions.length === 0)) {
-                    jsonInput.value = '[\n  \n]';
-                } else if (questions && questions.length > 0) {
-                    // Only update if not typing, or if content is significantly different
-                    if (document.activeElement !== jsonInput && jsonInput.value !== jsonStr) {
-                        jsonInput.value = jsonStr;
-                    }
+                // Update if not typing, or if content is significantly different
+                if (document.activeElement !== jsonInput && jsonInput.value !== jsonStr) {
+                    jsonInput.value = jsonStr;
                 }
 
                 updateSaveButtonState(questions);
@@ -738,25 +773,6 @@ const WorkshopManager = (() => {
                 }
             }
             return;
-        }
-
-        const alertContainer = document.getElementById('workshop-alert-container');
-        if (alertContainer) alertContainer.innerHTML = '';
-
-        if (!questions || questions.length === 0) {
-            previewPlaceholder.classList.remove('hidden');
-            previewContent.classList.add('hidden');
-            previewContent.innerHTML = '';
-            if (jsonContainer) jsonContainer.classList.add('hidden');
-            if (jsonInput) jsonInput.value = '';
-            
-            updateSaveButtonState(questions || []);
-            return;
-        }
-
-        // Show reorder suggestion if needed and not dismissed
-        if (!alertDismissed && checkNonLinearIds(questions)) {
-            showReorderSuggestion();
         }
 
         previewPlaceholder.classList.add('hidden');
@@ -864,7 +880,7 @@ const WorkshopManager = (() => {
         showPreviewStatus('Download started!', 'success');
     };
 
-    const handleFileDrop = (file) => {
+    const handleFileDrop = (file, handle = null) => {
         if (!file.name.toLowerCase().endsWith('.json')) {
             const workshopScreen = document.getElementById('workshopScreen');
             const isWorkshopVisible = workshopScreen && !workshopScreen.classList.contains('hidden');
@@ -890,26 +906,29 @@ const WorkshopManager = (() => {
 
                 if (isWorkshopVisible) {
                     // Success! Load it in workshop
-                    loadQuestions(parsed, file.name);
+                    loadQuestions(parsed, file.name, handle);
                     showPreviewStatus(`File "${file.name}" opened in Workshop!`, 'success');
                 } else {
                     // We are likely in main-content. Open in quizApp
                     if (window.quizApp) {
+                        const fileName = file.name.replace(/\.[^/.]+$/, "");
                         window.quizApp.state.allQuestions = parsed;
                         window.quizApp.state.questions = [...parsed];
                         window.quizApp.state.currentSubject = {
                             id: 'dropped',
-                            name: file.name.replace(/\.[^/.]+$/, ""),
+                            name: fileName,
                             icon: '📂',
                             color: '#6366f1',
                             bg: '#eef2ff',
-                            lang: 'EN'
+                            lang: 'EN',
+                            originalFileName: fileName,
+                            fileHandle: handle
                         };
                         window.quizApp.setupSlider();
                         window.quizApp.showScreen('questionCountScreen');
                     } else {
                         // Fallback: just open workshop
-                        loadQuestions(parsed, file.name);
+                        loadQuestions(parsed, file.name, handle);
                         if (window.quizApp) window.quizApp.showScreen('workshopScreen');
                     }
                 }
@@ -940,8 +959,12 @@ const WorkshopManager = (() => {
 
     const checkNonLinearIds = (questions) => {
         if (!questions || questions.length === 0) return false;
+        
+        const startIdEl = document.getElementById('workshopStartId');
+        const startId = startIdEl ? parseInt(startIdEl.value) || 1 : 1;
+        
         for (let i = 0; i < questions.length; i++) {
-            if (parseInt(questions[i].id) !== i + 1) {
+            if (parseInt(questions[i].id) !== startId + i) {
                 return true;
             }
         }
@@ -951,23 +974,40 @@ const WorkshopManager = (() => {
     const reorderIds = () => {
         if (!currentQuestions || currentQuestions.length === 0) return;
         
+        const startIdEl = document.getElementById('workshopStartId');
+        const startId = startIdEl ? parseInt(startIdEl.value) || 1 : 1;
+
         currentQuestions = currentQuestions.map((q, idx) => ({
             ...q,
-            id: idx + 1
+            id: startId + idx
         }));
 
+        // Reset alert state on manual fix
+        alertDismissed = false;
+
         // Update editor and preview
-        if (editorInput) {
+        if (editorInput && !isJsonView) {
             editorInput.value = reverseGenerate(currentQuestions);
             const lines = editorInput.value.split('\n').length;
             buildGutter(lines, getActiveLine());
             SmartSuggestion.update();
+        } else if (jsonInput && isJsonView) {
+            jsonInput.value = JSON.stringify(currentQuestions, null, 2);
+            const lines = jsonInput.value.split('\n').length;
+            if (jsonGutter) {
+                let html = '';
+                for (let i = 1; i <= Math.max(lines, 1); i++) {
+                    html += `<span class="ide-line-num">${i}</span>`;
+                }
+                jsonGutter.innerHTML = html;
+            }
         }
+        
         renderPreview(currentQuestions);
         updateSaveButtonState(currentQuestions);
         
-        // Ensure text editor version is also valid and in sync
-        generate(true);
+        // Ensure internal state consistency
+        if (!isJsonView) generate(true);
         
         showPreviewStatus('IDs reordered sequentially!', 'success');
     };
@@ -1024,19 +1064,27 @@ const WorkshopManager = (() => {
             const lines = editorInput.value.split('\n').length;
             buildGutter(lines, getActiveLine());
             SmartSuggestion.update();
-            // Ensure internal error state is updated based on the text just generated
-            generate(true);
         }
 
         renderPreview(currentQuestions);
         toggleActionButtons(true);
+
+        // Keep app state in sync
+        if (window.quizApp && window.quizApp.state.currentSubject) {
+            window.quizApp.state.allQuestions = currentQuestions;
+            window.quizApp.state.questions = [...currentQuestions];
+            window.quizApp.state.currentSubject.fileHandle = fileHandle;
+            window.quizApp.state.currentSubject.originalFileName = originalFileName;
+        }
     };
 
     const saveJSON = async () => {
-        // Force a generation to ensure everything is parsed and validated
-        generate(true);
+        // Validation check without reordering
+        if (!isJsonView && editorInput) {
+            generate(true);
+        }
 
-        // Check for syntax or logic errors from the generation step
+        // Check for syntax or logic errors
         if (currentErrors && currentErrors.length > 0) {
             showPreviewStatus('Cannot save: Please fix the errors in the editor first.', 'error');
             return;
@@ -1047,24 +1095,48 @@ const WorkshopManager = (() => {
             return;
         }
 
+        // If no handle, try to get one via showSaveFilePicker
+        if (!currentFileHandle && window.showSaveFilePicker) {
+            try {
+                let suggestedName = (originalFileName || "untitled_quiz");
+                if (!suggestedName.toLowerCase().endsWith('.json')) suggestedName += '.json';
+
+                currentFileHandle = await window.showSaveFilePicker({
+                    suggestedName: suggestedName,
+                    types: [{
+                        description: 'JSON Files',
+                        accept: { 'application/json': ['.json'] },
+                    }],
+                });
+                
+                // Sync back to QuizApp state
+                if (window.quizApp && window.quizApp.state.currentSubject) {
+                    window.quizApp.state.currentSubject.fileHandle = currentFileHandle;
+                }
+            } catch (err) {
+                if (err.name === 'AbortError') return;
+                console.error("Failed to get save handle:", err);
+            }
+        }
+
         if (currentFileHandle) {
             try {
+                const jsonString = JSON.stringify(currentQuestions, null, 2);
                 const writable = await currentFileHandle.createWritable();
-                await writable.write(JSON.stringify(currentQuestions, null, 2));
+                await writable.write(jsonString);
                 await writable.close();
-                lastSavedJSON = JSON.stringify(currentQuestions);
+                lastSavedJSON = jsonString;
                 updateSaveButtonState(currentQuestions);
                 showPreviewStatus('File saved successfully!', 'success');
             } catch (err) {
                 console.error("Failed to save file:", err);
                 showPreviewStatus(`Failed to save: ${err.message}`, 'error');
-                // Fallback to download if save fails (e.g. permission denied)
-                if (confirm("Direct save failed. Download as a new file instead?")) {
+                if (confirm("Direct save failed. Download instead?")) {
                     downloadJSON();
                 }
             }
         } else {
-            // Legacy/No handle fallback
+            // Last fallback if API not supported or cancelled
             downloadJSON();
         }
     };
