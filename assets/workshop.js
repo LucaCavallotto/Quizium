@@ -568,11 +568,12 @@ const WorkshopManager = (() => {
         const input = editorInput.value;
         const startIdStr = document.getElementById('workshopStartId').value;
 
-        if (!isSilent) hideStatus();
+        // Reset error state
         currentErrors = [];
 
         if (!input.trim()) {
             if (!isSilent) showStatus('Please enter some questions.', 'error');
+            else hideStatus(); // Clear previous errors if the input is now empty
             toggleActionButtons(false);
             renderPreview([]);
             return;
@@ -580,7 +581,7 @@ const WorkshopManager = (() => {
 
         let startId = parseInt(startIdStr);
         if (isNaN(startId) || startId < 0) {
-            if (!isSilent) showStatus('Invalid Starting ID.', 'error');
+            showStatus('Invalid Starting ID.', 'error');
             return;
         }
 
@@ -701,11 +702,14 @@ const WorkshopManager = (() => {
         buildGutter(linesCount, getActiveLine(), errorLineNums);
 
         if (errors.length > 0) {
-            if (!isSilent) showStatus(errors.join('<br>'), 'error');
+            showStatus(errors.join('<br>'), 'error');
             toggleActionButtons(false);
             renderPreview([]); // Clear preview on error
             return;
         }
+
+        // Fixed! Clear any existing error messages
+        hideStatus();
 
         currentQuestions = jsonOutput;
         renderPreview(currentQuestions);
