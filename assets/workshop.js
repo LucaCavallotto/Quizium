@@ -56,20 +56,20 @@ const WorkshopManager = (() => {
             setupIDE();
             SmartSuggestion.init(editorInput, hintOverlay, hintBar);
 
-                    // Real-time generation from text editor
-                    editorInput.addEventListener('input', () => {
-                        if (!isSyncing) {
-                            isSyncing = true;
-                            generate(true);
-                            isSyncing = false;
-                        }
-                    });
+            // Real-time generation from text editor
+            editorInput.addEventListener('input', () => {
+                if (!isSyncing) {
+                    isSyncing = true;
+                    generate(true);
+                    isSyncing = false;
+                }
+            });
 
-                    document.getElementById('workshopStartId')?.addEventListener('input', () => {
-                        if (!isSyncing) {
-                            renderPreview(currentQuestions);
-                        }
-                    });
+            document.getElementById('workshopStartId')?.addEventListener('input', () => {
+                if (!isSyncing) {
+                    renderPreview(currentQuestions);
+                }
+            });
         }
 
         if (filenameInput) {
@@ -110,7 +110,7 @@ const WorkshopManager = (() => {
             e.stopPropagation();
             dragCounter = 0;
             document.body.classList.remove('drag-active');
-            
+
             const files = e.dataTransfer.files;
             if (files && files.length > 0) {
                 let handle = null;
@@ -328,7 +328,7 @@ const WorkshopManager = (() => {
         const currentJSON = JSON.stringify(questions);
         const isDirty = currentJSON !== lastSavedJSON;
         saveBtn.disabled = !isDirty;
-        
+
         // Visual feedback for disabled state
         if (!isDirty) {
             saveBtn.classList.add('btn-tool-disabled');
@@ -562,10 +562,10 @@ const WorkshopManager = (() => {
     };
 
     const closeFile = () => {
-        const hasContent = (editorInput && editorInput.value.trim() !== '') || 
-                          (jsonInput && jsonInput.value.trim() !== '') ||
-                          currentQuestions.length > 0;
-        
+        const hasContent = (editorInput && editorInput.value.trim() !== '') ||
+            (jsonInput && jsonInput.value.trim() !== '') ||
+            currentQuestions.length > 0;
+
         if (!hasContent) {
             performReset();
             return;
@@ -899,7 +899,7 @@ const WorkshopManager = (() => {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        
+
         lastSavedJSON = jsonString;
         updateSaveButtonState(currentQuestions);
         showPreviewStatus('Download started!', 'success');
@@ -921,10 +921,11 @@ const WorkshopManager = (() => {
         const reader = new FileReader();
         reader.onload = (e) => {
             try {
-                const content = e.target.result;
+                const content = (e.target.result || "").trim();
+                if (!content) throw new Error("File is empty.");
                 const parsed = JSON.parse(content);
                 if (!Array.isArray(parsed)) throw new Error("File content must be a JSON array of questions.");
-                
+
                 // Check where we are to decide destination
                 const workshopScreen = document.getElementById('workshopScreen');
                 const isWorkshopVisible = workshopScreen && !workshopScreen.classList.contains('hidden');
@@ -960,7 +961,7 @@ const WorkshopManager = (() => {
             } catch (err) {
                 const workshopScreen = document.getElementById('workshopScreen');
                 const isWorkshopVisible = workshopScreen && !workshopScreen.classList.contains('hidden');
-                
+
                 const msg = `Invalid File Content: ${err.message}`;
                 if (isWorkshopVisible) {
                     showPreviewStatus(msg, 'error');
@@ -984,10 +985,10 @@ const WorkshopManager = (() => {
 
     const checkNonLinearIds = (questions) => {
         if (!questions || questions.length === 0) return false;
-        
+
         const startIdEl = document.getElementById('workshopStartId');
         const startId = startIdEl ? parseInt(startIdEl.value) || 1 : 1;
-        
+
         for (let i = 0; i < questions.length; i++) {
             if (parseInt(questions[i].id) !== startId + i) {
                 return true;
@@ -998,7 +999,7 @@ const WorkshopManager = (() => {
 
     const reorderIds = () => {
         if (!currentQuestions || currentQuestions.length === 0) return;
-        
+
         const startIdEl = document.getElementById('workshopStartId');
         const startId = startIdEl ? parseInt(startIdEl.value) || 1 : 1;
 
@@ -1027,13 +1028,13 @@ const WorkshopManager = (() => {
                 jsonGutter.innerHTML = html;
             }
         }
-        
+
         renderPreview(currentQuestions);
         updateSaveButtonState(currentQuestions);
-        
+
         // Ensure internal state consistency
         if (!isJsonView) generate(true);
-        
+
         showPreviewStatus('IDs reordered sequentially!', 'success');
     };
 
@@ -1046,7 +1047,7 @@ const WorkshopManager = (() => {
     const showReorderSuggestion = () => {
         const alertContainer = document.getElementById('workshop-alert-container');
         if (!alertContainer) return;
-        
+
         // Prevent duplicate alerts
         if (alertContainer.querySelector('.reorder-alert')) return;
 
@@ -1074,7 +1075,7 @@ const WorkshopManager = (() => {
         currentErrors = []; // Clear any previous errors
         alertDismissed = false; // Reset dismissal on new file load
         lastSavedJSON = JSON.stringify(currentQuestions);
-        
+
         // Strip extension if present for display
         const displayName = fileName ? fileName.replace(/\.[^/.]+$/, "") : null;
         originalFileName = displayName;
@@ -1083,7 +1084,7 @@ const WorkshopManager = (() => {
         if (filenameInput) {
             filenameInput.value = displayName || '';
         }
-        
+
         if (editorInput) {
             editorInput.value = reverseGenerate(currentQuestions);
             const lines = editorInput.value.split('\n').length;
@@ -1133,7 +1134,7 @@ const WorkshopManager = (() => {
                         accept: { 'application/json': ['.json'] },
                     }],
                 });
-                
+
                 // Sync back to QuizApp state
                 if (window.quizApp && window.quizApp.state.currentSubject) {
                     window.quizApp.state.currentSubject.fileHandle = currentFileHandle;
@@ -1147,6 +1148,9 @@ const WorkshopManager = (() => {
         if (currentFileHandle) {
             try {
                 const jsonString = JSON.stringify(currentQuestions, null, 2);
+                if (!jsonString || jsonString.trim() === '') {
+                    throw new Error("Generated JSON is empty.");
+                }
                 const writable = await currentFileHandle.createWritable();
                 await writable.write(jsonString);
                 await writable.close();

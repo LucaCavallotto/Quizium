@@ -366,11 +366,13 @@
         flex: 1 1 100%;
         margin-left: 0;
         max-width: none;
-        order: 3; /* Ensure it stays after the title */
+        order: 3;
+        /* Ensure it stays after the title */
     }
 
     .workshop-screen-main .page-title {
-        flex: 1; /* Allow title to take remaining space on first row */
+        flex: 1;
+        /* Allow title to take remaining space on first row */
     }
 }
 

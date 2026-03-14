@@ -348,8 +348,18 @@ class QuizApp {
             });
 
             const file = await handle.getFile();
-            const content = await file.text();
-            const data = JSON.parse(content);
+            const content = (await file.text()).trim();
+            if (!content) {
+                throw new Error("The selected file is empty.");
+            }
+
+            let data;
+            try {
+                data = JSON.parse(content);
+            } catch (parseErr) {
+                console.error("JSON Parse Error:", parseErr, "Content starts with:", content.substring(0, 50));
+                throw new Error("The file contains invalid JSON data.");
+            }
 
             // Validation (same as legacy)
             if (!Array.isArray(data) || data.length === 0) {
@@ -396,7 +406,9 @@ class QuizApp {
 
         reader.onload = (e) => {
             try {
-                const data = JSON.parse(e.target.result);
+                const content = (e.target.result || "").trim();
+                if (!content) throw new Error("File is empty.");
+                const data = JSON.parse(content);
 
                 // Validation
                 if (!Array.isArray(data) || data.length === 0) {
