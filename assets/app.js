@@ -175,9 +175,9 @@ class QuizApp {
             // Do not handle if modifier keys (Ctrl/Alt/Meta) are pressed to avoid conflict
             else if (!e.ctrlKey && !e.altKey && !e.metaKey && e.key >= '1' && e.key <= '9') {
                 const index = parseInt(e.key) - 1;
-                const options = document.querySelectorAll('.answer-option');
+                const container = document.getElementById(CONFIG.SELECTORS.OPTIONS_CONTAINER);
+                const options = container ? container.querySelectorAll('.answer-option') : [];
                 if (options[index] && !options[index].disabled) {
-                    // Simulate click to leverage existing logic
                     options[index].click();
                 }
             }
@@ -244,7 +244,7 @@ class QuizApp {
         if (typeof WorkshopManager !== 'undefined') {
             WorkshopManager.init();
             WorkshopManager.loadQuestions(
-                this.state.allQuestions, 
+                this.state.allQuestions,
                 this.state.currentSubject.originalFileName,
                 this.state.currentSubject.fileHandle
             );
@@ -926,7 +926,8 @@ class QuizApp {
     }
 
     showAnswerState(answerData, question, forceShowFeedback = false) {
-        const buttons = document.querySelectorAll('.answer-option');
+        const container = document.getElementById(CONFIG.SELECTORS.OPTIONS_CONTAINER);
+        const buttons = container ? container.querySelectorAll('.answer-option') : [];
         const showFeedback = forceShowFeedback || this.state.correctionMode === 'instant' || this.state.quizCompleted;
 
         buttons.forEach((btn, idx) => {

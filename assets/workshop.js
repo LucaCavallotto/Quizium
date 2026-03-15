@@ -865,15 +865,20 @@ const WorkshopManager = (() => {
     const playQuiz = () => {
         if (currentQuestions.length === 0) return;
 
+        // Get filename from input or use a fallback
+        const inputName = filenameInput ? filenameInput.value.trim() : "";
+        const fileName = inputName || "Workshop Quiz";
+        
         // Mock a subject payload and inject into app state
-        const fileName = "Workshop Session";
         quizApp.state.currentSubject = {
             id: 'workshop',
             name: fileName,
             icon: '🛠️',
             color: '#8b5cf6',
             bg: '#f3e8ff',
-            lang: 'EN'
+            lang: 'EN',
+            fileHandle: currentFileHandle,
+            originalFileName: originalFileName
         };
 
         quizApp.state.flaggedQuestions.clear();
