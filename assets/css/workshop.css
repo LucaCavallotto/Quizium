@@ -146,7 +146,7 @@
 .ide-gutter {
     background: var(--bg-body);
     border-right: 1px solid var(--border);
-    padding: 12px 0;
+    padding: 12px 0 40px;
     min-width: 40px;
     text-align: right;
     overflow: hidden;
@@ -180,7 +180,7 @@
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.6rem;
-    padding: 12px 12px 80px;
+    padding: 12px 12px 40px;
     border: none;
     outline: none;
     resize: none;
@@ -191,18 +191,14 @@
     tab-size: 2;
 }
 
-/* Status Notifications */
+/* Status Notifications - Floating into flow at bottom */
 .workshop-status {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
     padding: 10px 16px;
     font-size: 0.85rem;
     font-weight: 500;
-    border-top: 1px solid var(--border);
     animation: slideUp 0.3s ease-out;
-    z-index: 100;
+    z-index: 10;
     background: var(--bg-card);
     opacity: 0.98;
     backdrop-filter: blur(8px);
@@ -245,7 +241,6 @@
 }
 
 .preview-scroll-area {
-    padding-bottom: 60px;
     flex: 1;
     overflow-y: auto;
 }
@@ -397,7 +392,7 @@
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.6rem;
-    padding: 12px;
+    padding: 12px 12px 40px;
     color: transparent;
     /* real text invisible */
     white-space: pre;
@@ -420,97 +415,109 @@
     font-style: italic;
 }
 
-/* ID Reorder Alert - Premium Look */
+/* ID Reorder Alert - Compact Premium Look at Top */
 #workshop-alert-container {
-    padding: 20px 20px 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
     position: sticky;
     top: 0;
     z-index: 110;
+    animation: slideDown 0.3s ease-out;
 }
 
 .reorder-alert {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     gap: 12px;
-    padding: 16px 20px;
+    padding: 8px 16px;
     background: var(--bg-card);
-    border: 1px solid var(--primary);
-    border-radius: 12px;
-    animation: fadeIn 0.4s ease-out;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    position: relative;
+    opacity: 0.98;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .reorder-alert-content {
     display: flex;
-    align-items: flex-start;
-    gap: 14px;
+    align-items: center;
+    gap: 10px;
 }
 
 .reorder-alert-icon {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     flex-shrink: 0;
-    filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.2));
 }
 
 .reorder-alert-text {
-    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .reorder-alert-title {
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 2px;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
 }
 
 .reorder-alert-desc {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
-    line-height: 1.4;
 }
 
 .reorder-alert-actions {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
     gap: 8px;
-    margin-top: 4px;
 }
 
 .btn-reorder {
     background: var(--primary);
     color: white;
     border: none;
-    padding: 6px 14px;
+    padding: 4px 12px;
     border-radius: 6px;
     font-weight: 600;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
 }
 
 .btn-reorder:hover {
     background: var(--primary-dark);
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
 }
 
 .btn-reorder:active {
     transform: translateY(0);
 }
 
-@keyframes fadeIn {
+.reorder-dismiss-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.2s;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.reorder-dismiss-btn:hover {
+    opacity: 1;
+    color: var(--text-main);
+}
+
+@keyframes slideDown {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-100%);
     }
 
     to {

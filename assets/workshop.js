@@ -772,23 +772,21 @@ const WorkshopManager = (() => {
     // --- Preview Rendering ---
     const renderPreview = (questions) => {
         const alertContainer = document.getElementById('workshop-alert-container');
-        if (alertContainer) alertContainer.innerHTML = '';
-
-        if ((!questions || questions.length === 0) && !isJsonView) {
-            previewPlaceholder.classList.remove('hidden');
-            previewContent.classList.add('hidden');
-            if (jsonContainer) jsonContainer.classList.add('hidden');
-            if (jsonInput) {
-                jsonInput.value = '';
+        
+        // Determine if we should show the reorder suggestion
+        // Only update alert state if we have valid questions (prevents flickering during parse errors)
+        if (questions && questions.length > 0) {
+            const isNonLinear = checkNonLinearIds(questions);
+            
+            if (alertContainer) {
+                if (alertDismissed || !isNonLinear) {
+                    // Clear if user dismissed it OR if IDs are now linear
+                    alertContainer.innerHTML = '';
+                } else if (isNonLinear && !alertContainer.querySelector('.reorder-alert')) {
+                    // Show if non-linear AND not already showing
+                    showReorderSuggestion();
+                }
             }
-            updateSaveButtonState(questions || []);
-            return;
-        }
-
-        // Show reorder suggestion if needed and not dismissed
-        // This now happens before the isJsonView return so it's visible in both views
-        if (!alertDismissed && checkNonLinearIds(questions)) {
-            showReorderSuggestion();
         }
 
         if (isJsonView) {
@@ -1080,15 +1078,15 @@ const WorkshopManager = (() => {
                 <div class="reorder-alert-content">
                     <div class="reorder-alert-icon">🔢</div>
                     <div class="reorder-alert-text">
-                        <div class="reorder-alert-title">Non-linear IDs Detected</div>
-                        <div class="reorder-alert-desc">The question IDs aren't sequential. Would you like to fix them automatically?</div>
+                        <div class="reorder-alert-title">Non-linear IDs</div>
+                        <div class="reorder-alert-desc">Would you like to reorder them?</div>
                     </div>
                 </div>
                 <div class="reorder-alert-actions">
                     <button class="btn-reorder" onclick="WorkshopManager.reorderIds()">
-                        <span>🪄</span> Reorder Now
+                        Reorder IDs
                     </button>
-                    <button class="btn-tool btn-tool-outline" style="padding: 6px 14px; font-size: 0.82rem;" onclick="WorkshopManager.dismissReorderAlert()">Dismiss</button>
+                    <button class="reorder-dismiss-btn" onclick="WorkshopManager.dismissReorderAlert()" title="Dismiss">×</button>
                 </div>
             </div>
         `;
