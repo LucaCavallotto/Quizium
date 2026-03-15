@@ -29,6 +29,8 @@ const WorkshopManager = (() => {
     let originalFileName = null;
     let currentFileHandle = null;
     let lastSavedJSON = null;
+    let lastSavedFileName = null;
+    let lastSavedStartId = null;
 
     const init = () => {
         if (isInitialized) return;
@@ -66,6 +68,7 @@ const WorkshopManager = (() => {
             document.getElementById('workshopStartId')?.addEventListener('input', () => {
                 if (!isSyncing) {
                     renderPreview(currentQuestions);
+                    updateSaveButtonState(currentQuestions);
                 }
             });
         }
@@ -73,6 +76,7 @@ const WorkshopManager = (() => {
         if (filenameInput) {
             filenameInput.addEventListener('input', () => {
                 originalFileName = filenameInput.value.trim() || null;
+                updateSaveButtonState(currentQuestions);
             });
         }
 
@@ -125,6 +129,8 @@ const WorkshopManager = (() => {
         });
 
         lastSavedJSON = JSON.stringify(currentQuestions);
+        lastSavedFileName = filenameInput ? filenameInput.value.trim() : null;
+        lastSavedStartId = document.getElementById('workshopStartId')?.value || '1';
         updateSaveButtonState(currentQuestions);
 
         isInitialized = true;
@@ -322,8 +328,16 @@ const WorkshopManager = (() => {
 
     const updateSaveButtonState = (questions) => {
         if (!saveBtn) return;
+        
         const currentJSON = JSON.stringify(questions);
-        const isDirty = currentJSON !== lastSavedJSON;
+        const currentFileName = filenameInput ? filenameInput.value.trim() : null;
+        const currentStartId = document.getElementById('workshopStartId')?.value || '1';
+
+        const isJSONDirty = currentJSON !== lastSavedJSON;
+        const isFileNameDirty = currentFileName !== lastSavedFileName;
+        const isStartIdDirty = currentStartId !== lastSavedStartId;
+
+        const isDirty = isJSONDirty || isFileNameDirty || isStartIdDirty;
         saveBtn.disabled = !isDirty;
 
         // Visual feedback for disabled state
@@ -542,6 +556,12 @@ const WorkshopManager = (() => {
         originalFileName = null;
         currentFileHandle = null;
         lastSavedJSON = null;
+        lastSavedFileName = null;
+        lastSavedStartId = '1';
+
+        // Clear alerts
+        const alertContainer = document.getElementById('workshop-alert-container');
+        if (alertContainer) alertContainer.innerHTML = '';
 
         // Clear alert dismissal state
         alertDismissed = false;
@@ -897,7 +917,9 @@ const WorkshopManager = (() => {
         a.click();
         document.body.removeChild(a);
 
-        lastSavedJSON = jsonString;
+        lastSavedJSON = JSON.stringify(currentQuestions);
+        lastSavedFileName = filenameInput ? filenameInput.value.trim() : null;
+        lastSavedStartId = document.getElementById('workshopStartId')?.value || '1';
         updateSaveButtonState(currentQuestions);
         showPreviewStatus('Download started!', 'success');
     };
@@ -1072,6 +1094,8 @@ const WorkshopManager = (() => {
         currentErrors = []; // Clear any previous errors
         alertDismissed = false; // Reset dismissal on new file load
         lastSavedJSON = JSON.stringify(currentQuestions);
+        lastSavedFileName = fileName ? fileName.replace(/\.[^/.]+$/, "") : null;
+        lastSavedStartId = document.getElementById('workshopStartId')?.value || '1';
 
         // Strip extension if present for display
         const displayName = fileName ? fileName.replace(/\.[^/.]+$/, "") : null;
@@ -1151,7 +1175,9 @@ const WorkshopManager = (() => {
                 const writable = await currentFileHandle.createWritable();
                 await writable.write(jsonString);
                 await writable.close();
-                lastSavedJSON = jsonString;
+                lastSavedJSON = JSON.stringify(currentQuestions);
+                lastSavedFileName = filenameInput ? filenameInput.value.trim() : null;
+                lastSavedStartId = document.getElementById('workshopStartId')?.value || '1';
                 updateSaveButtonState(currentQuestions);
                 showPreviewStatus('File saved successfully!', 'success');
             } catch (err) {
