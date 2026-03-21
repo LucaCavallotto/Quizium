@@ -328,7 +328,9 @@
 }
 
 .workshop-filename-input {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
+    width: auto;
     background: var(--bg-body);
     border: 1px solid var(--border);
     border-radius: 6px;
@@ -338,6 +340,17 @@
     color: var(--text-main);
     transition: all 0.2s ease;
     outline: none;
+}
+
+.workshop-close-btn {
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.workshop-close-btn:hover {
+    color: var(--error-text);
+    border-color: var(--error);
+    background: var(--error-bg);
 }
 
 .workshop-filename-input:focus {
