@@ -328,7 +328,7 @@ const WorkshopManager = (() => {
 
     const updateSaveButtonState = (questions) => {
         if (!saveBtn) return;
-        
+
         const currentJSON = JSON.stringify(questions);
         const currentFileName = filenameInput ? filenameInput.value.trim() : null;
         const currentStartId = document.getElementById('workshopStartId')?.value || '1';
@@ -772,12 +772,12 @@ const WorkshopManager = (() => {
     // --- Preview Rendering ---
     const renderPreview = (questions) => {
         const alertContainer = document.getElementById('workshop-alert-container');
-        
+
         // Determine if we should show the reorder suggestion
         // Only update alert state if we have valid questions (prevents flickering during parse errors)
         if (questions && questions.length > 0) {
             const isNonLinear = checkNonLinearIds(questions);
-            
+
             if (alertContainer) {
                 if (alertDismissed || !isNonLinear) {
                     // Clear if user dismissed it OR if IDs are now linear
@@ -866,7 +866,7 @@ const WorkshopManager = (() => {
         // Get filename from input or use a fallback
         const inputName = filenameInput ? filenameInput.value.trim() : "";
         const fileName = inputName || "Workshop Quiz";
-        
+
         // Mock a subject payload and inject into app state
         quizApp.state.currentSubject = {
             id: 'workshop',
@@ -1145,7 +1145,19 @@ const WorkshopManager = (() => {
             return;
         }
 
-        // If no handle, try to get one via showSaveFilePicker
+        // If handle name doesn't match the input name, ask to rename
+        if (currentFileHandle && window.showSaveFilePicker) {
+            const inputName = (originalFileName || "").trim().toLowerCase();
+            const handleName = currentFileHandle.name.replace(/\.[^/.]+$/, "").toLowerCase();
+            
+            if (inputName && handleName && inputName !== handleName) {
+                if (confirm(`Filenames differ. Do you want to rename "${handleName}.json" to "${originalFileName}.json"?`)) {
+                    currentFileHandle = null; // Forces showSaveFilePicker below
+                }
+            }
+        }
+
+        // If no handle (or user chose to rename), try to get one via showSaveFilePicker
         if (!currentFileHandle && window.showSaveFilePicker) {
             try {
                 let suggestedName = (originalFileName || "untitled_quiz");
@@ -1162,6 +1174,7 @@ const WorkshopManager = (() => {
                 // Sync back to QuizApp state
                 if (window.quizApp && window.quizApp.state.currentSubject) {
                     window.quizApp.state.currentSubject.fileHandle = currentFileHandle;
+                    window.quizApp.state.currentSubject.originalFileName = currentFileHandle.name;
                 }
             } catch (err) {
                 if (err.name === 'AbortError') return;
