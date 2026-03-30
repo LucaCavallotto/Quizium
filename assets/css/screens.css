@@ -983,3 +983,280 @@
         /* No grid column overrides needed */
     }
 }
+
+/* =========================================
+   DESKTOP QUESTION GRILL
+   ========================================= */
+
+/* --- Layout wrapper: grill + main side by side --- */
+.quiz-body-flex {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /* Ensure it fills the fixed-position quiz screen behind the fixed header */
+    padding-top: 0;
+}
+
+/* --- quiz-main-area wraps scroll + footer on mobile too --- */
+.quiz-main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* --- Mobile: grill is hidden entirely --- */
+.quiz-grill,
+.quiz-grill-show-btn {
+    display: none;
+}
+
+/* =========================================
+   DESKTOP-ONLY GRILL STYLES (≥ 768px)
+   ========================================= */
+@media (min-width: 768px) {
+
+    /* --- Grill aside panel --- */
+    .quiz-grill {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+        background: var(--bg-card);
+        border-radius: var(--radius-l);
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        /* Gap from fixed header (52px) and footer (~90px) with extra breathing room */
+        margin: calc(var(--header-height) + 16px) 16px calc(90px + 16px) 16px;
+        padding: 20px 16px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        /* Entry animation */
+        animation: grillSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        /* Slide-out state class handled via JS below */
+        transition: flex 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                    max-width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity 0.3s ease,
+                    margin 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                    padding 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .quiz-grill.grill-hidden {
+        flex: 0 0 0;
+        max-width: 0;
+        opacity: 0;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    @keyframes grillSlideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* --- Grill header --- */
+    .quiz-grill-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        flex-shrink: 0;
+    }
+
+    .quiz-grill-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-tertiary);
+        white-space: nowrap;
+    }
+
+    /* Hide button (chevron left) */
+    .quiz-grill-hide-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-tertiary);
+        flex-shrink: 0;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .quiz-grill-hide-btn:hover {
+        background: var(--primary-light);
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    /* --- Grill question map grid --- */
+    .quiz-grill-map {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        flex: 1;
+        align-content: start;
+        overflow-y: auto;
+        padding: 4px 2px;
+    }
+
+    /* Each question dot in the grill — identical to nav-dot */
+    .grill-dot {
+        flex: 0 0 36px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        font-weight: 600;
+        background: var(--bg-body);
+        border: 2px solid var(--border);
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+    }
+
+    .grill-dot:hover {
+        border-color: var(--primary);
+    }
+
+    .grill-dot.grill-dot-current {
+        background: var(--bg-card);
+        color: var(--primary);
+        border: 3px solid var(--primary);
+        transform: scale(1.2);
+        z-index: 2;
+    }
+
+    .grill-dot.grill-dot-correct {
+        background: var(--success-bg);
+        color: var(--success-text);
+        border-color: var(--success);
+    }
+
+    .grill-dot.grill-dot-wrong {
+        background: var(--error-bg);
+        color: var(--error-text);
+        border-color: var(--error);
+    }
+
+    .grill-dot.grill-dot-answered {
+        /* final mode: answered but not yet corrected */
+        background: var(--text-secondary);
+        color: white;
+        border-color: var(--text-secondary);
+    }
+
+    .grill-dot.grill-dot-current.grill-dot-correct {
+        background: var(--bg-card);
+        color: var(--success);
+        border-color: var(--success);
+    }
+
+    .grill-dot.grill-dot-current.grill-dot-wrong {
+        background: var(--bg-card);
+        color: var(--error);
+        border-color: var(--error);
+    }
+
+    /* --- Grill footer (completed count) --- */
+    .quiz-grill-footer {
+        flex-shrink: 0;
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+    }
+
+    .quiz-grill-count {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-tertiary);
+        background: var(--bg-body);
+        border-radius: 8px;
+        padding: 6px 12px;
+        display: inline-block;
+    }
+
+    /* --- Show grill button (floating tab on left edge of main area) --- */
+    .quiz-grill-show-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 28px;
+        height: 48px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-left: none;
+        border-radius: 0 10px 10px 0;
+        cursor: pointer;
+        color: var(--text-tertiary);
+        transition: all 0.2s;
+        /* Hidden by default (grill is visible) */
+        opacity: 0;
+        pointer-events: none;
+        animation: none;
+    }
+
+    .quiz-grill-show-btn.visible {
+        opacity: 1;
+        pointer-events: auto;
+        animation: tabPop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .quiz-grill-show-btn:hover {
+        background: var(--primary-light);
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    @keyframes tabPop {
+        from { opacity: 0; transform: translateY(-50%) translateX(-8px); }
+        to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+    }
+
+    /* When grill is shown, hide the .hidden show-btn (use .hidden class) */
+    .quiz-grill-show-btn.hidden {
+        display: flex; /* override mobile display:none */
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* When navigator-container is hidden (grill mode) */
+    .navigator-container.grill-active {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (prefers-color-scheme: dark) {
+    .grill-dot.grill-dot-answered {
+        background: var(--border);
+        border-color: var(--border);
+        color: var(--text-main);
+    }
+}
