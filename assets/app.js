@@ -1048,6 +1048,11 @@ class QuizApp {
         if (countEl) {
             countEl.textContent = `${answeredCount} / ${this.state.totalQuestions}`;
         }
+
+        const currentGrillDot = document.getElementById(`grill-dot-${this.state.currentQuestionIndex}`);
+        if (currentGrillDot) {
+            currentGrillDot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
     }
 
     /** Toggle the grill panel visibility with animation. */
