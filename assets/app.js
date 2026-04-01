@@ -9,7 +9,8 @@ const CONFIG = {
         HOME: 'homeScreen',
         COUNT: 'questionCountScreen',
         QUIZ: 'quizScreen',
-        RESULTS: 'resultsScreen'
+        RESULTS: 'resultsScreen',
+        WORKSHOP: 'workshopScreen'
     },
     SELECTORS: {
         SUBJECT_CONTAINER: 'subjectContainer',
@@ -101,6 +102,11 @@ class QuizApp {
         this.setupTimerInput();
         this.setupKeyboardSupport();
         this.setupNavigationProtection();
+
+        // Initialize WorkshopManager early for global Drag & Drop
+        if (typeof WorkshopManager !== 'undefined') {
+            WorkshopManager.init();
+        }
     }
 
     setupNavigationProtection() {
@@ -108,8 +114,13 @@ class QuizApp {
             const quizScreen = document.getElementById(CONFIG.SCREENS.QUIZ);
             const isQuizActive = !quizScreen.classList.contains('hidden');
 
+            const workshopScreen = document.getElementById(CONFIG.SCREENS.WORKSHOP);
+            const isWorkshopActive = workshopScreen && !workshopScreen.classList.contains('hidden');
+            const hasWorkshopContent = WorkshopManager && WorkshopManager.hasUnsavedContent();
+
             // Only protect if Quiz is visible AND not completed AND not reviewing
-            if (isQuizActive && !this.state.quizCompleted && !this.state.isReviewing) {
+            if ((isQuizActive && !this.state.quizCompleted && !this.state.isReviewing) ||
+                (isWorkshopActive && hasWorkshopContent)) {
                 // Standard way to trigger browser confirmation
                 e.preventDefault();
                 e.returnValue = ''; // Required for Chrome/Edge
@@ -164,9 +175,9 @@ class QuizApp {
             // Do not handle if modifier keys (Ctrl/Alt/Meta) are pressed to avoid conflict
             else if (!e.ctrlKey && !e.altKey && !e.metaKey && e.key >= '1' && e.key <= '9') {
                 const index = parseInt(e.key) - 1;
-                const options = document.querySelectorAll('.answer-option');
+                const container = document.getElementById(CONFIG.SELECTORS.OPTIONS_CONTAINER);
+                const options = container ? container.querySelectorAll('.answer-option') : [];
                 if (options[index] && !options[index].disabled) {
-                    // Simulate click to leverage existing logic
                     options[index].click();
                 }
             }
@@ -178,6 +189,7 @@ class QuizApp {
      */
     bindGlobalEvents() {
         window.goHome = () => this.showScreen(CONFIG.SCREENS.HOME);
+        window.backToSetup = () => this.showScreen(CONFIG.SCREENS.COUNT);
         window.attemptCloseQuiz = () => this.attemptCloseQuiz();
         window.setSliderValue = (val) => this.setSliderValue(val);
         window.startQuizFromSlider = () => this.startQuizFromSlider();
@@ -195,6 +207,10 @@ class QuizApp {
         window.toggleFlag = () => this.toggleFlag();
         window.toggleFlag = () => this.toggleFlag();
         window.toggleShuffle = (checked) => this.toggleShuffle(checked);
+        window.handleLocalQuizUpload = (event) => this.handleLocalQuizUpload(event); // Keep for legacy if needed, though we use persistent now
+        window.handlePersistentUpload = () => this.handlePersistentUpload();
+        window.openWorkshop = () => this.openWorkshop();
+        window.attemptCloseWorkshop = () => this.attemptCloseWorkshop();
     }
 
     /**
@@ -209,6 +225,43 @@ class QuizApp {
         // Stop timer if leaving quiz screen (except to results)
         if (screenId !== CONFIG.SCREENS.QUIZ && screenId !== CONFIG.SCREENS.RESULTS) {
             this.stopTimer();
+        }
+    }
+
+    /**
+     * Workshop Navigation
+     */
+    openWorkshop() {
+        this.showScreen(CONFIG.SCREENS.WORKSHOP);
+        if (typeof WorkshopManager !== 'undefined') {
+            WorkshopManager.init();
+        }
+    }
+
+    editWorkshop() {
+        if (!this.state.allQuestions || this.state.allQuestions.length === 0) return;
+        this.showScreen(CONFIG.SCREENS.WORKSHOP);
+        if (typeof WorkshopManager !== 'undefined') {
+            WorkshopManager.init();
+            WorkshopManager.loadQuestions(
+                this.state.allQuestions,
+                this.state.currentSubject.originalFileName,
+                this.state.currentSubject.fileHandle
+            );
+        }
+    }
+
+    attemptCloseWorkshop() {
+        if (typeof WorkshopManager !== 'undefined' && WorkshopManager.hasUnsavedContent()) {
+            if (confirm("You have entered content in the Workshop. Are you sure you want to exit? Your progress will be lost.")) {
+                WorkshopManager.reset();
+                this.showScreen(CONFIG.SCREENS.HOME);
+            }
+        } else {
+            if (typeof WorkshopManager !== 'undefined') {
+                WorkshopManager.reset();
+            }
+            this.showScreen(CONFIG.SCREENS.HOME);
         }
     }
 
@@ -259,6 +312,9 @@ class QuizApp {
 
     async selectSubject(subjectId) {
         this.state.currentSubject = this.state.subjects.find(s => s.id === subjectId);
+        if (this.state.currentSubject) {
+            this.state.currentSubject.originalFileName = this.state.currentSubject.name;
+        }
         this.state.flaggedQuestions.clear(); // Ensure flags are cleared on new subject selection
 
         // Update Titles
@@ -277,6 +333,135 @@ class QuizApp {
             console.error('Error selecting subject:', error);
             alert('Failed to load questions for this subject.');
         }
+    }
+
+    async handlePersistentUpload() {
+        if (!window.showOpenFilePicker) {
+            // Fallback for browsers that don't support File System Access API
+            document.getElementById('local-file-input').click();
+            return;
+        }
+
+        try {
+            const [handle] = await window.showOpenFilePicker({
+                types: [{
+                    description: 'Quizium JSON Files',
+                    accept: { 'application/json': ['.json'] }
+                }],
+                multiple: false
+            });
+
+            const file = await handle.getFile();
+            const content = (await file.text()).trim();
+            if (!content) {
+                throw new Error("The selected file is empty.");
+            }
+
+            let data;
+            try {
+                data = JSON.parse(content);
+            } catch (parseErr) {
+                console.error("JSON Parse Error:", parseErr, "Content starts with:", content.substring(0, 50));
+                throw new Error("The file contains invalid JSON data.");
+            }
+
+            // Validation (same as legacy)
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error("Invalid Quiz File: Not a valid array of questions.");
+            }
+            if (data[0] && (!data[0].hasOwnProperty('question') || !data[0].hasOwnProperty('type') || !data[0].hasOwnProperty('answer'))) {
+                throw new Error("Invalid Quiz File: Missing required properties.");
+            }
+
+            const fileName = file.name.replace(/\.[^/.]+$/, "");
+            this.state.currentSubject = {
+                id: 'local',
+                name: fileName,
+                icon: '📁',
+                color: '#3b82f6',
+                bg: '#eff6ff',
+                lang: 'EN',
+                originalFileName: fileName, // Store without extension
+                fileHandle: handle // Store for persistent saving
+            };
+
+            this.state.flaggedQuestions.clear();
+            document.getElementById(CONFIG.SELECTORS.SELECTED_SUBJECT_TITLE).textContent = fileName;
+            document.getElementById(CONFIG.SELECTORS.QUIZ_SUBJECT_TITLE).textContent = fileName;
+
+            this.state.allQuestions = data;
+            this.state.questions = [...data];
+
+            this.setupSlider();
+            this.showScreen(CONFIG.SCREENS.COUNT);
+
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+            console.error("Local Quiz Upload Error:", err);
+            alert("Error loading file: " + err.message);
+        }
+    }
+
+    handleLocalQuizUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            try {
+                const content = (e.target.result || "").trim();
+                if (!content) throw new Error("File is empty.");
+                const data = JSON.parse(content);
+
+                // Validation
+                if (!Array.isArray(data) || data.length === 0) {
+                    throw new Error("Invalid Quiz File: Not a valid array of questions.");
+                }
+
+                // Check a basic signature on the first item
+                const signatureObj = data[0];
+                if (!signatureObj.hasOwnProperty('question') || !signatureObj.hasOwnProperty('type') || !signatureObj.hasOwnProperty('answer')) {
+                    throw new Error("Invalid Quiz File: Missing required properties (question, type, answer).");
+                }
+
+                // Clean up input value so the same file could be loaded again
+                event.target.value = '';
+
+                // Create a pseudo-subject for the custom quiz
+                const fileName = file.name.replace(/\.[^/.]+$/, ""); // Strip extension gracefully if present
+                this.state.currentSubject = {
+                    id: 'local',
+                    name: fileName,
+                    icon: '📁',
+                    color: '#3b82f6',
+                    bg: '#eff6ff',
+                    lang: 'EN',
+                    originalFileName: file.name
+                };
+
+                this.state.flaggedQuestions.clear();
+
+                // Set Titles
+                document.getElementById(CONFIG.SELECTORS.SELECTED_SUBJECT_TITLE).textContent = fileName;
+                document.getElementById(CONFIG.SELECTORS.QUIZ_SUBJECT_TITLE).textContent = fileName;
+
+                // Set Data
+                this.state.allQuestions = data;
+                this.state.questions = [...data];
+
+                this.setupSlider();
+                this.showScreen(CONFIG.SCREENS.COUNT);
+
+            } catch (err) {
+                console.error("Local Quiz Upload Error:", err);
+                alert("Invalid Quiz File. Please check that the file is a properly formatted Quizium JSON.");
+                // Ensure reset on fail too
+                event.target.value = '';
+            }
+        };
+
+        reader.readAsText(file);
     }
 
     /* ===========================
@@ -474,8 +659,14 @@ class QuizApp {
         this.state.flaggedQuestions.clear();
 
         // Reset UI
-        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.style.display = (this.state.correctionMode === 'final') ? 'none' : 'flex';
-        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.style.display = (this.state.correctionMode === 'final') ? 'none' : 'flex';
+        // Show/Hide counts based on correction mode
+        if (this.state.correctionMode === 'final') {
+            document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.classList.add('hidden');
+            document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.classList.add('hidden');
+        } else {
+            document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.classList.remove('hidden');
+            document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.classList.remove('hidden');
+        }
         document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = '0';
         document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = '0';
 
@@ -735,7 +926,8 @@ class QuizApp {
     }
 
     showAnswerState(answerData, question, forceShowFeedback = false) {
-        const buttons = document.querySelectorAll('.answer-option');
+        const container = document.getElementById(CONFIG.SELECTORS.OPTIONS_CONTAINER);
+        const buttons = container ? container.querySelectorAll('.answer-option') : [];
         const showFeedback = forceShowFeedback || this.state.correctionMode === 'instant' || this.state.quizCompleted;
 
         buttons.forEach((btn, idx) => {
@@ -806,16 +998,12 @@ class QuizApp {
     }
 
     attemptCloseQuiz() {
-        // If reviewing, just exit review (which goes to results or home depending on implementation, here we might want to just go home since it's the close button)
-        // Actually, the close button in review mode IS 'btnQuizClose' but the code toggles it 'hidden' in review mode (line 596 of original file).
-        // Let's check: 
-        // line 596: document.getElementById(CONFIG.SELECTORS.BTN_CLOSE).classList.toggle('hidden', this.state.isReviewing);
-        // So this button is NOT visible in review mode. In review mode, we have 'btnReviewBack' (line 597) which calls exitReview().
-        // So if this button is clicked, we are DEFINITELY in an active quiz and not reviewing.
+        // If the close button is clicked, we are in an active quiz.
+        // The button is hidden in review mode (handled via CSS/JS toggle).
 
         // Double check if quiz is completed but somehow we are here?
         if (this.state.quizCompleted) {
-            this.showScreen(CONFIG.SCREENS.HOME);
+            this.showScreen(CONFIG.SCREENS.COUNT);
             return;
         }
 
@@ -860,7 +1048,7 @@ class QuizApp {
         this.hideFinishConfirmation();
 
         if (action === 'exit') {
-            this.showScreen(CONFIG.SCREENS.HOME);
+            this.showScreen(CONFIG.SCREENS.COUNT);
         } else {
             this.finishQuiz();
         }
@@ -973,31 +1161,18 @@ class QuizApp {
         const skippedEl = document.getElementById('skippedResult');
         if (skippedEl) skippedEl.textContent = this.state.skippedAnswers;
 
-        // Show/Hide Review Button
-        document.getElementById(CONFIG.SELECTORS.BTN_REVIEW).style.display = 'flex';
+        // Show Review Button group
+        document.getElementById(CONFIG.SELECTORS.BTN_REVIEW).classList.remove('hidden');
 
-        // Update Review Wrong Button
+        // Update Review Wrong Button visibility
         const btnWrong = document.getElementById('btnReviewWrong');
         const actionableCount = this.state.wrongAnswers + this.state.skippedAnswers;
 
         if (actionableCount > 0) {
-            btnWrong.style.display = 'block'; // Or flex, depending on CSS, but block inside flex item is fine or let CSS handle it. Actually my CSS sets display flex on .review-buttons-row .btn.
-            // Wait, if I set style.display = 'flex' here it overrides CSS if not careful.
-            // But the button is a flex item. style.display='block' or '' (empty) is better if CSS handles it.
-            // The original code used 'flex'.
-            // Let's use removeProperty('display') to let CSS handle it, OR set it to 'block'/'flex'.
-            // Since it's a button, default is inline-block, but I want it visible.
-            // Let's just set it to 'block' or remove the display style if I want it visible?
-            // Actually, best to just set style.display = 'block' or 'flex'.
-            // The constraint is: if hidden, display:none. If visible, remove display:none.
-            btnWrong.style.display = '';
-            btnWrong.classList.remove('hidden'); // Ensure we don't have hidden class
-            // In fact the original code used style.display = 'none' / 'flex'.
-            // I will use style.display = 'block' because it is inside a flex row container, so it will behave as a flex item.
-            btnWrong.style.display = 'block';
+            btnWrong.classList.remove('hidden');
             btnWrong.textContent = 'Review Wrong';
         } else {
-            btnWrong.style.display = 'none';
+            btnWrong.classList.add('hidden');
         }
 
         const title = document.getElementById('resultTitle');
@@ -1098,8 +1273,8 @@ class QuizApp {
         this.state.totalQuestions = this.state.reviewIndices.length;
 
         // Show correct/wrong counts in header for review
-        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.style.display = 'flex';
-        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.style.display = 'flex';
+        document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).parentElement.classList.remove('hidden');
+        document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).parentElement.classList.remove('hidden');
         document.getElementById(CONFIG.SELECTORS.CORRECT_COUNT).textContent = this.state.correctAnswers;
         document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = this.state.wrongAnswers;
 
