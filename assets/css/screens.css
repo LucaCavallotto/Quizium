@@ -441,12 +441,14 @@
 
 .quiz-navigation {
     width: 100%;
-    padding: 8px 24px 24px 24px;
+    padding: 18px 24px;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 16px;
     max-width: 600px;
     margin: 0 auto;
+    position: relative; /* Context for absolute toggle button */
 }
 
 .quiz-navigation .nav-btn {
@@ -1110,7 +1112,8 @@
         white-space: nowrap;
     }
 
-    .quiz-grill-hide-btn, .quiz-grill-show-btn {
+    .quiz-grill-hide-btn,
+    .quiz-grill-show-btn {
         display: none !important;
     }
 
@@ -1271,16 +1274,16 @@
         display: flex;
         position: absolute;
         left: 24px;
-        bottom: 24px;
+        bottom: 18px;
         z-index: 100;
         background: var(--bg-card);
         border: 1px solid var(--border);
         color: var(--text-tertiary);
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
         padding: 0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     #btnToggleGrill:hover {
