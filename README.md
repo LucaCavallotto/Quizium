@@ -52,6 +52,15 @@ Improve your workflow with these keyboard shortcuts (Desktop):
 
 *Note: Number keys are disabled if the corresponding option is not available or if navigation modifiers (Ctrl/Alt) are held. Navigation/Selection keys are blocked when the confirmation modal is open.*
 
+## Quiz Grill (Desktop Only)
+
+The **Quiz Grill** is a powerful navigation sidebar that provides a "bird's-eye view" of your quiz progress:
+-   **Question Map**: Each dot represent a question. Blue for current, Green for correct, Red for wrong, and Grey for answered (in Final Correction mode).
+-   **Quick Jump**: Click any dot in the grill to navigate directly to that specific question.
+-   **Live Progress**: Tracks the number of completed questions in real-time.
+-   **Toggle Visibility**: Use the grid icon in the bottom-right corner of the screen to show or hide the grill sidebar.
+
+
 ## Navigation Protection
 
 To prevent accidental data loss, the application includes a protection mechanism:
@@ -86,7 +95,7 @@ To add a new subject to Quizium, you need to follow these steps:
 
 Create a new JSON file in the `data/` folder. The filename should be the unique ID of your subject (e.g., `history.json`).
 
-> **Tip**: You can use the [Question Builder Tool](https://lucacavallotto.github.io/Quizium/dev/question-builder.html) to easily generate the JSON structure.
+> **Tip**: You can use the **Quiz Workshop** (found on the Home Screen) to easily generate the JSON structure or edit existing quizzes.
 
 **JSON Format:**
 The file must contain an array of question objects. Each object should have the following structure:
@@ -152,10 +161,10 @@ Once this is done, refresh the page to see your new subject!
 
 ### Question Builder & Utility
 
-A standalone tool is available for developers to assist in content creation and management.
+The **Quiz Workshop** is an integrated suite of tools for content creation and management, accessible directly from the Home Screen.
 
--   **Location**: [`dev/question-builder.html`](https://lucacavallotto.github.io/Quizium/dev/question-builder.html)
--   **Usage**: Open the file directly in your browser.
+-   **Access**: Click the **Quiz Workshop** 🛠️ button on the Home Screen.
+-   **Edit Mode**: You can also enter the workshop with an existing quiz loaded by clicking **Edit Questions** ✏️ in the setup screen.
 
 **Features:**
 1.  **Question Builder Tab**:
@@ -164,9 +173,31 @@ A standalone tool is available for developers to assist in content creation and 
     -   Validates structure and indices.
     -   Smart JSON output (array vs list) based on Starting ID.
 
+**Builder Input Format:**
+To use the generator, paste your questions using the following structure (separate blocks with an empty line):
+
+*Multiple Choice:*
+```text
+Question Text
+Option 1
+Option 2
+Option 3
+0 (Correct Index: 0 for first, 1 for second, etc.)
+Expanation (Optional)
+```
+
+*Boolean:*
+```text
+Question Text
+b (identifies the block as boolean)
+1 (1 for True, 0 for False)
+Explanation (Optional)
+```
+
 2.  **Reorder IDs Tab**:
     -   Accepts an existing JSON array of questions.
     -   Sorts them by their current `id`.
     -   Renumbers `id` sequentially starting from 1.
     -   Outputs normalized JSON ready for use.
+
 
