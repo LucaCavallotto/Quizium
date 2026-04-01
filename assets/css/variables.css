@@ -2,6 +2,7 @@
    VARIABLES
    ========================================= */
 :root {
+    color-scheme: light dark;
     --primary: #6366f1;
     --primary-dark: #4f46e5;
     --primary-light: #e0e7ff;
@@ -39,6 +40,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
+        color-scheme: dark;
         --text-main: #f8fafc;
         --text-secondary: #cbd5e1;
         --text-tertiary: #94a3b8;

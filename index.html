@@ -175,40 +175,71 @@
                 </div>
             </div>
 
-            <div class="quiz-scroll-area">
-                <div class="question-card">
-                    <div class="question-meta">
-                        <span class="q-number">Question <span id="currentQuestion">1</span>/<span
-                                id="totalQuestions">10</span></span>
-                        <div class="d-flex items-center gap-16">
-                            <button id="btnFlagQuestion" class="btn-flag hidden" aria-label="Flag Question"
-                                onclick="toggleFlag()">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                                    <line x1="4" y1="22" x2="4" y2="15"></line>
-                                </svg>
-                            </button>
-                            <span class="q-id" id="questionIdDisplay"></span>
+            <!-- DESKTOP QUIZ BODY: Grill + Question side by side -->
+            <div class="quiz-body-flex">
+
+                <!-- LEFT: Question Grill (desktop only) -->
+                <aside class="quiz-grill" id="quizGrill">
+                    <div class="quiz-grill-header">
+                        <h2 class="quiz-grill-title">Questions</h2>
+                        <div class="quiz-grill-count" id="grillCompletedCount">0 / 0</div>
+                    </div>
+                    <div class="quiz-grill-map" id="grillQuestionMap"></div>
+                </aside>
+
+
+
+                <!-- RIGHT: Scroll area + footer -->
+                <div class="quiz-main-area">
+                    <div class="quiz-scroll-area">
+                        <div class="question-card">
+                            <div class="question-meta">
+                                <span class="q-number">Question <span id="currentQuestion">1</span>/<span
+                                        id="totalQuestions">10</span></span>
+                                <div class="d-flex items-center gap-16">
+                                    <button id="btnFlagQuestion" class="btn-flag hidden" aria-label="Flag Question"
+                                        onclick="toggleFlag()">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                                            <line x1="4" y1="22" x2="4" y2="15"></line>
+                                        </svg>
+                                    </button>
+                                    <span class="q-id" id="questionIdDisplay"></span>
+                                </div>
+                            </div>
+
+                            <h2 class="question-text" id="questionText">Loading...</h2>
+
+                            <div class="answer-options" id="optionsContainer"></div>
+                            <div id="explanationCallout" class="callout hidden"></div>
                         </div>
                     </div>
 
-                    <h2 class="question-text" id="questionText">Loading...</h2>
+                    <footer class="quiz-footer">
+                        <!-- Bottom-left corner of the UI into the footer -->
+                        <button class="btn btn-close quiz-grill-footer-toggle" id="btnToggleGrill"
+                            onclick="toggleGrill()" aria-label="Toggle Question Grid">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="18" x="3" y="3" rx="2" />
+                                <path d="M9 3v18" />
+                            </svg>
+                        </button>
 
-                    <div class="answer-options" id="optionsContainer"></div>
-                    <div id="explanationCallout" class="callout hidden"></div>
+                        <div class="navigator-container" id="navigatorContainer">
+                            <div class="navigator-scroll" id="questionNavigator"></div>
+                        </div>
+                        <div class="quiz-navigation">
+                            <button id="prevBtn" class="nav-btn btn-secondary"
+                                onclick="previousQuestion()">Previous</button>
+                            <button id="nextBtn" class="nav-btn btn-primary" onclick="nextQuestion()">Next</button>
+                        </div>
+                    </footer>
                 </div>
+
             </div>
-
-            <footer class="quiz-footer">
-                <div class="navigator-container">
-                    <div class="navigator-scroll" id="questionNavigator"></div>
-                </div>
-                <div class="quiz-navigation">
-                    <button id="prevBtn" class="nav-btn btn-secondary" onclick="previousQuestion()">Previous</button>
-                    <button id="nextBtn" class="nav-btn btn-primary" onclick="nextQuestion()">Next</button>
-                </div>
-            </footer>
         </div>
 
         <div id="resultsScreen" class="screen-container hidden">
@@ -257,7 +288,8 @@
                         </div>
                         <button class="btn btn-primary full-width" onclick="restartQuiz()">Try Again</button>
                     </div>
-                    <button class="btn btn-ghost full-width btn-home-bottom" onclick="backToSetup()">Back to Home</button>
+                    <button class="btn btn-ghost full-width btn-home-bottom" onclick="backToSetup()">Back to
+                        Home</button>
                 </div>
             </div>
         </div>
@@ -289,7 +321,8 @@
                 <div class="filename-container d-flex items-center gap-8">
                     <input type="text" id="workshop-filename-input" class="workshop-filename-input"
                         placeholder="untitled_quiz" spellcheck="false" autocomplete="off">
-                    <button class="btn-tool btn-tool-outline workshop-close-btn" onclick="WorkshopManager.closeFile()" title="Close File">
+                    <button class="btn-tool btn-tool-outline workshop-close-btn" onclick="WorkshopManager.closeFile()"
+                        title="Close File">
                         <span class="tool-icon">❌</span>
                         <span class="tool-label">Close</span>
                     </button>
