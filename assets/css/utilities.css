@@ -1,0 +1,39 @@
+/* assets/css/utilities.css */
+
+/* Spacing Utilities */
+.mt-16 { margin-top: 16px !important; }
+.mt-24 { margin-top: 24px !important; }
+.mt-32 { margin-top: 32px !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-24 { margin-bottom: 24px !important; }
+.mr-8 { margin-right: 8px !important; }
+.mr-auto { margin-right: auto !important; }
+.m-0 { margin: 0 !important; }
+
+.p-20 { padding: 20px !important; }
+.pb-12 { padding-bottom: 12px !important; }
+
+/* Flexbox Utilities */
+.d-flex { display: flex !important; }
+.flex-column { flex-direction: column !important; }
+.flex-row { flex-direction: row !important; }
+.items-center { align-items: center !important; }
+.justify-start { justify-content: flex-start !important; }
+.justify-center { justify-content: center !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-end { justify-content: flex-end !important; }
+.flex-shrink-0 { flex-shrink: 0 !important; }
+.gap-8 { gap: 8px !important; }
+.gap-16 { gap: 16px !important; }
+
+/* Typography Utilities */
+.text-sm { font-size: 0.85rem !important; }
+.text-lg { font-size: 1.1rem !important; }
+.text-xl { font-size: 1.2rem !important; }
+.font-semibold { font-weight: 600 !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+
+/* Misc Utilities */
+.full-width { width: 100% !important; }
+.scale-85 { transform: scale(0.85) !important; }
+.min-h-70 { min-height: 70px !important; }

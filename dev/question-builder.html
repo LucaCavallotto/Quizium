@@ -7,143 +7,183 @@
     <title>Dev Tool: Question Utility</title>
     <style>
         :root {
-            --bg: #f4f4f5;
+            --bg: #f3f4f6;
             --surface: #ffffff;
-            --border: #e4e4e7;
-            --text: #18181b;
-            --text-sec: #71717a;
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
+            --border: #e5e7eb;
+            --text: #1f2937;
+            --text-sec: #6b7280;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
             --danger: #ef4444;
-            --danger-bg: #fee2e2;
-            --success: #22c55e;
-            --success-bg: #dcfce7;
+            --danger-bg: #fef2f2;
+            --danger-border: #fca5a5;
+            --success: #10b981;
+            --success-bg: #ecfdf5;
+            --success-border: #6ee7b7;
+            --focus-ring: rgba(59, 130, 246, 0.3);
             --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--font-sans);
             background: var(--bg);
             color: var(--text);
             margin: 0;
-            padding: 20px;
-            line-height: 1.5;
+            padding: 40px 20px;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
             background: var(--surface);
-            padding: 32px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
         }
 
         h1 {
             margin-top: 0;
-            font-size: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 16px;
+            font-size: 1.75rem;
+            color: #111827;
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 20px;
+            font-weight: 700;
         }
 
-        h2 {
-            font-size: 1.1rem;
-            margin-top: 24px;
-            margin-bottom: 12px;
+        h2,
+        h3 {
+            color: #111827;
+            font-weight: 600;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         label {
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
+            color: #374151;
             font-size: 0.95rem;
         }
 
         input[type="number"] {
-            padding: 8px 12px;
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #f9fafb;
+            color: var(--text);
+            padding: 10px 14px;
             font-size: 1rem;
-            width: 120px;
+            width: 140px;
         }
 
-        textarea {
-            width: 100%;
-            height: 200px;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-family: var(--font-mono);
-            font-size: 14px;
-            line-height: 1.5;
-            resize: vertical;
-            box-sizing: border-box;
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+            background: var(--surface);
         }
 
         button {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         button:hover {
             background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+            color: #111827;
         }
 
         .status {
-            margin-top: 20px;
-            margin-bottom: 24px;
+            margin-top: 24px;
             padding: 16px;
-            border-radius: 6px;
+            border-radius: 8px;
             display: none;
             white-space: pre-wrap;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-left: 4px solid transparent;
         }
 
         .status.error {
             background: var(--danger-bg);
             color: #991b1b;
-            border: 1px solid #fecaca;
+            border-color: var(--danger-border);
+            border-left-color: var(--danger);
         }
 
         .status.success {
             background: var(--success-bg);
-            color: #166534;
-            border: 1px solid #bbf7d0;
+            color: #065f46;
+            border-color: var(--success-border);
+            border-left-color: var(--success);
         }
 
         .legend {
-            background: #fafafa;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 24px;
             font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .legend strong {
+            color: #0f172a;
         }
 
         .legend code {
             display: block;
-            background: #eee;
-            padding: 8px;
-            border-radius: 4px;
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 6px;
             font-family: var(--font-mono);
-            margin: 8px 0;
+            margin: 12px 0;
             white-space: pre;
+            color: #334155;
+            border: 1px solid #e2e8f0;
         }
 
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 24px;
         }
 
         @media (max-width: 600px) {
@@ -154,53 +194,219 @@
 
         .actions {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             margin-top: 20px;
-        }
-
-        .btn-secondary {
-            background: #e4e4e7;
-            color: #18181b;
-        }
-
-        .btn-secondary:hover {
-            background: #d4d4d8;
         }
 
         .tabs {
             display: flex;
-            margin-bottom: 24px;
-            border-bottom: 2px solid var(--border);
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+            gap: 8px;
         }
 
         .tab-btn {
-            padding: 12px 24px;
-            background: none;
+            padding: 12px 20px;
+            background: transparent;
             border: none;
             font-size: 1rem;
             color: var(--text-sec);
             cursor: pointer;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
-            font-weight: 500;
+            margin-bottom: -1px;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+            box-shadow: none;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            border-bottom: none;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(0);
         }
 
         .tab-btn.active {
             color: var(--primary);
-            border-bottom-color: var(--primary);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-bottom: 1px solid var(--surface);
         }
 
         .tab-btn:hover:not(.active) {
             color: var(--text);
-            background: #f4f4f5;
+            background: #f9fafb;
+            border: 1px solid transparent;
+            border-bottom: none;
         }
 
         .tab-content {
             display: none;
+            animation: fadeIn 0.3s ease;
         }
 
         .tab-content.active {
             display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .preview-section {
+            display: none;
+            margin-top: 32px;
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .preview-section h3 {
+            margin-top: 0;
+            font-size: 1.15rem;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        button.btn-success {
+            background: var(--success) !important;
+            color: white !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3) !important;
+        }
+
+        button.btn-success:hover {
+            background: #059669 !important;
+        }
+
+        /* ── IDE Editor Component ─────────────────────────────── */
+        .ide-editor {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f9fafb;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .ide-editor:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        .ide-editor.dark {
+            background: #1e293b;
+            border-color: #0f172a;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, .1);
+        }
+
+        .ide-body {
+            display: flex;
+            overflow: hidden;
+        }
+
+        .ide-gutter {
+            background: #f1f5f9;
+            border-right: 1px solid #e2e8f0;
+            padding: 12px 0;
+            min-width: 48px;
+            text-align: right;
+            overflow: hidden;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .ide-editor.dark .ide-gutter {
+            background: #162032;
+            border-right-color: #0f172a;
+        }
+
+        .ide-line-num {
+            display: block;
+            height: 1.6rem;
+            line-height: 1.6rem;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: #94a3b8;
+            padding-right: 12px;
+            transition: color 0.1s;
+        }
+
+        .ide-line-num.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .ide-editor.dark .ide-line-num {
+            color: #475569;
+        }
+
+        .ide-editor.dark .ide-line-num.active {
+            color: #58a6ff;
+        }
+
+        .ide-textarea {
+            flex: 1;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6rem;
+            padding: 12px 12px 12px 14px;
+            overflow-y: scroll;
+            overflow-x: auto;
+            height: 100%;
+            box-sizing: border-box;
+            background: transparent;
+            border: none;
+            outline: none;
+            resize: none;
+            color: var(--text);
+            caret-color: var(--primary);
+            tab-size: 2;
+            white-space: pre;
+        }
+
+        .ide-pre {
+            flex: 1;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6rem;
+            padding: 12px 12px 12px 14px;
+            overflow-y: scroll;
+            overflow-x: auto;
+            height: 100%;
+            box-sizing: border-box;
+            background: transparent;
+            border: none;
+            margin: 0;
+            color: #e2e8f0;
+            white-space: pre;
+            box-shadow: none;
+        }
+
+        .ide-textarea::-webkit-scrollbar,
+        .ide-pre::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .ide-textarea::-webkit-scrollbar-track,
+        .ide-pre::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .ide-textarea::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        .ide-pre::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -236,7 +442,7 @@ Explanation (Optional)</code>
 b
 0
 Explanation (Optional)</code>
-                        <p style="font-size: 0.85em; color: var(--text-sec)">0 = True, 1 = False</p>
+                        <p style="font-size: 0.85em; color: var(--text-sec)">1 = True, 0 = False</p>
                     </div>
                 </div>
             </div>
@@ -247,15 +453,35 @@ Explanation (Optional)</code>
             </div>
 
             <div class="form-group">
-                <label for="rawInput">Raw Question Input</label>
-                <textarea id="rawInput" placeholder="Paste your questions here..."></textarea>
+                <label>Raw Question Input</label>
+                <div class="ide-editor">
+                    <div class="ide-body" style="height:220px">
+                        <div class="ide-gutter" id="rawInput-gutter"></div>
+                        <textarea class="ide-textarea" id="rawInput" placeholder="Paste your questions here..."
+                            spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+                    </div>
+                </div>
             </div>
 
             <div id="builder-status" class="status"></div>
 
             <div class="actions">
-                <button onclick="generateJSON()">Generate & Copy JSON</button>
+                <button onclick="generateJSON()">Generate</button>
                 <button class="btn-secondary" onclick="clearBuilderInput()">Clear Input</button>
+            </div>
+
+            <div id="builder-preview-section" class="preview-section">
+                <h3>Preview</h3>
+                <div class="ide-editor dark">
+                    <div class="ide-body" style="height:400px">
+                        <div class="ide-gutter" id="builder-preview-gutter"></div>
+                        <pre class="ide-pre" id="builder-preview"></pre>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button id="builder-copy-btn" onclick="copyJSON('builder')">Copy to Clipboard</button>
+                    <button onclick="downloadJSON('builder')">Download .json</button>
+                </div>
             </div>
         </div>
 
@@ -276,25 +502,124 @@ Explanation (Optional)</code>
             </div>
 
             <div class="form-group">
-                <label for="jsonInput">JSON Input</label>
-                <textarea id="jsonInput" placeholder="Paste JSON array here..."></textarea>
+                <label>JSON Input</label>
+                <div class="ide-editor">
+                    <div class="ide-body" style="height:220px">
+                        <div class="ide-gutter" id="jsonInput-gutter"></div>
+                        <textarea class="ide-textarea" id="jsonInput" placeholder="Paste JSON array here..."
+                            spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+                    </div>
+                </div>
             </div>
 
             <div id="reorder-status" class="status"></div>
 
             <div class="actions">
-                <button onclick="reorderIDs()">Reorder & Copy JSON</button>
+                <button onclick="reorderIDs()">Reorder</button>
                 <button class="btn-secondary" onclick="clearReorderInput()">Clear Input</button>
+            </div>
+
+            <div id="reorder-preview-section" class="preview-section">
+                <h3>Preview</h3>
+                <div class="ide-editor dark">
+                    <div class="ide-body" style="height:400px">
+                        <div class="ide-gutter" id="reorder-preview-gutter"></div>
+                        <pre class="ide-pre" id="reorder-preview"></pre>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button id="reorder-copy-btn" onclick="copyJSON('reorder')">Copy to Clipboard</button>
+                    <button onclick="downloadJSON('reorder')">Download .json</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // ── IDE helpers ──────────────────────────────────────────────────────────
+
+        function buildGutter(gutterId, lineCount, activeLine) {
+            const gutter = document.getElementById(gutterId);
+            if (!gutter) return;
+            let html = '';
+            for (let i = 1; i <= Math.max(lineCount, 1); i++) {
+                const cls = (i === activeLine) ? ' active' : '';
+                html += `<span class="ide-line-num${cls}">${i}</span>`;
+            }
+            gutter.innerHTML = html;
+        }
+
+        function getActiveLine(textarea) {
+            return textarea.value.slice(0, textarea.selectionStart).split('\n').length;
+        }
+
+        function highlightLine(lineNum, textareaId, gutterId) {
+            const ta = document.getElementById(textareaId);
+            if (!ta) return;
+            const lines = ta.value.split('\n');
+            let startPos = 0;
+            for (let i = 0; i < lineNum - 1 && i < lines.length; i++) {
+                startPos += lines[i].length + 1;
+            }
+            ta.focus();
+            const lineLen = lines[lineNum - 1] ? lines[lineNum - 1].length : 0;
+            ta.setSelectionRange(startPos, startPos + lineLen);
+
+            buildGutter(gutterId, lines.length, lineNum);
+
+            const matches = window.getComputedStyle(ta).lineHeight.match(/([\d.]+)px/);
+            const lh = matches ? parseFloat(matches[1]) : 25.6;
+            ta.scrollTop = Math.max(0, (lineNum - 1) * lh - ta.clientHeight / 2);
+        }
+
+        function initTextareaIDE(textareaId, gutterId) {
+            const ta = document.getElementById(textareaId);
+            if (!ta) return;
+
+            function refresh() {
+                const lines = ta.value.split('\n').length;
+                buildGutter(gutterId, lines, getActiveLine(ta));
+                document.getElementById(gutterId).scrollTop = ta.scrollTop;
+            }
+
+            ta.addEventListener('input', refresh);
+            ta.addEventListener('scroll', () => {
+                document.getElementById(gutterId).scrollTop = ta.scrollTop;
+            });
+            ['keyup', 'mouseup', 'click', 'focus'].forEach(ev => ta.addEventListener(ev, refresh));
+
+            ta.addEventListener('keydown', e => {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const s = ta.selectionStart, end = ta.selectionEnd;
+                    ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(end);
+                    ta.selectionStart = ta.selectionEnd = s + 2;
+                    refresh();
+                }
+            });
+
+            buildGutter(gutterId, 1, 1);
+        }
+
+        function syncPreviewGutter(preElId, gutterId) {
+            const pre = document.getElementById(preElId);
+            const lines = (pre.textContent || '').split('\n').length;
+            buildGutter(gutterId, lines, null);
+            pre.addEventListener('scroll', () => {
+                document.getElementById(gutterId).scrollTop = pre.scrollTop;
+            });
+        }
+
+        // Init input textareas
+        initTextareaIDE('rawInput', 'rawInput-gutter');
+        initTextareaIDE('jsonInput', 'jsonInput-gutter');
+
+        // ── Tab switching ────────────────────────────────────────────────────────
+
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(`tab-${tabName}`).classList.add('active');
-
             const buttons = document.querySelectorAll('.tab-btn');
             if (tabName === 'builder') buttons[0].classList.add('active');
             if (tabName === 'reorder') buttons[1].classList.add('active');
@@ -302,185 +627,159 @@ Explanation (Optional)</code>
 
         function showStatus(elementId, msg, type) {
             const el = document.getElementById(elementId);
-            el.innerText = msg;
+            el.innerHTML = msg;
             el.className = `status ${type}`;
             el.style.display = 'block';
         }
 
-        // --- BUILDER LOGIC ---
+        // ── Builder ──────────────────────────────────────────────────────────────
+
         function clearBuilderInput() {
             document.getElementById('rawInput').value = '';
             document.getElementById('startId').value = '';
-            const statusEl = document.getElementById('builder-status');
-            statusEl.style.display = 'none';
+            document.getElementById('builder-status').style.display = 'none';
+            document.getElementById('builder-preview-section').style.display = 'none';
+            document.getElementById('builder-preview').textContent = '';
+            buildGutter('rawInput-gutter', 1, 1);
+            buildGutter('builder-preview-gutter', 1, null);
         }
 
         function generateJSON() {
             const input = document.getElementById('rawInput').value;
             const startIdStr = document.getElementById('startId').value;
             const statusEl = document.getElementById('builder-status');
-
-            // Just ensure we're targeting the right one in clear calls too
             statusEl.style.display = 'none';
             statusEl.className = 'status';
+            document.getElementById('builder-preview-section').style.display = 'none';
 
-            if (!input.trim()) {
-                showStatus('builder-status', 'Please enter some questions.', 'error');
-                return;
-            }
-
-            if (!startIdStr.trim()) {
-                showStatus('builder-status', 'Please enter a Starting ID.', 'error');
-                return;
-            }
+            if (!input.trim()) { showStatus('builder-status', 'Please enter some questions.', 'error'); return; }
+            if (!startIdStr.trim()) { showStatus('builder-status', 'Please enter a Starting ID.', 'error'); return; }
 
             let startId = parseInt(startIdStr);
-            if (isNaN(startId) || startId < 0) {
-                showStatus('builder-status', 'Invalid Starting ID.', 'error');
-                return;
+            if (isNaN(startId) || startId < 0) { showStatus('builder-status', 'Invalid Starting ID.', 'error'); return; }
+
+            const rawLines = input.split('\n');
+            const blocksList = [];
+            let currentBlockDeets = [];
+
+            rawLines.forEach((line, idx) => {
+                if (line.trim() === '') {
+                    if (currentBlockDeets.length > 0) {
+                        blocksList.push(currentBlockDeets);
+                        currentBlockDeets = [];
+                    }
+                } else {
+                    currentBlockDeets.push({ text: line.trim(), lineNum: idx + 1 });
+                }
+            });
+            if (currentBlockDeets.length > 0) {
+                blocksList.push(currentBlockDeets);
             }
 
-            // Split by double newlines separate question blocks
-            const blocks = input.split(/\n\s*\n/);
             const jsonOutput = [];
             let currentId = startId;
             const errors = [];
 
-            blocks.forEach((block, index) => {
-                if (!block.trim()) return;
+            blocksList.forEach((linesDetails, index) => {
+                const qNum = index + 1;
+                const mkErr = (lineNum, text) => errors.push(`<a href="javascript:void(0)" onclick="highlightLine(${lineNum}, 'rawInput', 'rawInput-gutter')" style="color: inherit; text-decoration: underline; font-weight: bold;">Line ${lineNum}</a> - Question ${qNum}: ${text}`);
 
-                const lines = block.split('\n').map(l => l.trim()).filter(l => l !== '');
-
-                if (lines.length < 2) {
-                    errors.push(`Question ${index + 1}: Malformed block (too few lines).`);
+                if (linesDetails.length < 2) {
+                    mkErr(linesDetails[0].lineNum, `Malformed block (too few lines).`);
                     return;
                 }
 
-                const questionText = lines[0];
-                const line2 = lines[1].toLowerCase();
-
-                let type = 'multiple';
-                let contentStartIndex = 1;
-
-                if (line2 === 'b') {
-                    type = 'boolean';
-                    contentStartIndex = 2;
-                } else {
-                    type = 'multiple';
-                    contentStartIndex = 1;
-                }
-
-                let questionObj = {
-                    id: currentId,
-                    type: type,
-                    question: questionText
-                };
-
-                const contentLines = lines.slice(contentStartIndex);
+                const questionText = linesDetails[0].text;
+                const line2Str = linesDetails[1].text.toLowerCase();
+                const type = (line2Str === 'b') ? 'boolean' : 'multiple';
 
                 if (type === 'multiple') {
-                    if (contentLines.length < 3) {
-                        errors.push(`Question ${index + 1}: Insufficient content for multiple choice.`);
+                    if (linesDetails.length < 3) {
+                        mkErr(linesDetails[0].lineNum, `Insufficient content for multiple choice.`);
                         return;
                     }
+                    let answerIndex = -1, optionLines = [], foundAnswerLineIndex = -1;
+                    let answerLineNum = -1;
 
-                    let answerIndex = -1;
-                    let optionLines = [];
-                    let foundAnswerLineIndex = -1;
-
-                    for (let i = 0; i < contentLines.length; i++) {
-                        if (/^\d+$/.test(contentLines[i])) {
+                    for (let i = linesDetails.length - 1; i >= 1; i--) {
+                        if (/^\d+$/.test(linesDetails[i].text)) {
                             foundAnswerLineIndex = i;
-                            answerIndex = parseInt(contentLines[i]);
+                            answerIndex = parseInt(linesDetails[i].text, 10);
+                            answerLineNum = linesDetails[i].lineNum;
                             break;
                         }
-                        optionLines.push(contentLines[i]);
                     }
 
+                    if (foundAnswerLineIndex !== -1) {
+                        for (let i = 1; i < foundAnswerLineIndex; i++) {
+                            optionLines.push(linesDetails[i].text);
+                        }
+                    }
                     if (foundAnswerLineIndex === -1) {
-                        errors.push(`Question ${index + 1}: Could not find answer index.`);
+                        mkErr(linesDetails[0].lineNum, `Could not find answer index.`);
                         return;
                     }
-
-                    if (optionLines.length < 2 || optionLines.length > 5) {
-                        errors.push(`Question ${index + 1}: Invalid number of options (${optionLines.length}). Must be 2-4.`);
+                    if (optionLines.length < 2 || optionLines.length > 4) {
+                        mkErr(linesDetails[1].lineNum, `Invalid number of options (${optionLines.length}). Must be 2-4.`);
                         return;
                     }
-
                     if (answerIndex < 0 || answerIndex >= optionLines.length) {
-                        errors.push(`Question ${index + 1}: Answer index ${answerIndex} out of bounds.`);
+                        mkErr(answerLineNum, `Answer index ${answerIndex} out of bounds.`);
                         return;
                     }
 
+                    let questionObj = { id: currentId, type, question: questionText };
                     questionObj.options = optionLines;
                     questionObj.answer = answerIndex;
-
-                    if (foundAnswerLineIndex + 1 < contentLines.length) {
-                        questionObj.explanation = contentLines.slice(foundAnswerLineIndex + 1).join(' ');
+                    if (foundAnswerLineIndex + 1 < linesDetails.length) {
+                        questionObj.explanation = linesDetails.slice(foundAnswerLineIndex + 1).map(l => l.text).join(' ');
                     }
-
-                } else { // Boolean
+                    jsonOutput.push(questionObj);
+                    currentId++;
+                } else {
+                    const contentLines = linesDetails.slice(2);
                     if (contentLines.length < 1) {
-                        errors.push(`Question ${index + 1}: Missing answer index for boolean.`);
+                        mkErr(linesDetails[1].lineNum, `Missing answer index for boolean.`);
                         return;
                     }
-
-                    if (!/^\d+$/.test(contentLines[0])) {
-                        errors.push(`Question ${index + 1}: Expected numeric answer index (0 or 1).`);
+                    const answerLineDeet = contentLines[0];
+                    if (!/^\d+$/.test(answerLineDeet.text)) {
+                        mkErr(answerLineDeet.lineNum, `Expected numeric answer index (0 or 1).`);
                         return;
                     }
-
-                    let rawAnswerIndex = parseInt(contentLines[0]);
-                    if (rawAnswerIndex !== 0 && rawAnswerIndex !== 1) {
-                        errors.push(`Question ${index + 1}: Boolean answer index must be 0 (True) or 1 (False).`);
+                    let raw = parseInt(answerLineDeet.text);
+                    if (raw !== 0 && raw !== 1) {
+                        mkErr(answerLineDeet.lineNum, `Boolean answer index must be 1 (True) or 0 (False).`);
                         return;
                     }
-
-                    questionObj.answer = (rawAnswerIndex === 0) ? 1 : 0;
-
+                    let questionObj = { id: currentId, type, question: questionText };
+                    questionObj.answer = raw;
                     if (contentLines.length > 1) {
-                        questionObj.explanation = contentLines.slice(1).join(' ');
+                        questionObj.explanation = contentLines.slice(1).map(l => l.text).join(' ');
                     }
+                    jsonOutput.push(questionObj);
+                    currentId++;
                 }
-
-                jsonOutput.push(questionObj);
-                currentId++;
             });
 
-            if (errors.length > 0) {
-                showStatus('builder-status', errors.join('\n'), 'error');
-                return;
-            }
+            if (errors.length > 0) { showStatus('builder-status', errors.join('\n'), 'error'); return; }
 
-            let jsonString = JSON.stringify(jsonOutput, null, 2);
-
-            if (startId > 0) {
-                jsonString = jsonString.trim();
-                // Check if bracket stripping is appropriate.
-                // If the user wants to append, they paste a list of objects.
-                // Standard behavior: if StartID > 0, we strip outer brackets.
-                if (jsonString.startsWith('[') && jsonString.endsWith(']')) {
-                    jsonString = jsonString.slice(1, -1).trim();
-                }
-            }
-
-            navigator.clipboard.writeText(jsonString).then(() => {
-                let msg = `Successfully generated ${jsonOutput.length} questions!\nJSON copied to clipboard.`;
-                if (startId > 0) {
-                    msg += `\n(Brackets [] removed for appending, remember to add a comma after the last object)`;
-                }
-                showStatus('builder-status', msg, 'success');
-            }).catch(err => {
-                showStatus('builder-status', 'Generated JSON but failed to copy map. See console.', 'error');
-                console.error(err);
-            });
+            const jsonString = JSON.stringify(jsonOutput, null, 2);
+            showStatus('builder-status', `Successfully generated ${jsonOutput.length} questions!`, 'success');
+            document.getElementById('builder-preview').textContent = jsonString;
+            document.getElementById('builder-preview-section').style.display = 'block';
+            syncPreviewGutter('builder-preview', 'builder-preview-gutter');
         }
 
-        // --- REORDER LOGIC ---
+        // ── Reorder ──────────────────────────────────────────────────────────────
+
         function clearReorderInput() {
             document.getElementById('jsonInput').value = '';
-            const statusEl = document.getElementById('reorder-status');
-            statusEl.style.display = 'none';
+            document.getElementById('reorder-status').style.display = 'none';
+            document.getElementById('reorder-preview-section').style.display = 'none';
+            document.getElementById('reorder-preview').textContent = '';
+            buildGutter('jsonInput-gutter', 1, 1);
+            buildGutter('reorder-preview-gutter', 1, null);
         }
 
         function reorderIDs() {
@@ -488,48 +787,51 @@ Explanation (Optional)</code>
             const statusEl = document.getElementById('reorder-status');
             statusEl.style.display = 'none';
             statusEl.className = 'status';
+            document.getElementById('reorder-preview-section').style.display = 'none';
 
-            if (!input.trim()) {
-                showStatus('reorder-status', 'Please paste JSON array.', 'error');
-                return;
-            }
+            if (!input.trim()) { showStatus('reorder-status', 'Please paste JSON array.', 'error'); return; }
 
             let questions;
-            try {
-                questions = JSON.parse(input);
-            } catch (e) {
-                showStatus('reorder-status', 'Invalid JSON syntax.', 'error');
-                return;
-            }
+            try { questions = JSON.parse(input); }
+            catch (e) { showStatus('reorder-status', 'Invalid JSON syntax.', 'error'); return; }
 
-            if (!Array.isArray(questions)) {
-                showStatus('reorder-status', 'Input must be a JSON array.', 'error');
-                return;
-            }
+            if (!Array.isArray(questions)) { showStatus('reorder-status', 'Input must be a JSON array.', 'error'); return; }
 
             for (let i = 0; i < questions.length; i++) {
                 if (!questions[i].hasOwnProperty('id')) {
-                    showStatus('reorder-status', `Item at index ${i} is missing 'id'.`, 'error');
-                    return;
+                    showStatus('reorder-status', `Item at index ${i} is missing 'id'.`, 'error'); return;
                 }
             }
 
-            // Sort by current ID
-            questions.sort((a, b) => a.id - b.id);
+            const reordered = questions.sort((a, b) => a.id - b.id).map((q, i) => ({ ...q, id: i + 1 }));
+            const jsonString = JSON.stringify(reordered, null, 2);
 
-            // Renumber from 1
-            questions.forEach((q, index) => {
-                q.id = index + 1;
-            });
+            showStatus('reorder-status', `Successfully reordered ${reordered.length} questions!\nIDs reset to 1-${reordered.length}.`, 'success');
+            document.getElementById('reorder-preview').textContent = jsonString;
+            document.getElementById('reorder-preview-section').style.display = 'block';
+            syncPreviewGutter('reorder-preview', 'reorder-preview-gutter');
+        }
 
-            const jsonString = JSON.stringify(questions, null, 2);
+        // ── Shared utilities ─────────────────────────────────────────────────────
 
-            navigator.clipboard.writeText(jsonString).then(() => {
-                showStatus('reorder-status', `Successfully reordered ${questions.length} questions!\nIDs reset to 1-${questions.length}.\nJSON copied to clipboard.`, 'success');
-            }).catch(err => {
-                console.error(err);
-                showStatus('reorder-status', 'Processed but copy failed.', 'error');
-            });
+        function copyJSON(type) {
+            const text = document.getElementById(`${type}-preview`).textContent;
+            const btn = document.getElementById(`${type}-copy-btn`);
+            navigator.clipboard.writeText(text).then(() => {
+                btn.innerText = 'Copied!';
+                btn.classList.add('btn-success');
+                setTimeout(() => { btn.innerText = 'Copy to Clipboard'; btn.classList.remove('btn-success'); }, 2000);
+            }).catch(() => alert('Failed to copy to clipboard.'));
+        }
+
+        function downloadJSON(type) {
+            const text = document.getElementById(`${type}-preview`).textContent;
+            const blob = new Blob([text], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'quiz-data.json';
+            document.body.appendChild(a); a.click();
+            document.body.removeChild(a); URL.revokeObjectURL(url);
         }
     </script>
 

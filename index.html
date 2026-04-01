@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Quizium</title>
     <link rel="stylesheet" href="assets/css/main.css">
+    <script>var quizApp = null;</script>
+    <script src="assets/workshop.js" defer></script>
     <script src="assets/app.js" defer></script>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
@@ -15,6 +17,7 @@
 <body>
 
     <div class="bg-gradient"></div>
+    <div class="drop-overlay" id="drop-overlay"></div>
 
     <div class="main-content">
 
@@ -32,6 +35,19 @@
                 </div>
                 <div class="subjects-grid" id="subjectContainer"></div>
 
+                <div class="mt-32">
+                    <button class="btn btn-secondary full-width" onclick="quizApp.handlePersistentUpload()">
+                        <span class="text-xl mr-8">📁</span> Load Local Quiz
+                    </button>
+                    <input type="file" id="local-file-input" accept=".json" class="hidden"
+                        onchange="handleLocalQuizUpload(event)" style="display: none;">
+                </div>
+
+                <div class="mt-16">
+                    <button class="btn btn-primary full-width" onclick="openWorkshop()">
+                        <span class="text-xl mr-8">🛠️</span> Quiz Workshop
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -49,7 +65,7 @@
             </div>
 
             <div class="options-block">
-                <p class="page-description" style="margin-bottom: 24px;">Customize your session.</p>
+                <p class="page-description mb-24">Customize your session.</p>
 
                 <div class="setup-grid">
                     <!-- Question Count Section -->
@@ -88,7 +104,7 @@
 
                     <!-- Time Mode Section -->
                     <div class="slider-wrapper">
-                        <div class="label-questions" style="margin-bottom: 16px;">Time Mode</div>
+                        <div class="label-questions mb-0">Time Mode</div>
                         <div class="preset-buttons vertical-options">
                             <button class="preset-btn active" id="btnTimeNone"
                                 onclick="selectTimeMode('none')">None</button>
@@ -98,8 +114,8 @@
                                 onclick="selectTimeMode('timer')">Timer</button>
                         </div>
 
-                        <div id="timerInputContainer" class="range-container slider-dimmed" style="margin-top: 20px;">
-                            <div class="count-display-group" style="padding-bottom: 12px;">
+                        <div id="timerInputContainer" class="range-container slider-dimmed mt-24">
+                            <div class="count-display-group pb-12">
                                 <input type="number" id="timerValueDisplay" class="slider-value-input" value="10"
                                     min="1" max="60">
                             </div>
@@ -113,22 +129,25 @@
 
                     <!-- Correction Mode Section -->
                     <div class="slider-wrapper">
-                        <div class="label-questions" style="margin-bottom: 16px;">Correction</div>
+                        <div class="label-questions mb-0">Correction</div>
                         <div class="preset-buttons vertical-options">
                             <button class="preset-btn active" id="btnCorrectionInstant"
                                 onclick="selectCorrectionMode('instant')">Instant</button>
                             <button class="preset-btn" id="btnCorrectionFinal"
                                 onclick="selectCorrectionMode('final')">Final</button>
                         </div>
-                        <div
-                            style="margin-top: 16px; font-size: 0.85rem; color: var(--text-tertiary); text-align: center; line-height: 1.4;">
+                        <div class="mt-16 text-sm text-secondary text-center">
                             <span id="correctionModeDesc">Instant feedback after each answer.</span>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn btn-primary full-width" onclick="startQuizFromSlider()"
-                    style="margin-top: 24px;">Start Quiz</button>
+                <div class="primary-actions-grid setup-actions mt-24">
+                    <button class="btn btn-secondary" onclick="quizApp.editWorkshop()">
+                        <span class="text-lg mr-8">✏️</span> Edit Questions
+                    </button>
+                    <button class="btn btn-primary" onclick="startQuizFromSlider()">Start Quiz</button>
+                </div>
             </div>
         </div>
 
@@ -138,9 +157,8 @@
                     <div class="quiz-header-left">
                         <button class="btn btn-close" id="btnQuizClose" onclick="attemptCloseQuiz()"
                             aria-label="Exit Quiz">✕</button>
-                        <button class="btn btn-close hidden" id="btnReviewBack" onclick="exitReview()"
-                            aria-label="Back to Results"
-                            style="font-size: 1rem; width: auto; padding: 0 8px; border-radius: 20px;">← Back</button>
+                        <button class="btn btn-close hidden btn-review-back" id="btnReviewBack" onclick="exitReview()"
+                            aria-label="Back to Results">← Back</button>
                         <span class="quiz-subject-badge" id="quizSubjectTitle">Subject</span>
                     </div>
 
@@ -153,7 +171,7 @@
                     </div>
                 </div>
                 <div class="progress-track">
-                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                    <div class="progress-fill" id="progressBar"></div>
                 </div>
             </div>
 
@@ -170,6 +188,22 @@
                                 <path d="M15 18l-6-6 6-6"/>
                             </svg>
                         </button>
+            <div class="quiz-scroll-area">
+                <div class="question-card">
+                    <div class="question-meta">
+                        <span class="q-number">Question <span id="currentQuestion">1</span>/<span
+                                id="totalQuestions">10</span></span>
+                        <div class="d-flex items-center gap-16">
+                            <button id="btnFlagQuestion" class="btn-flag hidden" aria-label="Flag Question"
+                                onclick="toggleFlag()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                                    <line x1="4" y1="22" x2="4" y2="15"></line>
+                                </svg>
+                            </button>
+                            <span class="q-id" id="questionIdDisplay"></span>
+                        </div>
                     </div>
                     <div class="quiz-grill-map" id="grillQuestionMap"></div>
                 </aside>
@@ -268,7 +302,7 @@
                         </div>
                         <button class="btn btn-primary full-width" onclick="restartQuiz()">Try Again</button>
                     </div>
-                    <button class="btn btn-ghost full-width btn-home-bottom" onclick="goHome()">Back to Home</button>
+                    <button class="btn btn-ghost full-width btn-home-bottom" onclick="backToSetup()">Back to Home</button>
                 </div>
             </div>
         </div>
@@ -283,6 +317,117 @@
                 <div class="modal-actions">
                     <button class="btn btn-secondary" onclick="hideFinishConfirmation()">Cancel</button>
                     <button class="btn btn-primary" onclick="confirmFinish()">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="workshopScreen" class="screen-container workshop-screen-main hidden">
+            <div class="nav-header flex-shrink-0 justify-start gap-16">
+                <button class="btn btn-icon-back" onclick="attemptCloseWorkshop()" aria-label="Go Back">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"></path>
+                        <path d="M12 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <h1 class="page-title m-0">Quiz Workshop</h1>
+                <div class="filename-container d-flex items-center gap-8">
+                    <input type="text" id="workshop-filename-input" class="workshop-filename-input"
+                        placeholder="untitled_quiz" spellcheck="false" autocomplete="off">
+                    <button class="btn-tool btn-tool-outline workshop-close-btn" onclick="WorkshopManager.closeFile()" title="Close File">
+                        <span class="tool-icon">❌</span>
+                        <span class="tool-label">Close</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Tabs -->
+            <div class="workshop-tabs mobile-only">
+                <button class="workshop-tab active" onclick="WorkshopManager.switchTab('editor')">Editor</button>
+                <button class="workshop-tab" onclick="WorkshopManager.switchTab('preview')">Preview</button>
+            </div>
+
+            <div class="workshop-layout">
+                <!-- Editor Panel -->
+                <div id="workshop-panel-editor" class="workshop-panel active">
+                    <div class="workshop-toolbar min-h-70">
+                        <div class="toolbar-group">
+                            <span class="tool-label text-sm font-semibold text-secondary">Start
+                                ID</span>
+                            <input type="number" id="workshopStartId" class="workshop-input-sm" placeholder="ID"
+                                value="1" min="0">
+                        </div>
+                        <div class="toolbar-group actions-group">
+                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.clear()"
+                                title="Clear Input">
+                                <span class="tool-icon">🗑️</span><span class="tool-label">Clear</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ide-editor-container">
+                        <div class="ide-body">
+                            <div class="ide-gutter" id="workshop-editor-gutter"></div>
+                            <div class="ide-textarea-wrap">
+                                <div class="hint-overlay" id="workshop-hint-overlay" aria-hidden="true"></div>
+                                <textarea class="ide-textarea" id="workshop-editor-input"
+                                    placeholder="Question Text&#10;Option A&#10;Option B&#10;Option C&#10;0&#10;Explanation (Optional)&#10;&#10;Question Text&#10;b&#10;0&#10;Explanation (Optional)"
+                                    spellcheck="false" autocomplete="off" autocorrect="off"
+                                    autocapitalize="off"></textarea>
+                            </div>
+                        </div>
+                        <div id="workshop-status" class="workshop-status hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Preview Panel -->
+                <div id="workshop-panel-preview" class="workshop-panel">
+                    <div class="workshop-toolbar justify-end min-h-70">
+                        <div class="toggle-wrapper mr-auto mb-0">
+                            <span class="toggle-label text-sm mr-8">JSON View</span>
+                            <label class="toggle-switch scale-85">
+                                <input type="checkbox" id="workshop-view-toggle"
+                                    onchange="WorkshopManager.toggleViewMode(this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="toolbar-group actions-group">
+                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.playQuiz()"
+                                title="Play This Quiz" id="workshop-play-btn" disabled>
+                                <span class="tool-icon">▶️</span><span class="tool-label">Play</span>
+                            </button>
+                            <button class="btn-tool btn-tool-outline" onclick="WorkshopManager.copyJSON()"
+                                title="Copy JSON" id="workshop-copy-btn" disabled>
+                                <span class="tool-icon">📋</span><span class="tool-label">Copy</span>
+                            </button>
+                            <button class="btn-tool" onclick="WorkshopManager.saveJSON()" title="Save Changes"
+                                id="workshop-save-btn" disabled>
+                                <span class="tool-icon">💾</span><span class="tool-label">Save</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="workshop-preview-container">
+                        <div class="preview-scroll-area" id="workshop-preview-scroll">
+                            <div id="workshop-alert-container"></div>
+                            <div class="preview-placeholder" id="workshop-preview-placeholder">
+                                <span class="placeholder-icon">👀</span>
+                                <p>Generated preview will appear here</p>
+                            </div>
+                            <div id="workshop-preview-content" class="hidden p-20">
+                                <!-- Cards injected via JS -->
+                            </div>
+                            <div id="workshop-json-container" class="hidden ide-body workshop-json-container">
+                                <div class="ide-gutter" id="workshop-json-gutter"></div>
+                                <div class="ide-textarea-wrap">
+                                    <textarea id="workshop-json-input" class="ide-textarea workshop-json-input"
+                                        spellcheck="false" autocomplete="off" autocorrect="off"
+                                        autocapitalize="off"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="workshop-status-preview" class="workshop-status hidden"></div>
+                    </div>
                 </div>
             </div>
         </div>

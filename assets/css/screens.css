@@ -569,14 +569,39 @@
 .primary-actions-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     width: 100%;
+    align-items: center; /* Center children */
+    justify-content: center;
+}
+
+.primary-actions-grid > .btn {
+    width: 100%;
+    max-width: 340px; /* Consistent width */
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 601px) {
+    .setup-actions {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+    }
+
+    .setup-actions > .btn {
+        flex: 1;
+        max-width: 280px;
+    }
 }
 
 .review-buttons-row {
     display: flex;
     gap: 12px;
     width: 100%;
+    max-width: 500px; /* Allow it to be wider but still centered */
+    justify-content: center;
 }
 
 .review-buttons-row .btn {
