@@ -1159,20 +1159,24 @@ class QuizApp {
 
     /** Set up grill state when a new quiz starts. */
     initGrill() {
-        // Default: grill is visible on desktop, not tracked on mobile
-        this.grillVisible = true;
+        this.grillVisible = true; // Default to visible on desktop
 
         const grill = document.getElementById('quizGrill');
-        const showBtn = document.getElementById('btnShowGrill');
         const navContainer = document.getElementById('navigatorContainer');
+        const toggleBtn = document.getElementById('btnToggleGrill');
 
         if (!this.isDesktop()) return;
 
-        // Reset state
-        grill.classList.remove('grill-hidden');
-        showBtn.classList.remove('visible');
-        showBtn.classList.add('hidden');
-        navContainer.classList.add('grill-active');
+        // Ensure everything starts in the 'shown' state if desktop
+        if (grill && grill.classList) {
+            grill.classList.remove('grill-hidden');
+        }
+        if (navContainer && navContainer.classList) {
+            navContainer.classList.add('grill-active');
+        }
+        if (toggleBtn && toggleBtn.classList) {
+            toggleBtn.classList.add('active');
+        }
     }
 
     /** Render all grill dots from scratch. */
@@ -1243,31 +1247,24 @@ class QuizApp {
         }
     }
 
-    /** Toggle the grill panel visibility with animation. */
+    /** Toggle the grill panel visibility. */
     toggleGrill() {
         if (!this.isDesktop()) return;
 
         const grill = document.getElementById('quizGrill');
-        const showBtn = document.getElementById('btnShowGrill');
         const navContainer = document.getElementById('navigatorContainer');
+        const toggleBtn = document.getElementById('btnToggleGrill');
 
         this.grillVisible = !this.grillVisible;
 
         if (this.grillVisible) {
-            // Show grill
             grill.classList.remove('grill-hidden');
-            showBtn.classList.remove('visible');
-            showBtn.classList.add('hidden');
             navContainer.classList.add('grill-active');
+            if (toggleBtn) toggleBtn.classList.add('active'); // Optional visual feedback
         } else {
-            // Hide grill
             grill.classList.add('grill-hidden');
-            showBtn.classList.remove('hidden');
-            // Small delay so CSS transition on grill finishes before showing tab
-            setTimeout(() => {
-                showBtn.classList.add('visible');
-            }, 100);
             navContainer.classList.remove('grill-active');
+            if (toggleBtn) toggleBtn.classList.remove('active');
         }
     }
 
