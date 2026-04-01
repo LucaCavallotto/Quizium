@@ -213,36 +213,7 @@
     transition: all 0.2s;
 }
 
-@media (min-width: 1024px) {
-    #btnToggleGrill {
-        display: flex;
-        position: absolute;
-        left: 24px;
-        bottom: 24px;
-        z-index: 100;
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        color: var(--text-tertiary);
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        padding: 0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
 
-    #btnToggleGrill:hover {
-        background: var(--primary-light);
-        color: var(--primary);
-        border-color: var(--primary);
-        transform: translateY(-2px);
-    }
-
-    #btnToggleGrill.active {
-        background: var(--primary);
-        color: white;
-        border-color: var(--primary);
-    }
-}
 
 .btn-close:hover {
     background: var(--bg-body);
@@ -1062,9 +1033,10 @@
     min-width: 0;
 }
 
-/* --- Mobile: grill is hidden entirely --- */
+/* --- Mobile: grill and toggle are hidden entirely --- */
 .quiz-grill,
-.quiz-grill-show-btn {
+.quiz-grill-show-btn,
+#btnToggleGrill {
     display: none;
 }
 
@@ -1290,5 +1262,37 @@
         background: var(--border);
         border-color: var(--border);
         color: var(--text-main);
+    }
+}
+
+/* --- Grill Toggle: Sticky in Footer area (Desktop only) --- */
+@media (min-width: 768px) {
+    #btnToggleGrill {
+        display: flex;
+        position: absolute;
+        left: 24px;
+        bottom: 24px;
+        z-index: 100;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--text-tertiary);
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        padding: 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    #btnToggleGrill:hover {
+        background: var(--primary-light);
+        color: var(--primary);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+    }
+
+    #btnToggleGrill.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
     }
 }
