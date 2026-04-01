@@ -207,6 +207,7 @@ class QuizApp {
         window.toggleFlag = () => this.toggleFlag();
         window.toggleFlag = () => this.toggleFlag();
         window.toggleShuffle = (checked) => this.toggleShuffle(checked);
+        window.toggleGrill = () => this.toggleGrill();
         window.handleLocalQuizUpload = (event) => this.handleLocalQuizUpload(event); // Keep for legacy if needed, though we use persistent now
         window.handlePersistentUpload = () => this.handlePersistentUpload();
         window.openWorkshop = () => this.openWorkshop();
@@ -682,6 +683,10 @@ class QuizApp {
         // Explicitly force scroll to start
         const nav = document.getElementById(CONFIG.SELECTORS.NAVIGATOR);
         if (nav) nav.scrollLeft = 0;
+
+        // Init and render grill (desktop only)
+        this.initGrill();
+        this.renderGrill();
     }
 
     startTimerLogic() {
@@ -1137,6 +1142,132 @@ class QuizApp {
         const currentDot = document.getElementById(`nav-dot-${this.state.currentQuestionIndex}`);
         if (currentDot) {
             currentDot.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        // Update grill in sync
+        this.updateGrill();
+    }
+
+    /* ===========================
+       Desktop Question Grill
+       =========================== */
+
+    /** Returns true only if we are on a desktop (≥ 768px). */
+    isDesktop() {
+        return window.matchMedia('(min-width: 768px)').matches;
+    }
+
+    /** Set up grill state when a new quiz starts. */
+    initGrill() {
+        // Default: grill is visible on desktop, not tracked on mobile
+        this.grillVisible = true;
+
+        const grill = document.getElementById('quizGrill');
+        const showBtn = document.getElementById('btnShowGrill');
+        const navContainer = document.getElementById('navigatorContainer');
+
+        if (!this.isDesktop()) return;
+
+        // Reset state
+        grill.classList.remove('grill-hidden');
+        showBtn.classList.remove('visible');
+        showBtn.classList.add('hidden');
+        navContainer.classList.add('grill-active');
+    }
+
+    /** Render all grill dots from scratch. */
+    renderGrill() {
+        const map = document.getElementById('grillQuestionMap');
+        if (!map) return;
+        map.innerHTML = '';
+
+        for (let i = 0; i < this.state.totalQuestions; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'grill-dot';
+            dot.id = `grill-dot-${i}`;
+
+            let displayNum = i + 1;
+            if (this.state.isReviewing && this.state.reviewIndices && this.state.reviewIndices[i] !== undefined) {
+                displayNum = this.state.reviewIndices[i] + 1;
+            }
+
+            dot.textContent = displayNum;
+            dot.setAttribute('aria-label', `Go to question ${displayNum}`);
+            dot.onclick = () => this.jumpToQuestion(i);
+            map.appendChild(dot);
+        }
+
+        this.updateGrill();
+    }
+
+    /** Update grill dot states (current / correct / wrong / answered). */
+    updateGrill() {
+        const map = document.getElementById('grillQuestionMap');
+        if (!map) return;
+
+        let answeredCount = 0;
+
+        for (let i = 0; i < this.state.totalQuestions; i++) {
+            const dot = document.getElementById(`grill-dot-${i}`);
+            if (!dot) continue;
+
+            const realIndex = this.getRealQuestionIndex(i);
+            const ans = this.state.allAnswers[realIndex];
+
+            // Reset classes
+            dot.className = 'grill-dot';
+
+            if (i === this.state.currentQuestionIndex) {
+                dot.classList.add('grill-dot-current');
+            }
+
+            if (ans) {
+                answeredCount++;
+                if (this.state.correctionMode === 'final' && !this.state.quizCompleted && !this.state.isReviewing) {
+                    dot.classList.add('grill-dot-answered');
+                } else {
+                    dot.classList.add(ans.isCorrect ? 'grill-dot-correct' : 'grill-dot-wrong');
+                }
+            }
+        }
+
+        // Update completed count label
+        const countEl = document.getElementById('grillCompletedCount');
+        if (countEl) {
+            countEl.textContent = `${answeredCount} / ${this.state.totalQuestions}`;
+        }
+
+        const currentGrillDot = document.getElementById(`grill-dot-${this.state.currentQuestionIndex}`);
+        if (currentGrillDot) {
+            currentGrillDot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    /** Toggle the grill panel visibility with animation. */
+    toggleGrill() {
+        if (!this.isDesktop()) return;
+
+        const grill = document.getElementById('quizGrill');
+        const showBtn = document.getElementById('btnShowGrill');
+        const navContainer = document.getElementById('navigatorContainer');
+
+        this.grillVisible = !this.grillVisible;
+
+        if (this.grillVisible) {
+            // Show grill
+            grill.classList.remove('grill-hidden');
+            showBtn.classList.remove('visible');
+            showBtn.classList.add('hidden');
+            navContainer.classList.add('grill-active');
+        } else {
+            // Hide grill
+            grill.classList.add('grill-hidden');
+            showBtn.classList.remove('hidden');
+            // Small delay so CSS transition on grill finishes before showing tab
+            setTimeout(() => {
+                showBtn.classList.add('visible');
+            }, 100);
+            navContainer.classList.remove('grill-active');
         }
     }
 
