@@ -102,11 +102,50 @@ class QuizApp {
         this.setupTimerInput();
         this.setupKeyboardSupport();
         this.setupNavigationProtection();
+        this.initGrillResizer();
 
         // Initialize WorkshopManager early for global Drag & Drop
         if (typeof WorkshopManager !== 'undefined') {
             WorkshopManager.init();
         }
+    }
+
+    initGrillResizer() {
+        const grill = document.getElementById('quizGrill');
+        const resizer = document.getElementById('quizGrillResizer');
+        if (!grill || !resizer) return;
+
+        let isResizing = false;
+
+        resizer.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            document.body.classList.add('is-resizing');
+            resizer.classList.add('active');
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const grillRect = grill.getBoundingClientRect();
+            let newWidth = e.clientX - grillRect.left;
+
+            // Enforce minimum and maximum limits
+            const minWidth = 200;
+            const maxWidth = window.innerWidth * 0.6; // Max 60% of viewport
+
+            if (newWidth < minWidth) newWidth = minWidth;
+            if (newWidth > maxWidth) newWidth = maxWidth;
+
+            grill.style.flex = `0 0 ${newWidth}px`;
+            grill.style.maxWidth = `${newWidth}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                document.body.classList.remove('is-resizing');
+                resizer.classList.remove('active');
+            }
+        });
     }
 
     setupNavigationProtection() {

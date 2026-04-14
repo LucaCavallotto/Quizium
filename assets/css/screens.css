@@ -1097,6 +1097,32 @@
         }
     }
 
+    .quiz-grill-resizer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6px;
+        height: 100%;
+        cursor: col-resize;
+        z-index: 10;
+        background: transparent;
+        transition: background 0.2s;
+    }
+
+    .quiz-grill-resizer:hover,
+    .quiz-grill-resizer.active {
+        background: var(--primary);
+    }
+
+    body.is-resizing {
+        cursor: col-resize !important;
+        user-select: none;
+    }
+
+    body.is-resizing .quiz-grill {
+        transition: none !important;
+    }
+
     /* --- Grill header --- */
     .quiz-grill-header {
         display: flex;
