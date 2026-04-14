@@ -199,6 +199,11 @@ class QuizApp {
                 this.toggleFlag();
             }
 
+            // Toggle Grill (d key)
+            if (e.key === 'd' || e.key === 'D') {
+                this.toggleGrill();
+            }
+
             // Navigation
             if (e.key === 'ArrowRight') {
                 e.preventDefault();
