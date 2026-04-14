@@ -310,7 +310,16 @@ class QuizApp {
      */
     async loadSubjects() {
         const container = document.getElementById(CONFIG.SELECTORS.SUBJECT_CONTAINER);
-        container.innerHTML = '';
+        container.innerHTML = `
+            <div id="loadingSpinner" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; padding: 3rem 0; grid-column: 1 / -1;">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div style="margin-top: 12px; color: var(--text-secondary); font-weight: 600;">Loading JSON files...</div>
+            </div>
+        `;
+
+        const subjectCardsCache = [];
 
         for (const subject of this.state.subjects) {
             try {
@@ -318,11 +327,16 @@ class QuizApp {
                 if (response.ok) {
                     const questions = await response.json();
                     this.state.subjectQuestionsCount[subject.id] = questions.length;
-                    this.renderSubjectCard(container, subject, questions.length);
+                    subjectCardsCache.push({subject, count: questions.length});
                 }
             } catch (error) {
                 console.error(`Error loading subject ${subject.id}:`, error);
             }
+        }
+
+        container.innerHTML = '';
+        for (const item of subjectCardsCache) {
+            this.renderSubjectCard(container, item.subject, item.count);
         }
     }
 
