@@ -1407,6 +1407,7 @@ class QuizApp {
         document.getElementById(CONFIG.SELECTORS.WRONG_COUNT).textContent = this.state.wrongAnswers;
 
         this.renderNavigator();
+        this.renderGrill();
         this.loadQuestion();
         this.showScreen(CONFIG.SCREENS.QUIZ);
 
