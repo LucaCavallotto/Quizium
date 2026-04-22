@@ -271,12 +271,14 @@
     opacity: 0.5;
 }
 
-/* Mobile Tabs */
+/* Mobile Tabs Container */
 .workshop-tabs {
     display: none;
-    /* Desktop default */
-    border-bottom: 1px solid var(--border);
     background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 
 .workshop-tab {
@@ -299,31 +301,47 @@
 @media (max-width: 992px) {
     .workshop-layout {
         flex-direction: column;
-        flex: none;
         height: auto;
-        overflow: visible;
-        padding: 12px;
+        padding: 16px;
+        gap: 16px;
     }
 
     .workshop-panel {
         height: 600px;
-        margin-bottom: 16px;
+        flex: none;
     }
 }
 
 @media (max-width: 768px) {
     .workshop-screen-main {
-        height: auto;
-        max-height: none;
-        overflow: visible;
+        height: 100dvh;
+        overflow: hidden; /* back to contained */
+    }
+
+    .workshop-screen-main .nav-header {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+
+    /* Show tabs on mobile */
+    .workshop-tabs.mobile-only {
+        display: flex;
     }
 
     .workshop-layout {
-        padding: 8px;
+        padding: 12px;
+        flex: 1;
+        overflow: hidden;
     }
 
     .workshop-panel {
-        height: 500px;
+        display: none; /* Hidden by default, toggled via .active class */
+        height: 100%;
+        margin-bottom: 0;
+    }
+
+    .workshop-panel.active {
+        display: flex;
     }
 }
 
