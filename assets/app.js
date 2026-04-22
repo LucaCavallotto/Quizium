@@ -205,8 +205,8 @@ class QuizApp {
                 this.toggleFlag();
             }
 
-            // Toggle Grill (d key)
-            if (e.key === 'd' || e.key === 'D') {
+            // Toggle Grill (s key)
+            if (e.key === 's' || e.key === 'S') {
                 this.toggleGrill();
             }
 
