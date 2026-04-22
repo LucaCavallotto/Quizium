@@ -1290,5 +1290,11 @@
     ],
     "answer": 0,
     "explanation": "Sebastian Vettel vinse il suo primo titolo nel 2010 con la Red Bull."
+  },
+  {
+    "id": 117,
+    "type": "open",
+    "question": "Qual'è il pilota più forte di tutti i tempi",
+    "explanation": "Ayrton Senna"
   }
 ]

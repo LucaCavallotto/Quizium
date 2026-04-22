@@ -174,6 +174,12 @@ class QuizApp {
             const quizScreen = document.getElementById(CONFIG.SCREENS.QUIZ);
             if (quizScreen.classList.contains('hidden')) return;
 
+            // Ignore if typing in an input or textarea
+            const target = e.target;
+            if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+                return;
+            }
+
             // Handle Confirmation Modal
             const confirmationModal = document.getElementById('confirmationModal');
             if (confirmationModal && !confirmationModal.classList.contains('hidden')) {
@@ -933,6 +939,35 @@ class QuizApp {
         const container = document.getElementById(CONFIG.SELECTORS.OPTIONS_CONTAINER);
         container.innerHTML = '';
 
+        if (question.type === 'open') {
+            const textarea = document.createElement('textarea');
+            textarea.className = 'open-answer-input';
+            textarea.placeholder = 'Insert your answer here...';
+            const savedAnswer = this.state.allAnswers[this.state.currentQuestionIndex];
+            if (savedAnswer && savedAnswer.selectedValue !== undefined) {
+                textarea.value = savedAnswer.selectedValue;
+            }
+            textarea.oninput = (e) => this.handleOpenAnswer(e.target.value, question);
+            container.appendChild(textarea);
+
+            if (this.state.correctionMode === 'instant' && !this.state.isReviewing && !this.state.quizCompleted) {
+                const confirmBtn = document.createElement('button');
+                confirmBtn.className = 'btn btn-primary full-width';
+                confirmBtn.style.marginTop = '16px';
+                confirmBtn.id = 'btnConfirmOpen';
+                confirmBtn.textContent = 'Confirm Answer';
+                confirmBtn.onclick = () => this.confirmOpenAnswer(question);
+                
+                // Hide if already confirmed
+                if (savedAnswer && savedAnswer.confirmed) {
+                    confirmBtn.classList.add('hidden');
+                }
+                
+                container.appendChild(confirmBtn);
+            }
+            return;
+        }
+
         let options = [];
         this.currentOptions = []; // Store for reference
 
@@ -964,6 +999,46 @@ class QuizApp {
             btn.onclick = () => this.handleOptionSelect(value, question);
             container.appendChild(btn);
         });
+    }
+
+    handleOpenAnswer(value, question) {
+        // If reviewing, ignore
+        if (this.state.isReviewing) return;
+
+        // Save Answer
+        // For open questions, isCorrect is always true since it's self-assessed
+        const currentAnswer = this.state.allAnswers[this.state.currentQuestionIndex] || {};
+        this.state.allAnswers[this.state.currentQuestionIndex] = { 
+            selectedValue: value, 
+            isCorrect: true,
+            confirmed: currentAnswer.confirmed || false
+        };
+
+        this.updateNavigator();
+        this.updateProgressBar();
+
+        // Only show feedback if already confirmed
+        if (this.state.correctionMode === 'instant' && this.state.allAnswers[this.state.currentQuestionIndex].confirmed) {
+            this.showAnswerState(this.state.allAnswers[this.state.currentQuestionIndex], question, false);
+        }
+    }
+
+    confirmOpenAnswer(question) {
+        const index = this.state.currentQuestionIndex;
+        const answer = this.state.allAnswers[index];
+        
+        if (!answer || (!answer.selectedValue || !answer.selectedValue.trim())) {
+            // Optional: could show a toast "Please type something first"
+            return;
+        }
+
+        answer.confirmed = true;
+        this.showAnswerState(answer, question, false);
+        
+        // Disable next button if it was disabled (though it's usually always enabled now)
+        document.getElementById(CONFIG.SELECTORS.NEXT_BTN).disabled = false;
+        
+        this.updateNavigator();
     }
 
     handleOptionSelect(selectedValue, question) {
@@ -1014,48 +1089,74 @@ class QuizApp {
 
     showAnswerState(answerData, question, forceShowFeedback = false) {
         const container = document.getElementById(CONFIG.SELECTORS.OPTIONS_CONTAINER);
-        const buttons = container ? container.querySelectorAll('.answer-option') : [];
-        const showFeedback = forceShowFeedback || this.state.correctionMode === 'instant' || this.state.quizCompleted;
-
-        buttons.forEach((btn, idx) => {
-            // Disable if showing feedback OR if Instant mode (locked)
-            // In Final mode during quiz, do NOT disable (allow change)
-            if (showFeedback || this.state.correctionMode === 'instant') {
-                btn.disabled = true;
+        let showFeedback = forceShowFeedback || this.state.quizCompleted;
+        
+        if (this.state.correctionMode === 'instant') {
+            if (question.type === 'open') {
+                showFeedback = showFeedback || (answerData && answerData.confirmed);
             } else {
-                btn.disabled = false;
-                // Restore active state visual (remove old classes first)
-                btn.className = 'answer-option';
+                showFeedback = true;
             }
+        }
 
-            // Resolve value
-            let btnValue;
-            if (question.type === 'multiple') {
-                const displayedOpt = this.currentOptions[idx];
-                btnValue = question.options.indexOf(displayedOpt);
-            } else {
-                btnValue = this.currentOptions[idx].value;
-            }
-
-            // Clean classes
-            btn.classList.remove('correct', 'wrong', 'selected');
-
-            if (showFeedback) {
-                if (btnValue === question.answer) {
-                    btn.classList.add('correct');
-                } else if (btnValue === answerData.selectedValue && !answerData.isCorrect) {
-                    btn.classList.add('wrong');
-                } else if (btnValue === answerData.selectedValue && answerData.isCorrect) {
-                    // Correct selected
-                    btn.classList.add('correct');
-                }
-            } else {
-                // Final Mode (During Quiz) - just show selected
-                if (btnValue === answerData.selectedValue) {
-                    btn.classList.add('selected');
+        if (question.type === 'open') {
+            const textarea = container.querySelector('.open-answer-input');
+            const confirmBtn = container.querySelector('#btnConfirmOpen');
+            
+            if (textarea) {
+                // Lock if reviewing, quiz completed, or confirmed in instant mode
+                textarea.disabled = this.state.isReviewing || this.state.quizCompleted || (this.state.correctionMode === 'instant' && answerData && answerData.confirmed);
+                
+                if (answerData && answerData.selectedValue !== null && textarea.value !== answerData.selectedValue) {
+                    textarea.value = answerData.selectedValue;
                 }
             }
-        });
+            if (confirmBtn && answerData && answerData.confirmed) {
+                confirmBtn.classList.add('hidden');
+            }
+        } else {
+            const buttons = container ? container.querySelectorAll('.answer-option') : [];
+
+            buttons.forEach((btn, idx) => {
+                // Disable if showing feedback OR if Instant mode (locked)
+                // In Final mode during quiz, do NOT disable (allow change)
+                if (showFeedback || this.state.correctionMode === 'instant') {
+                    btn.disabled = true;
+                } else {
+                    btn.disabled = false;
+                    // Restore active state visual (remove old classes first)
+                    btn.className = 'answer-option';
+                }
+
+                // Resolve value
+                let btnValue;
+                if (question.type === 'multiple') {
+                    const displayedOpt = this.currentOptions[idx];
+                    btnValue = question.options.indexOf(displayedOpt);
+                } else {
+                    btnValue = this.currentOptions[idx].value;
+                }
+
+                // Clean classes
+                btn.classList.remove('correct', 'wrong', 'selected');
+
+                if (showFeedback) {
+                    if (btnValue === question.answer) {
+                        btn.classList.add('correct');
+                    } else if (btnValue === answerData.selectedValue && !answerData.isCorrect) {
+                        btn.classList.add('wrong');
+                    } else if (btnValue === answerData.selectedValue && answerData.isCorrect) {
+                        // Correct selected
+                        btn.classList.add('correct');
+                    }
+                } else {
+                    // Final Mode (During Quiz) - just show selected
+                    if (btnValue === answerData.selectedValue) {
+                        btn.classList.add('selected');
+                    }
+                }
+            });
+        }
 
         if (showFeedback && question.explanation) {
             const exp = document.getElementById(CONFIG.SELECTORS.EXPLANATION);
@@ -1204,6 +1305,9 @@ class QuizApp {
                 if (this.state.correctionMode === 'final' && !this.state.quizCompleted && !this.state.isReviewing) {
                     // Just show a neutral 'answered' state
                     dot.classList.add('answered-neutral');
+                } else if (this.state.questions[realIndex].type === 'open') {
+                    // Open questions are always neutral answered state
+                    dot.classList.add('answered-neutral');
                 } else {
                     dot.classList.add(ans.isCorrect ? 'answered-correct' : 'answered-wrong');
                 }
@@ -1310,6 +1414,9 @@ class QuizApp {
             if (ans) {
                 answeredCount++;
                 if (this.state.correctionMode === 'final' && !this.state.quizCompleted && !this.state.isReviewing) {
+                    dot.classList.add('grill-dot-answered');
+                } else if (this.state.questions[realIndex].type === 'open') {
+                    // Open questions are always neutral in grill as well
                     dot.classList.add('grill-dot-answered');
                 } else {
                     dot.classList.add(ans.isCorrect ? 'grill-dot-correct' : 'grill-dot-wrong');
