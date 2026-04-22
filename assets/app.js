@@ -60,9 +60,9 @@ class QuizApp {
     constructor() {
         this.state = {
             subjects: [
-                { id: 'f1', name: 'Formula 1', icon: '🏎️', color: '#e10600', bg: '#fff1f0', lang: 'IT' },
-                { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff', lang: 'EN' },
-                { id: 'cnts', name: 'CNTS', icon: '🌐', color: '#10b981', bg: '#d1fae5', lang: 'EN' }
+                { id: 'f1', name: 'Formula 1', icon: '🏣️', color: '#e10600', bg: '#fff1f0', lang: 'IT', category: 'Motorsport' },
+                { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff', lang: 'EN', category: 'Technology' },
+                { id: 'cnts', name: 'CNTS', icon: '🌐', color: '#10b981', bg: '#d1fae5', lang: 'EN', category: 'Technology' }
             ],
             currentSubject: null,
             questions: [],
@@ -340,8 +340,32 @@ class QuizApp {
         }
 
         container.innerHTML = '';
+
+        // Group subjects by category
+        const categoryMap = {};
         for (const item of subjectCardsCache) {
-            this.renderSubjectCard(container, item.subject, item.count);
+            const cat = item.subject.category || 'Other';
+            if (!categoryMap[cat]) categoryMap[cat] = [];
+            categoryMap[cat].push(item);
+        }
+
+        // Render each category section
+        for (const [category, items] of Object.entries(categoryMap)) {
+            const section = document.createElement('div');
+            section.className = 'category-section';
+
+            const header = document.createElement('div');
+            header.className = 'category-header';
+            header.innerHTML = `<span class="category-title">${category}</span><span class="section-line"></span>`;
+            section.appendChild(header);
+
+            const grid = document.createElement('div');
+            grid.className = 'subjects-grid';
+            for (const item of items) {
+                this.renderSubjectCard(grid, item.subject, item.count);
+            }
+            section.appendChild(grid);
+            container.appendChild(section);
         }
     }
 

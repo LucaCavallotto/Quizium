@@ -22,33 +22,29 @@
     <div class="main-content">
 
         <div id="homeScreen" class="screen-container">
-            <header class="home-header">
-                <div class="logo-circle">🎯</div>
-                <h1 class="app-name">Quizium</h1>
-                <p class="app-tagline">Ready to challenge yourself?</p>
-            </header>
-
-            <div class="content-wrapper">
-                <div class="section-header">
-                    <span class="section-title">Explore Topics</span>
-                    <span class="section-line"></span>
+            <!-- Navbar -->
+            <nav class="home-navbar">
+                <div class="home-navbar-brand">
+                    <div class="logo-circle">🎯</div>
+                    <h1 class="app-name">Quizium</h1>
                 </div>
-                <div class="subjects-grid" id="subjectContainer"></div>
-
-                <div class="mt-32">
-                    <button class="btn btn-secondary full-width" onclick="quizApp.handlePersistentUpload()">
-                        <span class="text-xl mr-8">📁</span> Load Local Quiz
+                <div class="home-navbar-actions">
+                    <button class="btn btn-secondary navbar-action-btn" onclick="quizApp.handlePersistentUpload()" id="btn-load-quiz">
+                        <span class="navbar-btn-icon">📁</span>
+                        <span class="navbar-btn-label">Load Quiz</span>
                     </button>
                     <input type="file" id="local-file-input" accept=".json" class="hidden"
                         onchange="handleLocalQuizUpload(event)" style="display: none;">
-                </div>
-
-                <div class="mt-16">
-                    <button class="btn btn-primary full-width" onclick="openWorkshop()">
-                        <span class="text-xl mr-8">🛠️</span> Quiz Workshop
+                    <button class="btn btn-primary navbar-action-btn" onclick="openWorkshop()" id="btn-workshop">
+                        <span class="navbar-btn-icon">🛠️</span>
+                        <span class="navbar-btn-label">Quiz Workshop</span>
                     </button>
                 </div>
+            </nav>
 
+            <!-- Content Area -->
+            <div class="home-content">
+                <div id="subjectContainer"></div>
             </div>
         </div>
 
