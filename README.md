@@ -5,10 +5,10 @@ Quizium is a dynamic and interactive quiz application that allows users to test 
 ## How the App Works
 
 The application loads subject data dynamically from JSON files located in the `data/` folder.
-1.  **Home Screen**: Displays available subjects. The app reads the available subjects from the configuration in `assets/app.js` and fetches the corresponding JSON files to count the questions.
-2.  **Configuration**: Users can select the number of questions they want to answer (Short, Normal, Max, or a custom value using the slider).
-3.  **Quiz Mode**: Questions are presented one by one. The app tracks correct and wrong answers. Immediate feedback is provided with explanations.
-4.  **Results**: At the end of the quiz, a score is calculated and displayed along with a performance summary.
+1.  **Discovery**: The app reads a manifest file `data/quizzes.json` to discover available quiz IDs.
+2.  **Dynamic Metadata**: For each quiz, the app fetches the JSON file and extracts metadata (name, category, icon, color) directly from the file's content.
+3.  **Home Screen**: Quizzes are automatically grouped by the `category` field defined in their metadata.
+4.  **Configuration & Mode**: Users can select question count, time modes, and correction modes before starting.
 
 ## Time Modes
 
@@ -98,34 +98,54 @@ Create a new JSON file in the `data/` folder. The filename should be the unique 
 
 > **Tip**: You can use the **Quiz Workshop** (found on the Home Screen) to easily generate the JSON structure or edit existing quizzes.
 
-**JSON Format:**
-The file must contain an array of question objects. Each object should have the following structure:
+Quiz files are stored as objects containing both `metadata` and a `questions` array.
 
+**JSON Format:**
 ```json
-[
-  {
-    "id": 1,
-    "type": "multiple",
-    "question": "Your question text here?",
-    "options": ["Option A", "Option B", "Option C", "Option D"],
-    "answer": 2,
-    "explanation": "Brief explanation of why this answer is correct."
+{
+  "metadata": {
+    "id": "history",
+    "name": "World History",
+    "icon": "📜",
+    "color": "#d97706",
+    "bg": "#fffbeb",
+    "language": "EN",
+    "category": "History"
   },
-  {
-    "id": 2,
-    "type": "boolean",
-    "question": "True or False question statement?",
-    "answer": 0,
-    "explanation": "Explanation here."
-  },
-  {
-    "id": 3,
-    "type": "open",
-    "question": "Open-ended question statement?",
-    "explanation": "Self-assessment explanation here."
-  }
-]
+  "questions": [
+    {
+      "id": 1,
+      "type": "multiple",
+      "question": "Your question text here?",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "answer": 2,
+      "explanation": "Brief explanation of why this answer is correct."
+    },
+    {
+      "id": 2,
+      "type": "boolean",
+      "question": "True or False?",
+      "answer": 1,
+      "explanation": "Explanation here."
+    },
+    {
+      "id": 3,
+      "type": "open",
+      "question": "Open-ended question?",
+      "explanation": "Self-assessment explanation."
+    }
+  ]
+}
 ```
+
+- **Metadata Fields**:
+  - `id`: Unique identifier (should match filename).
+  - `name`: Display name.
+  - `icon`: Emoji representing the subject.
+  - `color`: Primary accent color for UI elements.
+  - `bg`: Soft background color for the card.
+  - `language`: `'EN'` or `'IT'` for UI labels.
+  - `category`: Used to group quizzes on the home screen.
 
 *   **id**: Unique integer identifier for the question.
 *   **type**: `"multiple"` for multiple choice, `"boolean"` for True/False, or `"open"` for open-ended questions.
@@ -135,34 +155,27 @@ The file must contain an array of question objects. Each object should have the 
     *   For `boolean`: Integer `0` (False) or `1` (True).
 
 
-### 2. Register the Subject in the App
+Adding a and subject is now entirely data-driven:
 
-Open `assets/app.js` and find the `subjects` array inside the `QuizApp` constructor state. Add a single line for your new subject:
+### 1. Create the Data File
+Create a new JSON file in the `data/` folder (e.g., `history.json`) following the structure above. 
 
-```javascript
-/* Inside QuizApp constructor -> this.state */
-subjects: [
-    // ... existing subjects
-    { 
-        id: 'history', 
-        name: 'World History', 
-        icon: '📜', 
-        color: '#d97706', 
-        bg: '#fffbeb',
-        lang: 'EN' 
-    }
-],
+> [!TIP]
+> Use the **Quiz Workshop** to easily generate and save these files. It automatically handles the metadata wrapping for you.
+
+### 2. Update the Manifest
+Open `data/quizzes.json` and add your new quiz ID to the array:
+
+```json
+[
+  "f1",
+  "cs",
+  "cnts",
+  "history"
+]
 ```
 
-*   **id**: Must match your JSON filename (without `.json`).
-*   **name**: The display name of the subject.
-*   **icon**: Emoji or text icon.
-*   **color**: Main accent color (CSS hex or var).
-*   **bg**: Light background color.
-*   **lang**: Language code (`'EN'` or `'IT'`) for formatting boolean question labels (e.g., True/False vs Vero/Falso).
-*   **file**: (Optional) If your JSON file name differs from the ID, specify it here (e.g., `file: 'my-history.json'`).
-
-Once this is done, refresh the page to see your new subject!
+The app will automatically detect the new file, read its metadata, and place it in the correct category section on the home screen. No code changes in `app.js` are required!
 
 ## Developer Tools
 
