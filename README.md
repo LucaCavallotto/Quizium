@@ -49,7 +49,7 @@ Improve your workflow with these keyboard shortcuts (Desktop):
 | **Backspace** | Cancel/Close Modal (when Modal is open) |
 | **Escape** | Exit Quiz or Cancel/Close Modal |
 | **f** | Flag/Unflag Question (Final Correction Mode only) |
-| **d** | Toggle Quiz Grill visibility |
+| **s** | Toggle Quiz Grill visibility |
 
 *Note: Number keys are disabled if the corresponding option is not available or if navigation modifiers (Ctrl/Alt) are held. Navigation/Selection keys are blocked when the confirmation modal is open.*
 
@@ -118,11 +118,18 @@ The file must contain an array of question objects. Each object should have the 
     "answer": 0,
     "explanation": "Explanation here."
   }
+  },
+  {
+    "id": 3,
+    "type": "open",
+    "question": "Open-ended question statement?",
+    "explanation": "Self-assessment explanation here."
+  }
 ]
 ```
 
 *   **id**: Unique integer identifier for the question.
-*   **type**: `"multiple"` for multiple choice, or `"boolean"` for True/False.
+*   **type**: `"multiple"` for multiple choice, `"boolean"` for True/False, or `"open"` for open-ended questions.
 *   **options**: Array of strings (Required only for `"multiple"` type).
 *   **answer**: 
     *   For `multiple`: Integer index (0-based) of the correct option.
@@ -193,6 +200,13 @@ Question Text
 b (identifies the block as boolean)
 1 (1 for True, 0 for False)
 Explanation (Optional)
+```
+
+*Open-ended:*
+```text
+Question Text
+o (identifies the block as open-ended)
+Self-assessment Explanation
 ```
 
 2.  **Reorder IDs Tab**:

@@ -267,11 +267,13 @@ const WorkshopManager = (() => {
             let block = `${q.question}\n`;
             if (q.type === 'boolean') {
                 block += `b\n${q.answer}`;
+            } else if (q.type === 'open') {
+                block += `o\n${q.explanation || ''}`;
             } else {
                 q.options.forEach(opt => block += `${opt}\n`);
                 block += `${q.answer}`;
             }
-            if (q.explanation) {
+            if (q.explanation && q.type !== 'open') {
                 block += `\n${q.explanation}`;
             }
             return block;
@@ -363,6 +365,7 @@ const WorkshopManager = (() => {
             optionOrAns: { icon: '➕', label: 'Another option (max 4)  or answer index (number)', cls: 'hint-pill-warn' },
             answerIdx: { icon: '✅', label: 'Answer index (0-based number)', cls: 'hint-pill-warn' },
             boolAnswer: { icon: '🔘', label: '0 = False  |  1 = True', cls: 'hint-pill-next' },
+            openExpl: { icon: '💡', label: 'Explanation for self-assessment', cls: 'hint-pill-done' },
             explanation: { icon: '💡', label: 'Explanation (optional)  —  or blank line for next question', cls: 'hint-pill-done' },
             nextQ: { icon: '↵', label: 'Blank line to start next question', cls: 'hint-pill-done' },
         };
@@ -397,6 +400,7 @@ const WorkshopManager = (() => {
         const getHint = (blockLines, cursorIndexInBlock) => {
             const trimmed = (i) => (blockLines[i] !== undefined ? blockLines[i].trim() : '');
             const isBoolean = trimmed(1).toLowerCase() === 'b';
+            const isOpen = trimmed(1).toLowerCase() === 'o';
 
             // ── BOOLEAN path ────────────────────────────────────────────────────
             if (isBoolean) {
@@ -404,6 +408,12 @@ const WorkshopManager = (() => {
                 if (cursorIndexInBlock === 1) return HINTS.boolAnswer;  // still on "b" line or just after
                 if (cursorIndexInBlock === 2) return HINTS.boolAnswer;  // answer line
                 return HINTS.explanation; // line 3+
+            }
+
+            // ── OPEN path ───────────────────────────────────────────────────────
+            if (isOpen) {
+                if (cursorIndexInBlock === 0) return HINTS.question;
+                return HINTS.openExpl;
             }
 
             // ── MULTIPLE CHOICE path ─────────────────────────────────────────
@@ -666,7 +676,9 @@ const WorkshopManager = (() => {
 
             const questionText = linesDetails[0].text;
             const line2Str = linesDetails[1].text.toLowerCase();
-            const type = (line2Str === 'b') ? 'boolean' : 'multiple';
+            let type = 'multiple';
+            if (line2Str === 'b') type = 'boolean';
+            else if (line2Str === 'o') type = 'open';
 
             if (type === 'multiple') {
                 if (linesDetails.length < 3) {
@@ -709,6 +721,18 @@ const WorkshopManager = (() => {
                 questionObj.answer = answerIndex;
                 if (foundAnswerLineIndex + 1 < linesDetails.length) {
                     questionObj.explanation = linesDetails.slice(foundAnswerLineIndex + 1).map(l => l.text).join(' ');
+                }
+                jsonOutput.push(questionObj);
+                currentId++;
+            } else if (type === 'open') {
+                // Open-ended
+                let questionObj = { id: currentId, type, question: questionText };
+                if (linesDetails.length > 1) {
+                    questionObj.explanation = linesDetails.slice(1).map(l => l.text).join(' ');
+                    // If the second line was just 'o', strip it if it's the only thing there or handle it
+                    if (linesDetails[1].text.toLowerCase() === 'o') {
+                        questionObj.explanation = linesDetails.slice(2).map(l => l.text).join(' ');
+                    }
                 }
                 jsonOutput.push(questionObj);
                 currentId++;
@@ -828,6 +852,8 @@ const WorkshopManager = (() => {
                     const bClass = isCorrect ? 'answer-option correct' : 'answer-option';
                     optionsHtml += `<button class="${bClass}" disabled><span>${opt}</span></button>`;
                 });
+            } else if (q.type === 'open') {
+                optionsHtml += `<textarea class="open-answer-input" placeholder="User will insert answer here..." disabled style="margin-top: 4px;"></textarea>`;
             } else {
                 const isTrueCorrect = q.answer === 1;
                 const isFalseCorrect = q.answer === 0;

@@ -3,15 +3,17 @@
    ========================================= */
 .main-content {
     width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 20px;
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
+/* Home screen is full-width, top-aligned */
+#homeScreen {
+    flex: 1;
+}
+
+/* Generic screen containers: centered, padded (for setup, results, workshop) */
 .screen-container {
     width: 100%;
     position: relative;
@@ -19,8 +21,10 @@
     padding-bottom: 20px;
 }
 
-/* Scroll Area (Centered) */
+/* Quiz screen overrides all of the above — it is position:fixed and self-contained */
+/* (its rules are defined in screens.css) */
 
+/* Scroll Area (Centered) */
 .quiz-scroll-area {
     padding-top: calc(var(--header-height) + 32px);
     padding-bottom: 180px;

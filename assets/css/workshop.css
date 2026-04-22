@@ -1,22 +1,32 @@
-/* Workshop Styles overrides and layout */
 .workshop-screen-main {
     max-height: 100dvh;
     height: 100dvh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    padding: 0 4px; /* Tiny cushion */
+}
+
+/* Workshop Header Refinement */
+.workshop-screen-main .nav-header {
+    padding: 8px 16px;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+    background: var(--bg-body);
+    border-bottom: 1px solid var(--border);
 }
 
 .workshop-layout {
     display: flex;
     flex-direction: row;
     flex: 1;
-    height: calc(100vh - var(--header-height));
-    gap: 16px;
-    padding: 16px 20px 20px;
+    gap: 20px;
+    padding: 20px;
     overflow: hidden;
     min-height: 0;
-    /* Crucial for scrolling flex items */
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .workshop-panel {
@@ -261,12 +271,14 @@
     opacity: 0.5;
 }
 
-/* Mobile Tabs */
+/* Mobile Tabs Container */
 .workshop-tabs {
     display: none;
-    /* Desktop default */
-    border-bottom: 1px solid var(--border);
     background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 
 .workshop-tab {
@@ -286,37 +298,50 @@
 }
 
 /* Responsive Overrides */
-@media (max-width: 768px) {
-    .workshop-screen-main {
-        height: auto;
-        max-height: none;
-        overflow: visible;
-    }
-
-    .workshop-tabs.mobile-only {
-        display: none !important;
-        /* Hide tabs, we are stacking now */
-    }
-
+@media (max-width: 992px) {
     .workshop-layout {
-        padding: 8px;
         flex-direction: column;
-        overflow-y: visible;
-        flex: none;
         height: auto;
+        padding: 16px;
+        gap: 16px;
     }
 
     .workshop-panel {
-        display: flex !important;
-        /* show both */
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        box-shadow: var(--shadow-sm);
-        flex: none;
-        width: 100%;
         height: 600px;
-        /* Fixed value for mobile view */
-        margin-bottom: 20px;
+        flex: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .workshop-screen-main {
+        height: 100dvh;
+        overflow: hidden; /* back to contained */
+    }
+
+    .workshop-screen-main .nav-header {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+
+    /* Show tabs on mobile */
+    .workshop-tabs.mobile-only {
+        display: flex;
+    }
+
+    .workshop-layout {
+        padding: 12px;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .workshop-panel {
+        display: none; /* Hidden by default, toggled via .active class */
+        height: 100%;
+        margin-bottom: 0;
+    }
+
+    .workshop-panel.active {
+        display: flex;
     }
 }
 

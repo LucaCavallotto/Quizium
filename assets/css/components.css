@@ -812,6 +812,11 @@ input[type=range]::-moz-range-track {
     z-index: 3;
 }
 
+.nav-dot.current.flagged::after {
+    top: -4px;
+    right: -4px;
+}
+
 @media (prefers-color-scheme: dark) {
     .nav-dot.answered-neutral {
         background: var(--border);
