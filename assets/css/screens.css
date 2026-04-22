@@ -1096,11 +1096,23 @@
         /* Hide labels on mobile */
     }
 
+    /* Exceptions: Always show Home label on results screen */
+    #resultsScreen .inner-navbar .navbar-btn-label {
+        display: block;
+    }
+
     .inner-navbar .navbar-action-btn {
         padding: 0;
         width: 40px;
         justify-content: center;
         border-radius: 50%;
+    }
+
+    #resultsScreen .inner-navbar .navbar-action-btn {
+        width: auto;
+        padding: 0 16px;
+        border-radius: var(--radius-m);
+        gap: 8px;
     }
 
     .inner-content {
