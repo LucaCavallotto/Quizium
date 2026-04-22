@@ -1315,6 +1315,11 @@ class QuizApp {
                     dot.classList.add(ans.isCorrect ? 'grill-dot-correct' : 'grill-dot-wrong');
                 }
             }
+
+            // Flagged questions
+            if (this.state.flaggedQuestions.has(realIndex)) {
+                dot.classList.add('flagged');
+            }
         }
 
         // Update completed count label

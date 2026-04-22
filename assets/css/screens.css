@@ -1401,6 +1401,26 @@
         border-color: var(--error);
     }
 
+    /* Flagged state for grill-dot */
+    .grill-dot.flagged::after {
+        content: '';
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        width: 11px;
+        height: 11px;
+        background: #f59e0b;
+        border: 2px solid var(--bg-card);
+        border-radius: 50%;
+        z-index: 3;
+    }
+
+    /* Specific offset for current because it is scaled up */
+    .grill-dot.grill-dot-current.flagged::after {
+        top: -3px;
+        right: -3px;
+    }
+
     /* --- Grill footer (completed count) --- */
     .quiz-grill-footer {
         flex-shrink: 0;
