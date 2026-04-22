@@ -117,7 +117,6 @@ The file must contain an array of question objects. Each object should have the 
     "question": "True or False question statement?",
     "answer": 0,
     "explanation": "Explanation here."
-  }
   },
   {
     "id": 3,
