@@ -29,7 +29,8 @@
                     <h1 class="app-name">Quizium</h1>
                 </div>
                 <div class="home-navbar-actions">
-                    <button class="btn btn-secondary navbar-action-btn" onclick="quizApp.handlePersistentUpload()" id="btn-load-quiz">
+                    <button class="btn btn-secondary navbar-action-btn" onclick="quizApp.handlePersistentUpload()"
+                        id="btn-load-quiz">
                         <span class="navbar-btn-icon">📁</span>
                         <span class="navbar-btn-label">Load Quiz</span>
                     </button>
@@ -49,19 +50,34 @@
         </div>
 
         <div id="questionCountScreen" class="screen-container hidden">
-            <div class="nav-header">
-                <button class="btn btn-icon-back" onclick="goHome()" aria-label="Go Back">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 12H5"></path>
-                        <path d="M12 19l-7-7 7-7"></path>
-                    </svg>
-                </button>
-                <h1 class="page-title" id="selectedSubjectTitle">Subject</h1>
-            </div>
+            <!-- Inner Navbar -->
+            <nav class="inner-navbar">
+                <div class="inner-navbar-left">
+                    <button class="btn btn-icon-back" onclick="goHome()" aria-label="Go Back">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5"></path>
+                            <path d="M12 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <h1 class="inner-page-title" id="selectedSubjectTitle">Subject</h1>
+                </div>
+                <div class="inner-navbar-actions">
+                    <button class="btn btn-secondary navbar-action-btn" onclick="quizApp.editWorkshop()">
+                        <span class="navbar-btn-icon">✏️</span>
+                        <span class="navbar-btn-label">Edit</span>
+                    </button>
+                    <button class="btn btn-primary navbar-action-btn" onclick="startQuizFromSlider()"
+                        id="btn-start-quiz">
+                        <span class="navbar-btn-label">Start Quiz</span>
+                        <span class="navbar-btn-icon" style="font-style:normal;">→</span>
+                    </button>
+                </div>
+            </nav>
 
-            <div class="options-block">
-                <p class="page-description mb-24">Customize your session.</p>
+            <!-- Setup Content -->
+            <div class="inner-content setup-inner-content">
+                <p class="page-description setup-desc">Customize your quiz session.</p>
 
                 <div class="setup-grid">
                     <!-- Question Count Section -->
@@ -132,17 +148,18 @@
                             <button class="preset-btn" id="btnCorrectionFinal"
                                 onclick="selectCorrectionMode('final')">Final</button>
                         </div>
-                        <div class="mt-16 text-sm text-secondary text-center">
+                        <div class="mt-16 text-secondary">
                             <span id="correctionModeDesc">Instant feedback after each answer.</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="primary-actions-grid setup-actions mt-24">
-                    <button class="btn btn-secondary" onclick="quizApp.editWorkshop()">
+                <!-- Mobile-only actions (hidden on desktop) -->
+                <div class="setup-mobile-actions">
+                    <button class="btn btn-secondary full-width" onclick="quizApp.editWorkshop()">
                         <span class="text-lg mr-8">✏️</span> Edit Questions
                     </button>
-                    <button class="btn btn-primary" onclick="startQuizFromSlider()">Start Quiz</button>
+                    <button class="btn btn-primary full-width" onclick="startQuizFromSlider()">Start Quiz</button>
                 </div>
             </div>
         </div>
@@ -155,8 +172,10 @@
                             aria-label="Exit Quiz">✕</button>
                         <button class="btn btn-close hidden btn-review-back" id="btnReviewBack" onclick="exitReview()"
                             aria-label="Back to Results">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
                             </svg>
                         </button>
                         <span class="quiz-subject-badge" id="quizSubjectTitle">Subject</span>
@@ -244,53 +263,69 @@
         </div>
 
         <div id="resultsScreen" class="screen-container hidden">
-            <div class="results-content">
-                <div class="score-hero">
-                    <div class="score-ring-container">
-                        <svg class="score-ring" width="160" height="160" viewBox="0 0 160 160">
-                            <circle class="ring-bg" cx="80" cy="80" r="70"></circle>
-                            <circle class="ring-progress" id="scoreRing" cx="80" cy="80" r="70" stroke-linecap="round"
-                                transform="rotate(-90 80 80)"></circle>
-                        </svg>
-                        <div class="score-text-center">
-                            <span class="score-big" id="scorePercentage">0%</span>
-                            <span class="score-label">Score</span>
+            <!-- Inner Navbar -->
+            <nav class="inner-navbar">
+                <div class="inner-navbar-left">
+                    <div class="results-nav-label">Quiz Results</div>
+                </div>
+                <div class="inner-navbar-actions">
+                    <button class="btn btn-ghost navbar-action-btn" onclick="goHome()">
+                        <span class="navbar-btn-icon">🏠</span>
+                        <span class="navbar-btn-label">Back to Home</span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Results Content -->
+            <div class="inner-content results-inner-content">
+                <div class="results-layout">
+                    <div class="score-hero">
+                        <div class="score-ring-container">
+                            <svg class="score-ring" width="160" height="160" viewBox="0 0 160 160">
+                                <circle class="ring-bg" cx="80" cy="80" r="70"></circle>
+                                <circle class="ring-progress" id="scoreRing" cx="80" cy="80" r="70"
+                                    stroke-linecap="round" transform="rotate(-90 80 80)"></circle>
+                            </svg>
+                            <div class="score-text-center">
+                                <span class="score-big" id="scorePercentage">0%</span>
+                                <span class="score-label">Score</span>
+                            </div>
+                        </div>
+                        <h2 class="result-title" id="resultTitle">Great Job!</h2>
+                        <p class="result-subtitle" id="resultMessage">You have mastered this subject.</p>
+                        <div class="time-result-badge hidden" id="timeResultBadge">
+                            ⏱️ <span id="timeResult">00:00</span>
                         </div>
                     </div>
-                    <h2 class="result-title" id="resultTitle">Great Job!</h2>
-                    <p class="result-subtitle" id="resultMessage">You have mastered this subject.</p>
-                    <div class="time-result-badge hidden" id="timeResultBadge">
-                        ⏱️ <span id="timeResult">00:00</span>
-                    </div>
-                </div>
 
-                <div class="stats-row">
-                    <div class="stat-box correct">
-                        <span class="stat-val" id="correctResult">0</span><span class="stat-lbl">Correct</span>
-                    </div>
-                    <div class="stat-box wrong">
-                        <span class="stat-val" id="wrongResult">0</span><span class="stat-lbl">Wrong</span>
-                    </div>
-                    <div class="stat-box skipped">
-                        <span class="stat-val" id="skippedResult">0</span><span class="stat-lbl">Skipped</span>
-                    </div>
-                    <div class="stat-box total">
-                        <span class="stat-val" id="totalQuestionsResult">0</span><span class="stat-lbl">Total</span>
-                    </div>
-                </div>
-
-                <div class="results-actions">
-                    <div class="primary-actions-grid">
-                        <div class="review-buttons-row">
-                            <button class="btn btn-secondary" id="btnReviewAnswers" onclick="startReview()">Review
-                                All</button>
-                            <button class="btn btn-secondary btn-soft-red" id="btnReviewWrong"
-                                onclick="startReview('wrong')">Review Wrong</button>
+                    <div class="results-right-col">
+                        <div class="stats-row">
+                            <div class="stat-box correct">
+                                <span class="stat-val" id="correctResult">0</span><span class="stat-lbl">Correct</span>
+                            </div>
+                            <div class="stat-box wrong">
+                                <span class="stat-val" id="wrongResult">0</span><span class="stat-lbl">Wrong</span>
+                            </div>
+                            <div class="stat-box skipped">
+                                <span class="stat-val" id="skippedResult">0</span><span class="stat-lbl">Skipped</span>
+                            </div>
+                            <div class="stat-box total">
+                                <span class="stat-val" id="totalQuestionsResult">0</span><span
+                                    class="stat-lbl">Total</span>
+                            </div>
                         </div>
-                        <button class="btn btn-primary full-width" onclick="restartQuiz()">Try Again</button>
+
+                        <div class="results-actions">
+                            <div class="review-buttons-row">
+                                <button class="btn btn-secondary" id="btnReviewAnswers" onclick="startReview()">Review
+                                    All</button>
+                                <button class="btn btn-secondary btn-soft-red" id="btnReviewWrong"
+                                    onclick="startReview('wrong')">Review Wrong</button>
+                            </div>
+                            <button class="btn btn-primary full-width" onclick="restartQuiz()">Try Again</button>
+
+                        </div>
                     </div>
-                    <button class="btn btn-ghost full-width btn-home-bottom" onclick="backToSetup()">Back to
-                        Home</button>
                 </div>
             </div>
         </div>
