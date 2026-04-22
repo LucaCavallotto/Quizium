@@ -59,11 +59,7 @@ const CONFIG = {
 class QuizApp {
     constructor() {
         this.state = {
-            subjects: [
-                { id: 'f1', name: 'Formula 1', icon: '🏣️', color: '#e10600', bg: '#fff1f0', lang: 'IT', category: 'Motorsport' },
-                { id: 'cs', name: 'Computer Science', icon: '💻', color: '#3b82f6', bg: '#eff6ff', lang: 'EN', category: 'Technology' },
-                { id: 'cnts', name: 'CNTS', icon: '🌐', color: '#10b981', bg: '#d1fae5', lang: 'EN', category: 'Technology' }
-            ],
+            subjects: [],
             currentSubject: null,
             questions: [],
             allQuestions: [], // Store full pool of questions
@@ -332,16 +328,43 @@ class QuizApp {
 
         const subjectCardsCache = [];
 
-        for (const subject of this.state.subjects) {
+        let quizFiles = [];
+        try {
+            const manifestResponse = await fetch(`${CONFIG.PATHS.DATA}quizzes.json`);
+            if (manifestResponse.ok || manifestResponse.status === 0) {
+                quizFiles = await manifestResponse.json();
+            } else {
+                throw new Error('Manifest fetch failed');
+            }
+        } catch (error) {
+            console.warn('Failed to load quiz manifest, using fallback list:', error);
+            // Fallback to known files if manifest fails
+            quizFiles = ['f1', 'cs', 'cnts'];
+        }
+
+        for (const fileId of quizFiles) {
             try {
-                const response = await fetch(`${CONFIG.PATHS.DATA}${subject.id}.json`);
-                if (response.ok) {
-                    const questions = await response.json();
-                    this.state.subjectQuestionsCount[subject.id] = questions.length;
-                    subjectCardsCache.push({subject, count: questions.length});
+                const response = await fetch(`${CONFIG.PATHS.DATA}${fileId}.json`);
+                if (response.ok || response.status === 0) {
+                    const data = await response.json();
+                    // Support both new structure (with metadata) and legacy structure (array)
+                    const metadata = data.metadata || { 
+                        id: fileId, 
+                        name: fileId.charAt(0).toUpperCase() + fileId.slice(1), 
+                        category: 'Other' 
+                    };
+                    const questions = data.questions || data;
+                    
+                    // Add to state if not already there
+                    if (!this.state.subjects.find(s => s.id === metadata.id)) {
+                        this.state.subjects.push(metadata);
+                    }
+                    
+                    this.state.subjectQuestionsCount[metadata.id] = questions.length;
+                    subjectCardsCache.push({subject: metadata, count: questions.length});
                 }
             } catch (error) {
-                console.error(`Error loading subject ${subject.id}:`, error);
+                console.error(`Error loading quiz file ${fileId}:`, error);
             }
         }
 
@@ -414,7 +437,8 @@ class QuizApp {
             const response = await fetch(`${CONFIG.PATHS.DATA}${subjectId}.json`);
             if (!response.ok) throw new Error('Failed to load questions');
 
-            this.state.allQuestions = await response.json();
+            const data = await response.json();
+            this.state.allQuestions = data.questions || data;
             this.state.questions = [...this.state.allQuestions]; // Initialize with all questions
             this.setupSlider();
             this.showScreen(CONFIG.SCREENS.COUNT);
@@ -454,16 +478,22 @@ class QuizApp {
                 throw new Error("The file contains invalid JSON data.");
             }
 
-            // Validation (same as legacy)
-            if (!Array.isArray(data) || data.length === 0) {
+            // Validation & Extraction
+            const questions = data.questions || (Array.isArray(data) ? data : null);
+            if (!questions || !Array.isArray(questions) || questions.length === 0) {
                 throw new Error("Invalid Quiz File: Not a valid array of questions.");
             }
-            if (data[0] && (!data[0].hasOwnProperty('question') || !data[0].hasOwnProperty('type') || !data[0].hasOwnProperty('answer'))) {
-                throw new Error("Invalid Quiz File: Missing required properties.");
+
+            // Check signature on first question (for both wrapped and unwrapped)
+            const firstQ = questions[0];
+            if (!firstQ || (!firstQ.hasOwnProperty('question') || !firstQ.hasOwnProperty('type') || !firstQ.hasOwnProperty('answer'))) {
+                throw new Error("Invalid Quiz File: Missing required question properties.");
             }
 
-            const fileName = file.name.replace(/\.[^/.]+$/, "");
-            this.state.currentSubject = {
+            const metadata = data.metadata || null;
+
+            const fileName = (metadata && metadata.name) ? metadata.name : file.name.replace(/\.[^/.]+$/, "");
+            this.state.currentSubject = metadata || {
                 id: 'local',
                 name: fileName,
                 icon: '📁',
@@ -478,8 +508,8 @@ class QuizApp {
             document.getElementById(CONFIG.SELECTORS.SELECTED_SUBJECT_TITLE).textContent = fileName;
             document.getElementById(CONFIG.SELECTORS.QUIZ_SUBJECT_TITLE).textContent = fileName;
 
-            this.state.allQuestions = data;
-            this.state.questions = [...data];
+            this.state.allQuestions = questions;
+            this.state.questions = [...questions];
 
             this.setupSlider();
             this.showScreen(CONFIG.SCREENS.COUNT);
@@ -503,23 +533,26 @@ class QuizApp {
                 if (!content) throw new Error("File is empty.");
                 const data = JSON.parse(content);
 
-                // Validation
-                if (!Array.isArray(data) || data.length === 0) {
+                // Validation & Extraction
+                const questions = data.questions || (Array.isArray(data) ? data : null);
+                if (!questions || !Array.isArray(questions) || questions.length === 0) {
                     throw new Error("Invalid Quiz File: Not a valid array of questions.");
                 }
 
                 // Check a basic signature on the first item
-                const signatureObj = data[0];
+                const signatureObj = questions[0];
                 if (!signatureObj.hasOwnProperty('question') || !signatureObj.hasOwnProperty('type') || !signatureObj.hasOwnProperty('answer')) {
                     throw new Error("Invalid Quiz File: Missing required properties (question, type, answer).");
                 }
+
+                const metadata = data.metadata || null;
 
                 // Clean up input value so the same file could be loaded again
                 event.target.value = '';
 
                 // Create a pseudo-subject for the custom quiz
-                const fileName = file.name.replace(/\.[^/.]+$/, ""); // Strip extension gracefully if present
-                this.state.currentSubject = {
+                const fileName = (metadata && metadata.name) ? metadata.name : file.name.replace(/\.[^/.]+$/, "");
+                this.state.currentSubject = metadata || {
                     id: 'local',
                     name: fileName,
                     icon: '📁',
@@ -536,8 +569,8 @@ class QuizApp {
                 document.getElementById(CONFIG.SELECTORS.QUIZ_SUBJECT_TITLE).textContent = fileName;
 
                 // Set Data
-                this.state.allQuestions = data;
-                this.state.questions = [...data];
+                this.state.allQuestions = questions;
+                this.state.questions = [...questions];
 
                 this.setupSlider();
                 this.showScreen(CONFIG.SCREENS.COUNT);

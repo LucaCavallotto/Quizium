@@ -240,9 +240,21 @@ const WorkshopManager = (() => {
 
         try {
             const parsed = JSON.parse(val);
-            if (!Array.isArray(parsed)) throw new Error("JSON must be an array of questions.");
+            const metadata = parsed.metadata || null;
+            const questions = parsed.questions || (Array.isArray(parsed) ? parsed : null);
 
-            currentQuestions = parsed;
+            if (!questions || !Array.isArray(questions)) {
+                throw new Error("JSON must be an array of questions or an object with a 'questions' array.");
+            }
+
+            currentQuestions = questions;
+
+            // Sync metadata to UI
+            if (metadata) {
+                if (filenameInput) filenameInput.value = metadata.name || metadata.id || "";
+                originalFileName = metadata.name || metadata.id || "";
+            }
+
             // Sync back to text editor
             editorInput.value = reverseGenerate(currentQuestions);
 
@@ -921,7 +933,8 @@ const WorkshopManager = (() => {
     };
 
     const copyJSON = async () => {
-        const jsonString = JSON.stringify(currentQuestions, null, 2);
+        const payload = wrapQuestionsWithMetadata(currentQuestions);
+        const jsonString = JSON.stringify(payload, null, 2);
         try {
             await navigator.clipboard.writeText(jsonString);
             showPreviewStatus('JSON copied to clipboard!', 'success');
@@ -931,7 +944,8 @@ const WorkshopManager = (() => {
     };
 
     const downloadJSON = () => {
-        const jsonString = JSON.stringify(currentQuestions, null, 2);
+        const payload = wrapQuestionsWithMetadata(currentQuestions);
+        const jsonString = JSON.stringify(payload, null, 2);
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonString);
 
         let fileName = originalFileName || "untitled_quiz";
@@ -972,7 +986,11 @@ const WorkshopManager = (() => {
                 const content = (e.target.result || "").trim();
                 if (!content) throw new Error("File is empty.");
                 const parsed = JSON.parse(content);
-                if (!Array.isArray(parsed)) throw new Error("File content must be a JSON array of questions.");
+                const questions = parsed.questions || (Array.isArray(parsed) ? parsed : null);
+                if (!questions || !Array.isArray(questions)) {
+                    throw new Error("File content must be a JSON array of questions or an object with a 'questions' array.");
+                }
+                const metadata = parsed.metadata || null;
 
                 // Check where we are to decide destination
                 const workshopScreen = document.getElementById('workshopScreen');
@@ -980,15 +998,15 @@ const WorkshopManager = (() => {
 
                 if (isWorkshopVisible) {
                     // Success! Load it in workshop
-                    loadQuestions(parsed, file.name, handle);
+                    loadQuestions(questions, file.name, handle, metadata);
                     showPreviewStatus(`File "${file.name}" opened in Workshop!`, 'success');
                 } else {
                     // We are likely in main-content. Open in quizApp
                     if (window.quizApp) {
                         const fileName = file.name.replace(/\.[^/.]+$/, "");
-                        window.quizApp.state.allQuestions = parsed;
-                        window.quizApp.state.questions = [...parsed];
-                        window.quizApp.state.currentSubject = {
+                        window.quizApp.state.allQuestions = questions;
+                        window.quizApp.state.questions = [...questions];
+                        window.quizApp.state.currentSubject = metadata || {
                             id: 'dropped',
                             name: fileName,
                             icon: '📂',
@@ -1001,8 +1019,9 @@ const WorkshopManager = (() => {
                         window.quizApp.setupSlider();
                         window.quizApp.showScreen('questionCountScreen');
                     } else {
-                        // Fallback: just open workshop
-                        loadQuestions(parsed, file.name, handle);
+                        // Success! Load it in workshop
+                        loadQuestions(questions, file.name, handle, metadata);
+                        showPreviewStatus(`File "${file.name}" opened in Workshop!`, 'success');
                         if (window.quizApp) window.quizApp.showScreen('workshopScreen');
                     }
                 }
@@ -1118,16 +1137,19 @@ const WorkshopManager = (() => {
         `;
     };
 
-    const loadQuestions = (questions, fileName = null, fileHandle = null) => {
+    const loadQuestions = (questions, fileName = null, fileHandle = null, metadata = null) => {
         currentQuestions = [...questions];
         currentErrors = []; // Clear any previous errors
         alertDismissed = false; // Reset dismissal on new file load
-        lastSavedJSON = JSON.stringify(currentQuestions);
-        lastSavedFileName = fileName ? fileName.replace(/\.[^/.]+$/, "") : null;
+
+        // Use metadata or filename for naming
+        const displayName = (metadata && metadata.name) ? metadata.name : (fileName ? fileName.replace(/\.[^/.]+$/, "") : "Untitled Quiz");
+        const category = (metadata && metadata.category) ? metadata.category : "Other";
+
+        lastSavedJSON = JSON.stringify(wrapQuestionsWithMetadata(currentQuestions, metadata));
+        lastSavedFileName = displayName;
         lastSavedStartId = document.getElementById('workshopStartId')?.value || '1';
 
-        // Strip extension if present for display
-        const displayName = fileName ? fileName.replace(/\.[^/.]+$/, "") : null;
         originalFileName = displayName;
         currentFileHandle = fileHandle;
 
@@ -1175,7 +1197,7 @@ const WorkshopManager = (() => {
         if (currentFileHandle && window.showSaveFilePicker) {
             const inputName = (originalFileName || "").trim().toLowerCase();
             const handleName = currentFileHandle.name.replace(/\.[^/.]+$/, "").toLowerCase();
-            
+
             if (inputName && handleName && inputName !== handleName) {
                 if (confirm(`Filenames differ. Do you want to rename "${handleName}.json" to "${originalFileName}.json"?`)) {
                     currentFileHandle = null; // Forces showSaveFilePicker below
@@ -1210,14 +1232,15 @@ const WorkshopManager = (() => {
 
         if (currentFileHandle) {
             try {
-                const jsonString = JSON.stringify(currentQuestions, null, 2);
+                const payload = wrapQuestionsWithMetadata(currentQuestions);
+                const jsonString = JSON.stringify(payload, null, 2);
                 if (!jsonString || jsonString.trim() === '') {
                     throw new Error("Generated JSON is empty.");
                 }
                 const writable = await currentFileHandle.createWritable();
                 await writable.write(jsonString);
                 await writable.close();
-                lastSavedJSON = JSON.stringify(currentQuestions);
+                lastSavedJSON = JSON.stringify(payload);
                 lastSavedFileName = filenameInput ? filenameInput.value.trim() : null;
                 lastSavedStartId = document.getElementById('workshopStartId')?.value || '1';
                 updateSaveButtonState(currentQuestions);
@@ -1233,6 +1256,44 @@ const WorkshopManager = (() => {
             // Last fallback if API not supported or cancelled
             downloadJSON();
         }
+    };
+
+    /**
+     * Internal helper to wrap questions in the new metadata structure
+     */
+    const wrapQuestionsWithMetadata = (questions, explicitMetadata = null) => {
+        // If we have explicit metadata (from a load), we preserve it
+        // Otherwise we look at the current subjects in app.js or use defaults
+
+        const currentName = filenameInput ? filenameInput.value.trim() : (originalFileName || "Untitled Quiz");
+        let metadata = explicitMetadata;
+
+        if (!metadata) {
+            // Try to find if this matches an existing subject
+            const existingSubject = (window.quizApp && window.quizApp.state.subjects)
+                ? window.quizApp.state.subjects.find(s => s.name === currentName || s.id === (originalFileName || "").toLowerCase())
+                : null;
+
+            if (existingSubject) {
+                metadata = { ...existingSubject };
+                delete metadata.questions; // In case it's there
+            } else {
+                metadata = {
+                    id: (originalFileName || currentName).toLowerCase().replace(/[^a-z0-9]/g, '_'),
+                    name: currentName,
+                    icon: '🛠️',
+                    color: '#8b5cf6',
+                    bg: '#f3e8ff',
+                    language: 'EN',
+                    category: 'Other'
+                };
+            }
+        }
+
+        return {
+            metadata: metadata,
+            questions: questions
+        };
     };
 
     return {
