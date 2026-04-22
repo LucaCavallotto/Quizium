@@ -852,6 +852,8 @@ const WorkshopManager = (() => {
                     const bClass = isCorrect ? 'answer-option correct' : 'answer-option';
                     optionsHtml += `<button class="${bClass}" disabled><span>${opt}</span></button>`;
                 });
+            } else if (q.type === 'open') {
+                optionsHtml += `<textarea class="open-answer-input" placeholder="User will insert answer here..." disabled style="margin-top: 4px;"></textarea>`;
             } else {
                 const isTrueCorrect = q.answer === 1;
                 const isFalseCorrect = q.answer === 0;
