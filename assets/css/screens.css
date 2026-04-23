@@ -357,7 +357,7 @@
 .results-right-col {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 50px;
     padding: 36px 32px;
 }
 
@@ -1179,7 +1179,7 @@
 
     .results-right-col {
         padding: 24px 20px 28px;
-        gap: 18px;
+        gap: 40px;
     }
 
     .results-inner-content .stat-box {
