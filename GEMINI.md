@@ -27,7 +27,7 @@
 ### Coding standards
 - **Patterns**:
     - **Class-Based Architecture**: Use the `QuizApp` (and `WorkshopManager`) classes to encapsulate logic. Avoid global variables outside the main instances.
-    - **Configuration Object**: Maintain `CONFIG` at the top of the file for screen IDs, paths, and element selectors.
+    - **Configuration Object**: Use the centralized `CONFIG` object from `assets/js/modules/config.js` for screen IDs, paths, and selectors.
     - **Global Mapping**: Explicitly bind class methods to the `window` object via `bindGlobalEvents()` for access from the HTML.
 - **Naming**: Use `camelCase` for JavaScript variables/functions and `kebab-case` for CSS classes.
 - **State Management**: Access all session-specific data via `this.state` within the class instance.
@@ -65,14 +65,23 @@ The project uses **pure CSS variables** defined in `variables.css` for theme con
 │   ├── quizzes.json        # Discovery manifest
 │   └── [id].json           # Self-describing quiz data (metadata + questions)
 └── assets/
-    ├── app.js              # State engine: Handles quiz flow, scoring, and UI sync
-    ├── workshop.js         # IDE-like content management tool
-    └── css/
+    ├── js/                 # Logic layer
+    │   ├── app.js          # App entry point & main class
+    │   ├── workshop.js     # Workshop entry point & manager class
+    │   └── modules/        # Modularized logic components
+    │       ├── config.js   # Global configuration & constants
+    │       ├── state.js    # Session state management
+    │       ├── ui.js       # DOM manipulation & screen management
+    │       ├── events.js   # Event listeners & global bindings
+    │       ├── dataLoader.js # Fetching & parsing logic
+    │       └── utils.js    # Helper functions
+    └── css/                # Styling layer (Design System)
         ├── variables.css   # Single source of truth for design tokens
         ├── layout.css      # Core grid and container definitions
         ├── components.css  # Atomic UI elements (btn, toggle, slider)
         ├── screens.css     # Navigation-level styling
-        └── workshop.css    # Specialized tool styling
+        ├── workshop.css    # Specialized tool styling
+        └── ...             # Support styles (base, utilities, etc.)
 ```
 
 ---
