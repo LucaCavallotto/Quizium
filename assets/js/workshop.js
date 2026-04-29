@@ -288,7 +288,7 @@ const WorkshopManager = (() => {
         let _textarea, _overlay, _bar;
         const HINTS = {
             question: { icon: '💬', label: 'Question text', cls: '' },
-            optionFirst: { icon: '🅰️', label: 'Option A  —  or type "b" for boolean', cls: '' },
+            optionFirst: { icon: '🅰️', label: 'Option A  —  or type "b" for boolean / "o" for open', cls: '' },
             optionNext: { icon: '➕', label: 'Option B / C / D', cls: '' },
             optionOrAns: { icon: '➕', label: 'Another option (max 4)  or answer index (number)', cls: 'hint-pill-warn' },
             answerIdx: { icon: '✅', label: 'Answer index (0-based number)', cls: 'hint-pill-warn' },
