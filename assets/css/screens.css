@@ -61,6 +61,10 @@
     letter-spacing: -0.03em;
 }
 
+.app-name-short {
+    display: none;
+}
+
 .section-line {
     height: 1px;
     background: var(--border);
@@ -996,6 +1000,15 @@
     .home-navbar {
         padding: 0 16px;
         height: 56px;
+        gap: 8px;
+    }
+
+    .home-navbar-brand {
+        gap: 8px;
+    }
+
+    .home-navbar-actions {
+        gap: 8px;
     }
 
     .navbar-btn-label {
@@ -1024,6 +1037,14 @@
 
     .app-name {
         font-size: 1.2rem;
+    }
+
+    .app-name-full {
+        display: none;
+    }
+
+    .app-name-short {
+        display: inline;
     }
 }
 
