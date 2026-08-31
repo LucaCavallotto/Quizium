@@ -1,6 +1,6 @@
 # Active Recall Hub
 
-Active Recall Hub is a dynamic and interactive quiz application built with HTML, CSS, and vanilla JavaScript, offering high-performance active recall learning without framework overhead.
+A dynamic and interactive multi-quiz web application for active recall learning. It hosts multiple quizzes across diverse topics and categories within a single platform, featuring customizable question sets, stopwatch and timer modes, instant vs. final correction feedback, a desktop quiz grill navigation sidebar, keyboard shortcuts, and detailed post-quiz answer reviews.
 
 ## How the App Works
 
